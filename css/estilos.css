@@ -1,0 +1,227 @@
+body{
+	background-color: #cdebeb;
+	margin: 0px;
+	padding: 0px;
+}
+header,h1{
+	margin: 0px;
+	padding: 0px;
+}
+
+h1{
+	text-shadow:rgba(0,0,0,0.5) 3px 3px 5px;
+	color: white; 
+}
+
+h2{
+	margin: 0px;
+	padding: 0px;
+	color:black;
+}
+a{
+	color: white;
+}
+
+footer{
+	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
+	border-top: 3px solid #c6c7cc;
+	color: white;
+	font-family: opcionUno;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 0px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	text-align: center;
+	width: 100%;
+}
+
+
+#cabezera{
+	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
+	border-bottom: 3px solid #c6c7cc;
+	font-size: 32px;
+	padding-bottom:5px; 
+	padding-top: 5px;
+}
+
+.titulo{
+	font-family: opcionCuatro;
+	font-style: normal;
+	text-align: center;
+	height: 100%;
+	padding-top:10px;
+}
+
+#contenedor{
+	display: flex;
+	flex-flow: row wrap;
+	margin: 0px;
+    -webkit-flex-flow: row wrap;
+    -webkit-justify-content:flex-start;
+    height: 100%;
+    width: auto;
+    /*-webkit-align-items: stretch;
+	Establece el valor por defecto para todos los items
+    */
+}
+
+
+#inicio{
+	width: 40%;
+	margin: 0px;
+	display: flex;
+	flex-direction:column;
+	-webkit-flex-direction:column;
+	align-self: stretch;         
+    -webkit-align-self: stretch;
+}
+
+#inicio section{
+	display: flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	padding: 10px 10px;
+	margin: 5px 0px;
+}
+
+#inicio section article{
+	font-size: 24px;
+	font-family: opcionUno;
+}
+
+#wrapper_botones{
+	display: flex;
+	padding: 5px 5px;
+	justify-content:center;
+	-webkit-flex-flow: row wrap;
+	align-items:center;
+}
+
+.boton{
+	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
+	box-shadow: rgba(8,43,255,0.75) 2px 2px 4px;
+	border-radius: 10px;
+	display: flex;
+	justify-content:center;
+	margin: 10px 10px;
+	padding: 15px 5px;
+	width: 50%;
+    -webkit-flex-flow: row wrap;
+    border : 1px solid #000000;
+    color:white;
+    flex-flow: row wrap;
+    font-family: opcionCuatro;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+/*Seccion de animacion de imagenes de guayaquil*/
+
+#inicio_animacion{
+	-webkit-flex-direction:column;
+	align-self: stretch;         
+	display: flex;
+	flex-direction:column;
+	justify-content:center;
+	width: 60%;	
+	height: 580px;
+    -webkit-align-self: stretch; 
+    margin: 0px;
+    position: relative;
+}
+
+
+#inicio_animacion img{
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top:0px;
+	left: 0px;
+	bottom: 0px;
+}
+
+@keyframes imagenAnimacion{
+	0%{
+		opacity: 0;
+	}
+
+	5%{
+		opacity: 1;
+	}
+
+	25%{
+		opacity: 1;
+	}
+
+	45%{
+		opacity: 1;
+	}
+
+	55%{
+		opacity: 0;
+	}
+
+	100%{
+		opacity: 0;
+	}
+}
+
+#inicio_animacion img{
+	background-repeat: none;
+	opacity: 0;
+	animation-name:imagenAnimacion;
+	animation-delay:0s;
+	animation-duration:30s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	animation-direction:normal;
+	animation-fill-mode:forwards;
+}
+
+#inicio_animacion img:last-child{
+	opacity: 1;
+}
+
+#inicio_animacion img:nth-child(1){
+	animation-delay:18s;
+}
+
+#inicio_animacion img:nth-child(2){
+	animation-delay:12s;
+}
+
+#inicio_animacion img:nth-child(3){
+	animation-delay:6s;
+}
+
+#inicio_animacion img:nth-child(4){
+	animation-delay:0s;
+}
+
+
+@font-face{
+	font-family: 'opcionUno';
+	src:url('Champagne & Limousines.ttf');
+}
+
+@font-face{
+	font-family: 'opcionDos';
+	src:url('eacologica.ttf');
+}
+
+@font-face{
+	font-family: 'opcionTres';
+	src:url('ASENINE_.ttf');
+}
+
+@font-face{
+	font-family: 'opcionCuatro';
+	src:url('Plump.ttf');
+}
+
+@font-face{
+	font-family: 'opcionCinco';
+	src:url('Thunder Lord.ttf');
+}
