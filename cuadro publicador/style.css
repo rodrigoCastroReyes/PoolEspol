@@ -1,0 +1,31 @@
+
+#cuadro_ruta{
+	background: #F7F5FA;
+	width: 708px;
+	padding: 5px 5px;
+
+}
+
+#googleMap{
+	border: 2px solid #0E1456;
+	padding: 10px 2px;
+}
+
+button{
+	width:100px;
+	height: 30px;
+	border: 2px solid #0E1456;
+	background: #9CF9F3;
+}
+
+h2{
+	background: #9CF9F3;
+	color: #0E1456;
+	padding: 10px 10px;
+	border: 2px solid #0E1456;
+}
+
+input{
+	background: #EEEADB;
+	border: 1px solid #0E1456;
+}
