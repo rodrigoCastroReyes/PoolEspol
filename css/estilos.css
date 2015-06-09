@@ -3,7 +3,7 @@ body{
 	margin: 0px;
 	padding: 0px;
 }
-header,h1{
+header,h1,h2,form{
 	margin: 0px;
 	padding: 0px;
 }
@@ -14,10 +14,9 @@ h1{
 }
 
 h2{
-	margin: 0px;
-	padding: 0px;
 	color:black;
 }
+
 a{
 	color: white;
 }
@@ -45,15 +44,7 @@ footer{
 	padding-top: 5px;
 }
 
-.titulo{
-	font-family: opcionCuatro;
-	font-style: normal;
-	text-align: center;
-	height: 100%;
-	padding-top:10px;
-}
-
-#contenedor{
+#contenedor_inicio{/*seccion de login, registro y animacion con imagenes*/
 	display: flex;
 	flex-flow: row wrap;
 	margin: 0px;
@@ -61,31 +52,43 @@ footer{
     -webkit-justify-content:flex-start;
     height: 100%;
     width: auto;
-    /*-webkit-align-items: stretch;
-	Establece el valor por defecto para todos los items
-    */
 }
-
 
 #inicio{
 	width: 40%;
 	margin: 0px;
-	display: flex;
-	flex-direction:column;
-	-webkit-flex-direction:column;
-	align-self: stretch;         
-    -webkit-align-self: stretch;
+}
+#inicio_sesion{
+	width: 40%;
+	justify-content:center;
+	align-items: center;
 }
 
-#inicio section{
+#logo{
+	margin: 0px;
+	padding-bottom: 5px;
+	cursor: pointer;
+}
+
+#formulario_inicio_sesion{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+}
+
+
+#wrapper_descripcion{
 	display: flex;
 	flex-direction:row;
 	flex-wrap:wrap;
 	padding: 10px 10px;
 	margin: 5px 0px;
+	justify-content:center;
 }
 
-#inicio section article{
+#wrapper_descripcion section article{
 	font-size: 24px;
 	font-family: opcionUno;
 }
@@ -100,33 +103,94 @@ footer{
 
 .boton{
 	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
-	box-shadow: rgba(8,43,255,0.75) 2px 2px 4px;
 	border-radius: 10px;
+	box-shadow: rgba(8,43,255,0.75) 2px 2px 4px;
 	display: flex;
 	justify-content:center;
 	margin: 10px 10px;
 	padding: 15px 5px;
-	width: 50%;
+	width: 45%;
     -webkit-flex-flow: row wrap;
     border : 1px solid #000000;
     color:white;
+    cursor: pointer;
     flex-flow: row wrap;
     font-family: opcionCuatro;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: normal;
 }
+
+.boton:hover{
+	background: -webkit-linear-gradient(top,rgb(10,73,167),rgb(0,50,200));
+	border-radius: 10px;
+	box-shadow: rgba(8,43,255,0.75) 3px 3px ;
+	display: flex;
+	justify-content:center;
+	margin: 10px 10px;
+	padding: 15px 5px;
+	width: 45%;
+    -webkit-flex-flow: row wrap;
+    border : 1px solid #000000;
+    color:white;
+    cursor: pointer;
+    flex-flow: row wrap;
+    font-family: opcionCuatro;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.titulo{
+	font-family: opcionCuatro;
+	font-style: normal;
+	text-align: center;
+	height: 100%;
+	padding-top:10px;
+}
+
+.columna_flexible{
+	align-self: stretch;         
+	display: flex;
+	flex-direction:column;
+	/*justify-content:center;*/
+}
+
+.entrada_texto{
+	border : 1px solid #000000;
+	border-radius: 3px;
+	font-size: 14px;
+	height: 30px;
+	margin: 0px 10px;
+	text-align: center;
+	width: 30%;
+	font-family: opcionDos;
+	background-color: white;
+}
+
+.entrada_texto:hover{
+	border : 1px solid #000000;
+	border-radius: 3px;
+	box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.75);
+	font-family: opcionDos;
+	font-size: 14px;
+	height: 30px;
+	margin: 0px 10px;
+	text-align: center;
+	width: 30%;
+	background-color: white;
+}
+
+.etiqueta{
+	font-family: opcionDos;
+	margin:0px;
+	padding-top: 10px;
+}
+
 
 /*Seccion de animacion de imagenes de guayaquil*/
 
 #inicio_animacion{
-	-webkit-flex-direction:column;
-	align-self: stretch;         
-	display: flex;
-	flex-direction:column;
-	justify-content:center;
 	width: 60%;	
 	height: 580px;
-    -webkit-align-self: stretch; 
     margin: 0px;
     position: relative;
 }
@@ -203,25 +267,26 @@ footer{
 
 @font-face{
 	font-family: 'opcionUno';
-	src:url('Champagne & Limousines.ttf');
+	src:url('fonts/Champagne & Limousines.ttf');
 }
 
 @font-face{
 	font-family: 'opcionDos';
-	src:url('eacologica.ttf');
+	src:url('fonts/eacologica.ttf');
 }
 
 @font-face{
 	font-family: 'opcionTres';
-	src:url('ASENINE_.ttf');
+	src:url('fonts/ASENINE_.ttf');
 }
 
 @font-face{
 	font-family: 'opcionCuatro';
-	src:url('Plump.ttf');
+	src:url('fonts/Plump.ttf');
 }
 
 @font-face{
 	font-family: 'opcionCinco';
-	src:url('Thunder Lord.ttf');
+	src:url('fonts/Thunder Lord.ttf');
 }
+
