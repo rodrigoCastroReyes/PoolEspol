@@ -1,4 +1,9 @@
-body{
+html,body{
+	height: 100%;
+	margin: 0px;
+}
+
+html,body{
 	background-color: #cdebeb;
 	margin: 0px;
 	padding: 0px;
@@ -6,6 +11,11 @@ body{
 header,h1,h2,form{
 	margin: 0px;
 	padding: 0px;
+}
+
+span{
+	font-family: opcionDos;
+	font-size: 10px;
 }
 
 h1{
@@ -64,6 +74,12 @@ footer{
 	align-items: center;
 }
 
+#inicio_registro{
+	width: 40%;
+	justify-content:center;
+	align-items: center;
+}
+
 #logo{
 	margin: 0px;
 	padding-bottom: 5px;
@@ -73,11 +89,18 @@ footer{
 #formulario_inicio_sesion{
 	width: 100%;
 	height: 100%;
+}
+
+#formulario_registro_usuario{
+	width: 100%;
+	height: 100%;
+}
+
+.formulario{
 	display: flex;
 	flex-direction:column;
 	align-items: center;
 }
-
 
 #wrapper_descripcion{
 	display: flex;
@@ -147,6 +170,10 @@ footer{
 	padding-top:10px;
 }
 
+.invisible{
+	display: none;
+}
+
 .columna_flexible{
 	align-self: stretch;         
 	display: flex;
@@ -155,28 +182,28 @@ footer{
 }
 
 .entrada_texto{
+	background-color: white;
 	border : 1px solid #000000;
 	border-radius: 3px;
+	font-family: opcionDos;
 	font-size: 14px;
 	height: 30px;
-	margin: 0px 10px;
+	margin: 5px 10px;
 	text-align: center;
 	width: 30%;
-	font-family: opcionDos;
-	background-color: white;
 }
 
 .entrada_texto:hover{
+	background-color: white;
 	border : 1px solid #000000;
 	border-radius: 3px;
 	box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.75);
 	font-family: opcionDos;
 	font-size: 14px;
 	height: 30px;
-	margin: 0px 10px;
+	margin: 5px 10px;
 	text-align: center;
 	width: 30%;
-	background-color: white;
 }
 
 .etiqueta{
@@ -185,12 +212,22 @@ footer{
 	padding-top: 10px;
 }
 
+.enlace{
+	font-family: opcionDos;
+	color: #ff0000;
+	cursor: pointer;
+}
+
+.logo{
+	cursor: pointer;
+}
+
 
 /*Seccion de animacion de imagenes de guayaquil*/
 
 #inicio_animacion{
 	width: 60%;	
-	height: 580px;
+	height: 100%;
     margin: 0px;
     position: relative;
 }

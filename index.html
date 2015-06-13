@@ -6,6 +6,7 @@
 		<meta charset="utf-8">
 		<meta name="description" content="Este es un proyecto innovador XD">
 		<meta name="keywords" content="DAW, aventon, red social,ESPOL">
+		<script type="text/javascript" src="js/init.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	</head>
 	<body>
@@ -13,13 +14,11 @@
 			<h1 class="titulo">POOL ESPOL</h1>
 		</header>
 		<div id="contenedor_inicio">
-		<!--<div id="inicio" class="columna_flexible">
+			<div id="inicio" class="columna_flexible">
 				<div id="wrapper_descripcion">
-					<a href="#">
-						<figure id="logo">
-							<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
-						</figure>
-					</a>
+					<figure id="logo" onclick="volverInicio();">
+						<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
+					</figure>
 					<section>
 						<h2 class="titulo">Descripcion del proyecto</h2>
 						<article>
@@ -36,23 +35,53 @@
 					</section>
 				</div>
 				<div id="wrapper_botones">
-					<input class="boton" name="iniciar_sesion" type="button" value="Iniciar Sesion">
-					<input class="boton" name="registrate" type="button" value="Registrate">
+					<input id="boton_sesion"class="boton" name="iniciar_sesion" type="button" value="Iniciar Sesion">
+					<input id="boton_registro" class="boton" name="registrate" type="button" value="Registrate">
 				</div>
-			</div>-->
-			<div id="inicio_sesion" class="columna_flexible">
-					<a href="#">
-						<figure id="logo">
-							<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
-						</figure>
-					</a>
-				<form id="formulario_inicio_sesion" method="post" action="">
-					<label for="usuario" class="etiqueta">Usuario:</label>
-					<input class="entrada_texto" name="usuario" id="usuario" type="text" placeholder="ejm: rodfcast" autofocus="autofocus" required>
-					<label for="contraseña" class="etiqueta">Contraseña:</label>
-					<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="ejm: ••••••••••••" required>
+			</div>
+			<div id="inicio_sesion" class="invisible">
+				<figure class="logo" onclick="volverInicio();">
+					<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
+				</figure>
+				<form id="formulario_inicio_sesion" class="formulario" method="post" action="">	
+					<input class="entrada_texto" name="usuario" id="usuario" type="text" placeholder="Usuario" autofocus="autofocus" required>
+					<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
 					<br>
 					<input class="boton" type="submit" value="Iniciar Sesion" >
+					<label class="etiqueta">
+						¿No tiene cuenta? 
+						<a id="enlace_iniciar_sesion" class="enlace" >Registrate</a>
+					</label>
+				</form>
+			</div>
+
+			<div id="inicio_registro" class="invisible">
+				<figure id="logo" onclick="volverInicio();">
+					<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
+				</figure>
+				<form id="formulario_registro_usuario" class="formulario" method="post" action="">
+					<input class="entrada_texto" name="usuario" id="usuario" type="text" 
+					placeholder="Usuario" autofocus="autofocus" required>
+					<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
+					<input class="entrada_texto" name="nombre" id="nombre" type="text" required
+					placeholder="Nombre">
+					<input class="entrada_texto" name="apellido" id="apellido" type="text"required
+					placeholder="Apellido">
+					<div>
+						<label for="Sexo" class="etiqueta">Sexo:</label>
+						<input type="radio" name="sexo" value="Masculino" checked=""> <span>Masculino</span>
+						<input  type="radio" name="sexo" value="Femenino"> <span>Femenino</span>
+					</div>
+					<input class="entrada_texto" name="nickname" id="nickname" type="text" required
+					placeholder="Nickname"
+					>
+					<input class="entrada_texto" name="telefono" id="telefono" type="tel" required placeholder="Telefono">
+					<input class="boton" type="submit" value="Registrar" >
+
+					<label class="etiqueta">
+						¿Ya tiene cuenta? 
+						<a id="enlace_iniciar_sesion" class="enlace" >Iniciar sesion</a>
+					</label>
 				</form>
 			</div>
 			<div id="inicio_animacion" class="columna_flexible">
@@ -60,7 +89,7 @@
 				<img src="imagenes/rectorado.jpg">
 				<img src="imagenes/espol.jpg">
 				<img src="imagenes/malecon.jpg">
-			</div>-->
+			</div>
 			<!--<footer>
 				<a href="#"> Desarrolladores </a> 
 			</footer>-->
