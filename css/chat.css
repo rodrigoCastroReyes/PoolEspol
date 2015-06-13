@@ -1,0 +1,69 @@
+
+.fotoPerfil{
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+}
+
+#contenido,#envio{
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+}
+
+#personas{
+	padding: 30px;
+	background: #0084D1;
+}
+
+#conversacion{
+	padding: 30px;
+}
+
+.persona{
+	display: flex;
+	flex-direction: row;
+	width: 300px;
+	height: 120px;
+	border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+	background: #AFEEEE;
+}
+
+#cabezeraMensaje{
+	display: flex;
+	flex-direction: row;
+	border-radius: 17px 17px 0px 0px;
+	-moz-border-radius: 17px 17px 0px 0px;
+	-webkit-border-radius: 17px 17px 0px 0px;
+	background: #AFEEEE;
+	padding: 5px;
+	height: 60px;
+}
+
+#txtMensaje, #btnEnviar{
+	padding: 30px;
+	background: #FFFFFF;
+	border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+}
+
+#areaMensajes{
+	border-radius: 0px 0px 17px 17px;
+	-moz-border-radius: 0px 0px 17px 17px;
+	-webkit-border-radius: 0px 0px 17px 17px;
+	background: #FFFFFF;
+	padding: 30px;
+
+}
+
+
+body{
+	background: #0084D1;	
+}
+
+footer{
+	text-align:center;
+}
