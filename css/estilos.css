@@ -1,21 +1,18 @@
-html,body{
-	height: 100%;
-	margin: 0px;
-}
-
-html,body{
+html,body,p{
 	background-color: #cdebeb;
 	margin: 0px;
 	padding: 0px;
+	height: 100%;
 }
+
 header,h1,h2,form{
 	margin: 0px;
 	padding: 0px;
 }
 
 span{
-	font-family: opcionDos;
-	font-size: 10px;
+	font-family: opcionUno;
+	font-size: 16px;
 }
 
 h1{
@@ -29,6 +26,7 @@ h2{
 
 a{
 	color: white;
+	font-family: opcionUno;
 }
 
 footer{
@@ -45,7 +43,7 @@ footer{
 	width: 100%;
 }
 
-
+/*Estilos cabezera*/
 #cabezera{
 	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
 	border-bottom: 3px solid #c6c7cc;
@@ -54,7 +52,8 @@ footer{
 	padding-top: 5px;
 }
 
-#contenedor_inicio{/*seccion de login, registro y animacion con imagenes*/
+/*seccion inicio de sesion, registro*/
+#contenedor_inicio{
 	display: flex;
 	flex-flow: row wrap;
 	margin: 0px;
@@ -67,7 +66,10 @@ footer{
 #inicio{
 	width: 40%;
 	margin: 0px;
+	justify-content:center;
+	align-items: center;
 }
+
 #inicio_sesion{
 	width: 40%;
 	justify-content:center;
@@ -76,7 +78,6 @@ footer{
 
 #inicio_registro{
 	width: 40%;
-	justify-content:center;
 	align-items: center;
 }
 
@@ -102,29 +103,36 @@ footer{
 	align-items: center;
 }
 
+#opciones_sexo{
+	padding: 10px;
+}
+
 #wrapper_descripcion{
 	display: flex;
 	flex-direction:row;
 	flex-wrap:wrap;
 	padding: 10px 10px;
-	margin: 5px 0px;
+	margin: 0px 0px;
 	justify-content:center;
 }
 
 #wrapper_descripcion section article{
 	font-size: 24px;
 	font-family: opcionUno;
+	padding: 0px 20px;
 }
 
 #wrapper_botones{
 	display: flex;
-	padding: 5px 5px;
+	padding: 0px 0px;
 	justify-content:center;
 	-webkit-flex-flow: row wrap;
 	align-items:center;
 }
 
+
 .boton{
+	flex-wrap: wrap;
 	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
 	border-radius: 10px;
 	box-shadow: rgba(8,43,255,0.75) 2px 2px 4px;
@@ -132,7 +140,7 @@ footer{
 	justify-content:center;
 	margin: 10px 10px;
 	padding: 15px 5px;
-	width: 45%;
+	width: auto;
     -webkit-flex-flow: row wrap;
     border : 1px solid #000000;
     color:white;
@@ -143,15 +151,17 @@ footer{
     font-weight: normal;
 }
 
+
 .boton:hover{
 	background: -webkit-linear-gradient(top,rgb(10,73,167),rgb(0,50,200));
 	border-radius: 10px;
 	box-shadow: rgba(8,43,255,0.75) 3px 3px ;
 	display: flex;
 	justify-content:center;
+
 	margin: 10px 10px;
 	padding: 15px 5px;
-	width: 45%;
+	width: auto;
     -webkit-flex-flow: row wrap;
     border : 1px solid #000000;
     color:white;
@@ -185,8 +195,8 @@ footer{
 	background-color: white;
 	border : 1px solid #000000;
 	border-radius: 3px;
-	font-family: opcionDos;
-	font-size: 14px;
+	font-family: opcionUno;
+	font-size: 20px;
 	height: 30px;
 	margin: 5px 10px;
 	text-align: center;
@@ -198,8 +208,8 @@ footer{
 	border : 1px solid #000000;
 	border-radius: 3px;
 	box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.75);
-	font-family: opcionDos;
-	font-size: 14px;
+	font-family: opcionUno;
+	font-size: 20px;
 	height: 30px;
 	margin: 5px 10px;
 	text-align: center;
@@ -214,7 +224,7 @@ footer{
 
 .enlace{
 	font-family: opcionDos;
-	color: #ff0000;
+	color: #f30202;
 	cursor: pointer;
 }
 
