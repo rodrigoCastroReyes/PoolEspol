@@ -1,0 +1,59 @@
+
+
+#publicador_carro{
+	border-radius: 10px;
+	border: 3px solid #c3c3c3;
+}
+
+#foto_perfil{
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+}
+
+button{
+	width:100px;
+	height: 35px;
+	border-radius: 10px;
+	border: 2px solid #c3c3c3;
+	background: #0080FF;
+	color: #FFFFFF;
+	font-size: 100%;
+	margin-right: 30px;
+	font-family: opcionUno;
+}
+
+h3{
+	flex-grow:1;
+	color:#FFFFFF;
+	font-family: opcionUno;
+	font-style: bold;
+}
+
+#cabezera{
+	background: #0080FF;
+	color: #0E1456;
+	padding: 10px 10px;
+	display:flex;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	border-bottom-width: 10px;	
+	border-bottom-style:solid;
+	border-bottom-color: #c3c3c3;
+
+}
+
+form{
+	padding: 0px 20px;
+
+}
+label{
+	font-family: opcionUno;
+	font-size: 26px;
+	font-style: bold;
+}
+
+@font-face{
+	font-family: 'opcionUno';
+	src:url('Champagne & Limousines.ttf');
+}
