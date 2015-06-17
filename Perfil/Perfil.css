@@ -1,10 +1,15 @@
+
+
+
+
+
 .flex-container{
 		max-width:960px;
 		width:90%;
 		list-style-type:none;
 		margin:20px auto;
 		padding:0;
-		background-color:#221;
+		background-color:white;
 		/*Flexbox setup*/
 		display: flex;
 }
