@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
-		<title></title>
+		<title>Pool Espol</title>
 		<meta charset="utf-8">
 		<meta name="description" content="Este es un proyecto innovador XD">
 		<meta name="keywords" content="DAW, aventon, red social,ESPOL">
@@ -10,25 +9,24 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	</head>
 	<body>
-		<header id="cabezera">
+		<header id="cabezera" class="rectangulo">
 			<h1 class="titulo">POOL ESPOL</h1>
 		</header>
 		<div id="contenedor_inicio">
 			<div id="inicio" class="columna_flexible">
-				<div id="wrapper_descripcion">
+				<div id="wrapper_descripcion" class="flex_row_center">
 					<figure id="logo" onclick="volverInicio();">
 						<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
 					</figure>
 					<section>
-						<!--<h2 class="titulo">Descripcion del proyecto</h2>-->
 						<article>
 							<p>Ayudamos en la reducción del tránsito de vehículos a ESPOL y así contribuir en mejorar la calidad del aire en la Ciudad de Guayaquil.
 							</p>
 						</article>
 					</section>
 				</div>
-				<div id="wrapper_botones">
-					<input id="boton_sesion"class="boton" name="iniciar_sesion" type="button" value="Iniciar Sesion">
+				<div id="wrapper_botones" class="flex_row_center">
+					<input id="boton_sesion" class="boton" name="iniciar_sesion" type="button" value="Iniciar Sesion">
 					<input id="boton_registro" class="boton" name="registrate" type="button" value="Registrate">
 				</div>
 			</div>
@@ -36,7 +34,7 @@
 				<figure class="logo" onclick="volverInicio();">
 					<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
 				</figure>
-				<form id="formulario_inicio_sesion" class="formulario" method="post" action="">	
+				<form id="formulario_inicio_sesion" class="formulario maximas_dimensiones" method="post" action="">	
 					<input class="entrada_texto" name="usuario" id="usuario" type="text" placeholder="Usuario" autofocus="autofocus" required>
 					<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
 					<br>
@@ -47,12 +45,11 @@
 					</label>
 				</form>
 			</div>
-
 			<div id="inicio_registro" class="invisible">
 				<figure id="logo" onclick="volverInicio();">
 					<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
 				</figure>
-				<form id="formulario_registro_usuario" class="formulario" method="post" action="">
+				<form id="formulario_registro_usuario" class="formulario maximas_dimensiones" method="post" action="">
 					<input class="entrada_texto" name="usuario" id="usuario" type="text" 
 					placeholder="Usuario" autofocus="autofocus" required>
 					<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
@@ -62,8 +59,8 @@
 					placeholder="Apellido">
 					<div id="opciones_sexo">
 						<label for="Sexo" class="etiqueta">Sexo:</label>
-						<input type="radio" name="sexo" value="Masculino" checked=""> <span>Masculino</span>
-						<input  type="radio" name="sexo" value="Femenino"> <span>Femenino</span>
+						<input type="radio" name="sexo" value="Masculino" checked=""> <span class="single_text">Masculino</span>
+						<input  type="radio" name="sexo" value="Femenino"> <span class="single_text">Femenino</span>
 					</div>
 					<input class="entrada_texto" name="nickname" id="nickname" type="text" required
 					placeholder="Nickname"
@@ -83,9 +80,9 @@
 				<img src="imagenes/espol.jpg">
 				<img src="imagenes/malecon.jpg">
 			</div>
-			<footer>
-				<a href="#"> Desarrolladores </a> 
-			</footer>
 		</div>
+		<footer id="footer" class="rectangulo">
+			<a href="#"> Desarrolladores </a> 
+		</footer>
 	</body>
 </html>
