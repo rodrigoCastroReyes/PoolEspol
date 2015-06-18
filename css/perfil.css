@@ -1,16 +1,19 @@
 @import "noticias.css";
 
+#flex-container{
+    background: #FFFFFF;
+
+}
+
+body{
+    background: #FFFFFF;
+    height: 100%;
+}
+
 .col-md-3{
-    border-radius:  20px 20px 20px 20px;
-     -moz-border-radius: 20px 20px 20px 20px;
-    
-    border-radius:  20px 20px 20px 20px;
-     -moz-border-radius: 20px 20px 20px 20px;
-    -webkit-border-radius: 20px 20px 20px 20px;
-    border: 4px solid black;
     padding:19px;
     width:400px;
-
+    background: #e2e4e6;
 
 }
 
@@ -89,9 +92,8 @@ text-align: center;
     padding:14px;
     margin:14px;
    
-    -moz-border-radius: 20px 20px 20px 20px;
-    -webkit-border-radius: 20px 20px 20px 20px;
-    border: 4px solid black;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
     
     background: #49c0f0; /* Old browsers */
     background: -moz-linear-gradient(top, #49c0f0 0%, #2cafe3 100%); /* FF3.6+ */

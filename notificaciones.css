@@ -1,0 +1,156 @@
+
+.fotoPerfil{
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+}
+
+#contenido,#envio{
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+}
+
+#personas{
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+	padding: 30px;
+	background: #0084D1;
+
+}
+
+#conversacion{
+
+
+}
+
+#chat{
+	background: #AFEEEE;
+	padding: 25px;
+	margin-left: 120px;
+	margin-top: 20px;
+	border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+}
+
+.persona{
+	display: flex;
+	flex-direction: row;
+	height: 100px;
+	border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+	background: #AFEEEE;
+	margin: 5px;
+}
+
+.persona:hover{
+	display: flex;
+	flex-direction: row;
+	height: 100px;
+	border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+	background: #AFFFEE;
+	margin: 5px;
+}
+
+#cabezeraMensaje{
+	display: flex;
+	flex-direction: row;
+	border-radius: 17px 17px 0px 0px;
+	-moz-border-radius: 17px 17px 0px 0px;
+	-webkit-border-radius: 17px 17px 0px 0px;
+	background: #0084D1;
+	padding: 5px;
+	height: 60px;
+}
+
+#txtMensaje, #btnEnviar{
+	padding: 30px;
+	border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+}
+
+
+#btnEnviar{
+	background: #0084D1;
+	color: #FFFFFF;
+}
+
+#btnEnviar:hover{
+	background: #FFFFFF;
+	color: #0084D1;
+}
+
+
+#areaMensajes{
+	border-radius: 0px 0px 17px 17px;
+	-moz-border-radius: 0px 0px 17px 17px;
+	-webkit-border-radius: 0px 0px 17px 17px;
+	background: #FFFFFF;
+	padding: 30px;
+	overflow: scroll;
+}
+
+
+
+
+footer{
+	text-align:center;
+}
+
+html,body{
+	margin:0px;
+	height:100%;
+}
+
+#cabezera{
+	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
+	border-bottom: 3px solid #c6c7cc;
+	padding-bottom:5px; 
+	padding-top: 5px;
+}
+
+
+  body
+{
+font-family:Arial, Helvetica, sans-serif;
+font-size:14px;
+background-color:#ddeef6;
+}
+a
+{
+color:#000000;
+font-weight:bold;
+text-decoration:none;
+
+}
+a:hover
+{
+color:#000000;
+font-weight:bold;
+text-decoration:none;
+
+}
+#sign_box
+{
+
+width:170px; background-color:#fff; border:solid 1px #5ea0c1; padding:8px;position:absolute;
+display:none;
+-moz-border-radius-topright:6px;-moz-border-radius-bottomleft:6px;-moz-border-radius-bottomright:6px;-webkit-border-top-right-radius:6px;-webkit-border-bottom-left-radius:6px;-webkit-border-bottom-right-radius:6px;
+}
+#sign_box a{ font-size:12px; color:#006699; font-weight:normal; text-decoration:underline;}
+#sign_box a:hover{ font-size:12px; color:#006699; text-decoration:underline;font-weight:normal}
+
+
+    
+#d1, #d2{
+	color: #5ea0c1;
+    font-size: medium;
+    alignment-adjust: text-before-edge;
+    font-style: oblique;
+}

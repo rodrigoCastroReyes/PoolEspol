@@ -2,9 +2,14 @@
 @import 'fonts.css';
 @import 'estilos.css';
 
+html,body{
+	background-color: #e2e4e6;
+}
+
+
 #contenedor_navegacion{
 	display: flex;
-	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
+	background: -webkit-linear-gradient(top,#0080FF, #0080BB);
 	border-bottom: 2px solid #9999ff
 }
 
@@ -61,7 +66,7 @@
 #mapa_ruta{
 	height: 250px;
 	width: 50%;
-	background-color:#0080FF;
+	background-color:white;
 }
 
 .nickname{
@@ -83,7 +88,7 @@
 	align-items:center;
 	height: 50px;
 	/*background: -webkit-linear-gradient(top,#1c9596, #1c9fff);*/
-	background: #0080FF;
+	background: #0080FB;
 }
 
 .menu_superior{
