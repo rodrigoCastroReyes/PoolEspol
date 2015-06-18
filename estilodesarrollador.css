@@ -178,7 +178,7 @@ h1{
 	width: 98px;
 	height: 98px;
 	 margin-top: 44px;
-	margin-left:-304px;
+	margin-left:-64px;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
    -moz-border-radius: 150px; 
@@ -191,7 +191,7 @@ h1{
 #dev1{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:120px;left: 99px;
+	position: relative;bottom:120px;left: 120px;
 	
 }
 #dev2{
@@ -215,7 +215,7 @@ h1{
 #dev5{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:99px;left: -200px;
+	position: relative;bottom:99px;left: 60px;
 	
 }
 
