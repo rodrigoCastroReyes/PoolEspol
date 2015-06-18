@@ -61,7 +61,7 @@
 #mapa_ruta{
 	height: 250px;
 	width: 50%;
-	background-color:white;
+	background-color:#0080FF;
 }
 
 .nickname{
@@ -82,7 +82,8 @@
 	display: flex;
 	align-items:center;
 	height: 50px;
-	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
+	/*background: -webkit-linear-gradient(top,#1c9596, #1c9fff);*/
+	background: #0080FF;
 }
 
 .menu_superior{
