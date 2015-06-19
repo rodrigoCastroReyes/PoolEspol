@@ -1,20 +1,26 @@
-@import "noticias.css";
+@import "barra.css";
 
-#flex-container{
-    background: #FFFFFF;
-
+*{
+    margin: 0px;
+    padding: 0px;
 }
+
 
 body{
     background: #FFFFFF;
     height: 100%;
 }
 
+
+#flex-container{
+    background: #FFFFFF;
+
+}
+
 .col-md-3{
     padding:19px;
     width:400px;
     background: #e2e4e6;
-
 }
 
 #perfilusuario img {

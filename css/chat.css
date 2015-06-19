@@ -1,14 +1,30 @@
-@import "noticias.css";
+@import "barra.css";
 @import "fonts.css";
-p{
-	background: #e2e4e6;
-	height: auto;
+
+*{
+	margin: 0px;
+	padding: 0px;
 }
+
+html,body{
+	height:100%;
+	background: #FFFFFF;
+}
+
 .fotoPerfil{
 	width: 50px;
 	height: 50px;
 	padding: 10px;
 }
+
+.texto_simple{
+	color: white;
+	font-family: opcionUno;
+	padding: 5px 5px;
+	font-size: 20px;
+}
+
+
 
 #contenido{
 	display: flex;
@@ -71,57 +87,63 @@ p{
 #cabezeraMensaje{
 	display: flex;
 	flex-direction: row;
+	align-items:center;
 	border-radius: 10px 10px 0px 0px;
 	background: #0084D1;
 	height: 10%;
 	width: 60%;
 }
 
-#txtMensaje, #btnEnviar{
-	margin-top: 20px;
+
+#envio{
+	width: 60%;
+	height: 10%;
+	margin-top: 10px;
+	display: flex;
+	justify-content:center;
+}
+
+#txtMensaje{
+	margin-right: 5px;
 	padding: 30px;
 	border-radius: 10px 10px 10px 10px;
-}
-#txtMensaje{
 	background: #e2e4e6;
 	border-color: #FFFFFF;
+	width: 75%;
 }
-
-
 
 #btnEnviar{
 	background: #0084D1;
 	color: #FFFFFF;
+	border-radius: 10px 10px 10px 10px;
+	width: 25%;
+	font-family: opcionUno;
 }
 
 #btnEnviar:hover{
 	background: #FFFFFF;
 	color: #0084D1;
+	font-family: opcionUno;
 }
 
-#envio{
-	width: 60%;
-	height: 10%;
-	display: flex;
-}
 
 #areaMensajes{
 	background: #e2e4e6;
 	overflow: scroll;
 	width: 60%;
-	height: 65%;
+	height: 60%;
 	border-radius: 0px 0px 10px 10px;
+}
+
+#areaMensajes p{
+	margin-top: 15px;
+	margin-left:20px;
 }
 
 footer{
 	text-align:center;
 }
 
-html,body{
-	margin:0px;
-	height:100%;
-	background: #FFFFFF;
-}
 
 #cabezera{
 	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);

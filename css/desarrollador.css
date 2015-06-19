@@ -11,18 +11,13 @@
 	 height: 50px;
 	 border-radius: 150px;
 	 position: absolute;bottom: 30%;left: 70%;
-	 
 	 padding: 3px;
-	 
   -webkit-border-radius: 150px;
    -moz-border-radius: 150px; 
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
 	 display: flex;
-	 
-	 
-	 
 }
 
 #imagenesicon1 img{
