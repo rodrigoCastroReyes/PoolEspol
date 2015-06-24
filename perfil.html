@@ -4,40 +4,41 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Perfil del usuario</title>
-	<link rel="stylesheet" href="bootstrap3/css/bootstrap.css">
-	<link rel="stylesheet" href="bootstrap3/css/bootstrap.min.css">
+	<!--<link rel="stylesheet" href="bootstrap3/css/bootstrap.css">
+	<link rel="stylesheet" href="bootstrap3/css/bootstrap.min.css">-->
 	<link rel="stylesheet" href="css/perfil.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 <body>
 	<header >
 		<div id="contenedor_navegacion">
+			<div id="contenedor_logo">
+				<figure id="logo"onclick="volverInicio();">
+					<img width="40" height="40" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
+				</figure>
+			</div>
 			<div id="contenedor_barra">
 				<nav>
 					<ul class="barraNavegacion">
 						<li>
-							<figure id="logo"onclick="volverInicio();">
-							<img width="40" height="40" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
-							</figure>
-						</li>
-						<li>
 							<span class="icon-newspaper"></span>
-							<span>Noticias</span></li>
-						<li>
-							<span class="icon-happy"></span>
-							<span>Perfil</span>
+							<span>Noticias</span>
 						</li>
 						<li>
-							<span class="icon-bell"></span>
-							<span>Notificaciones</span>
+							<span class="icon-pacman"></span>
+							<span>Perfil</span>
 						</li>
 						<li>
 							<span class="icon-mail4"></span>
 							<span>Mensajes</span>
 						</li>
 						<li>
+							<span class="icon-bell"></span>
+							<span>Notificaciones</span>
+						</li>
+						<li>
 							<span class="icon-switch"></span>
-							<span>Cerrar Sesion</span>
+							<span></span>
 						</li>
 					</ul>
 				</nav>
@@ -45,29 +46,52 @@
 		</div>
 	</header>
 	</section>
-		<div id="flex-container">
-		    <div class="col-md-3">
-	 			<center>
-	 				<div id="perfilusuario"><img src="imagenes/imagenPerfil.jpg" >
-	 				</div>
-	 			</center>
-	 			<h1 >Oswaldo Bayona</h1>
-	 				<div class="fondo">
-		 				<h2>Informacion Personal</h2>
-			 			<h4 >Nombre :Oswaldo Alejandro</h4>
-			 			<h4 >Apellido:Bayona Andrade</h4>
-			 			<h4 >Celular.090909090</h4>
-			 			<h4 >Sexo Hombre</h4>
-			 			<button class="editar"><img src="imagenes/edit.jpeg" id="lapiz"></button>
-			 			<!-- Agrego un boton-->
-			 		</div>
-					<div class="fondo">
-						<h2>Informacion del Vehiculo</h2>	
-						<h4 >Placa YIOP23</h4>
-			 			<h4 >Capacidad 3</h4>
-			 			<img src="imagenes/carro.jpeg" id="edit">
-			 			<button class="editar"><img src="imagenes/edit.jpeg" id="lapiz"></button>
+		<div class="flex_container">
+		    <div id="infoPerfil">
+		    	<div id="infoUsuario" class="columna_flexible">
+		 			<div id="nickName" class="columna_flexible flex_center">
+		 				<img width="100" height="100" src="imagenes/imagenPerfil.jpg" >
+		 				<h1 >Oswaldo Bayona</h1>
 					</div>
+		 			<div id="datosPersonales" class="columna_flexible flex_center ">
+		 				<h2>Informacion Personal</h2>
+		 				<div class="tabla">
+		 					<div class="tabla_item columna_flexible">
+			 					<label>Nombre </label>
+			 					<label>Apellido </label>
+			 					<label>Celular </label>
+					 			<label>Sexo </label>
+					 		</div>
+					 		<div class="tabla_item columna_flexible">
+					 			<h4>Oswaldo Alejandro</h4>
+					 			<h4>Bayona Andrade</h4>
+					 			<h4 >090909090</h4>
+					 			<h4 >Hombre</h4>
+					 		</div>
+				 		</div>
+				 		<div class="icon-pencil lapiz blanco columna_flexible flex_center">
+				 		</div>
+			 		</div>
+			 	</div>
+				<div id="infoVehiculo" class="columna_flexible flex_align_items_center">
+					<h2>Informacion del Vehiculo</h2>	
+					<div class="tabla">
+		 				<div class="tabla_item columna_flexible">
+			 				<label>Placa </label>
+			 				<label>Capacidad </label>
+						</div>
+						<div class="tabla_item columna_flexible">
+							<h4>YIOP23</h4>
+							<h4>3</h4>
+						</div> 		
+				 	</div>
+				 	<div class="icon-pencil lapiz blanco columna_flexible flex_center">
+				 		<!--<span class=""></span>-->
+				 	</div>	
+				</div>
+		 	</div>
+		 	<div id="rutasPerfil">
+		 		
 		 	</div>
 		 </div>
 	</section>
