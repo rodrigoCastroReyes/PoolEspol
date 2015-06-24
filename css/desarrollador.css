@@ -1,45 +1,26 @@
-#logoespol img{
-	 width: 75px; 
-	 height: 75px;
-	 border-radius: 150px;
-	 margin-left:15px;
+@import 'fonts.css';
+
+.navbar.navbar-default{
+
+background: -webkit-linear-gradient(top, #49c0f0 0%,#2cafe3 100%);
+
+
+}
+
+html,body{
+	background-color:#e2e4e6;
+
+}
+
+#tituloDesarrollador{
+    font-family: opcionCuatro;
+	font-style: normal;
+	margin-left:255px;
+	height: 100%;
+	padding-top:55px;
+	color:white;
 	
 }
-
-#imagenesicon img{
-	 width: 50px; 
-	 height: 50px;
-	 border-radius: 150px;
-	 position: absolute;bottom: 30%;left: 70%;
-	 padding: 3px;
-  -webkit-border-radius: 150px;
-   -moz-border-radius: 150px; 
-    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
-    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
-	 display: flex;
-}
-
-#imagenesicon1 img{
-	 width: 50px; 
-	 height: 50px;
-	 border-radius: 150px;
-	 position: absolute;bottom: 30%;left:89%;
-	
-	 
-	 padding: 3px;
-	 
-  -webkit-border-radius: 150px;
-   -moz-border-radius: 150px; 
-    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
-    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
-	 display: flex;
-	 
-	 
-	 
-}
-
 
 .opciones img:hover{
 	 background: blue;
@@ -73,32 +54,15 @@ footer{
 	color: white;
 	position: absolute;top: 560px;
 	width: 100%;
+	position:absolute;top:785px;
 	
 }
 
 #logosection img{
-	position: absolute;left: 80%;top: 343px;
+	position: absolute;left: 43%;bottom: 463px;
 	
 }
-#logosection{
-	width: 730px;
-   height: 133px;
-line-height: 0px;
-color: transparent; font-size: 30px;
-font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-weight: bold;
 
--webkit-transition: all 0.5s ease;
--moz-transition: all 0.5s ease;
--ms-transition: all 0.5s ease;
-transition: all 0.5s ease;
-}
-
-#logosection:hover{
-	line-height: 133px;
-    color: #575858;
-    margin-left: 32px;
-}
 
 #logosection p{
 	position: absolute;left: 45%;top: 50%;
@@ -109,13 +73,13 @@ p{
 
 h1{
 	
-	position: absolute;bottom: 77%;left: 299px;
+	position: absolute;bottom: 87%;left: 439px;
 }
 
 .col-md-3.col-sm-3.fig1 img{
 	width: 98px;
 	height: 98px;
-	margin-top: 70px;
+	margin-top: 275px;
 	margin-left:12px;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
@@ -130,8 +94,8 @@ h1{
 	width: 98px;
 	height: 98px;
 	position: relative;
-	margin-top: 330px;
-	margin-left:-278px;
+	margin-top: 530px;
+	margin-left:-68px;
 	-webkit-border-radius: 150px;
    -moz-border-radius: 150px; 
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
@@ -143,7 +107,7 @@ h1{
 .col-md-3.col-sm-3.fig3 img{
 	width: 98px;
 	height: 98px;
-	 margin-top: 70px;
+	 margin-top: 290px;
 	margin-left:-125px;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
@@ -157,8 +121,8 @@ h1{
 .col-md-3.col-sm-3.fig4 img{
 	width: 98px;
 	height: 98px;
-	margin-top: 70px;
-	margin-left:-55px;
+	margin-top: 275px;
+	margin-left:-35px;
 	
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
@@ -172,8 +136,8 @@ h1{
 .col-md-3.col-sm-3.fig5 img{
 	width: 98px;
 	height: 98px;
-	 margin-top: 44px;
-	margin-left:-64px;
+	 margin-top: 74px;
+	margin-left:-154px;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
    -moz-border-radius: 150px; 
@@ -192,7 +156,7 @@ h1{
 #dev2{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:120px;left:-134px;
+	position: relative;bottom:120px;left:44px;
 	
 }
 #dev3{
@@ -210,7 +174,7 @@ h1{
 #dev5{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:99px;left: 60px;
+	position: relative;bottom:115px;left: -45px;
 	
 }
 
