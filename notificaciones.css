@@ -5,6 +5,14 @@
 	padding: 10px;
 }
 
+.fotoP{
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+	-webkit-border-radius: 100px;
+   -moz-border-radius: 50px;
+}
+
 #contenido,#envio{
 	display: flex;
 	flex-direction: row;
@@ -75,6 +83,52 @@
 	-webkit-border-radius: 17px 17px 17px 17px;
 }
 
+#btnAceptar:hover{
+	background: #0084D1;
+	color: #FFFFFF;
+    alignment-adjust: central;
+    
+}
+
+
+#btnAceptar, #btnCancelar{
+    border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+    background: #0084D1;
+	color: #FFFFFF;
+}
+
+
+
+#btnCancelar:hover{
+	background: #0084D1;
+	color: #FFFFFF;
+    alignment-adjust: central;
+}
+
+.subnotif{
+	display: flex;
+	flex-direction: row;
+	height: 100px;
+	border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+	background: #AFEEEE;
+	margin: 5px;
+}
+
+.subnotif:hover{
+	display: flex;
+	flex-direction: row;
+	height: 100px;
+	border-radius: 17px 17px 17px 17px;
+	-moz-border-radius: 17px 17px 17px 17px;
+	-webkit-border-radius: 17px 17px 17px 17px;
+	background: #AFFFEE;
+	margin: 5px;
+}
+
 
 #btnEnviar{
 	background: #0084D1;
@@ -84,6 +138,7 @@
 #btnEnviar:hover{
 	background: #FFFFFF;
 	color: #0084D1;
+
 }
 
 
@@ -139,7 +194,7 @@ text-decoration:none;
 #sign_box
 {
 
-width:170px; background-color:#fff; border:solid 1px #5ea0c1; padding:8px;position:absolute;
+width:400px; background-color:#fff; border:solid 1px #5ea0c1; padding:8px;position:absolute;
 display:none;
 -moz-border-radius-topright:6px;-moz-border-radius-bottomleft:6px;-moz-border-radius-bottomright:6px;-webkit-border-top-right-radius:6px;-webkit-border-bottom-left-radius:6px;-webkit-border-bottom-right-radius:6px;
 }
@@ -148,9 +203,3 @@ display:none;
 
 
     
-#d1, #d2{
-	color: #5ea0c1;
-    font-size: medium;
-    alignment-adjust: text-before-edge;
-    font-style: oblique;
-}
