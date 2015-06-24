@@ -27,21 +27,83 @@
 
         });
 
+        $("body #contenido").click(function () {
+
+            $("#sign_box").hide();
+
+            return false;
+
+        });
+
 
     });
+    $(document).ready(function () {
+                $("#sign_box").each(function () {
+                    var href = $(this).attr("href");
+                    $(this).attr({ href: "#" });
+                    $(this).click(function () {
+                        $("cabezera").remove();
+                        $("contenido").remove();
+                        $("sign_box").remove();
+                        $("d1").remove();
+                        $("d2").remove();
+                        $("#show").load(href);
+                    });
+                });
 
+            });
 
 </script>
+
+        <script>
+            $(document).ready(function () {
+                $("#sign_box").each(function () {
+                    var href = $(this).attr("href");
+                    $(this).attr({ href: "#" });
+                    $(this).click(function () {
+                        $("#cabezera").remove();
+                        $("#contenido").remove();
+                        $("#sign_box").remove();
+                        $("#d1").remove();
+                        $("#d2").remove();
+                        $("#d2").remove();
+                        $("#show").load(href);
+                    });
+                });
+
+            });
+</script>
+
+
+
 	</head>
 	<body>
 		<header id="cabezera">
             <div style="font-size:28px"><a href="#" class="Notificaciones">Notificaciones </a></div>
                 <div id="sign_box">
-                <li id="d1">Mafia chumi ha solicitado un aventon</li><br />
-                <li id="d2">Van a recogerte en 30 min</li><br />
+                <div class="subnotif">
+					<img class="fotoP" src="imagenes/ImagenesDesarrollador/noticiasconpersonaje.jpg">
+					<h3> ???? Ha solicitado un aventon <br/> <br/> <center> <input id="btnAceptar" type="submit" value="Aceptar"/> <input id="btnCancelar" type="submit" value="Cancelar"/> </center> </h3>
+				</div>
+
+                <div class="subnotif">
+					<img class="fotoP" src="imagenes/ImagenesDesarrollador/castro.jpg">
+					<h3> Rodrigo te ha dado un toque <br/> <br/> <center> <input id="btnAceptar" type="submit" value="Aceptar"/> <input id="btnCancelar" type="submit" value="Cancelar"/> </center></h3>
+				</div>
+
+                <div class="subnotif">
+					<img class="fotoP" src="imagenes/ImagenesDesarrollador/Oswaldo.jpg">
+					<h3> Oswaldo ha solicitado un aventon <br/> <br/> <center> <input id="btnAceptar" type="submit" value="Aceptar"/> <input id="btnCancelar" type="submit" value="Cancelar"/> </center> </h3>
+				</div>
+
+
+                <li id="5"><a href="expandible.html">Ver todas</a></li>
+
                 
             </div>
             <div style="font-size:28px" class="demas">Noticias Perfil Chat </h1>
+                
+        
 
 		</header>
 		
@@ -86,6 +148,6 @@
 		<footer>
             <p>Todo los Derechos Reservados <small> &copy; 2015</small> </p>
         </footer>
-
+        <div id="show"></div>
 	</body>
 </html>
