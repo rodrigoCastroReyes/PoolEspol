@@ -79,7 +79,7 @@ h1{
 .col-md-3.col-sm-3.fig1 img{
 	width: 98px;
 	height: 98px;
-	margin-top: 275px;
+	margin-top: 335px;
 	margin-left:12px;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
@@ -107,7 +107,7 @@ h1{
 .col-md-3.col-sm-3.fig3 img{
 	width: 98px;
 	height: 98px;
-	 margin-top: 290px;
+	 margin-top: 335px;
 	margin-left:-125px;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
@@ -121,7 +121,7 @@ h1{
 .col-md-3.col-sm-3.fig4 img{
 	width: 98px;
 	height: 98px;
-	margin-top: 275px;
+	margin-top: 335px;
 	margin-left:-35px;
 	
 	position: relative;top: 189%;
@@ -136,8 +136,8 @@ h1{
 .col-md-3.col-sm-3.fig5 img{
 	width: 98px;
 	height: 98px;
-	 margin-top: 74px;
-	margin-left:-154px;
+	 margin-top: 14px;
+	margin-left:54px;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
    -moz-border-radius: 150px; 
@@ -174,7 +174,7 @@ h1{
 #dev5{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:115px;left: -45px;
+	position: relative;bottom:115px;left: 155px;
 	
 }
 
