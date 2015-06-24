@@ -35,9 +35,16 @@
 					<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
 				</figure>
 				<form id="formulario_inicio_sesion" class="formulario maximas_dimensiones" method="post" action="">	
-					<input class="entrada_texto" name="usuario" id="usuario" type="text" placeholder="Usuario" autofocus="autofocus" required>
-					<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
-					<br>
+					<div class="tabla ">
+						<div class="tabla_item columna_flexible flex_end">
+							<label for="usuario" class="etiqueta ">Usuario:</label>
+							<label for="contraseña" class="etiqueta ">Contraseña:</label>
+						</div>
+						<div class="tabla_item columna_flexible flex_start">
+							<input class="entrada_texto" name="usuario" id="usuario" type="text" placeholder="Usuario" autofocus="autofocus" required>
+							<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
+						</div>
+					</div>
 					<input class="boton" type="submit" value="Iniciar Sesion" >
 					<label class="etiqueta">
 						¿No tiene cuenta? 
@@ -51,22 +58,32 @@
 					<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
 				</figure>
 				<form id="formulario_registro_usuario" class="formulario maximas_dimensiones" method="post" action="">
-					<input class="entrada_texto" name="usuario" id="usuario" type="text" 
-					placeholder="Usuario" autofocus="autofocus" required>
-					<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
-					<input class="entrada_texto" name="nombre" id="nombre" type="text" required
-					placeholder="Nombre">
-					<input class="entrada_texto" name="apellido" id="apellido" type="text"required
-					placeholder="Apellido">
-					<div id="opciones_sexo">
-						<label for="Sexo" class="etiqueta">Sexo:</label>
-						<input type="radio" name="sexo" value="Masculino" checked=""> <span class="single_text">Masculino</span>
-						<input  type="radio" name="sexo" value="Femenino"> <span class="single_text">Femenino</span>
+					<div class="tabla flex">
+						<div class="tabla_item columna_flexible_start flex_end">
+							<label for="usuario" class="etiqueta ">Usuario:</label>
+							<label for="contraseña" class="etiqueta">Contraseña:</label>
+							<label for="nombre" class="etiqueta">Nombre:</label>
+							<label for="apellido" class="etiqueta">Apellido:</label>
+							<label for="nickname" class="etiqueta">Nickname:</label>
+							<label for="telefono" class="etiqueta">Telefono:</label>
+							<label for="sexo" class="etiqueta">Sexo:</label>
+						</div>
+						<div class="tabla_item columna_flexible_start flex_start">
+							<input class="entrada_texto" name="usuario" id="usuario" type="text" 
+							placeholder="Usuario" autofocus="autofocus" required>
+							<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
+							<input class="entrada_texto" name="nombre" id="nombre" type="text" required
+							placeholder="Nombre">
+							<input class="entrada_texto" name="apellido" id="apellido" type="text"required
+							placeholder="Apellido">
+							<input class="entrada_texto" name="nickname" id="nickname" type="text" required	placeholder="Nickname">
+							<input class="entrada_texto" name="telefono" id="telefono" type="tel" required placeholder="Telefono">
+							<div id="opciones_sexo">
+								<input type="radio" name="sexo" value="Masculino" checked=""> <span class="single_text">Masculino</span>
+								<input  type="radio" name="sexo" value="Femenino"> <span class="single_text">Femenino</span>
+							</div>
+						</div>
 					</div>
-					<input class="entrada_texto" name="nickname" id="nickname" type="text" required
-					placeholder="Nickname"
-					>
-					<input class="entrada_texto" name="telefono" id="telefono" type="tel" required placeholder="Telefono">
 					<input class="boton" type="submit" value="Registrar" >
 
 					<label class="etiqueta">
