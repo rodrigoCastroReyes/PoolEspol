@@ -15,7 +15,7 @@ html,body{
 #tituloDesarrollador{
     font-family: opcionCuatro;
 	font-style: normal;
-	margin-left:255px;
+	margin-left:195px;
 	height: 100%;
 	padding-top:55px;
 	color:white;
@@ -59,7 +59,7 @@ footer{
 }
 
 #logosection img{
-	position: absolute;left: 43%;bottom: 463px;
+	position: absolute;left: 43%;bottom: 263px;
 	
 }
 
@@ -73,7 +73,7 @@ p{
 
 h1{
 	
-	position: absolute;bottom: 87%;left: 439px;
+	position: absolute;bottom: 77%;left: 329px;
 }
 
 .col-md-3.col-sm-3.fig1 img{
