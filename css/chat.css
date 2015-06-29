@@ -14,7 +14,8 @@ html,body{
 .fotoPerfil{
 	width: 50px;
 	height: 50px;
-	padding: 10px;
+	padding: 0px 5px 0px 5px;
+	border-radius: 50px 50px 50px 50px;
 }
 
 .texto_simple{
@@ -104,41 +105,39 @@ html,body{
 }
 
 #txtMensaje{
-	margin-right: 5px;
-	padding: 30px;
-	border-radius: 10px 10px 10px 10px;
 	background: #e2e4e6;
 	border-color: #FFFFFF;
 	width: 75%;
+	height: 30px;
 }
 
-#btnEnviar{
-	background: #0084D1;
-	color: #FFFFFF;
-	border-radius: 10px 10px 10px 10px;
-	width: 25%;
-	font-family: opcionUno;
+
+#btnEnviar {
+  border-radius: 0px;
+  font-family: opcionUno;
+  color: #ffffff;
+  font-size: 20px;
+  background: #0080FF;
+  text-decoration: none;
+  width: 25%;
+  height: 30px;
 }
 
-#btnEnviar:hover{
-	background: #FFFFFF;
-	color: #0084D1;
-	font-family: opcionUno;
+#btnEnviar:hover {
+  background: #23b7e5;
+  text-decoration: none;
 }
 
 
 #areaMensajes{
 	background: #e2e4e6;
-	overflow: scroll;
 	width: 60%;
 	height: 60%;
-	border-radius: 0px 0px 10px 10px;
+	display: flex;
+	flex-direction: column;
 }
 
-#areaMensajes p{
-	margin-top: 15px;
-	margin-left:20px;
-}
+
 
 footer{
 	text-align:center;
@@ -150,4 +149,39 @@ footer{
 	border-bottom: 3px solid #c6c7cc;
 	padding-bottom:5px; 
 	padding-top: 5px;
+}
+
+.friend, .self{
+	
+	display: flex;
+	flex-direction: row;
+}
+
+.friend {
+	justify-content: flex-start;
+}
+
+.self {
+	justify-content: flex-end;
+}
+
+.mensaje{
+	border-radius: 10px 10px 10px 10px;
+	background: #FFFFFF;
+	padding: 10px;
+	margin: 3px;
+	max-width: 70%;
+	display: block;
+}
+
+.infoPer{
+	padding: 15px;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+p.text {
+    width: 100%; 
+    word-wrap: break-word;
 }

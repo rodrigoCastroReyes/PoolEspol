@@ -2,9 +2,10 @@
 
 .navbar.navbar-default{
 
-background: -webkit-linear-gradient(top, #49c0f0 0%,#2cafe3 100%);
-
-
+background: -webkit-linear-gradient(top,#0080FF, #0080BB);
+ width:134%;
+ margin-left:-1%;
+ 
 }
 
 html,body{
@@ -15,10 +16,12 @@ html,body{
 #tituloDesarrollador{
     font-family: opcionCuatro;
 	font-style: normal;
-	margin-left:255px;
-	height: 100%;
-	padding-top:55px;
+	margin-left:29%;
+	padding-top:0px;
+	font-size:289%;
+	
 	color:white;
+	list-style:none;
 	
 }
 
@@ -28,13 +31,15 @@ html,body{
 }
 
 a{
-	background: -webkit-linear-gradient(top, #49c0f0 0%,#2cafe3 100%);
+	
+	color:white;
+}
+a:hover{
+	color:white;
+	font-style:none
 }
 
-.nav.nav-pills{
 
-	 background: -webkit-linear-gradient(top, #49c0f0 0%,#2cafe3 100%);
-}
 
 #home{
 	font-weight:bold;
@@ -48,35 +53,25 @@ a{
 	position: absolute;bottom: 30%;left: 80%;
 }
 
-footer{
-	 background: -webkit-linear-gradient(top, #49c0f0 0%,#2cafe3 100%);
-	 font-weight:bold;
-	color: white;
-	position: absolute;top: 560px;
-	width: 100%;
-	position:absolute;top:785px;
-	
-}
+
 
 #logosection img{
-	position: absolute;left: 43%;bottom: 463px;
+	margin-left: 1%;
+	margin-top:5%;
 	
 }
 
 
-#logosection p{
-	position: absolute;left: 45%;top: 50%;
-}
 p{
 	margin-left: 87px;
 }
 
-h1{
+h2{
 	
-	position: absolute;bottom: 87%;left: 439px;
+	position: relative;bottom: 49px;left: 370px;
 }
 
-.col-md-3.col-sm-3.fig1 img{
+.fig1 img{
 	width: 98px;
 	height: 98px;
 	margin-top: 335px;
@@ -90,12 +85,12 @@ h1{
 	 display: flex;
 	
 }
-.col-md-3.col-sm-3.fig2 img{
+.fig2 img{
 	width: 98px;
 	height: 98px;
 	position: relative;
-	margin-top: 530px;
-	margin-left:-68px;
+	margin-top: 540px;
+	margin-left:58%;
 	-webkit-border-radius: 150px;
    -moz-border-radius: 150px; 
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
@@ -104,11 +99,11 @@ h1{
 	 display: flex;
 	
 }
-.col-md-3.col-sm-3.fig3 img{
+.fig3 img{
 	width: 98px;
 	height: 98px;
 	 margin-top: 335px;
-	margin-left:-125px;
+	margin-left:59%;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
    -moz-border-radius: 150px; 
@@ -118,11 +113,11 @@ h1{
 	 display: flex;
 	
 }
-.col-md-3.col-sm-3.fig4 img{
+.fig4 img{
 	width: 98px;
 	height: 98px;
 	margin-top: 335px;
-	margin-left:-35px;
+	margin-left:226%;
 	
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
@@ -133,11 +128,11 @@ h1{
 	 display: flex;
 	
 }
-.col-md-3.col-sm-3.fig5 img{
+.fig5 img{
 	width: 98px;
 	height: 98px;
 	 margin-top: 14px;
-	margin-left:54px;
+	margin-left:239%;
 	position: relative;top: 189%;
 	-webkit-border-radius: 150px;
    -moz-border-radius: 150px; 
@@ -156,25 +151,33 @@ h1{
 #dev2{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:120px;left:44px;
+	position: relative;bottom:120px;left:199px;
 	
 }
 #dev3{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:120px;left: -23px;
+	position: relative;bottom:120px;left: 147%;
 	
 }
 #dev4{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:120px;left: 59px;
+	position: relative;bottom:120px;left: 421px;
 	
 }
 #dev5{
 	width: 54px;
 	height: 54px;
-	position: relative;bottom:115px;left: 155px;
+	position: relative;bottom:115px;left: 459px;
+	
+}
+.row{
+	margin-top:-22%;
+}
+.flex-container{
+	display:flex;
+	flex-flow: row wrap;
 	
 }
 

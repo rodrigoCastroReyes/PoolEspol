@@ -6,7 +6,7 @@
 }
 
 html,body,p{
-	background-color: #cdebeb;
+	background-color: #e2e4e6;
 	height: 100%;
 }
 
@@ -27,7 +27,7 @@ a{
 /*Estilos cabezera*/
 
 .rectangulo{
-	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
+	background: #0080FB;
 	padding-bottom: 5px;
 	padding-top: 0px;
 	width: 100%;
@@ -96,6 +96,18 @@ a{
 	font-size: 16px;
 }
 
+.tabla{
+    display: flex;
+    flex-direction:row;
+    height: 100%;
+}
+
+.tabla_item{
+ 	width: 100%;
+    font-size:20px;
+}
+
+
 
 /*****************************/
 
@@ -105,7 +117,7 @@ a{
 }
 
 #opciones_sexo{
-	padding: 10px;
+	padding: 5px;
 }
 
 .logo{
@@ -129,7 +141,7 @@ a{
 
 .boton{
 	flex-wrap: wrap;
-	background: -webkit-linear-gradient(top,#1c9596, #1c9fff);
+	background: #0080FB;
 	border-radius: 10px;
 	box-shadow: rgba(8,43,255,0.75) 2px 2px 4px;
 	display: flex;
@@ -149,7 +161,7 @@ a{
 
 
 .boton:hover{
-	background: -webkit-linear-gradient(top,rgb(10,73,167),rgb(0,50,200));
+	background: #23b7e5;
 	border-radius: 10px;
 	box-shadow: rgba(8,43,255,0.75) 3px 3px ;
 	display: flex;
@@ -186,36 +198,43 @@ a{
 	flex-direction:column;
 }
 
+.columna_flexible_start{
+	display: flex;
+	flex-direction:column;
+}
+
+.flex_start{
+	align-items:flex-start;
+}
+
+.flex_end{
+	align-items:flex-end;	
+}
+
+
+.etiqueta{
+	font-family: opcionDos;
+	padding: 0px;
+	margin: 6px 5px 5px 5px;
+	height: auto;
+}
+
 .entrada_texto{
 	background-color: white;
 	border : 1px solid #000000;
 	border-radius: 3px;
 	font-family: opcionUno;
 	font-size: 20px;
-	height: 30px;
-	margin: 5px 10px;
+	height: auto;
+	margin: 5px 5px;
 	text-align: center;
-	width: 30%;
+	width: 60%;
 }
 
 .entrada_texto:hover{
-	background-color: white;
-	border : 1px solid #000000;
-	border-radius: 3px;
 	box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.75);
-	font-family: opcionUno;
-	font-size: 20px;
-	height: 30px;
-	margin: 5px 10px;
-	text-align: center;
-	width: 30%;
 }
 
-.etiqueta{
-	font-family: opcionDos;
-	margin:0px;
-	padding-top: 10px;
-}
 
 .enlace{
 	font-family: opcionDos;
