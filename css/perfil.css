@@ -17,10 +17,15 @@ html,body{
     align-items:center;
     height: 100%;
 }
+.datos{
 
+position:relative;top:11px;
+
+}
 .columna_flexible{
     display: flex;
     flex-direction:column;
+	margin-bottom:1px;
 }
 
 .flex_center{
@@ -94,7 +99,7 @@ html,body{
 
 .tabla_item{
     padding-right: 10px;
-    font-size:20px;
+    font-size:21px;
 }
 
 #wrapper_editar{
@@ -121,15 +126,53 @@ html,body{
     background-color:white;
 }
 
+.candado{
+ color:white;
+  border-radius: 120px;
+  width:40px;
+  height:40px;
+  position:relative;left:-100px;top:32px;
+  font-size: 28px;
+  display : none;
+}
+
+
+.cancelado{
+
+  color:white;
+  border-radius: 120px;
+    width:40px;
+    height:40px;
+	position:relative;left:100px;
+	font-size: 28px;
+	 display : none;
+
+}
+
+.checkuser{
+ background-color:white;
+  border-radius: 120px;
+  width:40px;
+  height:40px;
+
+}
+
+.cancelarcarro{
+ background-color:white;
+  border-radius: 120px;
+    width:40px;
+    height:40px;
+}
+
 input[type=text]#labelNombre{
 	 background:#0080FB; 
 	 margin:0px;
 	 padding:0px;
 	 display:flex;
 	 border-style:none;
-	 font-size:17px;
+	 font-size:16px;
 	 width:95%;
-	 position:relative;left:19px;bottom:-1px;
+	 position:relative;left:19px;bottom:-12px;
 }
 
 input[type=text]#labelApellido{
@@ -138,9 +181,9 @@ input[type=text]#labelApellido{
 	 padding:0px;
 	 display:flex;
 	 border-style:none;
-	 font-size:17px;
+	 font-size:16px;
 	 width:95%;
-	 position:relative;left:19px;top:5px;
+	 position:relative;left:19px;top:15px;
 }
 input[type=text]#labelCelular{
 	 background:#0080FB; 
@@ -148,9 +191,9 @@ input[type=text]#labelCelular{
 	 padding:0px;
 	 display:flex;
 	 border-style:none;
-	 font-size:17px;
+	 font-size:16px;
 	  width:95%;
-	 position:relative;left:19px;top:10px;
+	 position:relative;left:19px;top:19px;
 }
 input[type=text]#labelsexo{
 	 background:#0080FB; 
@@ -158,14 +201,43 @@ input[type=text]#labelsexo{
 	 padding:0px;
 	 display:flex;
 	 border-style:none;
-	 font-size:17px;
+	 font-size:16px;
 	  width:95%;
-	 position:relative;left:19px;top:13px;
+	 position:relative;left:19px;top:21px;
 }
 ::-webkit-input-placeholder { color:white; }
 
+input[type=text]#labelplaca{
+
+	 background:#0080FB; 
+	 margin:0px;
+	 padding:0px;
+	 display:flex;
+	 border-style:none;
+	 font-size:17px;
+	  width:95%;
+	 position:relative;left:19px;top:2px;
+
+}
+input[type=text]#labelcapacidad{
+ background:#0080FB; 
+	 margin:0px;
+	 padding:0px;
+	 display:flex;
+	 border-style:none;
+	 font-size:17px;
+	  width:95%;
+	 position:relative;left:19px;top:3px;
+}
+
 #botonusuario:hover{
-border:2px solid white;
+border:1px solid white;
+
+}
+#botonusuario{
+
+position:relative;top:21px;
+
 }
 
 
