@@ -6,6 +6,7 @@
 		<meta name="description" content="Este es un proyecto innovador XD">
 		<meta name="keywords" content="DAW, aventon, red social,ESPOL">
 		<script type="text/javascript" src="js/init.js"></script>
+		<script type="text/javascript" src="js/registro.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	</head>
 	<body>
@@ -26,7 +27,7 @@
 					</section>
 				</div>
 				<div id="wrapper_botones" class="flex_row_center">
-					<input id="boton_sesion" class="boton" name="iniciar_sesion" type="button" value="Iniciar Sesion">
+					<input id="boton_sesion" class="boton" name="iniciar_sesion" type="button" value="Iniciar Sesion" >
 					<input id="boton_registro" class="boton" name="registrate" type="button" value="Registrate">
 				</div>
 			</div>
@@ -41,8 +42,13 @@
 							<label for="contraseña" class="etiqueta ">Contraseña:</label>
 						</div>
 						<div class="tabla_item columna_flexible flex_start">
-							<input class="entrada_texto" name="usuario" id="usuario" type="text" placeholder="Usuario" autofocus="autofocus" required>
-							<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
+							<input class="entrada_texto" name="usuario" id="usuario" type="text" placeholder="Usuario"
+							pattern="[a-z]{6,20}"
+							autofocus required>
+							<input class="entrada_texto" name="contraseña" id="contraseña" type="password" 
+							placeholder="Contraseña" 
+							pattern="[A-Za-z0-9]{6,20}"
+							required>
 						</div>
 					</div>
 					<input class="boton" type="submit" value="Iniciar Sesion" >
@@ -57,11 +63,26 @@
 				="logo" onclick="volverInicio();">
 					<img height="100" width="100" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
 				</figure>
-				<form id="formulario_registro_usuario" class="formulario maximas_dimensiones" method="post" action="">
+				<div id="formulario_registro_usuario" class="formulario maximas_dimensiones">
 					<div class="tabla flex">
 						<div class="tabla_item columna_flexible_start flex_end">
 							<label for="usuario" class="etiqueta ">Usuario:</label>
 							<label for="contraseña" class="etiqueta">Contraseña:</label>
+						</div>
+						<div class="tabla_item columna_flexible_start flex_start">
+							<form id="autenticacion" name="autenticacion" method="post" action="">
+								<input class="entrada_texto" name="usuario" id="usuario" 
+								type="text" pattern="[a-z]{6,20}"
+								autofocus="autofocus" required>
+								<input class="entrada_texto" name="contraseña" id="contraseña" 
+								type="password" pattern="[A-Za-z0-9]{6,20}"
+								required>
+							</form>
+						</div>
+					</div>
+					<input id="botonAutenticar" form="autenticacion" class="boton" type="button" value="Autenticar" >
+					<div class="tabla flex">
+						<div class="tabla_item columna_flexible_start flex_end">
 							<label for="nombre" class="etiqueta">Nombre:</label>
 							<label for="apellido" class="etiqueta">Apellido:</label>
 							<label for="nickname" class="etiqueta">Nickname:</label>
@@ -69,28 +90,35 @@
 							<label for="sexo" class="etiqueta">Sexo:</label>
 						</div>
 						<div class="tabla_item columna_flexible_start flex_start">
-							<input class="entrada_texto" name="usuario" id="usuario" type="text" 
-							placeholder="Usuario" autofocus="autofocus" required>
-							<input class="entrada_texto" name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
-							<input class="entrada_texto" name="nombre" id="nombre" type="text" required
-							placeholder="Nombre">
-							<input class="entrada_texto" name="apellido" id="apellido" type="text"required
-							placeholder="Apellido">
-							<input class="entrada_texto" name="nickname" id="nickname" type="text" required	placeholder="Nickname">
-							<input class="entrada_texto" name="telefono" id="telefono" type="tel" required placeholder="Telefono">
-							<div id="opciones_sexo">
-								<input type="radio" name="sexo" value="Masculino" checked=""> <span class="single_text">Masculino</span>
-								<input  type="radio" name="sexo" value="Femenino"> <span class="single_text">Femenino</span>
-							</div>
+							<form id="registrar" name="registrar" method="post" action="">
+								<input class="entrada_texto" name="nombre" id="nombre" type="text" required
+								disabled 
+								>
+								<input class="entrada_texto" name="apellido" id="apellido" type="text"required
+								disabled>
+								<input class="entrada_texto" name="nickname" id="nickname" type="text"required	
+								disabled
+								type="text" pattern="[a-z]{6,15}">
+								<input class="entrada_texto" name="telefono" id="telefono" type="tel"
+								pattern="[0-9]{10}" 
+								required disabled>
+								<div id="opciones_sexo">
+									<input type="radio" name="sexo" value="Masculino" checked="" disabled> 
+									<span class="single_text">Masculino</span>
+									<input type="radio" name="sexo" value="Femenino" disabled>
+									<span class="single_text" >Femenino</span>
+								</div>
+							</form>
 						</div>
 					</div>
-					<input class="boton" type="submit" value="Registrar" >
-
+					<input id="botonRegistro" form="registrar" class="boton" type="submit" 
+					value="Registrar"  
+					disabled>
 					<label class="etiqueta">
 						¿Ya tiene cuenta? 
 						<a id="enlace_iniciar_sesion" class="enlace" >Iniciar sesion</a>
 					</label>
-				</form>
+				</div>
 			</div>
 			<div id="inicio_animacion" class="columna_flexible">
 				<img src="imagenes/obelisco.png">
