@@ -15,7 +15,7 @@ html,body{
     display: flex;
     justify-content:flex-start;
     align-items:center;
-    height: 100%;
+    height: 129%;
 }
 .datos{
 
@@ -25,7 +25,7 @@ position:relative;top:11px;
 .columna_flexible{
     display: flex;
     flex-direction:column;
-	margin-bottom:1px;
+	margin-bottom:-1px;
 }
 
 .flex_center{
@@ -63,20 +63,21 @@ position:relative;top:11px;
 #nickName{
     background-color: #e2e4e6;
     font-family: opcionUno;
-    height: 70%;
+    height: 210%;
+    position: relative;top: 44px;
 }
 
 #nickName img{
-    width: 90px; 
-    height: 90px;
+    width: 108px; 
+    height: 100px;
     border-radius: 150px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     transition: all 1s ease;
 }
 
 #nickName img:hover{
-    width:110px;
-    height:110px;
+    width:140px;
+    height:240px;
     border-radius: 150px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
@@ -86,9 +87,12 @@ position:relative;top:11px;
     font-family: opcionUno;
     color:white;   
     width: auto;
-    height: 100%;
+    height: 2000px;
     padding: 5px 10px;
     align-content:center;
+    position: relative;top: 17%;
+
+
 }
 
 .tabla{
@@ -131,9 +135,10 @@ position:relative;top:11px;
   border-radius: 120px;
   width:40px;
   height:40px;
-  position:relative;left:-100px;top:32px;
+  position:relative;left:10px;bottom:-32px;
   font-size: 28px;
-  display : none;
+  display: none;
+
 }
 
 
@@ -143,9 +148,11 @@ position:relative;top:11px;
   border-radius: 120px;
     width:40px;
     height:40px;
-	position:relative;left:100px;
+	position:relative;left:150px;bottom: 4px;
 	font-size: 28px;
-	 display : none;
+  display: none;
+  
+	 
 
 }
 
@@ -154,6 +161,9 @@ position:relative;top:11px;
   border-radius: 120px;
   width:40px;
   height:40px;
+  position: relative;left: -54px;top: 117px;
+  display: none;
+  
 
 }
 
@@ -162,6 +172,9 @@ position:relative;top:11px;
   border-radius: 120px;
     width:40px;
     height:40px;
+    position: relative;left: 72px;top: 80px;
+    display: none;
+   
 }
 
 input[type=text]#labelNombre{
@@ -170,9 +183,9 @@ input[type=text]#labelNombre{
 	 padding:0px;
 	 display:flex;
 	 border-style:none;
-	 font-size:16px;
-	 width:95%;
-	 position:relative;left:19px;bottom:-12px;
+	 font-size:15px;
+	 width:90%;
+	 position:relative;left:75px;bottom:10px;
 }
 
 input[type=text]#labelApellido{
@@ -181,9 +194,10 @@ input[type=text]#labelApellido{
 	 padding:0px;
 	 display:flex;
 	 border-style:none;
-	 font-size:16px;
-	 width:95%;
-	 position:relative;left:19px;top:15px;
+	 font-size:15px;
+	 width:89%;
+  
+	 position:relative;left:75px;bottom: 11px;
 }
 input[type=text]#labelCelular{
 	 background:#0080FB; 
@@ -192,8 +206,8 @@ input[type=text]#labelCelular{
 	 display:flex;
 	 border-style:none;
 	 font-size:16px;
-	  width:95%;
-	 position:relative;left:19px;top:19px;
+	  width:80%;
+	 position:relative;left:74px;bottom:11px;
 }
 input[type=text]#labelsexo{
 	 background:#0080FB; 
@@ -202,10 +216,14 @@ input[type=text]#labelsexo{
 	 display:flex;
 	 border-style:none;
 	 font-size:16px;
-	  width:95%;
-	 position:relative;left:19px;top:21px;
+	  width:55%;
+	 position:relative;left:74px;top:-5px;
 }
 ::-webkit-input-placeholder { color:white; }
+
+:-moz-placeholder {
+    color: blue;
+}
 
 input[type=text]#labelplaca{
 
@@ -216,7 +234,7 @@ input[type=text]#labelplaca{
 	 border-style:none;
 	 font-size:17px;
 	  width:95%;
-	 position:relative;left:19px;top:2px;
+	 position:relative;left:19px;top:84px;
 
 }
 input[type=text]#labelcapacidad{
@@ -227,7 +245,7 @@ input[type=text]#labelcapacidad{
 	 border-style:none;
 	 font-size:17px;
 	  width:95%;
-	 position:relative;left:19px;top:3px;
+	 position:relative;left:19px;top:89px;
 }
 
 #botonusuario:hover{
@@ -236,8 +254,27 @@ border:1px solid white;
 }
 #botonusuario{
 
-position:relative;top:21px;
+position:relative;top:18px;left: 78px;
 
 }
+#botoncarro{
+position: relative;top: 125px;
 
+}
+#lblplaca{
+position: relative;top: 80px;
+}
 
+#lblcapacidad{
+
+position: relative;top: 82px;
+}
+
+#infovehiculo{
+
+position: relative;top: 89px;
+
+}
+button{
+  background: #0080FB;
+}
