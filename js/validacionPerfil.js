@@ -1,3 +1,15 @@
+/**
+ *NOTA LOS EVENTOS DE VALIDACIONES SE ACTIVAN CUANDO PRESIONAN
+ *LA TECLA ENTERRRRR
+ *
+ *
+ *
+ * 
+ */
+
+
+
+
 function habilitarcajasusuario(){
 	document.getElementById("labelNombre").style.background ='white';
 	document.getElementById("labelApellido").style.background ='white';
