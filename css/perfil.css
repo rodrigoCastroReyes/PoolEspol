@@ -135,7 +135,7 @@ position:relative;top:11px;
   border-radius: 120px;
   width:40px;
   height:40px;
-  position:relative;left:10px;bottom:-32px;
+  position:relative;left:7px;bottom:-2px;
   font-size: 28px;
   display: none;
 
@@ -161,8 +161,9 @@ position:relative;top:11px;
   border-radius: 120px;
   width:40px;
   height:40px;
-  position: relative;left: -54px;top: 117px;
+  position: relative;left: -4px;top: 2px;
   display: none;
+  z-index: 2;
   
 
 }
@@ -275,6 +276,40 @@ position: relative;top: 82px;
 position: relative;top: 89px;
 
 }
-button{
-  background: #0080FB;
+
+
+#adv1{
+
+  font-size: 11px;
 }
+
+#adv2{
+
+font-size: 10px;
+
+}
+
+#adv3{
+font-size: 10px;
+
+
+}
+
+#adv4{
+
+font-size: 10px;
+
+}
+#botu1{
+  position: relative;top: 32px;
+  background: #0080FB;
+  border-style: none;
+}
+
+#botc1{
+  position: relative;top: 120px;right: 45px;
+  background: #e2e4e6;
+  border-style: none;
+  z-index: 1;
+}
+
