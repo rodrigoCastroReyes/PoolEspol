@@ -12,8 +12,12 @@ function autenticar(){
 			campo=campos_registro[i];
 			if(campo.name=="nombre"){
 				campo.value="RODRIGO FABRICIO";
+				campo.disabled=true;
 			}else if (campo.name=="apellido"){
 				campo.value="CASTRO REYES";
+				campo.disabled=true;
+			}else if(campo.name=="sexo"){
+				campo.disabled=true;
 			}else{
 				campo.disabled=false;
 			}
@@ -21,9 +25,7 @@ function autenticar(){
 		document.getElementById("botonRegistro").disabled=false;
 		//document.autenticacion.submit();
 	}else{
-		
-		alert("Escribe bien chucha!!");
-
+		alert("Ingrese los campos correctamente");
 	}
 
 }
