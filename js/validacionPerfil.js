@@ -130,7 +130,8 @@ function deshabilitarcajasauto(){
 function guadarDatos(evt){
 	var val=document.forms["datosPersona"].checkValidity();
 	if(val==false){
-		alert("escreibe bien!!!");
+		alert("Error: Informacion incorrecta!!!");
+		document.getElementById("labelNombre").focus();
 	}else{
 		deshabilitarcajasusuario();
 		alert("se guardo correctamente");
@@ -140,7 +141,8 @@ function guadarDatos(evt){
 function guadarDatosAuto(evt){
 	var val=document.forms["datosAuto"].checkValidity();
 	if(val==false){
-		alert("escreibe bien!!!");
+		alert("Error: Informacion incorrecta!!!");
+		document.getElementById("labelplaca").focus();
 	}else{
 		deshabilitarcajasauto();
 		alert("se guardo correctamente");
