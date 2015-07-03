@@ -187,6 +187,7 @@ input[type=text]#labelNombre{
 	 font-size:15px;
 	 width:90%;
 	 position:relative;left:75px;bottom:10px;
+   color: #FFFFFF;
 }
 
 input[type=text]#labelApellido{
@@ -199,6 +200,7 @@ input[type=text]#labelApellido{
 	 width:89%;
   
 	 position:relative;left:75px;bottom: 11px;
+   color: #FFFFFF;
 }
 input[type=text]#labelCelular{
 	 background:#0080FB; 
@@ -209,6 +211,7 @@ input[type=text]#labelCelular{
 	 font-size:16px;
 	  width:80%;
 	 position:relative;left:74px;bottom:11px;
+   color: #FFFFFF;
 }
 input[type=text]#labelsexo{
 	 background:#0080FB; 
@@ -219,6 +222,7 @@ input[type=text]#labelsexo{
 	 font-size:16px;
 	  width:55%;
 	 position:relative;left:74px;top:-5px;
+   color: #FFFFFF;
 }
 ::-webkit-input-placeholder { color:white; }
 
@@ -228,7 +232,7 @@ input[type=text]#labelsexo{
 
 input[type=text]#labelplaca{
 
-	 background:#0080FB; 
+	 background:#e2e4e6;; 
 	 margin:0px;
 	 padding:0px;
 	 display:flex;
@@ -236,10 +240,11 @@ input[type=text]#labelplaca{
 	 font-size:17px;
 	  width:95%;
 	 position:relative;left:19px;top:84px;
+   color: #000000;
 
 }
 input[type=text]#labelcapacidad{
- background:#0080FB; 
+ background:#e2e4e6;; 
 	 margin:0px;
 	 padding:0px;
 	 display:flex;
@@ -247,6 +252,7 @@ input[type=text]#labelcapacidad{
 	 font-size:17px;
 	  width:95%;
 	 position:relative;left:19px;top:89px;
+   color: #000000;
 }
 
 #botonusuario:hover{
