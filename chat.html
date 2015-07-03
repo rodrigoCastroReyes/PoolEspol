@@ -7,6 +7,8 @@
 		<meta name="keywords" content="DAW, aventon, red social,ESPOL">
 		<link rel="stylesheet" type="text/css" href="css/chat.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/chat.js"></script>
 	</head>
 	<body>
 		<header>
@@ -45,22 +47,28 @@
 		</div>
 		</header>
 		<section id="contenido">
+
 			<div id="personas" >
-				<div class="persona">
+				<div class="persona" data-per="fajada">
 					<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
 					<h3>Fajada</h3>
 				</div>
-				<div class="persona">
+
+				<div class="persona" data-per="mafiachumi">
 					<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
 					<h3>Mafia Chumi</h3>
 				</div>
 			</div>
-			<div id="conversacion" >
+			
+
+				
+
+			<div class="conversacion" id="fajada" >
 				<div id="cabezeraMensaje">
 					<img class="fotoPerfil" src="imagenes/LogoPoolEspol.png">
 					<span class="texto_simple">Fajada</span>
 				</div>
-				<div id="areaMensajes">
+				<div id="areaMensajes" data-per="fajada">
 					
 					<div class="friend"> 
 						<div class="infoPer">
@@ -80,17 +88,70 @@
 							<P class=>Kevin</P>
 						</div>
 						<div class="mensaje">
-							<P class="text">Donde siemprellllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll</P>
+							<P class="text">Donde siempre1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</P>
+						</div>
+					</div>
+
+
+				</div>
+
+				<div id="envio" >
+					<input type="text" id="txtMensaje" placeholder="escriba su mensaje..." data-per="fajada"/> 
+					<input id="btnEnviar" type="submit" value="Enviar" data-per="fajada"/>
+				</div>
+			</div>
+
+
+			<div class="conversacion" id="mafiachumi">
+				<div id="cabezeraMensaje">
+					<img class="fotoPerfil" src="imagenes/LogoPoolEspol.png">
+					<span class="texto_simple">Mafia Chumi</span>
+				</div>
+				<div id="areaMensajes" data-per="mafiachumi">
+					
+					<div class="friend"> 
+						<div class="infoPer">
+							<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
+							<P>Mafia Chumi</P>
+						</div>
+						<div class="mensaje">
+							<P>
+								Hola Kevin, a lo diri diri?
+							</P>
+						</div>
+					</div>
+					
+					<div class="self">
+						<div class="infoPer">
+							<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
+							<P class=>Kevin</P>
+						</div>
+						<div class="mensaje">
+							<P class="text">claro</P>
+						</div>
+					</div>
+
+					<div class="friend"> 
+						<div class="infoPer">
+							<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
+							<P>Mafia Chumi</P>
+						</div>
+						<div class="mensaje">
+							<P>
+								Esa ehhhh lo muchachooooo</P>
 						</div>
 					</div>
 
 
 				</div>
 				<div id="envio">
-					<input type="text" id="txtMensaje" placeholder="escriba su mensaje..."/> 
-					<input id="btnEnviar" type="submit" value="Enviar"/>
+					<input type="text" id="txtMensaje" placeholder="escriba su mensaje..." data-per="mafiachumi"/> 
+					<input id="btnEnviar" type="submit" value="Enviar" data-per="mafiachumi"/>
 				</div>
-			</div>
+			</div>	
+
+
+
 		</section>
 		<footer>
             <p>Todo los Derechos Reservados <small> &copy; 2015</small> </p>

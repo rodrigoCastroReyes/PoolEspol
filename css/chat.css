@@ -16,6 +16,7 @@ html,body{
 	height: 50px;
 	padding: 0px 5px 0px 5px;
 	border-radius: 50px 50px 50px 50px;
+	cursor: pointer;
 }
 
 .texto_simple{
@@ -42,7 +43,7 @@ html,body{
 
 }
 
-#conversacion{
+.conversacion{
 	background: #FFFFFF;
 	display:flex;
 	flex-direction:column;
@@ -72,6 +73,7 @@ html,body{
 	color:black;
 	font-family: opcionUno;
 	margin: 5px;
+	cursor: pointer;
 }
 
 .persona:hover{
@@ -126,6 +128,7 @@ html,body{
 #btnEnviar:hover {
   background: #23b7e5;
   text-decoration: none;
+
 }
 
 
@@ -184,4 +187,8 @@ footer{
 p.text {
     width: 100%; 
     word-wrap: break-word;
+}
+
+#fajada,#mafiachumi{
+	display: none;
 }

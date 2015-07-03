@@ -1,5 +1,6 @@
 @import "barra.css";
 
+
 *{
     margin: 0px;
     padding: 0px;
@@ -14,12 +15,17 @@ html,body{
     display: flex;
     justify-content:flex-start;
     align-items:center;
-    height: 100%;
+    height: 129%;
 }
+.datos{
 
+position:relative;top:11px;
+
+}
 .columna_flexible{
     display: flex;
     flex-direction:column;
+	margin-bottom:-1px;
 }
 
 .flex_center{
@@ -57,20 +63,21 @@ html,body{
 #nickName{
     background-color: #e2e4e6;
     font-family: opcionUno;
-    height: 70%;
+    height: 210%;
+    position: relative;top: 44px;
 }
 
 #nickName img{
-    width: 90px; 
-    height: 90px;
+    width: 108px; 
+    height: 100px;
     border-radius: 150px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     transition: all 1s ease;
 }
 
 #nickName img:hover{
-    width:110px;
-    height:110px;
+    width:140px;
+    height:240px;
     border-radius: 150px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
@@ -80,9 +87,12 @@ html,body{
     font-family: opcionUno;
     color:white;   
     width: auto;
-    height: 100%;
+    height: 2000px;
     padding: 5px 10px;
     align-content:center;
+    position: relative;top: 17%;
+
+
 }
 
 .tabla{
@@ -93,7 +103,7 @@ html,body{
 
 .tabla_item{
     padding-right: 10px;
-    font-size:20px;
+    font-size:21px;
 }
 
 #wrapper_editar{
@@ -120,7 +130,192 @@ html,body{
     background-color:white;
 }
 
+.candado{
+ color:white;
+  border-radius: 120px;
+  width:40px;
+  height:40px;
+  position:relative;left:7px;bottom:-2px;
+  font-size: 28px;
+  display: none;
+
 }
 
 
+.cancelado{
+
+  color:white;
+  border-radius: 120px;
+    width:40px;
+    height:40px;
+	position:relative;left:150px;bottom: 4px;
+	font-size: 28px;
+  display: none;
+  
+	 
+
+}
+
+.checkuser{
+ background-color:white;
+  border-radius: 120px;
+  width:40px;
+  height:40px;
+  position: relative;left: -4px;top: 2px;
+  display: none;
+  z-index: 2;
+  
+
+}
+
+.cancelarcarro{
+ background-color:white;
+  border-radius: 120px;
+    width:40px;
+    height:40px;
+    position: relative;left: 72px;top: 80px;
+    display: none;
+   
+}
+
+input[type=text]#labelNombre{
+	 background:#0080FB; 
+	 margin:0px;
+	 padding:0px;
+	 display:flex;
+	 border-style:none;
+	 font-size:15px;
+	 width:90%;
+	 position:relative;left:75px;bottom:10px;
+   color: #FFFFFF;
+}
+
+input[type=text]#labelApellido{
+	 background:#0080FB; 
+	 margin:0px;
+	 padding:0px;
+	 display:flex;
+	 border-style:none;
+	 font-size:15px;
+	 width:89%;
+  
+	 position:relative;left:75px;bottom: 11px;
+   color: #FFFFFF;
+}
+input[type=text]#labelCelular{
+	 background:#0080FB; 
+	 margin:0px;
+	 padding:0px;
+	 display:flex;
+	 border-style:none;
+	 font-size:16px;
+	  width:80%;
+	 position:relative;left:74px;bottom:11px;
+   color: #FFFFFF;
+}
+input[type=text]#labelsexo{
+	 background:#0080FB; 
+	 margin:0px;
+	 padding:0px;
+	 display:flex;
+	 border-style:none;
+	 font-size:16px;
+	  width:55%;
+	 position:relative;left:74px;top:-5px;
+   color: #FFFFFF;
+}
+::-webkit-input-placeholder { color:white; }
+
+:-moz-placeholder {
+    color: blue;
+}
+
+input[type=text]#labelplaca{
+
+	 background:#e2e4e6;; 
+	 margin:0px;
+	 padding:0px;
+	 display:flex;
+	 border-style:none;
+	 font-size:17px;
+	  width:95%;
+	 position:relative;left:19px;top:84px;
+   color: #000000;
+
+}
+input[type=text]#labelcapacidad{
+ background:#e2e4e6;; 
+	 margin:0px;
+	 padding:0px;
+	 display:flex;
+	 border-style:none;
+	 font-size:17px;
+	  width:95%;
+	 position:relative;left:19px;top:89px;
+   color: #000000;
+}
+
+#botonusuario:hover{
+border:1px solid white;
+
+}
+#botonusuario{
+
+position:relative;top:18px;left: 78px;
+
+}
+#botoncarro{
+position: relative;top: 125px;
+
+}
+#lblplaca{
+position: relative;top: 80px;
+}
+
+#lblcapacidad{
+
+position: relative;top: 82px;
+}
+
+#infovehiculo{
+
+position: relative;top: 89px;
+
+}
+
+
+#adv1{
+
+  font-size: 11px;
+}
+
+#adv2{
+
+font-size: 10px;
+
+}
+
+#adv3{
+font-size: 10px;
+
+
+}
+
+#adv4{
+
+font-size: 10px;
+
+}
+#botu1{
+  position: relative;top: 32px;
+  background: #0080FB;
+  border-style: none;
+}
+
+#botc1{
+  position: relative;top: 120px;right: 45px;
+  background: #e2e4e6;
+  border-style: none;
+  z-index: 1;
+}
 
