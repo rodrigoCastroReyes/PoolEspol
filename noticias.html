@@ -58,14 +58,14 @@
 						<h3 id = "nickname" >Oswaldo Bayona Andrade</h3>
 					</div>
 					<hr>
-					
-					<form>
+					<form class="formulario-publicar">
 						<label>Publicar </label></br></br>
 						<span>
 							<button type="button" id = "btnRuta">Crear ruta</button>
 							<button type="button" id = "btnAventon" >Pedir Avent&oacute;n</button>
 						</span>
 					</br></br>
+					</form>
 				</div>
 			</div>
 
@@ -137,48 +137,72 @@
 				</div>
 			</div>
 		</div>
-
-
 		<div id = "Pantalla_Ruta">	
 			<div id = "Contenido_Ruta">
-				
 				<input id = "btnClose" value = "X" type = "button" class = "close"/>
-				
-				<div id="googleMap" style="width:95%;height:60%;"></div></br>
-				<form id = "form_ruta">
-					<h2 class = "Titulo_Ruta">Ingrese una sucesi&oacute;n de puntos para marcar el camino</h2></br>
-					<span><label>Fecha: </label><input  id = "Fecha" type ="date" /></span></br>
-					<span><label>Hora: </label><input  id = "Hora" type ="time" /></span></br>
-					<span><label>Capacidad: </label><input type ="number" min = "1" max = "12" value ="1"/></span></br>
-					<span><label>Costo: $</label><input type ="number" value = "0.00" step="0.01"/></span></br>
-					<span>
-						<button id = "btnAceptar" type="submit">Aceptar</button>
-						<button id="btnCancelar" type = "button">Cancelar</button
-					</span>
-				</form>
+				<div id="googleMap" style="height:60%;">
+				</div>
+				<div class = "Titulo_Ruta">
+					<span >Ingrese una sucesi&oacute;n de puntos para marcar el camino</span>
+				</div>
+				<div class="tabla flex_between_around ">
+					<div class="tabla">
+						<div class="tabla_item columna_flexible flex_end">
+							<label class="etiqueta">Fecha: </label>
+							<label class="etiqueta">Hora: </label>
+						</div>
+						
+						<div class="tabla_item columna_flexible ">
+							<form id = "formRuta" class="formulario">
+								<input class="entradaDatos" id = "Fecha" type ="date" />
+								<input class="entradaDatos" id = "Hora" type ="time" />	
+							</form>
+						</div>
+					</div>
+					<div class="tabla margin_right">
+						<div class="tabla_item columna_flexible flex_end">
+							<label class="etiqueta">Capacidad: </label>
+							<label class="etiqueta">Costo: $</label>
+						</div>
+						<div class="tabla_item columna_flexible ">
+							<input form= "formRuta" class="entradaDatos" type ="number" 
+							min = "1" max = "6" value ="1"/>
+							<input form="formRuta" class="entradaDatos" type ="number" 
+							value = "0.00" step="0.01" max="2.00"/>	
+						</div>
+					</div>
+				</div>
+				<div class="tabla flex_center">
+					<button form="formRuta" id ="btnAceptar" type="submit">Aceptar</button>
+					<button form="formRuta" id="btnCancelar" type = "button">Cancelar</button>
+				</div>
 			</div>
 		</div>
 
 		<div id = "Pantalla_Aventon">	
 			<div id = "Contenido_Aventon">
-				
 				<input id = "btnCloseAventon" value = "X" type = "button" class = "close"/>
-				<!--<h2 class = "Titulo_Cuador_Mapa">Ingrese una sucesi&oacute;n de puntos para marcar el camino</h2>-->
-				<div id="googleMap2" style="width:95%;height:100%;"></div></br>
-				<form id = "form_ruta">
-					<h2 class = "Titulo_Aventon">Ingrese un punto en el mapa que ser&aacute; su paradero</h2></br>
-					<span><label>Fecha: </label><input  id = "Fecha_Aventon" type ="date" /></span></br>
-					<span><label>Hora: </label><input  id = "Hora_Aventon" type ="time" /></span></br></br>
-					<span>
-						<button id = "btnAceptarAventon" type="submit">Aceptar</button>
-						<button id="btnCancelarAventon" type = "button">Cancelar</button
-					</span>
-				</form>
+				<div id="googleMap2" style="height:70%;"></div>
+				<div class = "Titulo_Aventon">
+					<span> Ingrese un punto en el mapa que ser&aacute; su paradero</span>
+				</div>
+				<div class="tabla flex_center">
+					<div class="tabla_item columna_flexible" >
+							<label class="etiqueta">Fecha: </label>
+							<label class="etiqueta">Hora: </label>
+					</div>
+					<div class="tabla_item columna_flexible" >
+						<form id = "formAventon" class="formulario">
+							<input class="entradaDatos" id = "Fecha_Aventon" type ="date" />
+							<input class="entradaDatos" id = "Hora_Aventon" type ="time" />
+						</form>
+					</div>
+				</div>
+				<div class="tabla flex_center">
+					<button form="formAventon" id = "btnAceptarAventon" type="submit">Aceptar</button>
+					<button form="formAventon" id="btnCancelarAventon" type = "button">Cancelar</button>
+				</div>
 			</div>
 		</div>
-
-
-
-
 	</body>
 </html>

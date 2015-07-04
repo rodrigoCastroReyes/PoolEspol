@@ -1,17 +1,54 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+span,form{
+	margin: 0px;
+	padding: 0px;
+}
 
 #googleMap, #googleMap2{
-	border: 2px solid #0E1456;
+	
 	padding: 5px 17px;
 }
 
 .Titulo_Ruta, .Titulo_Aventon{
-	background: #9CF9F3;
-	color: #0E1456;
-	padding: 15px 15px;
-	border: 2px solid #0E1456;
-	font-size: 12; 
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	background: #e2e4e6;
+	color: black;
+	width: 100%;
+	font-size: 20px; 
+	font-family: opcionDos;
+	text-align: center;
 }
 
+#Pantalla_Ruta, #Pantalla_Aventon{
+	display: flex;
+	flex-direction:column;
+    position: absolute;
+    align-items: center;
+    border-radius: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity:0;
+    transform: translate(-50%, -50%);
+    transition: all 400ms ease-in;
+    text-align: justify;
+    top: 55%;
+    left: 50%;
+    visibility: hidden;
+    height: 70%;
+    width: 60%;
+	bottom: 0;
+	border: 3px solid #c3c3c3;
+}
+
+
+#Contenido_Ruta, #Contenido_Aventon{
+    position: absolute;
+}
 
 .popUp{
     display: flex;
@@ -22,45 +59,8 @@
     position: relative;
     border-radius:5px;
     height: 100%;
-    width: 80%
-}
-
-#Pantalla_Ruta, #Pantalla_Aventon{
-	display: flex;
-    background: #cdebeb;
-    justify-content:center;
-    position: fixed;
-    align-items: center;
-    border-radius: 12px;
-    font-family: Arial, Helvetica, sans-serif;
-    opacity:0;
-    transform: translate(-50%, -50%);
-    transition: all 400ms ease-in;
-    text-align: justify;
-    top: 40%;
-    left: 40%;
-    visibility: hidden;
-    height: 80%;
     width: 100%;
-	bottom: 0;
 }
-
-
-#form_ruta{
-	display:flex;
-	padding: 10px 10px;
-	flex-direction:column;
-	height: 100%;
-}
-
-#Contenido_Ruta, #Contenido_Aventon{
-	padding: 5px 5px;
-    height: 100%;
-    justify-content:row;	
-    position: absolute;
-}
-
-
 
 .close {
 	background: #606061;
@@ -74,12 +74,68 @@
 	height: 30px;
 	text-decoration: none;
 	font-weight: bold;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
+	z-index: 9999;
 	border-radius: 12px;
-	-moz-box-shadow: 1px 1px 3px #000;
-	-webkit-box-shadow: 1px 1px 3px #000;
 	box-shadow: 1px 1px 3px #000;
 }
 
 .close:hover { background: #00d9ff; }
+
+.tabla{
+    display: flex;
+    flex-direction:row;
+    margin-top: 5px ;
+    margin-bottom: 10px;
+}
+
+.tabla_item{
+    font-size:20px;
+}
+
+.flex_center{
+	align-items:center;
+	justify-content:center;
+}
+
+.flex_between_around{
+	justify-content:space-around;
+	align-content:center;
+}
+
+.columna_flexible{
+	display: flex;
+	align-items:stretch;
+	flex-direction:column;
+}
+
+.etiqueta{
+	font-family: opcionDos;
+	height: 25px;
+	margin: 5px 5px 5px 5px;
+	font-size: 16px;
+}
+
+.entradaDatos{
+	font-family: opcionUno;
+	height: 25px;
+	width: 140px;
+	margin: 5px 5px 5px 5px;
+	font-size: 16px;
+}
+
+.flex_end{
+	align-items:flex-end;	
+}
+
+.margin_right{
+	margin-right: 50px;
+}
+
+.formulario{
+	display:flex; 
+	flex-direction:column;
+}
+
+.formulario-publicar{
+	padding: 10px 20px;
+}
