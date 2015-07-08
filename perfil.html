@@ -65,38 +65,26 @@
 						<form   id="datosPersona" accept-charset="utf-8" action=>
 							<label class="datos">Nombre </label>
 							<input type="text"  id="labelNombre" value="Oswaldo Alejandro" disabled=true required pattern="[a-zA-Z\s]{4,}" title="solamento datos alfebeticos"/>
-
-
 							<label class="datos">Apellido </label>
 							<input type="text"  id="labelApellido" value="Bayona Andrade" disabled=true required pattern="[a-zA-Z\s]{4,}"
 							/ title="Datos alfabeticos">
-
 							<label class="datos">Celular </label>
 							<input type="text"  id="labelCelular" value="0991209877" max="11" required disabled=true pattern="[0-9]{10}" title="Datos solamente numerico" />
-
 							<label class="datos">Sexo </label>
 							<input type="text"  id="labelsexo" value="masculino"  disabled=true required title="datos masculino o femenino"/>
-
 							<div class="icon-pencil lapiz blanco columna_flexible flex_center" id="botonusuario" role="button" onclick="habilitarcajasusuario()">
-
 							</div>
 								<button type="button" id="botu1" onclick="guadarDatos()" >
-									<div class="icon-lock  candado columna_flexible flex_center" id="botonguardar" >
+									<div class="icon-floppy-disk  candado columna_flexible flex_center" id="botonguardar" >
 							   		 </div>
 							   	</button>
 									<div class="icon-cancel-circle  cancelado columna_flexible flex_center" id="botoncancelar" role="button" onclick="cancelarUsuario()" >
 							</div>
-
 						</form>
 					</div>
-
-
 				</div>
 			</div>
-
 			<form  accept-charset="utf-8" id="datosAuto">
-
-
 				<div id="infoVehiculo" class="columna_flexible flex_align_items_center">
 					<h2 id="infovehiculo">Informacion del Vehiculo</h2>	
 					<div class="tabla">
@@ -106,27 +94,17 @@
 						</div>
 						<div class="tabla_item columna_flexible">
 							<input type="text" id="labelplaca" value="PVY0323" disabled=true required pattern="[A-Z0-9]{6,7}" title="SE requiere que los datos sea alfanumerico de longitud de 6 a 7 caracteres" />
-
-							
-							
 							<input type="text" id="labelcapacidad" value="3" disabled=true required pattern="[0-6]{1}" title="Solamente datos numericos de un solo digito" />
-
 						</div> 		
 					</div>
 					<div class="icon-pencil lapiz blanco columna_flexible flex_center" id="botoncarro" role="button" onclick="habilitarcajasauto()">
 						<!--<span class=""></span>-->
 					</div>	
 					<button type="button" id="botc1" >
-						<div type="submit" class="icon-user-check  checkuser columna_flexible flex_center" id="botonguardarcarro" onclick="guadarDatosAuto()"></div>
-
+						<div type="submit" class="icon-floppy-disk  checkuser columna_flexible flex_center" id="botonguardarcarro" onclick="guadarDatosAuto()"></div>
 					</button>
-					
-
-
-					<div class="icon-cross cancelarcarro columna_flexible flex_center" id="botoncancelarcarro" role="button" onclick="cancelarAutos()" role="button">
+					<div class="icon-cancel-circle cancelarcarro columna_flexible flex_center" id="botoncancelarcarro" role="button" onclick="cancelarAutos()" role="button">
 					</div>
-					
-
 				</div>
 			</form>
 			<div id="rutasPerfil">

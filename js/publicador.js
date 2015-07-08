@@ -25,11 +25,9 @@ function eventoRuta(event){
 	};
 	var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 	//$("article").css('opacity','0.5');
+  $("#contenedor_rutas").css('opacity','0.5');
 	$("#Pantalla_Ruta").css('visibility','visible');
 	$("#Pantalla_Ruta").css('opacity','1');
-	$("#Pantalla_Ruta").css('top','50%');
-  $("#Pantalla_Ruta").css('right','0%');
-  $("#Pantalla_Ruta").css('left','0%');
 	$("#Contenido_Ruta").addClass('popUp');
 
   var txtFecha = new Date().toDateInputValue()
@@ -47,14 +45,14 @@ function eventoCerrar(event){
   	console.log("cerrar");
   	$("#Pantalla_Ruta").css('visibility','hidden');
   	$("#Pantalla_Ruta").css('opacity','0');
-  	//$("article").css('opacity','1');
+  	$("#contenedor_rutas").css('opacity','1');
 }
 
 function eventoCerrarAventon(event){
     console.log("cerrar");
     $("#Pantalla_Aventon").css('visibility','hidden');
     $("#Pantalla_Aventon").css('opacity','0');
-    //$("article").css('opacity','1');
+    $("#contenedor_rutas").css('opacity','1');
 }
 
 
@@ -68,9 +66,7 @@ function eventoAventon(event){
   //$("article").css('opacity','0.5');
   $("#Pantalla_Aventon").css('visibility','visible');
   $("#Pantalla_Aventon").css('opacity','1');
-  $("#Pantalla_Aventon").css('top','50%');
-  $("#Pantalla_Aventon").css('right','0%');
-  $("#Pantalla_Aventon").css('left','0%');
+  $("#contenedor_rutas").css('opacity','0.5');
   $("#Contenido_Aventon").addClass('popUp');
 
   var txtFecha = new Date().toDateInputValue()
@@ -81,8 +77,6 @@ function eventoAventon(event){
   console.log(txtTiempo);
   $('#Hora_Aventon').val(txtTiempo);
   $('#Hora_Aventon').attr("min",txtTiempo);
-
-
 }
 
 function inicializarCuadro(){
