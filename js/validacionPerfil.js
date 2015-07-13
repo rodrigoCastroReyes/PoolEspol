@@ -6,163 +6,143 @@
  *
  * 
  */
+var nombre, apellido,cedula,nickname;
+var placa,capacidad;
 
- var nombre, apellido,cedula;
- var placa,capacidad;
+function editarUsuario(){
+	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
+	//estilo de cajas de texto deben cambiar para el ingreso de informacion
+	habilitarEntradas(inputs,'white');
+	//se deshabilita el lapiz y se muestra el boton guardar y cancelar
+	botonEditarUsuario.style.display='none'
+	botonGuardarUsuario.style.display = 'flex';
+	botonCancelarUsuario.style.display = 'flex';
 
- function salvarDatosUsuario(){
- 	nombre=labelNombre.value;
- 	apellido=labelApellido.value;
- 	cedula=labelCelular.value;
- }
+	//se guardan los datos actuales del usuario
+	nombre=inputs[0].value;
+ 	apellido=inputs[1].value;
+ 	cedula=inputs[2].value;
+ 	nickname=inputs[3].value;
+}
 
-function salvarDatosAutos(){
- 	placa=labelplaca.value;
- 	capacidad=labelcapacidad.value;
- }
-
-function cancelarUsuario(){
- 	labelNombre.value=nombre;
- 	labelApellido.value=apellido;
- 	labelCelular.value=cedula;
- 	deshabilitarcajasusuario();
- }
-
- function cancelarAutos(){
- 	labelplaca.value=placa;
- 	labelcapacidad.value=capacidad;
- 	deshabilitarcajasauto();
-
- }
-
-
-function habilitarcajasusuario(){
-	document.getElementById("labelNombre").style.background ='white';
-	document.getElementById("labelApellido").style.background ='white';
-	document.getElementById("labelCelular").style.background = 'white';
-	//document.getElementById("labelsexo").style.background='white';
-
-	document.getElementById("labelNombre").style.color ='black';
-	document.getElementById("labelApellido").style.color ='black';
-	document.getElementById("labelCelular").style.color = 'black';
-	//document.getElementById("labelsexo").style.color='black';
-	
-	document.getElementById("labelNombre").disabled=false;
-	document.getElementById("labelApellido").disabled=false;
-	document.getElementById("labelCelular").disabled=false;
-	//document.getElementById("labelsexo").disabled=false;
-	
-	document.getElementById("botonusuario").style.display = 'none';
-	document.getElementById("botonguardar").style.display = 'flex';
-	document.getElementById("botoncancelar").style.display = 'flex';
-	document.getElementById("labelNombre").focus();
-	var lista = document.getElementsByClassName("datos");
-	
-		for(i=0; i <lista.length ; i++){
-			
-			lista[i].style.marginbottom = "55px";
-			
+function habilitarEntradas(inputs,color){
+	for(var i=0;i<inputs.length;i++){
+		if(i==0){//foco en la primera caja de texto 
+			inputs[i].focus();
 		}
-		salvarDatosUsuario();
-	
+		inputs[i].style.background=color;
+		inputs[i].disabled=false;//se habilita la caja de texto 
+	}
 }
 
-function deshabilitarcajasusuario(){
-	document.getElementById("labelNombre").style.background ='#0080FB';
-	document.getElementById("labelApellido").style.background ='#0080FB';
-	document.getElementById("labelCelular").style.background = '#0080FB';
-	//document.getElementById("labelsexo").style.background='white';
+function cancelarEdicion(){
+	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
+	//estilo de cajas de texto deben cambiar
+	deshabilitarEntradas(inputs,'#0080FB');
 
-	document.getElementById("labelNombre").style.color ='white';
-	document.getElementById("labelApellido").style.color ='white';
-	document.getElementById("labelCelular").style.color = 'white';
-	//document.getElementById("labelsexo").style.color='black';
+	botonEditarUsuario.style.display='flex'
+	botonGuardarUsuario.style.display = 'none';
+	botonCancelarUsuario.style.display = 'none';
 	
-	document.getElementById("labelNombre").disabled=true;
-	document.getElementById("labelApellido").disabled=true;
-	document.getElementById("labelCelular").disabled=true;
-	//document.getElementById("labelsexo").disabled=false;
-	
-	document.getElementById("botonusuario").style.display = 'flex';
-	document.getElementById("botonguardar").style.display = 'none';
-	document.getElementById("botoncancelar").style.display = 'none';
-	document.getElementById("labelNombre").focus();
-	var lista = document.getElementsByClassName("datos");
-	
-		for(i=0; i <lista.length ; i++){
-			
-			lista[i].style.marginbottom = "0px";
-			
-		}
-	
+	inputs[0].value=nombre;
+ 	inputs[1].value=apellido;
+ 	inputs[2].value=cedula;
+ 	inputs[3].value=nickname;
 }
 
-
-function habilitarcajasauto(){
-	document.getElementById("labelplaca").style.background='white';
-	document.getElementById("labelcapacidad").style.background = 'white';
-	document.getElementById("labelplaca").style.borderColor = 'blue';
-	document.getElementById("labelcapacidad").style.borderColor = 'blue';
-	document.getElementById("labelplaca").disabled=false;
-	document.getElementById("labelcapacidad").disabled=false;
-	document.getElementById("botonguardarcarro").style.display = 'flex';
-	document.getElementById("botoncancelarcarro").style.display= 'flex';
-	document.getElementById("botoncarro").style.display = 'none';
-	document.getElementById("labelplaca").focus();
-	salvarDatosAutos();
-	
+function deshabilitarEntradas(inputs,color){
+	for(var i=0;i<inputs.length;i++){
+		inputs[i].style.background=color;
+		inputs[i].disabled=true;//se deshabilita la caja de texto 
+	}
 }
 
-function deshabilitarcajasauto(){
-	document.getElementById("labelplaca").style.background='#e2e4e6';
-	document.getElementById("labelcapacidad").style.background = '#e2e4e6';
-	//document.getElementById("labelplaca").style.borderColor = 'blue';
-	//document.getElementById("labelcapacidad").style.borderColor = 'blue';
-	document.getElementById("labelplaca").disabled=true;
-	document.getElementById("labelcapacidad").disabled=true;
-	document.getElementById("botonguardarcarro").style.display = 'none';
-	document.getElementById("botoncancelarcarro").style.display= 'none';
-	document.getElementById("botoncarro").style.display = 'flex';
-	
-}
-
-
-function guadarDatos(evt){
+function guardarDatos(evt){
 	var val=document.forms["datosPersona"].checkValidity();
+	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
+	//input: nombre,apellido,cedula,nickname
 	$(".error").fadeOut().remove();
+
 	if(val==false){
-		if(!labelNombre.checkValidity()){
-			$(".labelNombre").focus().after('<span class="error">Solo letras</span>'); 
+		if(!input[0].checkValidity()){
+			input[0].focus().after('<span class="error">Solo letras</span>'); 
 		}
-		if(!labelApellido.checkValidity()){
+		if(!input[1].checkValidity()){
 			alert("Error: apellido!!!");
 		}
-		if(!labelCelular.checkValidity()){
+		if(!input[2].checkValidity()){
 			alert("Error: cedula!!!");
 		}
-		document.getElementById("labelNombre").focus();
+		if(!input[3].checkValidity()){
+			alert("Error: cedula!!!");
+		}
+		input[0].focus();
 	}else{
-		deshabilitarcajasusuario();
+		botonEditarUsuario.style.display='flex'
+		botonGuardarUsuario.style.display = 'none';
+		botonCancelarUsuario.style.display = 'none';
+		deshabilitarEntradas(inputs,'#0080FB');
 		alert("se guardo correctamente");
 	}
 }
 
-function guadarDatosAuto(evt){
+function editarInfoAuto(){
+	var inputs=document.querySelectorAll("#datosAuto input");
+	
+	habilitarEntradas(inputs,'white');//habilita las entradas de texto
+
+	botonEditarAuto.style.display='none'
+	botonGuardarAuto.style.display ='flex';
+	botonCancelarAuto.style.display ='flex';
+	
+	placa=inputs[0].value;
+	capacidad=inputs[1].value;
+}
+
+function cancelarEdicionAuto(){
+	var inputs = document.querySelectorAll("#datosAuto input");
+	
+	deshabilitarEntradas(inputs,'#e2e4e6');//deshabilita las entradas de texto
+
+	botonEditarAuto.style.display='flex'
+	botonGuardarAuto.style.display ='none';
+	botonCancelarAuto.style.display ='none';
+
+	inputs[0].value=placa;
+ 	inputs[1].value=capacidad;
+
+}
+
+function guardarDatosAuto(evt){
 	var val=document.forms["datosAuto"].checkValidity();
+	var inputs = document.querySelectorAll("#datosAuto input");
 	if(val==false){
-		if(!labelplaca.checkValidity()){
+		if(!inputs[0].checkValidity()){
 			alert("Error: Placa!!!");
 		}
-		if(!labelcapacidad.checkValidity()){
+		if(!inputs[1].checkValidity()){
 			alert("Error: capacidad!!!");
 		}
-		document.getElementById("labelplaca").focus();
+		inputs[0].focus();
 	}else{
-		deshabilitarcajasauto();
+		botonEditarAuto.style.display='flex'
+		botonGuardarAuto.style.display ='none';
+		botonCancelarAuto.style.display ='none';
+		deshabilitarEntradas(inputs,'#e2e4e6');//deshabilita las entradas de texto
 		alert("se guardo correctamente");
 	}
 }
 
+function inicio(){
+	console.log("editar perfil");
 
+	document.getElementById("botonEditarUsuario").addEventListener('click',editarUsuario,false);
+	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
+	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatos,false);
 
+	document.getElementById("botonEditarAuto").addEventListener('click',editarInfoAuto,false);
+	document.getElementById("botonCancelarAuto").addEventListener('click',cancelarEdicionAuto,false);
+	document.getElementById("botonGuardarAuto").addEventListener('click',guardarDatosAuto,false);
+}
 
+window.addEventListener('load',inicio,false);
