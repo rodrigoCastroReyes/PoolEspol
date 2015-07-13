@@ -54,17 +54,18 @@
 					<img width="100" height="100" src="imagenes/imagenPerfil.jpg" >
 					<h1 >Oswaldito</h1>
 				</div>
-
 				<div id="datosPersonales" class="columna_flexible flex_center ">
 					<h2>Informacion Personal</h2>
 					<div class="tabla">
 						<div class="tabla_item columna_flexible">
-							<form   id="datosPersona" accept-charset="utf-8" action=>
-								<label class="datos">Nombre </label>
-								<input type="text"  id="labelNombre" value="Oswaldo Alejandro" disabled=true required pattern="[a-zA-Z\s]{4,}"/>
+							<form   id="datosPersona" accept-charset="utf-8" >
+								<div>
+									<label class="datos">Nombre </label>
+									<input type="text"  id="labelNombre" value="Oswaldo Alejandro" disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos" />
+								</div>
 								<label class="datos">Apellido </label>
 								<input type="text"  id="labelApellido" value="Bayona Andrade" disabled=true required pattern="[a-zA-Z\s]{4,}"
-								/ title="Datos alfabeticos">
+								title="Datos alfabeticos"/>
 								<label class="datos">Celular </label>
 								<input type="text"  id="labelCelular" value="0991209877" max="11" required disabled=true pattern="[0-9]{10}" title="Datos solamente numerico" />
 								<label class="datos">Sexo </label>
@@ -80,7 +81,6 @@
 							</form>
 						</div>
 					</div>
-				</div>
 
 				<form   id="datosAuto" accept-charset="utf-8" id="datosAuto">
 					<div id="infoVehiculo" class="columna_flexible flex_align_items_center">
@@ -94,27 +94,20 @@
 								<input type="text" id="labelplaca" value="PVY0323" disabled=true required pattern="[A-Z0-9]{6,7}" title="SE requiere que los datos sea alfanumerico de longitud de 6 a 7 caracteres" />
 								<input type="text" id="labelcapacidad" value="3" disabled=true required pattern="[0-6]{1}" title="Solamente datos numericos de un solo digito" />
 							</div> 		
-						</div>
-						
+						</div>	
 						<div id="continerBotones">
 							<div class="icon-pencil lapiz blanco columna_flexible flex_center" id="botoncarro" role="button" onclick="habilitarcajasauto()">
 							</div>	
-
 							<button type="button" id="botc1" >
 								<div type="submit" class="icon-floppy-disk  checkuser columna_flexible flex_center" id="botonguardarcarro" onclick="guadarDatosAuto()"></div>
-							</button>
-							
+							</button>		
 							<div class="icon-cancel-circle cancelarcarro columna_flexible flex_center" id="botoncancelarcarro" role="button" onclick="cancelarAutos()" role="button">
 							</div>
 						</div>
-
-
 					</div>
 				</form>
-
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>
