@@ -35,8 +35,6 @@ html,body{
 }
 
 #personas{
-	display: flex;
-	flex-direction: column;
 	width: 20%;
 	padding: 30px;
 	background: #e2e4e6;
@@ -132,12 +130,13 @@ html,body{
 }
 
 
-#areaMensajes{
+.areaMensajes{
 	background: #e2e4e6;
 	width: 60%;
 	height: 60%;
 	display: flex;
 	flex-direction: column;
+	overflow-y : hidden;
 }
 
 
@@ -172,7 +171,7 @@ footer{
 	border-radius: 10px 10px 10px 10px;
 	background: #FFFFFF;
 	padding: 10px;
-	margin: 3px;
+	margin: 10px;
 	max-width: 70%;
 	display: block;
 }
@@ -191,4 +190,55 @@ p.text {
 
 #fajada,#mafiachumi{
 	display: none;
+}
+
+.esconder{
+	display: flex;
+}
+
+.regresar{
+	display: none;
+	margin: 20px;
+}
+
+.invisible{
+	display: flex;
+	flex-direction: column;
+}
+
+.visible{
+	display: flex;
+	flex-direction: column;
+}
+
+
+@media (max-width: 800px){
+	.regresar{
+		display: flex;
+		margin: 20px;
+		font-family: opcionUno;
+	}
+
+	#personas{
+		width: 100%;
+		padding: 30px;
+		background: #e2e4e6;
+	}
+
+	.invisible{
+		display: none;
+	}
+
+	.visible{
+		display: flex;
+		flex-direction: column;
+	}
+
+	.regresar:hover{
+		color: #0084D1;
+		cursor: pointer;
+	}
+
+
+
 }

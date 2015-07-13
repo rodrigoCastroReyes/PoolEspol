@@ -3,11 +3,19 @@ function mostrarChat(evt){
 	if(actual!=null){
 		actual.css("display","none");
 	}
+	personas.classList.remove("visible");
+	personas.classList.add("invisible");
 	$('#'+this.dataset.per).css("display","flex");
 	actual=$('#'+this.dataset.per);
+
 }
 
-function enviarMensaje(evt){
+function regresar(evt){
+	personas.classList.remove("invisible");
+	personas.classList.add("visible");
+	if(actual!=null){
+		actual.css("display","none");
+	}
 
 }
 
@@ -16,7 +24,7 @@ function enviarMensaje(evt){
 
 function inicializar(){
 	$('.persona').click(mostrarChat);
-
+	$('.regresar').click(regresar);
 }
 
 
