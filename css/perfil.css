@@ -17,14 +17,14 @@ html,body{
     align-items:center;
     height: 129%;
 }
+
 .datos{
-
-position:relative;top:11px;
-
+  position:relative;top:11px;
 }
+
 .columna_flexible{
-    display: flex;
-    flex-direction:column;
+  display: flex;
+  flex-direction:column;
 	margin-bottom:-1px;
 }
 

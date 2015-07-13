@@ -12,28 +12,29 @@
 		<link rel = "stylesheet" href = "css/publicador-carro.css"/>
 		<script src = "js/jquery-1.11.3.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
-		<script src = "js/publicador.js"> </script>
 		<script src = "js/noticias.js"> </script>
+		<script src = "js/publicador.js"> </script>
+		<script src = "js/barra.js"> </script>
 	</head>
 	<body>
 		<div id="contenedor_navegacion">
 			<div id="contenedor_logo">
-				<figure id="logo"onclick="volverInicio();">
+				<figure id="logo" onclick="">
 					<img width="40" height="40" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
 				</figure>
 			</div>
 			<div id="contenedor_barra">
 				<nav>
 					<ul class="barraNavegacion">
-						<li>
+						<li onclick="cargarNoticias();">
 							<span class="icon-newspaper"></span>
 							<span>Noticias</span>
 						</li>
-						<li>
+						<li onclick="cargarPerfil();">
 							<span class="icon-pacman"></span>
-							<span id="PerfilID">Perfil</span>
+							<span >Perfil</span>
 						</li>
-						<li>
+						<li onclick="cargarMensajes();">
 							<span class="icon-mail4"></span>
 							<span>Mensajes</span>
 						</li>
