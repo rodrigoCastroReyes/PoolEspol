@@ -129,9 +129,17 @@ function deshabilitarcajasauto(){
 
 function guadarDatos(evt){
 	var val=document.forms["datosPersona"].checkValidity();
+	$(".error").fadeOut().remove();
 	if(val==false){
-		alert("Error: Informacion incorrecta!!!");
-		labelNombre.setAttribute("class","error");
+		if(!labelNombre.checkValidity()){
+			$(".labelNombre").focus().after('<span class="error">Solo letras</span>'); 
+		}
+		if(!labelApellido.checkValidity()){
+			alert("Error: apellido!!!");
+		}
+		if(!labelCelular.checkValidity()){
+			alert("Error: cedula!!!");
+		}
 		document.getElementById("labelNombre").focus();
 	}else{
 		deshabilitarcajasusuario();
@@ -142,7 +150,12 @@ function guadarDatos(evt){
 function guadarDatosAuto(evt){
 	var val=document.forms["datosAuto"].checkValidity();
 	if(val==false){
-		alert("Error: Informacion incorrecta!!!");
+		if(!labelplaca.checkValidity()){
+			alert("Error: Placa!!!");
+		}
+		if(!labelcapacidad.checkValidity()){
+			alert("Error: capacidad!!!");
+		}
 		document.getElementById("labelplaca").focus();
 	}else{
 		deshabilitarcajasauto();

@@ -63,12 +63,14 @@
 				<h2>Informacion Personal</h2>
 				<div class="tabla">
 					<div class="tabla_item columna_flexible">
-						<form   id="datosPersona" accept-charset="utf-8" action=>
-							<label class="datos">Nombre </label>
-							<input type="text"  id="labelNombre" value="Oswaldo Alejandro" disabled=true required pattern="[a-zA-Z\s]{4,}"/>
+						<form   id="datosPersona" accept-charset="utf-8" >
+							<div>
+								<label class="datos">Nombre </label>
+								<input type="text"  id="labelNombre" value="Oswaldo Alejandro" disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos" />
+							</div>
 							<label class="datos">Apellido </label>
 							<input type="text"  id="labelApellido" value="Bayona Andrade" disabled=true required pattern="[a-zA-Z\s]{4,}"
-							/ title="Datos alfabeticos">
+							title="Datos alfabeticos"/>
 							<label class="datos">Celular </label>
 							<input type="text"  id="labelCelular" value="0991209877" max="11" required disabled=true pattern="[0-9]{10}" title="Datos solamente numerico" />
 							<label class="datos">Sexo </label>
@@ -86,7 +88,7 @@
 				</div>
 			</div>
 
-			<form   id="datosAuto" accept-charset="utf-8" id="datosAuto">
+			<form   id="datosAuto" accept-charset="utf-8">
 				<div id="infoVehiculo" class="columna_flexible flex_align_items_center">
 					<h2 id="infovehiculo">Informacion del Vehiculo</h2>	
 					<div class="tabla">
