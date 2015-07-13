@@ -5,7 +5,9 @@
 		<meta charset="utf-8">
 		<meta name="description" content="Este es un proyecto innovador XD">
 		<meta name="keywords" content="DAW, aventon, red social,ESPOL">
-		<link rel="stylesheet" type="text/css" href="css/chat.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale-1">
+		<link rel="stylesheet"  href="css/chat.css">
+		<!--<link rel="stylesheet" media="(max-width: 800px)" href="css/chatCelular.css">-->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/chat.js"></script>
@@ -48,7 +50,7 @@
 		</header>
 		<section id="contenido">
 
-			<div id="personas" >
+			<div id="personas" class=" visible" >
 				<div class="persona" data-per="fajada">
 					<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
 					<h3>Fajada</h3>
@@ -64,11 +66,12 @@
 				
 
 			<div class="conversacion" id="fajada" >
+				<div class="regresar" >Mostar Conversaciones</div>
 				<div id="cabezeraMensaje">
 					<img class="fotoPerfil" src="imagenes/LogoPoolEspol.png">
 					<span class="texto_simple">Fajada</span>
 				</div>
-				<div id="areaMensajes" data-per="fajada">
+				<div class="areaMensajes" data-per="fajada">
 					
 					<div class="friend"> 
 						<div class="infoPer">
@@ -88,9 +91,10 @@
 							<P class=>Kevin</P>
 						</div>
 						<div class="mensaje">
-							<P class="text">Donde siempre1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</P>
+							<P class="text">Donde siempre</P>
 						</div>
 					</div>
+
 
 
 				</div>
@@ -103,11 +107,12 @@
 
 
 			<div class="conversacion" id="mafiachumi">
+				<div class="regresar" >Mostar Conversaciones</div>
 				<div id="cabezeraMensaje">
 					<img class="fotoPerfil" src="imagenes/LogoPoolEspol.png">
 					<span class="texto_simple">Mafia Chumi</span>
 				</div>
-				<div id="areaMensajes" data-per="mafiachumi">
+				<div class="areaMensajes" data-per="mafiachumi">
 					
 					<div class="friend"> 
 						<div class="infoPer">
@@ -141,6 +146,8 @@
 								Esa ehhhh lo muchachooooo</P>
 						</div>
 					</div>
+
+
 
 
 				</div>

@@ -131,6 +131,7 @@ function guadarDatos(evt){
 	var val=document.forms["datosPersona"].checkValidity();
 	if(val==false){
 		alert("Error: Informacion incorrecta!!!");
+		labelNombre.setAttribute("class","error");
 		document.getElementById("labelNombre").focus();
 	}else{
 		deshabilitarcajasusuario();
