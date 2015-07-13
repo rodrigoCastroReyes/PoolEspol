@@ -319,3 +319,21 @@ a{
 	animation-delay:0s;
 }
 
+@media screen and (max-width:500px){
+
+	#inicio_animacion{
+		display: none;
+	}
+
+	#inicio{
+		width: auto;
+	}
+
+	#inicio_registro{
+		width: auto;
+	}
+
+	#inicio_sesion{
+		width: auto;
+	}
+}
