@@ -136,6 +136,61 @@ span,form{
 	flex-direction:column;
 }
 
-.formulario-publicar{
-	padding: 10px 20px;
+@media screen and (max-width: 400px){
+	
+	.Titulo_Ruta, .Titulo_Aventon{
+		width: 100%;
+		font-size: 15px; 
+		padding: 10px 0px;
+	}
+
+	#Pantalla_Ruta, #Pantalla_Aventon{
+	    width: 90%;
+	}
+
+	.popUp{
+		height: 80%;
+	}
+
+	#Contenido_Ruta > div:nth-child(4){
+		display: flex;
+		flex-direction: column;
+		margin: 10px 0px 5px 0px;
+	}
+
+	#Contenido_Ruta > div:nth-child(4) > div{
+		justify-content:center;
+		margin: 0px;
+	}
+
+	#Contenido_Ruta > div:nth-child(5),#Contenido_Aventon > div:nth-child(5){
+		justify-content: space-around;
+		margin-bottom: 20px;
+	}
+
+	#Contenido_Ruta > div:nth-child(5) button,#Contenido_Aventon > div:nth-child(5) button{
+		margin-right: 0px;
+	}
+
+	#Contenido_Aventon > div:nth-child(4){
+		margin: 15px 0px 20px 0px;
+	}
+	
+	.margin_right {
+  		margin-right: 0px;
+	}
+
+	.etiqueta{
+		font-size: 14px;
+		height: 30px;
+		width: 75px;
+		vertical-align: middle;
+		text-align: center;
+	}
+
+	.entradaDatos{
+		font-size: 14px;
+		height: 30px;
+		width: 125px;
+	}
 }

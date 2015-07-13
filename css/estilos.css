@@ -319,7 +319,7 @@ a{
 	animation-delay:0s;
 }
 
-@media screen and (max-width:500px){
+@media screen and (max-width:400px){
 
 	#inicio_animacion{
 		display: none;

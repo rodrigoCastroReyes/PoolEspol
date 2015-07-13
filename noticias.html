@@ -3,17 +3,17 @@
 	<head>
 		<title></title>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale-1">
 		<meta name="description" content="Este es un proyecto innovador XD">
 		<meta name="keywords" content="DAW, aventon, red social,ESPOL">
-
-		<link rel="stylesheet" type="text/css" href="css/noticias2.css">
+		<link rel="stylesheet" type="text/css" href="css/noticias.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/estiloMapa.css">
 		<link rel = "stylesheet" href = "css/publicador-carro.css"/>
-
 		<script src = "js/jquery-1.11.3.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<script src = "js/publicador.js"> </script>
+		<script src = "js/noticias.js"> </script>
 	</head>
 	<body>
 		<div id="contenedor_navegacion">
@@ -31,7 +31,7 @@
 						</li>
 						<li>
 							<span class="icon-pacman"></span>
-							<span>Perfil</span>
+							<span id="PerfilID">Perfil</span>
 						</li>
 						<li>
 							<span class="icon-mail4"></span>
@@ -51,7 +51,7 @@
 		</div>
 		
 		<div id="contenedor_rutas">
-			<div id="ruta" class="visualizador">
+			<div id="cuadroPublicador" class="visualizador">
 				<div id = "publicador_carro">
 					<div id = "cabezera">
 						<img id = "foto_perfil" src = "imagenes/imagenPerfil.jpg"/>&nbsp;&nbsp;
@@ -80,7 +80,7 @@
 						<span class="info_noticias" >Mensaje</span>
 					</div>
 				</div>
-				<div id="mapa_ruta">
+				<div id = "mapaGoogle1" class="mapa_ruta" >
 				</div>
 				<div class="menu_inferior menu_noticias">
 					<div class="lateral flex_start">
@@ -104,7 +104,7 @@
 						<span class="info_noticias" >Mensaje</span>
 					</div>
 				</div>
-				<div id="mapa_ruta">
+				<div id = "mapaGoogle2" class="mapa_ruta">
 				</div>
 				<div class="menu_inferior menu_noticias">
 					<div class="lateral flex_start">
@@ -123,7 +123,7 @@
 						<span class="info_noticias" >Mensaje</span>
 					</div>
 				</div>
-				<div id="mapa_ruta">
+				<div id = "mapaGoogle3" class="mapa_ruta">
 				</div>
 				<div class="menu_inferior menu_noticias">
 					<div class="lateral flex_start">
@@ -203,6 +203,7 @@
 					<button form="formAventon" id="btnCancelarAventon" type = "button">Cancelar</button>
 				</div>
 			</div>
-		</div>
+		</div>		
+
 	</body>
 </html>

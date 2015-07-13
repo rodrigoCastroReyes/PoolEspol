@@ -16,6 +16,8 @@ function obtenerHora(){
   return txtHora + ":" + txtMinuto;
 }
 
+
+
 function eventoRuta(event){
 
 	mapProp = {
@@ -32,12 +34,31 @@ function eventoRuta(event){
 
   var txtFecha = new Date().toDateInputValue()
   $('#Fecha').val(txtFecha);
-  $('#Fecha').attr("min",txtFecha);
+  $('#Fecha').attr('min',txtFecha);
 
   var txtTiempo = obtenerHora();
   console.log(txtTiempo);
   $('#Hora').val(txtTiempo);
-  $('#Hora').attr("min",txtTiempo);
+  $('#Hora').attr('min', txtTiempo);
+  //validaciones para la hora
+  $('#Hora')[0].checkValidity();
+
+
+  document.getElementById('Hora').addEventListener('invalid', function() {
+    console.log("Error");
+
+}, false);
+
+  document.getElementById('Hora').addEventListener('focusout', function(event) {
+      console.log("Change");
+      var hora = event.target; 
+      var fecha = document.getElementById('Fecha');
+      if(Date.parse(fecha.value) > Date.parse(txtFecha)){
+          console.log("If")
+          hora.min = "00:00";
+      }
+
+  }, false);
 
 }
 
@@ -73,6 +94,7 @@ function eventoAventon(event){
   $('#Fecha_Aventon').val(txtFecha);
   $('#Fecha_Aventon').attr("min",txtFecha);
 
+
   var txtTiempo = obtenerHora();
   console.log(txtTiempo);
   $('#Hora_Aventon').val(txtTiempo);
@@ -97,6 +119,13 @@ function inicializarCuadro(){
 
   var btnCloseAventon = document.getElementById('btnCloseAventon');
   btnCloseAventon.addEventListener('click', eventoCerrarAventon,false);
+
+  var btnAceptar = document.getElementById('btnAceptar');
+  btnAceptar.addEventListener('click', function(event){
+    console.log("checkValidity");
+    $('#Hora')[0].checkValidity();
+
+  }, false);
 
 
 }

@@ -25,6 +25,7 @@ button{
 	font-size: 100%;
 	margin-right: 30px;
 	font-family: opcionUno;
+	transition: background-color 0.5s ease;
 	cursor: pointer;
 }
 
@@ -56,4 +57,43 @@ h3{
 label{
 	font-family: opcionTres;
 	font-size: 26px;
+}
+
+.formulario-publicar{
+	padding: 10px 20px;
+}
+
+@media screen and (max-width: 400px){
+	#publicador_carro{
+		width: 90%;
+		height: 150px;
+	}
+
+	.formulario-publicar{
+		padding: 5px 15px;
+	}
+
+	#foto_perfil{
+		width: 35px;
+		height: 35px;
+		border-radius: 17px;
+	}
+
+	button{
+		width: 110px;
+		height: 35px;
+		font-size: 18px;
+	}
+
+	button:hover{
+		background: #23b7e5;
+	}
+
+	h3{
+		font-size: 24px;
+	}
+
+	label{
+		font-size: 24px;
+	}
 }

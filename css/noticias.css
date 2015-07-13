@@ -13,7 +13,7 @@ html,body{
 
 
 #contenedor_rutas{
-	margin-top: 15px; 
+	margin-top: 70px; 
 	width: 100%;
 }
 
@@ -26,7 +26,7 @@ html,body{
 	width: 100%;
 }
 
-#mapa_ruta{
+.mapa_ruta{
 	height: 250px;
 	width: 50%;
 	background-color:white;
@@ -79,4 +79,29 @@ html,body{
 
 .cursor_pointer{
 	cursor: pointer;
+}
+
+@media screen and (max-width: 400px){
+	
+	#contenedor_rutas{
+		margin-top: 10px; 
+	}
+
+	.mapa_ruta{
+		height: 250px;
+		width: 90%;
+		background-color:white;
+	}
+
+	.info_noticias{
+		font-size: 18px;
+		height: 100%;
+		padding: 5px 5px;
+	}
+
+	.menu_noticias{
+		width: 90%;
+		height: 50px;
+	}
+
 }
