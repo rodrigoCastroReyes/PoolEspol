@@ -63,7 +63,7 @@ label{
 	padding: 10px 20px;
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 800px){
 	#publicador_carro{
 		width: 90%;
 		height: 150px;
@@ -80,9 +80,10 @@ label{
 	}
 
 	button{
-		width: 110px;
+		width: 65px;
 		height: 35px;
-		font-size: 18px;
+		font-size: 10px;
+		margin-right: 10px;
 	}
 
 	button:hover{
@@ -90,10 +91,10 @@ label{
 	}
 
 	h3{
-		font-size: 24px;
+		font-size: 18px;
 	}
 
 	label{
-		font-size: 24px;
+		font-size: 18px;
 	}
 }
