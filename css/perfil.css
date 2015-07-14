@@ -9,7 +9,10 @@
 html,body{
     width: 100%;
     height: 100%;
+    background: white;
 }
+
+
 
 .input_text:invalid{
     background-color: red;
@@ -26,9 +29,10 @@ html,body{
     background-color: #e2e4e6;
     height: 100%;
     width: 25%;
-    margin-top: 90px;
+    margin-top: 40px;
     border-right: 2px solid #c3c3c3;
     border-bottom: 2px solid #c3c3c3;
+    position:fixed;
 }
 
 #infoUsuario{
@@ -235,6 +239,11 @@ html,body{
     text-align: center;
 }
 
+#contenedor_rutas{
+    background: white;
+    margin-left: 25%;
+}
+
 @media screen and (max-width:800px){
 
     #nickName{
@@ -286,6 +295,14 @@ html,body{
         flex-direction:column;
         justify-content:flex-start;
         height: auto;
+    }
+
+    #infoPerfil{
+        position: relative;
+        margin-top: 50px;
+    }
+    #contenedor_rutas{
+        margin-left: 0px;
     }
 }
 

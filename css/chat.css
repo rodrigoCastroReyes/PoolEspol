@@ -86,7 +86,7 @@ html,body{
 	margin: 5px;
 }
 
-#cabezeraMensaje{
+.cabezeraMensaje{
 	display: flex;
 	flex-direction: row;
 	align-items:center;
@@ -94,10 +94,11 @@ html,body{
 	background: #0084D1;
 	height: 10%;
 	width: 60%;
+	margin-top: 50px;
 }
 
 
-#envio{
+.envio{
 	width: 60%;
 	height: 10%;
 	margin-top: 10px;
@@ -175,11 +176,11 @@ footer{
 	margin: 10px;
 	max-width: 70%;
 	display: block;
+	height: 100%;
 }
 
 .infoPer{
-	padding: 15px;
-	margin: 10px;
+	padding: 10px;
 	display: flex;
 	flex-direction: column;
 }
@@ -240,6 +241,18 @@ p.text {
 		cursor: pointer;
 	}
 
+	.cabezeraMensaje{
+		margin-top: 10px;
+		width: 90%;
+	}
+
+	.areaMensajes{
+		width: 90%;
+	}
+
+	.envio{
+		width: 90%;
+	}
 
 
 }

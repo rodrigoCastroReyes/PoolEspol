@@ -142,9 +142,6 @@ html,body{
 
 @media screen and (max-width: 800px){
 	
-	#contenedor_rutas{
-		margin-top: 10px; 
-	}
 
 	.mapa_ruta{
 		height: 250px;
@@ -165,10 +162,10 @@ html,body{
 	}
 
 	.info-horario{
-	color: white;
-	font-size: 10px;
-	display: flex;
-	width: 100%; 
+		color: white;
+		font-size: 10px;
+		display: flex;
+		width: 100%; 
 	}
 
 }

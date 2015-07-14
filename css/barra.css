@@ -86,7 +86,7 @@
 		padding: 3px 5px;
 	}
 	#contenedor_navegacion{
-		position: relative;
+		/*position: relative;*/
 		height: auto;
 	}
 }
@@ -126,7 +126,7 @@
 		padding: 3px 5px;
 	}
 	#contenedor_navegacion{
-		position: relative;
+		/*position: relative;*/
 		height: auto;
 	}
 }
