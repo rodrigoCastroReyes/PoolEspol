@@ -27,6 +27,8 @@ html,body{
     height: 100%;
     width: 25%;
     margin-top: 90px;
+    border-right: 2px solid #c3c3c3;
+    border-bottom: 2px solid #c3c3c3;
 }
 
 #infoUsuario{
@@ -77,6 +79,7 @@ html,body{
 }
 
 .label{
+    font-family: opcionUno;
     padding:0px;
     width:90%;
     font-size: 18px;
@@ -219,33 +222,70 @@ html,body{
     width: 0;
 }
 
+#infoRutas{
+    width: 75%;
+    height: 100%;
+}
 
-
+#tituloRutas{
+    font-family: opcionUno;
+    font-size: 32px;
+    font-weight: bold;
+    color:#0080FB;
+    text-align: center;
+}
 
 @media screen and (max-width:800px){
- #infoPerfil{
-    background-color: #e2e4e6;
-    height: 105%;
-    width: 90%;
-    display: block;
-    position: absolute;right: 1px;top: -8%;
-    padding-left: 35%;
-}
 
-#datosPersonales{
-    position: relative;right: 9%;bottom: -2%;
-    margin-right: 12%;
-    width: 110%;
-    height: 105%;
-    padding-bottom: 3%;    
-}
-
-#infoVehiculo{
-    position: relative;top:2%;right: 4%;
-    height: auto;
+    #nickName{
+        height: 50%;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
     
-}
+    #infoUsuario{
+        height: 65%;
+    }
 
+    #infoPerfil{
+        background-color: #e2e4e6;
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        border-right: transparent;
+    }
+
+    #contenedor_botones{
+        margin-top: 10px;
+        margin-bottom: 0px;
+        height: 40px;
+    }
+
+    #datosPersonales{
+        width: 100%;
+        height: 80%;
+        padding-bottom: 10px;    
+    }
+
+    #infoVehiculo{
+        height: auto;
+    }
+
+    .tabla{
+        margin: 5px;
+    }
     
+    .lapiz,.lapiz_auto{
+        font-size: 20px;
+        height: 20px;
+        border: 60px;
+        padding: 0px;
+    }
+
+    .flex_container{
+        flex-direction:column;
+        justify-content:flex-start;
+        height: auto;
+    }
 }
 

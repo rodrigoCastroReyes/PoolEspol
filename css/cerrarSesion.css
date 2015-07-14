@@ -1,0 +1,75 @@
+@import 'fonts.css';
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+html,body,p{
+	background-color: #e2e4e6;
+	height: 100%;
+}
+
+h1{
+	text-shadow:rgba(0,0,0,0.5) 3px 3px 5px;
+	color: white; 
+}
+
+h2{
+	color:black;
+}
+
+a{
+	color: white;
+	font-family: opcionUno;
+}
+
+/*Estilos cabezera*/
+
+.rectangulo{
+	background: #0080FB;
+	padding-bottom: 5px;
+	padding-top: 0px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+}
+
+
+#cabezera{
+	border-bottom: 3px solid #c6c7cc;
+	font-size: 26px;
+}
+
+#footer{
+	border-top: 3px solid #c6c7cc;
+	font-family: opcionUno;
+	font-size: 15px;
+}
+
+
+/*seccion inicio de sesion, registro*/
+#contenedor_inicio{
+	display: flex;
+	flex-flow: row wrap;
+	margin: 0px;
+    flex-flow: row wrap;
+    justify-content:flex-start;
+    height: 100%;
+    width: auto;
+}
+
+/*Seccion Inicial*/
+#inicio{
+	width: 40%;
+	justify-content:center;
+	align-items: center;
+}
+
+.columna_flexible{
+	align-self: center;   
+	align-items:center;      
+	display: flex;
+	flex-direction:column;
+}

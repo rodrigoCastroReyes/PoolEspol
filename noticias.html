@@ -43,7 +43,7 @@
 							<span class="icon-bell"></span>
 							<span>Notificaciones</span>
 						</li>
-						<li>
+						<li onclick="salir();">
 							<span class="icon-switch"></span>
 							<span></span>
 						</li>
@@ -52,6 +52,16 @@
 			</div>
 		</div>
 		
+			<div id="menu_salir">
+				<div >
+					<span id="leyenda_menu">Esta seguro que desea salir?</span>
+					<span class="icon-sad2 iconos_menu"></span>
+				</div>
+				<div>
+					<span id="aceptar_cierre" class="icon-checkmark iconos_menu"></span>
+					<span id="cancelar_cierre" class="icon-cancel-circle iconos_menu"></span>
+				</div>
+			</div>
 		<div id="contenedor_rutas">
 			<div id="cuadroPublicador" class="visualizador">
 				<div id = "publicador_carro">
@@ -183,7 +193,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div id = "Pantalla_Aventon">	
 			<div id = "Contenido_Aventon">
 				<input id = "btnCloseAventon" value = "X" type = "button" class = "close"/>
@@ -209,6 +218,5 @@
 				</div>
 			</div>
 		</div>		
-
 	</body>
 </html>
