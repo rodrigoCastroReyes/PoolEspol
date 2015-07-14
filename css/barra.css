@@ -90,3 +90,43 @@
 		height: auto;
 	}
 }
+
+
+@media screen and (max-width:736px){
+	
+	.barraNavegacion li > span:nth-child(1) {
+		font-size: 25px;
+		padding: 0px 18px;
+		border-right: 2px solid white;
+	}
+
+	.barraNavegacion li:nth-child(n){
+		margin: 0px;
+		padding: 10px 0px 10px 0px;
+		height: 100%;
+	}
+
+	.barraNavegacion li:nth-child(n):hover{
+		padding: 10px 0px 10px 0px;
+		background: -webkit-linear-gradient(top,#0080FF, #0080BB);
+	}
+
+	.barraNavegacion li > span:nth-child(2) {
+		display: none;
+	}
+	
+	.barraNavegacion{
+		justify-content:space-around;
+		align-items:center;	
+	}
+
+	#contenedor_logo{
+		width: 25px;
+		height: 25px;
+		padding: 3px 5px;
+	}
+	#contenedor_navegacion{
+		position: relative;
+		height: auto;
+	}
+}

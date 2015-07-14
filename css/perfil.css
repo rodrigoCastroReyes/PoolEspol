@@ -218,3 +218,34 @@ html,body{
     top: 8px;
     width: 0;
 }
+
+
+
+
+@media screen and (max-width:800px){
+ #infoPerfil{
+    background-color: #e2e4e6;
+    height: 105%;
+    width: 90%;
+    display: block;
+    position: absolute;right: 1px;top: -8%;
+    padding-left: 35%;
+}
+
+#datosPersonales{
+    position: relative;right: 9%;bottom: -2%;
+    margin-right: 12%;
+    width: 110%;
+    height: 105%;
+    padding-bottom: 3%;    
+}
+
+#infoVehiculo{
+    position: relative;top:2%;right: 4%;
+    height: auto;
+    
+}
+
+    
+}
+
