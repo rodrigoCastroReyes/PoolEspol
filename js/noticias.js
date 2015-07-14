@@ -46,7 +46,6 @@ function colocar_marcadores(map, puntos){
   for (var i =0; i < puntos.length; i++){
     
     var coordenada = puntos[i];
-    console.log(i);
     var position = new google.maps.LatLng(coordenada.x, coordenada.y);
     
     var marker= new google.maps.Marker({

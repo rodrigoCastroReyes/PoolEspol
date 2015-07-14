@@ -1,0 +1,345 @@
+@import 'fonts.css';
+
+*{
+	margin: 0px;
+	padding: 0px; 
+	
+}
+body{
+	background-color:#e2e4e6;
+}
+
+header{
+	padding: 20px;
+	background: -webkit-linear-gradient(top,#0080FF, #0080BB); 
+}
+
+a{
+	font-family: opcionCuatro;
+	font-style: normal;
+	color: white;
+	font-size: 49px;
+	list-style:none;
+	
+	position: relative;left: 44%;bottom: auto;
+}
+a:link{
+text-decoration: none;
+}
+li{
+	list-style: none;
+}
+
+h1{
+	position: absolute;left: 29%;
+	color: black;
+	font-family: opcionDos;
+	font-style:normal;
+	font-size: 35px;
+	display: flex;
+	
+}
+
+#estudianteJorge{
+
+display: flex;
+position: absolute;right: 85%;top:48%;
+
+}
+
+#estudianteJorge > span{
+
+position: absolute;left: 106%;bottom: 3%;
+font-family: opcionDos;
+	font-style:normal;
+}
+
+#estudianteCastro{
+	
+display: flex;
+position: absolute;left: 40%;top:48%;
+
+}
+#estudianteCastro > span{
+
+position: absolute;left: 126%;top:48%;
+font-family: opcionDos;
+	font-style:normal;
+}
+#estudianteOswaldo{
+		
+display: flex;
+position: absolute;left: 75%;top:48%;
+}
+#estudianteOswaldo > span{
+
+position: absolute;left: 109%;top: 48%;
+font-family: opcionDos;
+	font-style:normal;
+}
+#estudianteLuis{
+			
+display: flex;
+position: absolute;right: 70%;top:81%;
+
+}
+#estudianteLuis > span{
+
+position: absolute;left: 120%;top: 48%;
+font-family: opcionDos;
+	font-style:normal;
+}
+#estudianteKevin{
+
+display: flex;
+position: absolute;left: 62%;top:81%;
+}
+#estudianteKevin > span{
+
+position: absolute;left: 109%;top: 48%;
+font-family: opcionDos;
+	font-style:normal;
+}
+
+#jorge{
+	width: 95px;
+	height:95px;
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+
+}
+#castro{
+	width: 95px;
+	height:95px;
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+#oswaldo{
+	width: 95px;
+	height:95px;
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+#luis{
+	width: 95px;
+	height:95px;
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+#kevin{
+	width: 95px;
+	height:95px;
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+#logo{
+	height: 170px;
+	width: 170px;
+	position: absolute;top: 23%;left: 47%;
+}
+
+@media  screen and (max-width:800px) {
+	header{
+	padding: 15px;
+	background: -webkit-linear-gradient(top,#0080FF, #0080BB); 
+}
+
+	a{
+	font-family: opcionCuatro;
+	font-style: normal;
+	color: white;
+	font-size: 30px;
+	list-style:none;
+	
+	position: relative;left: 30%;bottom: auto;
+ }
+ a:link{
+ 	text-decoration: none;
+ }
+
+ h1{
+	position: absolute;left: 11%;
+	color: black;
+	font-family: opcionDos;
+	font-style:normal;
+	text-align: center;
+	font-size: 20px;
+	display: flex;
+	
+	
+}
+ #estudianteJorge{
+
+display: flex;
+position: absolute;right: 60%;top:25%;
+
+}
+
+#estudianteJorge > span{
+
+position: absolute;left: 110%;bottom: 5%;
+font-family: opcionDos;
+	font-style:normal;
+	font-size: 14px;
+}
+#jorge{
+	width: 75px;
+	height:75px;
+	display: flex;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+
+}
+
+#estudianteCastro{
+
+display: flex;
+position: absolute;left: 18%;top:45%;
+
+}
+#estudianteCastro > span{
+
+position: absolute;left: 126%;top:46%;
+font-family: opcionDos;
+	font-style:normal;
+}
+
+#castro{
+	width: 75px;
+	height:75px;
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+#estudianteOswaldo{
+		
+display: flex;
+position: absolute;left: 17%;top:65%;
+}
+#estudianteOswaldo > span{
+
+position: absolute;left: 116%;top: 52%;
+font-family: opcionDos;
+	font-style:normal;
+}
+#oswaldo{
+	width: 75px;
+	height:75px;
+	display: flex;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+#estudianteLuis{
+
+display: flex;
+position: absolute;right: 61%;top:87%;
+
+}
+#estudianteLuis > span{
+
+position: absolute;left: 120%;top: 48%;
+font-family: opcionDos;
+	font-style:normal;
+}
+
+#luis{
+	width: 75px;
+	height:75px;
+	display: flex;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+#estudianteKevin{
+
+display: flex;
+position: absolute;left: 15%;top:110%;
+}
+#estudianteKevin > span{
+
+position: absolute;left: 120%;top: 48%;
+font-family: opcionDos;
+	font-style:normal;
+}
+#kevin{
+	width: 75px;
+	height:75px;
+	display: flex;
+	padding: 0px;
+	margin: 0px;
+	-webkit-border-radius: 150px;
+   -moz-border-radius: 150px; 
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+#logo{
+	
+	width: 45px;
+	height: 45px;
+	display: flex;
+	position: relative;left: 8px;bottom: 54px;
+}
+body{
+	height: auto;
+	width: auto;
+	background-color:#e2e4e6;
+}
+
+}
