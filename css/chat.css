@@ -39,6 +39,8 @@ html,body{
 	padding: 30px;
 	background: #e2e4e6;
 	margin-top: 30px;
+	position: fixed;
+	height: 100%;
 
 }
 
@@ -50,6 +52,7 @@ html,body{
 	align-items:center;
 	height: 100%;
 	width: 100%;
+	margin-left: 20%;
 }
 
 #chat{
@@ -225,6 +228,7 @@ p.text {
 		width: 100%;
 		padding: 30px;
 		background: #e2e4e6;
+		position: relative;
 	}
 
 	.invisible{
@@ -254,5 +258,8 @@ p.text {
 		width: 90%;
 	}
 
+	.conversacion{
+		margin-left: 0%;
+	}
 
 }
