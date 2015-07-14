@@ -38,8 +38,8 @@ function habilitarEntradas(inputs,color){
 function cancelarEdicion(){
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
 	//estilo de cajas de texto deben cambiar
+	$(".error").fadeOut().remove();
 	deshabilitarEntradas(inputs,'#0080FB');
-
 	botonEditarUsuario.style.display='flex'
 	botonGuardarUsuario.style.display = 'none';
 	botonCancelarUsuario.style.display = 'none';
@@ -62,21 +62,20 @@ function guardarDatos(evt){
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
 	//input: nombre,apellido,cedula,nickname
 	$(".error").fadeOut().remove();
-
 	if(val==false){
-		if(!input[0].checkValidity()){
-			input[0].focus().after('<span class="error">Solo letras</span>'); 
+		if(!inputs[0].checkValidity()){
+			$("#datosPersona .input_text:nth-child(1)").focus().after('<span class="error">Solo letras</span>'); 
 		}
-		if(!input[1].checkValidity()){
-			alert("Error: apellido!!!");
+		if(!inputs[1].checkValidity()){
+			inputs[1].style.background="#BC1010";
 		}
-		if(!input[2].checkValidity()){
-			alert("Error: cedula!!!");
+		if(!inputs[2].checkValidity()){
+			inputs[2].style.background="#BC1010";
 		}
-		if(!input[3].checkValidity()){
-			alert("Error: cedula!!!");
+		if(!inputs[3].checkValidity()){
+			inputs[3].style.background="#BC1010";
 		}
-		input[0].focus();
+		inputs[0].focus();
 	}else{
 		botonEditarUsuario.style.display='flex'
 		botonGuardarUsuario.style.display = 'none';
@@ -118,10 +117,10 @@ function guardarDatosAuto(evt){
 	var inputs = document.querySelectorAll("#datosAuto input");
 	if(val==false){
 		if(!inputs[0].checkValidity()){
-			alert("Error: Placa!!!");
+			inputs[0].style.background="#BC1010";
 		}
 		if(!inputs[1].checkValidity()){
-			alert("Error: capacidad!!!");
+			inputs[1].style.background="#BC1010";
 		}
 		inputs[0].focus();
 	}else{

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Perfil del usuario</title>
+	<title>Perfil</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="css/perfil.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -67,7 +67,9 @@
 								<input class="input_text" type="text" value="Oswaldo Alejandro" disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos" />
 								<input class="input_text" type="text"  value="Bayona Andrade" disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos"/>
 								<input class="input_text" type="text"   value="0991209877" max="11" required disabled=true pattern="[0-9]{10}" title="Datos solamente numerico" />
-								<input class="input_text" type="text" value="Oswaldito"  disabled=true required/>
+								<input class="input_text" type="text" value="oswaldito"  disabled=true
+								pattern="[a-z]{6,15}" 
+								required/>
 							</form>
 						</div>
 					</div>
@@ -75,10 +77,9 @@
 						<div id="botonEditarUsuario" 
 						class="icon-pencil lapiz columna_flexible flex_center">
 						</div>
-						<div id="botonGuardarUsuario" class="icon-floppy-disk candado" id="botonguardar" 
-						onclick="guardarDatos()" >
+						<div id="botonGuardarUsuario" class="icon-floppy-disk candado" >
 						</div>
-						<div id="botonCancelarUsuario" class="icon-cancel-circle cancelado" id="botoncancelar" role="button" onclick="cancelarUsuario()" >
+						<div id="botonCancelarUsuario" class="icon-cancel-circle cancelado">
 						</div>
 					</div>
 				</div>
@@ -107,6 +108,9 @@
 					<div id="botonCancelarAuto" class="icon-cancel-circle  cancelado">
 					</div>
 				</div>
+		</div>
+		<div id="rutas">
+			
 		</div>
 	</div>
 </body>
