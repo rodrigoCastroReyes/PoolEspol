@@ -39,7 +39,7 @@
 								<span class="icon-bell"></span>
 								<span>Notificaciones</span>
 							</li>
-							<li>
+							<li onclick="salir();">
 								<span class="icon-switch"></span>
 								<span></span>
 							</li>
@@ -48,8 +48,17 @@
 				</div>
 			</div>
 		</header>
+		<div id="menu_salir">
+			<div >
+				<span id="leyenda_menu">Esta seguro que desea salir?</span>
+				<span class="icon-sad2 iconos_menu"></span>
+			</div>
+			<div>
+				<span id="aceptar_cierre" class="icon-checkmark iconos_menu"></span>
+				<span id="cancelar_cierre" class="icon-cancel-circle iconos_menu"></span>
+			</div>
+		</div>
 		<section id="contenido">
-
 			<div id="personas" class=" visible" >
 				<div class="persona" data-per="fajada">
 					<img class="fotoPerfil" src="imagenes/fajada.jpg"> 
@@ -61,10 +70,6 @@
 					<h3>Mafia Chumi</h3>
 				</div>
 			</div>
-			
-
-				
-
 			<div class="conversacion" id="fajada" >
 				<div class="regresar" >Mostar Conversaciones</div>
 				<div class="cabezeraMensaje">
@@ -104,8 +109,6 @@
 					<input id="btnEnviar" type="submit" value="Enviar" data-per="fajada"/>
 				</div>
 			</div>
-
-
 			<div class="conversacion" id="mafiachumi">
 				<div class="regresar" >Mostar Conversaciones</div>
 				<div class="cabezeraMensaje">
@@ -153,10 +156,6 @@
 					<input id="btnEnviar" type="submit" value="Enviar" data-per="mafiachumi"/>
 				</div>
 			</div>	
-
-
-
 		</section>
-		
 	</body>
 </html>

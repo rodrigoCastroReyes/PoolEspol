@@ -93,53 +93,6 @@ html,body{
 	cursor: pointer;
 }
 
-#contenedor_menu{
-	width: 100%;
-	height: 80px;
-}
-
-#menu_salir{
-	background-color: #0080FB;
-	border-radius: 6px;
-	color: white;
-	display: none;
-	flex-direction:column;
-	justify-content:center;
-	height: 110px;
-	width: 290px;
-	position: absolute;
-	top:35%;
-	left:40%;
-	right:40%;
-    z-index: 100;
-    border: 3px solid white;
-}
-
-#menu_salir span{
-	padding: 5px 5px;
-	margin: 5px 5px;
-}
-
-#aceptar_cierre,#cancelar_cierre{
-	cursor: pointer;
-}
-
-#menu_salir div{
-	display: flex;
-	flex-direction:row;
-	justify-content:center;
-	width: 100%;
-	padding: 5px;
-}
-
-#leyenda_menu{
-	font-family: opcionUno;
-}
-
-.iconos_menu{
-	font-size: 25px;
-}
-
 @media screen and (max-width: 800px){
 	
 

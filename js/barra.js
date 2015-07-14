@@ -12,7 +12,7 @@ function cargarMensajes(){
 
 function salir(){
 	menu_salir.style.display="flex";
-	contenedor_rutas.style.opacity=0.5;
+	//contenedor_rutas.style.opacity=0.5;
 }
 
 function aceptarCierre(){
@@ -20,7 +20,7 @@ function aceptarCierre(){
 }
 
 function cancelarCierre(){
-	contenedor_rutas.style.opacity=1;
+	//contenedor_rutas.style.opacity=1;
 	menu_salir.style.display="none";
 }
 
