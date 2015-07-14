@@ -37,7 +37,7 @@ h3{
 	flex-grow:1;
 	color:#FFFFFF;
 	font-size: 26px;
-	font-family: opcionTres;
+	font-family: opcionUno;
 }
 
 #cabezera{
@@ -55,7 +55,7 @@ h3{
 }
 
 label{
-	font-family: opcionTres;
+	font-family: opcionUno;
 	font-size: 26px;
 }
 

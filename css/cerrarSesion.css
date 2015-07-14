@@ -1,0 +1,80 @@
+@import 'fonts.css';
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+html,body,p{
+	background-color: #e2e4e6;
+	height: 100%;
+}
+
+h1{
+	text-shadow:rgba(0,0,0,0.5) 3px 3px 5px;
+	color: white; 
+}
+
+h2{
+	color:black;
+}
+
+a{
+	color: white;
+	font-family: opcionUno;
+}
+
+/*Estilos cabezera*/
+
+.rectangulo{
+	background: #0080FB;
+	padding-bottom: 5px;
+	padding-top: 0px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+}
+
+
+#cabezera{
+	border-bottom: 3px solid #c6c7cc;
+	font-size: 26px;
+}
+
+#footer{
+	border-top: 3px solid #c6c7cc;
+	font-family: opcionUno;
+	font-size: 15px;
+}
+
+.titulo{
+	font-family: opcionCuatro;
+	font-style: normal;
+	text-align: center;
+	height: 100%;
+	padding-top:10px;
+}
+
+.logo{
+	margin: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	cursor: pointer;
+}
+
+#contenedor_inicio{
+	display: flex;
+	flex-flow: column wrap;
+	margin: 0px;
+    justify-content:center;
+    align-items:center;
+    height: 100%;
+    width: auto;
+}
+
+#leyenda{
+	margin: 10px;
+	font-family: opcionUno;
+	font-size: 36px;
+}

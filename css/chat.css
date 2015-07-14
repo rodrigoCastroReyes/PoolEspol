@@ -26,12 +26,11 @@ html,body{
 	font-size: 20px;
 }
 
-
-
 #contenido{
 	display: flex;
 	flex-direction: row;
 	height: 100%;
+	transition: all 0.5s ease;
 }
 
 #personas{
@@ -39,6 +38,8 @@ html,body{
 	padding: 30px;
 	background: #e2e4e6;
 	margin-top: 30px;
+	position: fixed;
+	height: 100%;
 
 }
 
@@ -50,6 +51,7 @@ html,body{
 	align-items:center;
 	height: 100%;
 	width: 100%;
+	margin-left: 20%;
 }
 
 #chat{
@@ -86,7 +88,7 @@ html,body{
 	margin: 5px;
 }
 
-#cabezeraMensaje{
+.cabezeraMensaje{
 	display: flex;
 	flex-direction: row;
 	align-items:center;
@@ -94,10 +96,11 @@ html,body{
 	background: #0084D1;
 	height: 10%;
 	width: 60%;
+	margin-top: 50px;
 }
 
 
-#envio{
+.envio{
 	width: 60%;
 	height: 10%;
 	margin-top: 10px;
@@ -175,11 +178,11 @@ footer{
 	margin: 10px;
 	max-width: 70%;
 	display: block;
+	height: 100%;
 }
 
 .infoPer{
-	padding: 15px;
-	margin: 10px;
+	padding: 10px;
 	display: flex;
 	flex-direction: column;
 }
@@ -224,6 +227,7 @@ p.text {
 		width: 100%;
 		padding: 30px;
 		background: #e2e4e6;
+		position: relative;
 	}
 
 	.invisible{
@@ -240,6 +244,21 @@ p.text {
 		cursor: pointer;
 	}
 
+	.cabezeraMensaje{
+		margin-top: 10px;
+		width: 90%;
+	}
 
+	.areaMensajes{
+		width: 90%;
+	}
+
+	.envio{
+		width: 90%;
+	}
+
+	.conversacion{
+		margin-left: 0%;
+	}
 
 }

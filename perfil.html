@@ -4,11 +4,19 @@
 	<meta charset="utf-8">
 	<title>Perfil</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="css/perfil.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script src="js/jquery.min.js" type="text/javascript" ></script>
+	<link rel="stylesheet" type="text/css" href="css/noticias.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/estiloMapa.css">
+	<link rel="stylesheet" href="css/perfil.css">
+	<link rel = "stylesheet" href = "css/publicador-carro.css"/>
+	<script src = "js/jquery-1.11.3.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script src = "js/noticias.js"> </script>
+	<script src = "js/publicador.js"> </script>
 	<script src="js/validacionPerfil.js" type="text/javascript"></script>
 	<script src ="js/barra.js" type="text/javascript"></script>
+	<script src = "js/desplegableNotificaciones.js"> </script>
 </head>
 <body>
 	<header >
@@ -33,11 +41,15 @@
 							<span class="icon-mail4"></span>
 							<span>Mensajes</span>
 						</li>
-						<li>
+						<li id="notificaciones">
 							<span class="icon-bell"></span>
 							<span>Notificaciones</span>
 						</li>
-						<li>
+						<li id="notificacionesCelular" onclick="cargarNotificaciones();" >
+							<span class="icon-bell"></span>
+							<span>Notificaciones</span>
+						</li>
+						<li onclick="salir();">
 							<span class="icon-switch"></span>
 							<span></span>
 						</li>
@@ -46,7 +58,64 @@
 			</div>
 		</div>
 	</header>
-	<div class="flex_container">
+	<div id="menu_salir">
+		<div >
+			<span id="leyenda_menu">Esta seguro que desea salir?</span>
+			<span class="icon-sad2 iconos_menu"></span>
+		</div>
+		<div>
+			<span id="aceptar_cierre" class="icon-checkmark iconos_menu"></span>
+			<span id="cancelar_cierre" class="icon-cancel-circle iconos_menu"></span>
+		</div>
+	</div>
+
+	<div id="sign_box">
+        <div class="subnotif">
+            <div class="contenedorFotoPerfil">
+                <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/noticiasconpersonaje.jpg">
+            </div>
+		    <div class="infoNotificacion">
+                <div> 
+                    <h3 class="tituloNotificacion">Ha solicitado un aventon</h3>
+                </div>
+                <div class="contenedorBotones">
+                <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                </div>
+            </div>
+		</div>
+        <div class="subnotif">
+            <div class="contenedorFotoPerfil">
+                <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/castro.jpg">
+            </div>
+            <div class="infoNotificacion">
+                <div>
+                    <h3 class="tituloNotificacion">Oswaldo ha solicitado un aventon</h3>
+                </div>
+                <div class="contenedorBotones">
+                <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                </div>
+            </div>
+		</div>
+        <div class="subnotif">
+            <div class="contenedorFotoPerfil">
+                <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/kevin.jpg">
+            </div>
+            <div class="infoNotificacion">
+                <div>
+                    <h3 class="tituloNotificacion">Mafia ha solicitado un aventon</h3>
+                </div>
+                <div class="contenedorBotones">
+                <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                </div>
+            </div>
+        </div>
+        <center><a id="mas">Ver todas</a></center>
+	</div>
+
+	<div id="contenedor_perfil"class="flex_container">
 		<div id="infoPerfil">
 			<div id="infoUsuario" class="columna_flexible">
 				<div id="nickName" class="columna_flexible flex_center">
@@ -108,12 +177,152 @@
 					<div id="botonCancelarAuto" class="icon-cancel-circle  cancelado">
 					</div>
 				</div>
-		</div>
-	   </div>
-		<div id="rutas">
-			
-		</div>
+			</div>
+	   	</div>
 
+		<div id="infoRutas">
+			<div id = "contenedor_rutas_perfil">
+				<div id="cuadroPublicador" class="visualizador">
+					<div id = "publicador_carro">
+						<div id = "cabezera">
+							<img id = "foto_perfil" src = "imagenes/imagenPerfil.jpg"/>&nbsp;&nbsp;
+							<h3 id = "nickname" >Oswaldo Bayona Andrade</h3>
+						</div>
+						<hr>
+						<form class="formulario-publicar">
+							<label>Publicar </label></br></br>
+							<span>
+								<button type="button" id = "btnRuta">Crear ruta</button>
+								<button type="button" id = "btnAventon" >Pedir Avent&oacute;n</button>
+							</span>
+						</br></br>
+						</form>
+					</div>
+				</div>
+				<h1 id="tituloRutas">Mis Rutas</h1>
+				<div id="ruta" class="visualizador">
+					<div class="menu_superior menu_noticias">
+						<div class="lateral flex_start">
+							<img class="nickname cursor_pointer" src="imagenes/imagenPerfil.jpg">
+							<span class="info_noticias">Ruta</span>
+						</div>
+						
+					</div>
+					<div id = "mapaGoogle1" class="mapa_ruta" >
+					</div>
+					<div class="menu_inferior menu_noticias">
+						
+						<div class = "info-horario"><span>13/07/2015 - 09:30</span></div>
+						<div class="lateral flex_end">
+							<span class="info_noticias">$0.25</span>
+							<span class="icon-users info_noticias"></span>
+							<span class="info_noticias">5</span>
+						</div>
+					</div>
+				</div>
+				<div id="anuncio" class="visualizador">
+					<div class="menu_superior menu_noticias">
+						<div class="lateral flex_start">
+							<img class="nickname cursor_pointer" height="30" width="30" src="imagenes/imagenPerfil.jpg">
+							<span class="info_noticias">Anuncio</span>
+						</div>
+						
+					</div>
+					<div id = "mapaGoogle2" class="mapa_ruta">
+					</div>
+					<div class="menu_inferior menu_noticias">
+						
+						<div class = "info-horario"><span>13/07/2015 - 09:45</span></div>
+					</div>
+				</div>
+				<div id="ruta" class="visualizador">
+					<div class="menu_superior menu_noticias">
+						<div class="lateral flex_start">
+							<img class="nickname cursor_pointer" height="30" width="30" src="imagenes/imagenPerfil.jpg">
+							<span class="info_noticias">Ruta</span>
+						</div>
+						
+					</div>
+					<div id = "mapaGoogle3" class="mapa_ruta">
+					</div>
+					<div class="menu_inferior menu_noticias">
+						
+						<div class = "info-horario"><span>13/07/2015 - 10:30</span></div>
+						<div class="lateral flex_end">
+							<span class="info_noticias">$0.25</span>
+							<span class="icon-users info_noticias"></span>
+							<span class="info_noticias">5</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id = "Pantalla_Ruta">	
+				<div id = "Contenido_Ruta">
+					<input id = "btnClose" value = "X" type = "button" class = "close"/>
+					<div id="googleMap" style="height:60%;">
+					</div>
+					<div class = "Titulo_Ruta">
+						<span >Ingrese una sucesi&oacute;n de puntos para marcar el camino</span>
+					</div>
+					<div class="tabla flex_between_around ">
+						<div class="tabla">
+							<div class="tabla_item columna_flexible flex_end">
+								<label class="etiqueta">Fecha: </label>
+								<label class="etiqueta">Hora: </label>
+							</div>
+							
+							<div class="tabla_item columna_flexible ">
+								<form id = "formRuta" class="formulario">
+									<input class="entradaDatos" id = "Fecha" type ="date" />
+									<input class="entradaDatos" id = "Hora" type ="time" />	
+								</form>
+							</div>
+						</div>
+						<div class="tabla margin_right">
+							<div class="tabla_item columna_flexible flex_end">
+								<label class="etiqueta">Capacidad: </label>
+								<label class="etiqueta">Costo: $</label>
+							</div>
+							<div class="tabla_item columna_flexible ">
+								<input form= "formRuta" class="entradaDatos" type ="number" 
+								min = "1" max = "6" value ="1"/>
+								<input form="formRuta" class="entradaDatos" type ="number" 
+								value = "0.00" step="0.01" max="2.00"/>	
+							</div>
+						</div>
+					</div>
+					<div class="tabla flex_center">
+						<button form="formRuta" id ="btnAceptar" type="submit">Aceptar</button>
+						<button form="formRuta" id="btnCancelar" type = "button">Cancelar</button>
+					</div>
+				</div>
+			</div>
+			<div id = "Pantalla_Aventon">	
+				<div id = "Contenido_Aventon">
+					<input id = "btnCloseAventon" value = "X" type = "button" class = "close"/>
+					<div id="googleMap2" style="height:70%;"></div>
+					<div class = "Titulo_Aventon">
+						<span> Ingrese un punto en el mapa que ser&aacute; su paradero</span>
+					</div>
+					<div class="tabla flex_center">
+						<div class="tabla_item columna_flexible" >
+								<label class="etiqueta">Fecha: </label>
+								<label class="etiqueta">Hora: </label>
+						</div>
+						<div class="tabla_item columna_flexible" >
+							<form id = "formAventon" class="formulario">
+								<input class="entradaDatos" id = "Fecha_Aventon" type ="date" />
+								<input class="entradaDatos" id = "Hora_Aventon" type ="time" />
+							</form>
+						</div>
+					</div>
+					<div class="tabla flex_center">
+						<button form="formAventon" id = "btnAceptarAventon" type="submit">Aceptar</button>
+						<button form="formAventon" id="btnCancelarAventon" type = "button">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

@@ -11,6 +11,7 @@
 		<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/chat.js"></script>
 		<script src = "js/barra.js"> </script>
+		<script src = "js/desplegableNotificaciones.js"> </script>
 	</head>
 	<body>
 		<header>
@@ -35,11 +36,15 @@
 								<span class="icon-mail4"></span>
 								<span>Mensajes</span>
 							</li>
-							<li>
+							<li id="notificaciones">
 								<span class="icon-bell"></span>
 								<span>Notificaciones</span>
 							</li>
-							<li>
+							<li id="notificacionesCelular" onclick="cargarNotificaciones();" >
+								<span class="icon-bell"></span>
+								<span>Notificaciones</span>
+							</li>
+							<li onclick="salir();">
 								<span class="icon-switch"></span>
 								<span></span>
 							</li>
@@ -48,34 +53,86 @@
 				</div>
 			</div>
 		</header>
-		<section id="contenido">
+		<div id="menu_salir">
+			<div >
+				<span id="leyenda_menu">Esta seguro que desea salir?</span>
+				<span class="icon-sad2 iconos_menu"></span>
+			</div>
+			<div>
+				<span id="aceptar_cierre" class="icon-checkmark iconos_menu"></span>
+				<span id="cancelar_cierre" class="icon-cancel-circle iconos_menu"></span>
+			</div>
+		</div>
 
+		<div id="sign_box">
+                <div class="subnotif">
+                    <div class="contenedorFotoPerfil">
+                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/noticiasconpersonaje.jpg">
+                    </div>
+				    <div class="infoNotificacion">
+                        <div> 
+                            <h3 class="tituloNotificacion">Ha solicitado un aventon</h3>
+                        </div>
+                        <div class="contenedorBotones">
+                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                        </div>
+                    </div>
+				</div>
+                <div class="subnotif">
+                    <div class="contenedorFotoPerfil">
+                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/castro.jpg">
+                    </div>
+                    <div class="infoNotificacion">
+                        <div>
+                            <h3 class="tituloNotificacion">Oswaldo ha solicitado un aventon</h3>
+                        </div>
+                        <div class="contenedorBotones">
+                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                        </div>
+                    </div>
+				</div>
+                <div class="subnotif">
+                    <div class="contenedorFotoPerfil">
+                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/kevin.jpg">
+                    </div>
+                    <div class="infoNotificacion">
+                        <div>
+                            <h3 class="tituloNotificacion">Mafia ha solicitado un aventon</h3>
+                        </div>
+                        <div class="contenedorBotones">
+                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                        </div>
+                    </div>
+                </div>
+                <center><a id="mas">Ver todas</a></center>
+        </div>
+
+		<section id="contenido">
 			<div id="personas" class=" visible" >
 				<div class="persona" data-per="fajada">
-					<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
+					<img class="fotoPerfil" src="imagenes/fajada.jpg"> 
 					<h3>Fajada</h3>
 				</div>
 
 				<div class="persona" data-per="mafiachumi">
-					<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
+					<img class="fotoPerfil" src="imagenes/mafia.jpg"> 
 					<h3>Mafia Chumi</h3>
 				</div>
 			</div>
-			
-
-				
-
 			<div class="conversacion" id="fajada" >
 				<div class="regresar" >Mostar Conversaciones</div>
-				<div id="cabezeraMensaje">
-					<img class="fotoPerfil" src="imagenes/LogoPoolEspol.png">
+				<div class="cabezeraMensaje">
+					<img class="fotoPerfil" src="imagenes/fajada.jpg">
 					<span class="texto_simple">Fajada</span>
 				</div>
 				<div class="areaMensajes" data-per="fajada">
 					
 					<div class="friend"> 
 						<div class="infoPer">
-							<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
+							<img class="fotoPerfil" src="imagenes/fajada.jpg"> 
 							<P>Fajada</P>
 						</div>
 						<div class="mensaje">
@@ -99,24 +156,22 @@
 
 				</div>
 
-				<div id="envio" >
+				<div class="envio" >
 					<input type="text" id="txtMensaje" placeholder="escriba su mensaje..." data-per="fajada"/> 
 					<input id="btnEnviar" type="submit" value="Enviar" data-per="fajada"/>
 				</div>
 			</div>
-
-
 			<div class="conversacion" id="mafiachumi">
 				<div class="regresar" >Mostar Conversaciones</div>
-				<div id="cabezeraMensaje">
-					<img class="fotoPerfil" src="imagenes/LogoPoolEspol.png">
+				<div class="cabezeraMensaje">
+					<img class="fotoPerfil" src="imagenes/mafia.jpg">
 					<span class="texto_simple">Mafia Chumi</span>
 				</div>
 				<div class="areaMensajes" data-per="mafiachumi">
 					
 					<div class="friend"> 
 						<div class="infoPer">
-							<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
+							<img class="fotoPerfil" src="imagenes/mafia.jpg"> 
 							<P>Mafia Chumi</P>
 						</div>
 						<div class="mensaje">
@@ -138,7 +193,7 @@
 
 					<div class="friend"> 
 						<div class="infoPer">
-							<img class="fotoPerfil" src="imagenes/kevin.jpg"> 
+							<img class="fotoPerfil" src="imagenes/mafia.jpg"> 
 							<P>Mafia Chumi</P>
 						</div>
 						<div class="mensaje">
@@ -147,21 +202,12 @@
 						</div>
 					</div>
 
-
-
-
 				</div>
-				<div id="envio">
+				<div class="envio">
 					<input type="text" id="txtMensaje" placeholder="escriba su mensaje..." data-per="mafiachumi"/> 
 					<input id="btnEnviar" type="submit" value="Enviar" data-per="mafiachumi"/>
 				</div>
 			</div>	
-
-
-
 		</section>
-		<footer>
-            <p>Todo los Derechos Reservados <small> &copy; 2015</small> </p>
-        </footer>
 	</body>
 </html>
