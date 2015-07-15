@@ -35,7 +35,7 @@
 							<span class="icon-mail4"></span>
 							<span>Mensajes</span>
 						</li>
-						<li>
+						<li onclick="cargarNotificaciones();">
 							<span class="icon-bell"></span>
 							<span>Notificaciones</span>
 						</li>
@@ -57,48 +57,52 @@
 				<span id="cancelar_cierre" class="icon-cancel-circle iconos_menu"></span>
 			</div>
 		</div>
-		<div id="contenedor_notif">
+
+		<section id="contenedor_notif">
 
 			<div id="subnotif" class="notif">
 
 				<div id = "notificacion">
+					
 					<div id = "cabezera">
-						<img id = "foto" src = "imagenes/mafia.jpg"/>&nbsp;&nbsp;
-						<h3 id = "nick" >Oswaldo Bayona Andrade ha solicitado un aventon</h3>
-                        <button type="button" id = "btnAceptar">Aceptar</button>
-						<button type="button" id = "btnNegar" >Negar</button>
+						<div class="superior">
+							<img id = "foto" src = "imagenes/imagenPerfil.jpg"/>&nbsp;&nbsp;
+							<h3 id = "nick" >Oswaldito ha solicitado un aventon</h3>
+                        </div>
+
+                        <div class="contenedorBotones">
+                        	<button type="button" id = "btnAceptar">Aceptar</button>
+							<button type="button" id = "btnNegar" >Negar</button>
+						</div>
+
+					</div>
+					</br>
+					<div id = "cabezera">
+						<div class="superior">
+							<img id = "foto" src = "imagenes/mafia.jpg"/>&nbsp;&nbsp;
+							<h3 id = "nick" >Mafia Chumi Quiere llevarte</h3>
+                        </div>
+
+                        <div class="contenedorBotones">
+                        	<button type="button" id = "btnAceptar">Aceptar</button>
+							<button type="button" id = "btnNegar" >Negar</button>
+						</div>
+
+					</div>
+				</br>
+					<div id = "cabezera">
+						<div class="superior">
+							<img id = "foto" src = "imagenes/fajada.jpg"/>&nbsp;&nbsp;
+							<h3 id = "nick" >Fajada confirmo el aventon</h3>
+                        </div>
+
 					</div>
 					
 				</div>
 			</div>
 
-            <div id="subnotif" class="notif">
-
-				<div id = "notificacion">
-					<div id = "cabezera">
-						<img id = "foto" src = "imagenes/ImagenesDesarrollador/castro.jpg"/>&nbsp;&nbsp;
-						<h3 id = "nick" >Rodrigo te ha dado un toque</h3>
-                        <button type="button" id = "btnAceptar">Aceptar</button>
-						<button type="button" id = "btnNegar" >Negar</button>
-					</div>
-					
-				</div>
-			</div>
-
-
-            <div id="subnotif" class="notif">
-
-				<div id = "notificacion">
-					<div id = "cabezera">
-						<img id = "foto" src = "imagenes/ImagenesDesarrollador/jorge.jpg"/>&nbsp;&nbsp;
-						<h3 id = "nick" >Jorge ira a re cogerte</h3>
-                        <button type="button" id = "btnAceptar">Aceptar</button>
-						<button type="button" id = "btnNegar" >Negar</button>
-					</div>
-					
-				</div>
-			</div>
-		</div>
+            
+		</section>
 		
 	</body>
 </html>
