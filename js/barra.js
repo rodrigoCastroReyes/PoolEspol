@@ -24,21 +24,16 @@ function salir(){
 
 	if(rutas!=null){
 		rutas.style.opacity=0.5;//pagina de noticias
-		var botones=document.querySelectorAll("button");
-		for(var i=0;i<botones.length;i++){
-			botones[i].disabled=true;
-		}
+		botonesOff();
 	}
 	if(perfil!=null){
 		perfil.style.opacity=0.5;//pagina de perfil
-		var botones=document.querySelectorAll("button");
-		for(var i=0;i<botones.length;i++){
-			botones[i].disabled=true;
-		}
+		botonesOff()
 	}
 
 	if(chat!=null){
 		chat.style.opacity=0.5;
+		botonesOff()
 	}
 }
 
@@ -55,24 +50,34 @@ function cancelarCierre(){
 
 	if(rutas!=null){
 		rutas.style.opacity=1;//pagina de noticias
-		var botones=document.querySelectorAll("button");
-		for(var i=0;i<botones.length;i++){
-			botones[i].disabled=false;
-		}
+		botonesOn()
 	}
 	if(perfil!=null){
 		perfil.style.opacity=1;//pagina de perfil
-		var botones=document.querySelectorAll("button");
-		for(var i=0;i<botones.length;i++){
-			botones[i].disabled=false;
-		}
+		botonesOn()
 	}
 
 	if(chat!=null){
 		chat.style.opacity=1;
+		botonesOn()
 	}
-
 }
+
+function botonesOn(){
+	var botones=document.querySelectorAll("button");
+	for(var i=0;i<botones.length;i++){
+		botones[i].disabled=false;
+	}
+}
+
+function botonesOff(){
+	var botones=document.querySelectorAll("button");
+	for(var i=0;i<botones.length;i++){
+		botones[i].disabled=true;
+	}
+}
+
+
 
 function init(){
 	aceptar_cierre.addEventListener('click',aceptarCierre,false);
