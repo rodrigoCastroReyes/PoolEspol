@@ -10,6 +10,10 @@ function cargarMensajes(){
   window.location.href="chat.html"; 
 }
 
+function cargarNotificaciones(){
+  window.location.href="notificaciones.html"; 
+}
+
 function salir(){
 	menu_salir.style.display="flex";
 	//contenedor_rutas.style.opacity=0.5;
