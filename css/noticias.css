@@ -93,6 +93,10 @@ html,body{
 	cursor: pointer;
 }
 
+#sign_box{
+	margin-top: -40px;
+}
+
 @media screen and (max-width: 800px){
 	
 

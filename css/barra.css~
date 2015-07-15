@@ -1,5 +1,4 @@
 @import "fonts.css";
-@import "desplegableNotificaciones.css";
 
 #contenedor_navegacion{
 	display: flex;
@@ -140,13 +139,6 @@
 		height: auto;
 	}
 }
-#notificacionesCelular{
-	display: none;
-}
-
-#notificaciones{
-	display: flex;
-}
 
 
 @media screen and (max-width:736px){
@@ -185,12 +177,5 @@
 	#contenedor_navegacion{
 		/*position: relative;*/
 		height: auto;
-	}
-	#notificaciones{
-		display: none;
-	}
-
-	#notificacionesCelular{
-		display: flex;
 	}
 }

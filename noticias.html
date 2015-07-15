@@ -16,6 +16,7 @@
 		<script src = "js/noticias.js"> </script>
 		<script src = "js/publicador.js"> </script>
 		<script src = "js/barra.js"> </script>
+		<script src = "js/desplegableNotificaciones.js"> </script>
 	</head>
 	<body>
 		<div id="contenedor_navegacion">
@@ -39,7 +40,11 @@
 							<span class="icon-mail4"></span>
 							<span>Mensajes</span>
 						</li>
-						<li onclick="cargarNotificaciones();">
+						<li id="notificaciones">
+							<span class="icon-bell"></span>
+							<span>Notificaciones</span>
+						</li>
+						<li id="notificacionesCelular" onclick="cargarNotificaciones();" >
 							<span class="icon-bell"></span>
 							<span>Notificaciones</span>
 						</li>
@@ -61,6 +66,54 @@
 				<span id="cancelar_cierre" class="icon-cancel-circle iconos_menu"></span>
 			</div>
 		</div>
+
+		<div id="sign_box">
+                <div class="subnotif">
+                    <div class="contenedorFotoPerfil">
+                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/noticiasconpersonaje.jpg">
+                    </div>
+				    <div class="infoNotificacion">
+                        <div> 
+                            <h3 class="tituloNotificacion">Ha solicitado un aventon</h3>
+                        </div>
+                        <div class="contenedorBotones">
+                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                        </div>
+                    </div>
+				</div>
+                <div class="subnotif">
+                    <div class="contenedorFotoPerfil">
+                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/castro.jpg">
+                    </div>
+                    <div class="infoNotificacion">
+                        <div>
+                            <h3 class="tituloNotificacion">Oswaldo ha solicitado un aventon</h3>
+                        </div>
+                        <div class="contenedorBotones">
+                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                        </div>
+                    </div>
+				</div>
+                <div class="subnotif">
+                    <div class="contenedorFotoPerfil">
+                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/kevin.jpg">
+                    </div>
+                    <div class="infoNotificacion">
+                        <div>
+                            <h3 class="tituloNotificacion">Mafia ha solicitado un aventon</h3>
+                        </div>
+                        <div class="contenedorBotones">
+                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
+                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
+                        </div>
+                    </div>
+                </div>
+                <center><a id="mas">Ver todas</a></center>
+        </div>
+
+
 		<div id="contenedor_rutas">
 			<div id="cuadroPublicador" class="visualizador">
 				<div id = "publicador_carro">
