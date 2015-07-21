@@ -1,9 +1,6 @@
 /**
  *NOTA LOS EVENTOS DE VALIDACIONES SE ACTIVAN CUANDO PRESIONAN
  *LA TECLA ENTERRRRR
- *
- *
- *
  * 
  */
 var nombre, apellido,cedula,nickname;
@@ -64,16 +61,18 @@ function guardarDatos(evt){
 	$(".error").fadeOut().remove();
 	if(val==false){
 		if(!inputs[0].checkValidity()){
-			$("#datosPersona .input_text:nth-child(1)").focus().after('<span class="error">Solo letras</span>'); 
+			$("#datosPersona .input_text:nth-child(1)").focus().after('<span class="error">Este campo solo puede contener letras!</span>'); 
 		}
 		if(!inputs[1].checkValidity()){
-			inputs[1].style.background="#BC1010";
+			$("#datosPersona .input_text:nth-child(2)").focus().after('<span class="error">Este campo solo puede contener letras!</span>'); 
 		}
 		if(!inputs[2].checkValidity()){
-			inputs[2].style.background="#BC1010";
+			$("#datosPersona .input_text:nth-child(3)").focus().after('<span class="error">Solo se ingresa numeros</span>'); 
 		}
 		if(!inputs[3].checkValidity()){
-			inputs[3].style.background="#BC1010";
+					
+			$("#datosPersona .input_text:nth-child(4)").focus().after('<span class="error">Solamente datos alfabeticos y de longitud mayor a 6 caracteres</span>'); 
+
 		}
 		inputs[0].focus();
 	}else{
@@ -100,7 +99,7 @@ function editarInfoAuto(){
 
 function cancelarEdicionAuto(){
 	var inputs = document.querySelectorAll("#datosAuto input");
-	
+	$(".error").fadeOut().remove();
 	deshabilitarEntradas(inputs,'#e2e4e6');//deshabilita las entradas de texto
 
 	botonEditarAuto.style.display='flex'
@@ -117,10 +116,10 @@ function guardarDatosAuto(evt){
 	var inputs = document.querySelectorAll("#datosAuto input");
 	if(val==false){
 		if(!inputs[0].checkValidity()){
-			inputs[0].style.background="#BC1010";
+			$("#datosAuto .input_text:nth-child(1)").focus().after('<span class="error">Este campo debe tener al menos 6 caracteres alfanumerico</span>'); 
 		}
 		if(!inputs[1].checkValidity()){
-			inputs[1].style.background="#BC1010";
+			$("#datosAuto .input_text:nth-child(2)").focus().after('<span class="error">Este campo debe estar entre un numero del 1 al 6</span>'); 
 		}
 		inputs[0].focus();
 	}else{
