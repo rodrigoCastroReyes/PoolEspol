@@ -114,12 +114,14 @@ function cancelarEdicionAuto(){
 function guardarDatosAuto(evt){
 	var val=document.forms["datosAuto"].checkValidity();
 	var inputs = document.querySelectorAll("#datosAuto input");
+	$(".error").fadeOut().remove();
+
 	if(val==false){
 		if(!inputs[0].checkValidity()){
 			$("#datosAuto .input_text:nth-child(1)").focus().after('<span class="error">Este campo debe tener al menos 6 caracteres alfanumerico</span>'); 
 		}
 		if(!inputs[1].checkValidity()){
-			$("#datosAuto .input_text:nth-child(2)").focus().after('<span class="error">Este campo debe estar entre un numero del 1 al 6</span>'); 
+			$("#datosAuto .input_text:nth-child(2)").focus().after('<span class="error">Este dato debe estar entre [1-6]</span>'); 
 		}
 		inputs[0].focus();
 	}else{
