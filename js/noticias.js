@@ -8,27 +8,53 @@ function punto(x,y) {
 //datos que llegan desde el servidor
 var ptoAventon = new punto(-2.2845962215476465 ,-79.88536566495895);
 
-var ruta1 = [
-    new punto(-2.196898776976102 ,-79.92794036865234 ),
-    new punto(-2.19823889516066 ,-79.92990374565125),
-    new punto(-2.196641474147045 ,-79.9354076385498 ),
-    new punto(-2.194089885360678 ,-79.93833661079407),
-    new punto(-2.188321992152271 ,-79.94444131851196 ),
-    new punto(-2.1807314966553757 ,-79.94523525238037),
-    new punto(-2.1723636814734295 ,-79.94108855724335 ),
-    new punto(-2.165411015653738 ,-79.94540691375732),
-    new punto(-2.1557619277556506 ,-79.94861483573914 ),
-    new punto(-2.1522024709832657 ,-79.95297074317932 ),
-];
 
-var ruta2 = [
-    new punto( -2.163802838596867 ,-79.9209451675415 ),
-    new punto(-2.1651858709684997 ,-79.9229085445404),
-    new punto(-2.1621732174395216 ,-79.92952823638916  ),
-    new punto(-2.1727657236231828 ,-79.94051456451416),
-    new punto(-2.155767288377049 ,-79.9485182762146  ),
-    new punto(-2.152320404925176 ,-79.95322287082672)
-];
+var ruta1, ruta2;
+
+function procesarRutas(event){
+  var respond = event.target.responseText;
+  var listRutas = JSON.parse(respond);
+  ruta1 = listRutas.rutas[0];
+  ruta2 = listRutas.rutas[1];
+
+  mapProp = {
+  center:new google.maps.LatLng(-2.201403, -79.917732),
+  zoom:15,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+  mapProp3 = {
+  center:new google.maps.LatLng(-2.201403, -79.917732),
+  zoom:15,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+  var map=new google.maps.Map(document.getElementById("mapaGoogle1"),mapProp);
+  colocar_marcadores(map, ruta1.ruta);
+  var map3=new google.maps.Map(document.getElementById("mapaGoogle3"),mapProp3);
+  colocar_marcadores(map3, ruta2.ruta);
+
+}
+
+function procesarAventones(event){
+  var respond = event.target.responseText;
+  var listventones = JSON.parse(respond);
+  
+  var aventon1 = listventones.aventones[0];
+
+  mapProp2 = {
+  center:new google.maps.LatLng(-2.2845962215476465 ,-79.88536566495895),
+  zoom:15,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+  var map2=new google.maps.Map(document.getElementById("mapaGoogle2"),mapProp2);
+  
+  colocarPunto(map2, aventon1.ubicacion);
+
+
+
+}
 
 function colocarPunto(map, punto){
   var marker= new google.maps.Marker({
@@ -78,32 +104,17 @@ function colocar_marcadores(map, puntos){
 }
 
 function cargarMapas(event){
+  
+  var request = new XMLHttpRequest();
+  request.open("GET","JSON/rutas.json",true);
+  request.addEventListener('load',procesarRutas ,false);
+  request.send(null);
 
-	mapProp = {
-	center:new google.maps.LatLng(-2.201403, -79.917732),
-  zoom:15,
-  mapTypeId:google.maps.MapTypeId.ROADMAP
-	};
 
-  mapProp2 = {
-  center:new google.maps.LatLng(-2.2845962215476465 ,-79.88536566495895),
-  zoom:15,
-  mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-
-  mapProp3 = {
-  center:new google.maps.LatLng(-2.201403, -79.917732),
-  zoom:15,
-  mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-
-	var map=new google.maps.Map(document.getElementById("mapaGoogle1"),mapProp);
-  var map2=new google.maps.Map(document.getElementById("mapaGoogle2"),mapProp2);
-  var map3=new google.maps.Map(document.getElementById("mapaGoogle3"),mapProp3);
-
-  colocar_marcadores(map, ruta1);
-  colocarPunto(map2, ptoAventon);
-  colocar_marcadores(map3, ruta2);
+  var request_aventones = new XMLHttpRequest();
+  request_aventones.open("GET", "JSON/aventones.json", true);
+  request_aventones.addEventListener('load', procesarAventones, false);
+  request_aventones.send(null);
 
 }
 
