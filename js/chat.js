@@ -30,26 +30,26 @@ function procesarConversacion(event){
 		mensaje=mensajes[i].contenido;
 		imagen.setAttribute("class","fotoPerfil");
 		contenedorMensaje.setAttribute("class","mensaje");
-		contenerPerfil.setAttribute("class","infoPerfil");
+		contenerPerfil.setAttribute("class","infoPer");
 		if(tipo=="emisor"){
 			contenedor.setAttribute("class","friend");
 			imagen.setAttribute("src",fotoEmisor);
 			p1.innerHTML=nickEmisor;
+			contenedor.appendChild(contenerPerfil);
+			contenedor.appendChild(contenedorMensaje);
 		}else{
 			contenedor.setAttribute("class","self");
 			imagen.setAttribute("src",fotoReceptor);
 			p1.innerHTML=nickReceptor;
+			contenedor.appendChild(contenedorMensaje);
+			contenedor.appendChild(contenerPerfil);
+		
 		}
 		p2.innerHTML=mensaje;
 		contenerPerfil.appendChild(imagen);
 		contenerPerfil.appendChild(p1);
 		contenedorMensaje.appendChild(p2);
-		contenedor.appendChild(contenerPerfil);
-		contenedor.appendChild(contenedorMensaje);
-		areaMensajes.appendChild(contenedor);
-
-
-		
+		areaMensajes.appendChild(contenedor);		
 	}
 	
 }

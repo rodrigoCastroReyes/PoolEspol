@@ -106,30 +106,48 @@ html,body{
 	margin-top: 10px;
 	display: flex;
 	justify-content:center;
+	background: #e2e4e6;
 }
 
 #txtMensaje{
-	background: #e2e4e6;
 	border-color: #FFFFFF;
 	width: 75%;
 	height: 30px;
+	background-color: white;
+	border : 1px solid #000000;
+	border-radius: 3px 3px 3px 3px;
+	font-family: opcionUno;
+	font-size: 20px;
+	margin: 5px 5px;
+	text-align: center;
+	transition: box-shadow 0.5s ease;
+	margin-top: 10px;
 }
 
 
 #btnEnviar {
-  border-radius: 0px;
-  font-family: opcionUno;
-  color: #ffffff;
-  font-size: 20px;
-  background: #0080FF;
-  text-decoration: none;
-  width: 25%;
-  height: 30px;
+ 	flex-wrap: wrap;
+	background: #0080FB;
+	border-radius: 10px;
+	box-shadow: rgba(8,43,255,0.75) 2px 2px 4px;
+	display: flex;
+	justify-content:center;
+	margin: 5px 10px;
+    color:white;
+    cursor: pointer;
+    flex-flow: row wrap;
+    font-family: opcionUno;
+    font-size: 20px;
+    transition: all 0.5s ease;
+  	width: 25%;
+  	height: 30px;
+  	margin-top: 10px;
 }
 
 #btnEnviar:hover {
-  background: #23b7e5;
-  text-decoration: none;
+	background: #23b7e5;
+	border-radius: 10px;
+	box-shadow: rgba(8,43,255,0.75) 3px 3px ;
 
 }
 
@@ -138,9 +156,11 @@ html,body{
 	background: #e2e4e6;
 	width: 60%;
 	height: 60%;
+	/*
 	display: flex;
 	flex-direction: column;
-	overflow-y : hidden;
+	*/
+	overflow-y: auto;
 }
 
 
@@ -158,7 +178,6 @@ footer{
 }
 
 .friend, .self{
-	
 	display: flex;
 	flex-direction: row;
 }
@@ -214,6 +233,7 @@ p.text {
 	display: flex;
 	flex-direction: column;
 }
+
 
 
 @media (max-width: 800px){
