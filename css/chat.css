@@ -52,6 +52,7 @@ html,body{
 	height: 100%;
 	width: 100%;
 	margin-left: 20%;
+	overflow-y: auto;
 }
 
 #chat{
@@ -119,7 +120,7 @@ html,body{
 	font-family: opcionUno;
 	font-size: 20px;
 	margin: 5px 5px;
-	text-align: center;
+	text-align: left;
 	transition: box-shadow 0.5s ease;
 	margin-top: 10px;
 }

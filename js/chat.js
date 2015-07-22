@@ -112,7 +112,31 @@ function cargarConversaciones(){
 
 }
 
+function enviarMensaje(){
+	texto=txtMensaje.value;
+	txtMensaje.value="";
+	var contenerPerfil=document.createElement("div");
+	var contenedorMensaje=document.createElement("div");
+	var contenedor=document.createElement("div");
+	var imagen=document.createElement("img");
+	var p1=document.createElement("p");
+	var p2=document.createElement("p");
 
+	contenedor.setAttribute("class","self");
+	imagen.setAttribute("src","imagenes/kevin.jpg");
+	imagen.setAttribute("class","fotoPerfil");
+	p1.innerHTML="kevin";
+	p2.innerHTML=texto;
+	contenedorMensaje.setAttribute("class","mensaje");
+	contenerPerfil.setAttribute("class","infoPer");
+	contenedor.appendChild(contenedorMensaje);
+	contenedor.appendChild(contenerPerfil);
+	contenerPerfil.appendChild(imagen);
+	contenerPerfil.appendChild(p1);
+	contenedorMensaje.appendChild(p2);
+	areaMensajes.appendChild(contenedor);
+
+}
 
 
 function inicializar(){
@@ -120,6 +144,7 @@ function inicializar(){
 	$('.regresar').click(regresar);
 	cargarConversaciones();
 	$('#conversacion').css("display","none");
+	$('#btnEnviar').click(enviarMensaje);
 }
 
 
