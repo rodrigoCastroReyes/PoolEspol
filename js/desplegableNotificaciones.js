@@ -8,7 +8,8 @@ function iniciar () {
 	    $("#sign_box").show();
 	    return false;
 	});
-
+	
+	/*
 	$("body").click(function () {
 		$("#contenedor_Notificacion").hide();
 	    $("#sign_box").hide();
@@ -19,7 +20,7 @@ function iniciar () {
 		$("#contenedor_Notificacion").hide();
 	    $("#sign_box").hide();
 	    return false;
-	});
+	});*/
 
 	$("#mas").click(function () {
 		cargarNotificaciones();

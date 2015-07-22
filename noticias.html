@@ -13,6 +13,7 @@
 		<link rel = "stylesheet" href = "css/cuadroPublicador.css"/>
 		<script src = "js/jquery-1.11.3.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
+		
 		<script src = "js/noticias.js"> </script>
 		<script src = "js/publicador.js"> </script>
 		<script src = "js/barra.js"> </script>
@@ -219,7 +220,7 @@
 							<label class="etiqueta">Hora: </label>
 						</div>
 						<div class="tabla_item columna_flexible ">
-							<form name="formRuta" class="formulario" action="#">
+							<form id = "formRuta" name="formRuta" class="formulario" action="noticias.html">
 								<input class="entradaDatos" id = "Fecha" type ="date" />
 								<input class="entradaDatos" id = "Hora" type ="time" />	
 							</form>

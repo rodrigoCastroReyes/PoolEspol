@@ -97,9 +97,10 @@ html,body{
 
 @media screen and (max-width: 800px){
 
+
 	.VisualizadorRuta-mapa{
 		height: 250px;
-		width: 90%;
+		width: 95%;
 		background-color:white;
 	}
 
@@ -110,7 +111,7 @@ html,body{
 	}
 
 	.VisualizadorRuta-menu{
-		width: 90%;
+		width: 95%;
 		height: 50px;
 	}
 
