@@ -221,7 +221,7 @@ p.text {
 
 .regresar{
 	display: none;
-	margin: 20px;
+	margin: 50px;
 }
 
 .invisible{
@@ -239,7 +239,7 @@ p.text {
 @media (max-width: 800px){
 	.regresar{
 		display: flex;
-		margin: 20px;
+		margin: 50px;
 		font-family: opcionUno;
 	}
 
