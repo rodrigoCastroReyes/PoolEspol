@@ -15,9 +15,8 @@ function cargarNotificaciones(){
 }
 
 function salir(){
-	
 	menu_salir.style.display="flex";
-
+	
 	var rutas=document.getElementById("contenedor_rutas");
 	var perfil=document.getElementById("contenedor_perfil")
 	var chat=document.getElementById("contenido");
