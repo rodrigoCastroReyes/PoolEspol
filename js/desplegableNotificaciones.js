@@ -5,7 +5,6 @@ function cargarNotificaciones(){
 $(document).ready(function () {
 	$("#notificaciones").click(function () {
 		$("#contenedor_Notificacion").show();
-		
 	    $("#sign_box").show();
 	    return false;
 	});
