@@ -18,7 +18,7 @@ html,body{
 	transition: all 0.5s ease;
 }
 
-.visualizador{
+.VisualizadorRuta{
 	display: flex;
 	flex-direction:column;
 	align-items:center;
@@ -27,10 +27,61 @@ html,body{
 	width: 100%;
 }
 
-.mapa_ruta{
+.VisualizadorRuta-menu{
+	width: 50%;
+	display: flex;
+	align-items:center;
+	height: 50px;
+	background: #0080FB;
+}
+
+.VisualizadorRuta-opcion{
+	display: flex;
+	width: 100%; 
+	padding-left:10px;
+	padding-right:10px; 
+}
+
+.VisualizadorRuta-info{
+	color:white;
+	font-family: opcionUno;
+	font-size: 20px;
+	height: 100%;
+	padding: 5px 5px;
+}
+
+
+.VisualizadorRuta-mapa{
 	height: 250px;
 	width: 50%;
 	background-color:white;
+}
+
+.u-menu_superior{
+	border-radius: 10px 10px 0px 0px;
+}
+
+.u-menu_inferior{
+	border-radius: 0px 0px 10px 10px;
+}
+
+.u-flex_end{
+	justify-content:flex-end;
+}
+
+.u-flex_start{
+	justify-content:flex-start;
+}
+
+.u-cursor_pointer{
+	cursor: pointer;
+}
+
+.info-horario{
+	color: white;
+	font-size: 16px;
+	width: 100%; 
+	font-family: opcionUno;
 }
 
 .nickname{
@@ -40,80 +91,25 @@ html,body{
 	width:30px;
 }
 
-.info_noticias{
-	color:white;
-	font-family: opcionUno;
-	font-size: 20px;
-	height: 100%;
-	padding: 5px 5px;
-}
-
-.menu_noticias{
-	width: 50%;
-	display: flex;
-	align-items:center;
-	height: 50px;
-	/*background: -webkit-linear-gradient(top,#1c9596, #1c9fff);*/
-	background: #0080FB;
-}
-
-.menu_superior{
-	border-radius: 10px 10px 0px 0px;
-}
-
-.menu_inferior{
-	border-radius: 0px 0px 10px 10px;
-}
-
-.lateral{
-	display: flex;
-	width: 100%; 
-	padding-left:10px;
-	padding-right:10px; 
-}
-
-.info-horario{
-	color: white;
-	font-size: 16px;
-	display: flex;
-	width: 100%; 
-	displat:flex;
-	justify-content:center;
-}
-
-.flex_end{
-	justify-content:flex-end;
-}
-
-.flex_start{
-	justify-content:flex-start;
-}
-
-.cursor_pointer{
-	cursor: pointer;
-}
-
 #sign_box{
 	margin-top: -40px;
 }
 
 @media screen and (max-width: 800px){
-	
 
-	.mapa_ruta{
+	.VisualizadorRuta-mapa{
 		height: 250px;
 		width: 90%;
 		background-color:white;
 	}
 
-	.info_noticias{
+	.VisualizadorRuta-info{
 		font-size: 18px;
 		height: 100%;
 		padding: 5px 5px;
-		font-size: 12px;
 	}
 
-	.menu_noticias{
+	.VisualizadorRuta-menu{
 		width: 90%;
 		height: 50px;
 	}
@@ -124,5 +120,4 @@ html,body{
 		display: flex;
 		width: 100%; 
 	}
-
 }

@@ -2,9 +2,6 @@ var mapProp;
 var hora_referencia;
 var marker;
 
-
-
-
 Date.prototype.toDateInputValue = (function() {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -74,7 +71,8 @@ function erroresFechaHoraAventon(event){
 }
 
 
-function eventoRuta(event){
+function crearRuta(event){
+  //evento generado cuando el usuario hace click en el boton crear ruta del caudro publicador
 
   mapProp = {
   center:new google.maps.LatLng(-2.201403, -79.917732),
@@ -83,13 +81,11 @@ function eventoRuta(event){
   };
   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
   
-  //$("article").css('opacity','0.5');
   $("#contenedor_rutas").css('opacity','0.5');
   $("#Pantalla_Ruta").css('visibility','visible');
   $("#Pantalla_Ruta").css('opacity','1');
   $("#Contenido_Ruta").addClass('popUp');
 
-  //configuracion y validacion de la fecha y hora
   var txtFecha = new Date().toDateInputValue();
   $('#Fecha').val(txtFecha);
   $('#Fecha').attr('min',txtFecha);
@@ -172,7 +168,7 @@ function eventoAventon(event){
 
 function inicializarCuadro(){
   var btnRuta=document.getElementById("btnRuta");
-  btnRuta.addEventListener('click',eventoRuta,false);
+  btnRuta.addEventListener('click',crearRuta,false);
 
   var btnAventon=document.getElementById("btnAventon");
   btnAventon.addEventListener('click',eventoAventon,false);
@@ -188,8 +184,6 @@ function inicializarCuadro(){
 
   var btnCloseAventon = document.getElementById('btnCloseAventon');
   btnCloseAventon.addEventListener('click', eventoCerrarAventon,false);
-
-
 
 }
 

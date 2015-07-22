@@ -145,7 +145,7 @@
 }
 
 #notificaciones{
-	display: flex;
+	display: block;
 }
 
 
@@ -192,5 +192,8 @@
 
 	#notificacionesCelular{
 		display: flex;
+	}
+	#menu_salir{
+		  left: 10%	;
 	}
 }

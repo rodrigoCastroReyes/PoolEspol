@@ -9,7 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/estiloMapa.css">
 	<link rel="stylesheet" href="css/perfil.css">
-	<link rel = "stylesheet" href = "css/publicador-carro.css"/>
+	<link rel = "stylesheet" href = "css/cuadroPublicador.css"/>
+
+
 	<script src = "js/jquery-1.11.3.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<script src = "js/noticias.js"> </script>
@@ -179,89 +181,105 @@
 				</div>
 			</div>
 	   	</div>
-
 		<div id="infoRutas">
-			<div id = "contenedor_rutas_perfil">
-				<div id="cuadroPublicador" class="visualizador">
-					<div id = "publicador_carro">
-						<div id = "cabezera">
-							<img id = "foto_perfil" src = "imagenes/imagenPerfil.jpg"/>&nbsp;&nbsp;
-							<h3 id = "nickname" >Oswaldo Bayona Andrade</h3>
+			<div id="contenedor_rutas_perfil">
+				<div id="cuadroPublicador" class="CuadroPublicador">
+					<div class = "CuadroPublicador-contenedor">
+						<div class = "CuadroPublicador-cabezera">
+							<img class = "CuadroPublicador-foto" src = "imagenes/imagenPerfil.jpg"/>&nbsp;&nbsp;
+							<h3 id = "nickname" >oswaldito</h3>
 						</div>
 						<hr>
-						<form class="formulario-publicar">
-							<label>Publicar </label></br></br>
-							<span>
-								<button type="button" id = "btnRuta">Crear ruta</button>
-								<button type="button" id = "btnAventon" >Pedir Avent&oacute;n</button>
+						<form class="CuadroPublicador-formulario">
+							<label>Publicar </label>
+							<span >
+								<button class="CuadroPublicador-Boton" type="button" id = "btnRuta">Crear ruta</button>
+								<button class ="CuadroPublicador-Boton" type="button" id = "btnAventon" >Pedir Avent&oacute;n</button>
 							</span>
-						</br></br>
 						</form>
 					</div>
 				</div>
 				<h1 id="tituloRutas">Mis Rutas</h1>
-				<div id="ruta" class="visualizador">
-					<div class="menu_superior menu_noticias">
-						<div class="lateral flex_start">
-							<img class="nickname cursor_pointer" src="imagenes/imagenPerfil.jpg">
-							<span class="info_noticias">Ruta</span>
+				<div id="ruta" class="VisualizadorRuta">
+					<div class="VisualizadorRuta-menu u-menu_superior ">
+						<div class="VisualizadorRuta-opcion u-flex_start">
+							<img class="nickname u-cursor_pointer" src="imagenes/fajada.jpg">
+							<span class="VisualizadorRuta-info">Kevin</span>
 						</div>
-						
+						<div class="VisualizadorRuta-opcion u-flex_end" >
+							<span class="icon-mail4  VisualizadorRuta-info u-cursor_pointer"></span>
+							<span class="VisualizadorRuta-info">Mensaje</span>
+						</div>
 					</div>
-					<div id = "mapaGoogle1" class="mapa_ruta" >
+					<div id = "mapaGoogle1" class="VisualizadorRuta-mapa" >
 					</div>
-					<div class="menu_inferior menu_noticias">
-						
+					<div class="VisualizadorRuta-menu u-menu_inferior ">
+						<div class="VisualizadorRuta-opcion u-flex_start">
+							<span id="agregar_ruta" class="VisualizadorRuta-info icon-plus u-cursor_pointer" ></span> 
+						</div>
 						<div class = "info-horario"><span>13/07/2015 - 09:30</span></div>
-						<div class="lateral flex_end">
-							<span class="info_noticias">$0.25</span>
-							<span class="icon-users info_noticias"></span>
-							<span class="info_noticias">5</span>
+						<div class="VisualizadorRuta-opcion u-flex_end">
+							<span class="VisualizadorRuta-info ">$0.25</span>
+							<span class="icon-users VisualizadorRuta-info "></span>
+							<span class="VisualizadorRuta-info ">5</span>
 						</div>
 					</div>
 				</div>
-				<div id="anuncio" class="visualizador">
-					<div class="menu_superior menu_noticias">
-						<div class="lateral flex_start">
-							<img class="nickname cursor_pointer" height="30" width="30" src="imagenes/imagenPerfil.jpg">
-							<span class="info_noticias">Anuncio</span>
+				<div id="anuncio" class="VisualizadorRuta">
+					<div class="VisualizadorRuta-menu u-menu_superior ">
+						<div class="VisualizadorRuta-opcion u-flex_start">
+							<img class="nickname u-cursor_pointer" src="imagenes/ImagenesDesarrollador/jorge.jpg">
+							<span class="VisualizadorRuta-info">Jorge</span>
 						</div>
-						
+						<div class="VisualizadorRuta-opcion u-flex_end" >
+							<span class="icon-mail4  VisualizadorRuta-info u-cursor_pointer"></span>
+							<span class="VisualizadorRuta-info">Mensaje</span>
+						</div>
 					</div>
-					<div id = "mapaGoogle2" class="mapa_ruta">
+					<div id = "mapaGoogle2" class="VisualizadorRuta-mapa" >
 					</div>
-					<div class="menu_inferior menu_noticias">
-						
+					<div class="VisualizadorRuta-menu u-menu_inferior ">
+						<div class="VisualizadorRuta-opcion u-flex_start">
+							<span id="agregar_ruta" class="VisualizadorRuta-info icon-plus u-cursor_pointer" ></span> 
+						</div>
 						<div class = "info-horario"><span>13/07/2015 - 09:45</span></div>
+						<div class="VisualizadorRuta-opcion u-flex_end">
+						<!---espacio en blanco para cerrrar la fecha-->
+						</div>
 					</div>
 				</div>
-				<div id="ruta" class="visualizador">
-					<div class="menu_superior menu_noticias">
-						<div class="lateral flex_start">
-							<img class="nickname cursor_pointer" height="30" width="30" src="imagenes/imagenPerfil.jpg">
-							<span class="info_noticias">Ruta</span>
+				<div id="ruta" class="VisualizadorRuta">
+					<div class="VisualizadorRuta-menu u-menu_superior ">
+						<div class="VisualizadorRuta-opcion u-flex_start">
+							<img class="nickname u-cursor_pointer" src="imagenes/ImagenesDesarrollador/castro.jpg">
+							<span class="VisualizadorRuta-info">Rodrigo</span>
 						</div>
-						
+						<div class="VisualizadorRuta-opcion u-flex_end" >
+							<span class="icon-mail4  VisualizadorRuta-info u-cursor_pointer"></span>
+							<span class="VisualizadorRuta-info">Mensaje</span>
+						</div>
 					</div>
-					<div id = "mapaGoogle3" class="mapa_ruta">
+					<div id = "mapaGoogle3" class="VisualizadorRuta-mapa" >
 					</div>
-					<div class="menu_inferior menu_noticias">
-						
-						<div class = "info-horario"><span>13/07/2015 - 10:30</span></div>
-						<div class="lateral flex_end">
-							<span class="info_noticias">$0.25</span>
-							<span class="icon-users info_noticias"></span>
-							<span class="info_noticias">5</span>
+					<div class="VisualizadorRuta-menu u-menu_inferior ">
+						<div class="VisualizadorRuta-opcion u-flex_start">
+							<span id="agregar_ruta" class="VisualizadorRuta-info icon-plus u-cursor_pointer" ></span> 
+						</div>
+						<div class = "info-horario"><span>13/07/2015 - 09:30</span></div>
+						<div class="VisualizadorRuta-opcion u-flex_end">
+							<span class="VisualizadorRuta-info ">$0.25</span>
+							<span class="icon-users VisualizadorRuta-info "></span>
+							<span class="VisualizadorRuta-info ">5</span>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id = "Pantalla_Ruta">	
 				<div id = "Contenido_Ruta">
-					<input id = "btnClose" value = "X" type = "button" class = "close"/>
+					<input id = "btnClose" value = "X" type = "button" class = "IngresoRuta-cerrar"/>
 					<div id="googleMap" style="height:60%;">
 					</div>
-					<div class = "Titulo_Ruta">
+	 				<div class = "IngresoRuta-Titulo">
 						<span >Ingrese una sucesi&oacute;n de puntos para marcar el camino</span>
 					</div>
 					<div class="tabla flex_between_around ">
@@ -270,7 +288,6 @@
 								<label class="etiqueta">Fecha: </label>
 								<label class="etiqueta">Hora: </label>
 							</div>
-							
 							<div class="tabla_item columna_flexible ">
 								<form id = "formRuta" class="formulario">
 									<input class="entradaDatos" id = "Fecha" type ="date" />
@@ -285,15 +302,15 @@
 							</div>
 							<div class="tabla_item columna_flexible ">
 								<input form= "formRuta" class="entradaDatos" type ="number" 
-								min = "1" max = "6" value ="1"/>
+								min = "1" max = "20" value ="1"/>
 								<input form="formRuta" class="entradaDatos" type ="number" 
-								value = "0.00" step="0.01" max="2.00"/>	
+								min = "0.00" value = "0.00" step="0.01" max="2.00"/>	
 							</div>
 						</div>
 					</div>
 					<div class="tabla flex_center">
-						<button form="formRuta" id ="btnAceptar" type="submit">Aceptar</button>
-						<button form="formRuta" id="btnCancelar" type = "button">Cancelar</button>
+						<button class="IngresoRuta-Boton" form="formRuta" id ="btnAceptarRuta" type="submit">Aceptar</button>
+						<button class="IngresoRuta-Boton" form="formRuta" id="btnCancelarRuta" type = "button">Cancelar</button>
 					</div>
 				</div>
 			</div>
@@ -301,7 +318,7 @@
 				<div id = "Contenido_Aventon">
 					<input id = "btnCloseAventon" value = "X" type = "button" class = "close"/>
 					<div id="googleMap2" style="height:70%;"></div>
-					<div class = "Titulo_Aventon">
+					<div class = "IngresoAventon-Titulo">
 						<span> Ingrese un punto en el mapa que ser&aacute; su paradero</span>
 					</div>
 					<div class="tabla flex_center">
@@ -317,11 +334,11 @@
 						</div>
 					</div>
 					<div class="tabla flex_center">
-						<button form="formAventon" id = "btnAceptarAventon" type="submit">Aceptar</button>
-						<button form="formAventon" id="btnCancelarAventon" type = "button">Cancelar</button>
+						<button class="IngresoAventon-Boton" form="formAventon" id = "btnAceptarAventon" type="submit">Aceptar</button>
+						<button class="IngresoAventon-Boton" form="formAventon" id="btnCancelarAventon" type = "button">Cancelar</button>
 					</div>
 				</div>
-			</div>
+			</div>		
 		</div>
 	</div>
 </body>

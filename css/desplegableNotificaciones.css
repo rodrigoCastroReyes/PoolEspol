@@ -1,8 +1,8 @@
 #sign_box{
-	background-color:#c3c3c3; 
-	border-bottom:solid 2px #c3c3c3; 
-	border-right:solid 2px #c3c3c3;
-	border-left:solid 2px #c3c3c3;; 
+	background-color:#c3c3c3;
+	border-bottom:solid 2px #e2e4e6;
+	border-right:solid 2px #e2e4e6;
+	border-left:solid 2px #e2e4e6;
 	padding:8px;
 	display:none;
 	border-bottom-left-radius:8px;
@@ -26,6 +26,7 @@ a{
 	display: flex;
 	flex-direction: row;
 	align-items:center;
+	justify-content:space-around;
 	height: 80px;
 	border-radius: 5px 5px 5px 5px;
 	background: white;
@@ -96,4 +97,5 @@ a{
 	#sign_box{
 		display: none;
 	}
+
 }

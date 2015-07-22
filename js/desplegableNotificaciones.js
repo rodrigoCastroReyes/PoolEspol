@@ -2,7 +2,7 @@ function cargarNotificaciones(){
   window.location.href="notificaciones.html"; 
 }
 
-$(document).ready(function () {
+function iniciar () {
 	$("#notificaciones").click(function () {
 		$("#contenedor_Notificacion").show();
 	    $("#sign_box").show();
@@ -25,6 +25,6 @@ $(document).ready(function () {
 		cargarNotificaciones();
 	    return false;
 	});
+}
 
-
-});
+window.addEventListener('load',iniciar,false);
