@@ -43,7 +43,7 @@ html,body{
 
 }
 
-.conversacion{
+#conversacion{
 	background: #FFFFFF;
 	display:flex;
 	flex-direction:column;
@@ -88,7 +88,7 @@ html,body{
 	margin: 5px;
 }
 
-.cabezeraMensaje{
+#cabezeraMensaje{
 	display: flex;
 	flex-direction: row;
 	align-items:center;
@@ -100,7 +100,7 @@ html,body{
 }
 
 
-.envio{
+#envio{
 	width: 60%;
 	height: 10%;
 	margin-top: 10px;
@@ -134,7 +134,7 @@ html,body{
 }
 
 
-.areaMensajes{
+#areaMensajes{
 	background: #e2e4e6;
 	width: 60%;
 	height: 60%;
@@ -244,20 +244,20 @@ p.text {
 		cursor: pointer;
 	}
 
-	.cabezeraMensaje{
+	#cabezeraMensaje{
 		margin-top: 10px;
 		width: 90%;
 	}
 
-	.areaMensajes{
+	#areaMensajes{
 		width: 90%;
 	}
 
-	.envio{
+	#envio{
 		width: 90%;
 	}
 
-	.conversacion{
+	#conversacion{
 		margin-left: 0%;
 	}
 

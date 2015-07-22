@@ -1,0 +1,11 @@
+{ 
+	"fotoReceptor":"imagenes/kevin.jpg",
+	"nickReceptor":"Kevin",
+	"fotoEmisor":"imagenes/mafia.jpg",
+	"nickEmisor":"mafia",
+	"mensajes":[
+		{"tipo":"emisor","contenido":"Kevin a lo diri diri?"},
+		{"tipo":"receptor","contenido":"claro!"},
+		{"tipo":"emisor","contenido":"esa eeeehhh lo muchachos!!!"}
+	]
+}
