@@ -1,5 +1,9 @@
 var mapProp;
 var hora_referencia;
+var marker;
+
+
+
 
 Date.prototype.toDateInputValue = (function() {
     var local = new Date(this);
@@ -78,6 +82,7 @@ function eventoRuta(event){
   mapTypeId:google.maps.MapTypeId.ROADMAP
   };
   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+  
   //$("article").css('opacity','0.5');
   $("#contenedor_rutas").css('opacity','0.5');
   $("#Pantalla_Ruta").css('visibility','visible');
@@ -118,13 +123,30 @@ function eventoCerrarAventon(event){
 }
 
 
+function ubicarMarcador(location, map) {
+  if ( marker ) {
+    marker.setPosition(location);
+  } else {
+    marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  }
+}
+
+
 function eventoAventon(event){
   mapProp = {
   center:new google.maps.LatLng(-2.201403, -79.917732),
   zoom:15,
   mapTypeId:google.maps.MapTypeId.ROADMAP
   };
+  marker = null;
   var map=new google.maps.Map(document.getElementById("googleMap2"),mapProp);
+  google.maps.event.addListener(map, 'click', function(event) {
+    ubicarMarcador(event.latLng, map);
+  });
+
 
   $("#Pantalla_Aventon").css('visibility','visible');
   $("#Pantalla_Aventon").css('opacity','1');
@@ -155,7 +177,7 @@ function inicializarCuadro(){
   var btnAventon=document.getElementById("btnAventon");
   btnAventon.addEventListener('click',eventoAventon,false);
 
-  var btnCancelar = document.getElementById('btnCancelar');
+  var btnCancelar = document.getElementById('btnCancelarRuta');
   btnCancelar.addEventListener('click', eventoCerrar,false);
 
   var btnClose = document.getElementById('btnClose');
