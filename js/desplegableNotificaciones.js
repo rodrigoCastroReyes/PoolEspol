@@ -1,11 +1,19 @@
+var ban=0;
 function cargarNotificaciones(){
   window.location.href="notificaciones.html"; 
 }
 
 function iniciar () {
 	$("#notificaciones").click(function () {
-		$("#contenedor_Notificacion").show();
-	    $("#sign_box").show();
+		if(ban==0){
+			$("#contenedor_Notificacion").show();
+	    	$("#sign_box").show();
+	    	ban=1;
+	    }else{
+	    	$("#contenedor_Notificacion").hide();
+	    	$("#sign_box").hide();
+	    	ban=0;
+	    }
 	    return false;
 	});
 	
