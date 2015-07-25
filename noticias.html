@@ -128,31 +128,6 @@
 					</form>
 				</div>
 			</div>
-			<div id="ruta" class="VisualizadorRuta">
-				<div class="VisualizadorRuta-menu u-menu_superior ">
-					<div class="VisualizadorRuta-opcion u-flex_start">
-						<img class="nickname u-cursor_pointer" src="imagenes/fajada.jpg">
-						<span class="VisualizadorRuta-info">Kevin</span>
-					</div>
-					<div class="VisualizadorRuta-opcion u-flex_end" >
-						<span class="icon-mail4  VisualizadorRuta-info u-cursor_pointer"></span>
-						<span class="VisualizadorRuta-info">Mensaje</span>
-					</div>
-				</div>
-				<div id = "mapaGoogle1" class="VisualizadorRuta-mapa" >
-				</div>
-				<div class="VisualizadorRuta-menu u-menu_inferior ">
-					<div class="VisualizadorRuta-opcion u-flex_start">
-						<span id="agregar_ruta" class="VisualizadorRuta-info icon-plus u-cursor_pointer" ></span> 
-					</div>
-					<div class = "info-horario"><span>13/07/2015 - 09:30</span></div>
-					<div class="VisualizadorRuta-opcion u-flex_end">
-						<span class="VisualizadorRuta-info ">$0.25</span>
-						<span class="icon-users VisualizadorRuta-info "></span>
-						<span class="VisualizadorRuta-info ">5</span>
-					</div>
-				</div>
-			</div>
 			<div id="anuncio" class="VisualizadorRuta">
 				<div class="VisualizadorRuta-menu u-menu_superior ">
 					<div class="VisualizadorRuta-opcion u-flex_start">
@@ -176,48 +151,23 @@
 					</div>
 				</div>
 			</div>
-			<div id="ruta" class="VisualizadorRuta">
-				<div class="VisualizadorRuta-menu u-menu_superior ">
-					<div class="VisualizadorRuta-opcion u-flex_start">
-						<img class="nickname u-cursor_pointer" src="imagenes/ImagenesDesarrollador/castro.jpg">
-						<span class="VisualizadorRuta-info">Rodrigo</span>
-					</div>
-					<div class="VisualizadorRuta-opcion u-flex_end" >
-						<span class="icon-mail4  VisualizadorRuta-info u-cursor_pointer"></span>
-						<span class="VisualizadorRuta-info">Mensaje</span>
-					</div>
-				</div>
-				<div id = "mapaGoogle3" class="VisualizadorRuta-mapa" >
-				</div>
-				<div class="VisualizadorRuta-menu u-menu_inferior ">
-					<div class="VisualizadorRuta-opcion u-flex_start">
-						<span id="agregar_ruta" class="VisualizadorRuta-info icon-plus u-cursor_pointer" ></span> 
-					</div>
-					<div class = "info-horario"><span>13/07/2015 - 09:30</span></div>
-					<div class="VisualizadorRuta-opcion u-flex_end">
-						<span class="VisualizadorRuta-info ">$0.25</span>
-						<span class="icon-users VisualizadorRuta-info "></span>
-						<span class="VisualizadorRuta-info ">5</span>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div id = "Pantalla_Ruta">	
-			<div id = "Contenido_Ruta">
+			<div id = "Contenido_Ruta" class="IngresoRuta">
 				<input id = "btnClose" value = "X" type = "button" class = "IngresoRuta-cerrar"/>
-				<div id="googleMap" style="height:60%;">
+				<div id="googleMap" class="IngresoRuta-Mapa">
 				</div>
- 				<div class = "IngresoRuta-Titulo">
+ 				<div class="IngresoRuta-Titulo">
 					<span >Ingrese una sucesi&oacute;n de puntos para marcar el camino</span>
 				</div>
-				<div class="tabla flex_between_around ">
+				<div class="IngresoRuta-datos flex_between_around ">
 					<div class="tabla">
 						<div class="tabla_item columna_flexible flex_end">
 							<label class="etiqueta">Fecha: </label>
 							<label class="etiqueta">Hora: </label>
 						</div>
 						<div class="tabla_item columna_flexible ">
-							<form id = "formRuta" name="formRuta" class="formulario" action="noticias.html">
+							<form id = "formRuta" name="formRuta" class="IngresoRuta-formulario" action="noticias.html">
 								<input class="entradaDatos" id = "Fecha" type ="date" />
 								<input class="entradaDatos" id = "Hora" type ="time" />	
 							</form>
@@ -236,7 +186,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="tabla flex_center">
+				<div class="IngresoRuta-botones">
 					<input class="IngresoRuta-Boton" form="formRuta" id ="btnAceptarRuta" type="submit" value="Aceptar"/>
 					<input class="IngresoRuta-Boton" form="formRuta" id="btnCancelarRuta" type = "button" value="Cancelar"/>
 				</div>
