@@ -107,7 +107,7 @@ span,form{
 	flex-direction:column;
 }
 
-.IngresoRuta-datos{
+.IngresoRuta-datos,.IngresoAventon-datos{
 	display: flex;
 	justify-content:center;
 	margin-top: 10px ;
@@ -115,7 +115,7 @@ span,form{
 	height: 25%;
 }
 
-.IngresoRuta-botones{
+.IngresoRuta-botones,.IngresoAventon-botones{
 	display: flex;
 	justify-content:center;
 	height: 15%;

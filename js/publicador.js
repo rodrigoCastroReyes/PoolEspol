@@ -157,6 +157,9 @@ function crearAventon(event){
   var posicion=new google.maps.LatLng(miPosicion.latitud,miPosicion.longitude) //se crea un punto en el mapa con mi posicion actual
   map=null;
   establecerMapa(document.getElementById("googleMap2"),posicion);
+  google.maps.event.addListener(map, 'click', function(event) {
+    ubicarMarcador(event.latLng, map);
+  });
 
   $("#contenedor_rutas").css('opacity','0.5');
   $("#Pantalla_Aventon").css('visibility','visible');
@@ -185,7 +188,6 @@ function cerrarAventon(event){
     $("#Pantalla_Aventon").css('opacity','0');
     $("#contenedor_rutas").css('opacity','1');
 }
-
 
 function ubicarMarcador(location, map) {
   if ( marker ) {
