@@ -102,7 +102,7 @@ span,form{
 	background: #00d9ff; 
 }
 
-.IngresoRuta-formulario, .formulario{
+.IngresoRuta-formulario,.IngresoAventon-formulario{
 	display:flex; 
 	flex-direction:column;
 }

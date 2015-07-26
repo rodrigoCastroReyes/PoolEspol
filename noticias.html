@@ -166,7 +166,7 @@
 							<label class="etiqueta">Hora: </label>
 						</div>
 						<div class="tabla_item columna_flexible ">
-							<form id = "formRuta" name="formRuta" class="IngresoRuta-formulario" action="noticias.html">
+							<form id = "formRuta" name="formRuta" class="IngresoRuta-formulario" >
 								<input class="entradaDatos" id = "Fecha" type ="date" />
 								<input class="entradaDatos" id = "Hora" type ="time" />	
 							</form>
@@ -178,15 +178,15 @@
 							<label class="etiqueta">Costo: $</label>
 						</div>
 						<div class="tabla_item columna_flexible ">
-							<input form= "formRuta" class="entradaDatos" type ="number" 
+							<input id="RutaCapacidad" form= "formRuta" class="entradaDatos" type ="number" 
 							min = "1" max = "20" value ="1"/>
-							<input form="formRuta" class="entradaDatos" type ="number" 
+							<input  id="RutaCosto" form="formRuta" class="entradaDatos" type ="number" 
 							min = "0.00" value = "0.00" step="0.01" max="2.00"/>	
 						</div>
 					</div>
 				</div>
 				<div class="IngresoRuta-botones">
-					<input class="IngresoRuta-Boton" form="formRuta" id ="btnAceptarRuta" type="submit" value="Aceptar"/>
+					<input class="IngresoRuta-Boton" form="formRuta" id ="btnAceptarRuta" type="button" value="Aceptar"/>
 					<input class="IngresoRuta-Boton" form="formRuta" id="btnCancelarRuta" type = "button" value="Cancelar"/>
 				</div>
 			</div>
@@ -200,18 +200,18 @@
 				</div>
 				<div class="IngresoAventon-datos flex_center">
 					<div class="tabla_item columna_flexible" >
-							<label class="etiqueta">Fecha: </label>
-							<label class="etiqueta">Hora: </label>
+						<label class="etiqueta">Fecha: </label>
+						<label class="etiqueta">Hora: </label>
 					</div>
 					<div class="tabla_item columna_flexible" >
-						<form id = "formAventon" class="formulario">
+						<form id = "formAventon" class="IngresoAventon-formulario">
 							<input class="entradaDatos" id = "Fecha_Aventon" type ="date" />
 							<input class="entradaDatos" id = "Hora_Aventon" type ="time" />
 						</form>
 					</div>
 				</div>
 				<div class="IngresoAventon-botones flex_center">
-					<button class="IngresoAventon-Boton" form="formAventon" id = "btnAceptarAventon" type="submit">Aceptar</button>
+					<button class="IngresoAventon-Boton" form="formAventon" id = "btnAceptarAventon" type="button">Aceptar</button>
 					<button class="IngresoAventon-Boton" form="formAventon" id="btnCancelarAventon" type = "button">Cancelar</button>
 				</div>
 			</div>

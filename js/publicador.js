@@ -1,3 +1,4 @@
+
 var hora_referencia;
 var marker;
 
@@ -9,6 +10,15 @@ var end;//punto final
 var firstMarker;//marcador del punto inicial
 var directionsService=new google.maps.DirectionsService();
 var directionsDisplay;
+
+//objeto usado para almacenar la informacion de una ruta
+var infoRuta={};
+infoRuta.publicador;
+infoRuta.fecha;
+infoRuta.hora;
+infoRuta.precio;
+infoRuta.capacidad;
+infoRuta.ruta=[];
 
 function establecerMapa(contenedor,posicion){
   var mapProp = {
@@ -131,28 +141,6 @@ function getCoords(position){
   console.log("Your position is: "+ lat +";"+ lon);
 };
 
-
-function inicializar(){
-  btnRuta.addEventListener('click',crearRuta,false);
-  btnCancelarRuta.addEventListener('click', cerrarRuta,false);
-  btnClose.addEventListener('click', cerrarRuta,false);
-
-  btnAventon.addEventListener('click',crearAventon,false);
-  btnCancelarAventon.addEventListener('click', cerrarAventon,false);
-  btnCloseAventon.addEventListener('click', cerrarAventon,false);
-  
-  var rendererOptions = {
-    draggable: true,
-    suppressMarkers:false,
-    preserveViewport:true,
-    markerOptions:{
-      draggable: true
-    }
-  };
-  directionsDisplay=new google.maps.DirectionsRenderer(rendererOptions);
-  queryCoords();
-}
-
 function crearAventon(event){
   var posicion=new google.maps.LatLng(miPosicion.latitud,miPosicion.longitude) //se crea un punto en el mapa con mi posicion actual
   map=null;
@@ -198,6 +186,54 @@ function ubicarMarcador(location, map) {
       map: map
     });
   }
+}
+
+function guardarRuta(){
+  var valid=document.forms["formRuta"].checkValidity();
+  if(valid){
+    guardarPuntos();
+    guardarDatos();
+    //se envia los datos
+    crearVisualizadorRuta(infoRuta);//se crea el visualizador de la ruta
+    //document.forms["formRuta"].submit();
+    console.log(infoRuta);
+    cerrarRuta();//se cierra el cuadro publicador de ruta
+    infoRuta={};//se reinicia infoRuta
+    infoRuta.publicador;
+    infoRuta.fecha;
+    infoRuta.hora;
+    infoRuta.precio;
+    infoRuta.capacidad;
+    infoRuta.ruta=[];
+  }
+}
+
+function guardarPuntos(){
+  var ruta=directionsDisplay.getDirections().routes[0];
+  var leg=ruta.legs[0];
+  /*routes: An array of DirectionsRoutes, 
+  each of which contains information about the legs and steps of which it is composed.*/
+  /*
+  legs:An array of DirectionsLegs, 
+  each of which contains information about the steps of which it is composed
+  */
+  var end_route=leg.end_location;
+  var start_route=leg.start_location;
+  var waypoints_route=leg.via_waypoints;
+  infoRuta.ruta.push({'x':start_route.lat(),'y':start_route.lng()});
+  for(var i=0;i<waypoints_route.length;i++){
+    var middle_route=waypoints_route[i];
+    infoRuta.ruta.push({'x':middle_route.lat(),'y':middle_route.lng()});
+  }
+  infoRuta.ruta.push({'x':end_route.lat(),'y':end_route.lng()});
+}
+
+function guardarDatos(){
+  infoRuta.publicador=nickname.innerHTML;
+  infoRuta.capacidad=parseInt(RutaCapacidad.value);
+  infoRuta.costo=parseFloat(RutaCosto.value);
+  infoRuta.fecha=Fecha.value;
+  infoRuta.hora=obtenerHora();
 }
 
 //validaciones 
@@ -268,5 +304,31 @@ function erroresFechaHoraAventon(event){
   }
 
 }
+
+
+function inicializar(){
+  btnRuta.addEventListener('click',crearRuta,false);
+  btnCancelarRuta.addEventListener('click', cerrarRuta,false);
+  btnClose.addEventListener('click', cerrarRuta,false);
+
+  btnAventon.addEventListener('click',crearAventon,false);
+  btnCancelarAventon.addEventListener('click', cerrarAventon,false);
+  btnCloseAventon.addEventListener('click', cerrarAventon,false);
+  
+  var rendererOptions = {
+    draggable: true,
+    suppressMarkers:false,
+    preserveViewport:true,
+    markerOptions:{
+      draggable: true
+    }
+  };
+  directionsDisplay=new google.maps.DirectionsRenderer(rendererOptions);
+  queryCoords();
+
+  btnAceptarRuta.addEventListener('click',guardarRuta,false);
+
+}
+
 
 window.addEventListener('load',inicializar,false);
