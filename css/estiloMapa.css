@@ -8,10 +8,6 @@ span,form{
 	padding: 0px;
 }
 
-#Contenido_Aventon{
-    position: absolute;
-}
-
 #Pantalla_Ruta, #Pantalla_Aventon{
 	display: flex;
 	flex-direction:column;
@@ -31,7 +27,7 @@ span,form{
 	border: 3px solid #c3c3c3;
 }
 
-.IngresoRuta{
+.IngresoRuta,.IngresoAventon{
 	position: absolute;
 	display: flex;
     justify-content:center;
@@ -44,23 +40,11 @@ span,form{
     width: 100%;
 }
 
-.IngresoRuta-Mapa{
+.IngresoRuta-Mapa,.IngresoAventon-Mapa{
 	height: 100%;
 	width: 100%;
 	background-color:white;
 }
-
-/*.popUp{
-    display: flex;
-    justify-content:center;
-    flex-direction:column;
-    background: #0080FB;
-    z-index: 9999;
-    position: relative;
-    border-radius:5px;
-    height: 100%;
-    width: 100%;
-}*/
 
 .IngresoRuta-Boton,.IngresoAventon-Boton{
 	background: #0080FF;
@@ -97,7 +81,7 @@ span,form{
 	text-align: center;
 }
 
-.IngresoRuta-cerrar{
+.IngresoRuta-cerrar,.IngresoAventon-cerrar{
 	background: #606061;
 	border-radius: 12px;
 	box-shadow: 1px 1px 3px #000;
@@ -114,7 +98,7 @@ span,form{
 	z-index: 9999;
 }
 
-.IngresoRuta-cerrar:hover { 
+.IngresoRuta-cerrar:hover, .IngresoAventon-cerrar:hover{ 
 	background: #00d9ff; 
 }
 
