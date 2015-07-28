@@ -107,13 +107,20 @@ span,form{
 	flex-direction:column;
 }
 
-.IngresoRuta-datos,.IngresoAventon-datos{
+.IngresoRuta-datos{
 	display: flex;
 	justify-content:center;
 	margin-top: 10px ;
     margin-bottom: 5px;
 	height: 25%;
 }
+.IngresoAventon-datos{
+	display: flex;
+	justify-content:center;
+	margin-top: 10px ;
+    margin-bottom: 5px;
+}
+
 
 .IngresoRuta-botones,.IngresoAventon-botones{
 	display: flex;
@@ -151,7 +158,7 @@ span,form{
 .etiqueta{
 	font-family: opcionDos;
 	height: 35px;
-	margin: 5px 5px 5px 5px;
+	margin: 10px 5px 5px 5px;
 	font-size: 16px;
 }
 

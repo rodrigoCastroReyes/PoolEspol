@@ -1,7 +1,7 @@
 
 var hora_referencia;
-var marker;
 
+var puntoAventon;
 var miPosicion={};//posicion actual 
 var map;//map
 var waypoints=[];//puntos intermedios
@@ -12,13 +12,47 @@ var directionsService=new google.maps.DirectionsService();
 var directionsDisplay;
 
 //objeto usado para almacenar la informacion de una ruta
-var infoRuta={};
-infoRuta.publicador;
-infoRuta.fecha;
-infoRuta.hora;
-infoRuta.precio;
-infoRuta.capacidad;
-infoRuta.ruta=[];
+var infoRuta={
+  publicador:"",
+  fecha:"",
+  hora:"",
+  precio:0.0,
+  capacidad:0,
+  ruta:[]
+};
+
+var infoAventon={
+  publicador:"",
+  fecha:"",
+  hora:"",
+  ubicacion:{}
+}
+
+//Geolocalizacion
+function queryCoords(){//consulta al navegador si es posible usar geolocation
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(getCoords,errorFound);
+      //se obtiene las posiciones actuales
+    }else{
+      alert("Actualiza tu guevada");
+    }
+}
+
+function errorFound(error){
+    alert("Error has ocurred" + error.code);
+    miPosicion.error=true;//indica que hubo un error en la peticion de geolocalizacion
+    /* 0: Error desconocido 1: Permiso denegado  2: Posicion no esta disponible  3: Timeout
+    */
+}
+
+function getCoords(position){
+  var lat=position.coords.latitude;
+  var lon= position.coords.longitude;
+  miPosicion.error=true;
+  miPosicion.latitud=lat;
+  miPosicion.longitude=lon;
+  console.log("Your position is: "+ lat +";"+ lon);
+};
 
 function establecerMapa(contenedor,posicion){
   var mapProp = {
@@ -35,6 +69,8 @@ function establecerMapa(contenedor,posicion){
   google.maps.event.addListener(marker,'click',borrarMarcador);//si doy click en marker se borra
 }
 
+
+/*Rutas*/
 //Creacion de rutas
 function crearRuta(event){
   //evento generado cuando el usuario hace click en el boton crear ruta del cuadro publicador  
@@ -77,7 +113,7 @@ function cerrarRuta(event){
     $("#contenedor_rutas").css('opacity','1');
 }
 
-function agregarMarcador(event){
+function agregarMarcador(event){//Cuando el usuario hace click en el mapa se marca ese punto en la ruta
   if(start==null){
     start=new google.maps.LatLng(event.latLng.A,event.latLng.F); 
     firstMarker=new google.maps.Marker({
@@ -113,79 +149,6 @@ function agregarMarcador(event){
 
 function borrarMarcador(event){
   this.setMap(null);
-}
-
-//Geolocalizacion
-function queryCoords(){//consulta al navegador si es posible usar geolocation
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(getCoords,errorFound);
-      //se obtiene las posiciones actuales
-    }else{
-      alert("Actualiza tu guevada");
-    }
-}
-
-function errorFound(error){
-    alert("Error has ocurred" + error.code);
-    miPosicion.error=true;//indica que hubo un error en la peticion de geolocalizacion
-    /* 0: Error desconocido 1: Permiso denegado  2: Posicion no esta disponible  3: Timeout
-    */
-}
-
-function getCoords(position){
-  var lat=position.coords.latitude;
-  var lon= position.coords.longitude;
-  miPosicion.error=true;
-  miPosicion.latitud=lat;
-  miPosicion.longitude=lon;
-  console.log("Your position is: "+ lat +";"+ lon);
-};
-
-function crearAventon(event){
-  var posicion=new google.maps.LatLng(miPosicion.latitud,miPosicion.longitude) //se crea un punto en el mapa con mi posicion actual
-  map=null;
-  establecerMapa(document.getElementById("googleMap2"),posicion);
-  google.maps.event.addListener(map, 'click', function(event) {
-    ubicarMarcador(event.latLng, map);
-  });
-
-  $("#contenedor_rutas").css('opacity','0.5');
-  $("#Pantalla_Aventon").css('visibility','visible');
-  $("#Pantalla_Aventon").css('opacity','1');
-
-  //configuracion y validacion de fecha y hora
-  var txtFecha = new Date().toDateInputValue();
-  $('#Fecha_Aventon').val(txtFecha);
-  $('#Fecha_Aventon').attr('min',txtFecha);
-
-  var txtTiempo = obtenerHora();
-  hora_referencia = txtTiempo;
-  $('#Hora_Aventon').val(txtTiempo);
-
-  //validaciones para la hora
-  $('#Hora_Aventon')[0].checkValidity();
-  $('#Fecha_Aventon')[0].checkValidity();
-
-  document.getElementById('Fecha_Aventon').addEventListener('change', erroresFechaHoraAventon, false);
-  document.getElementById('Hora_Aventon').addEventListener('change', erroresFechaHoraAventon, false);  
-}
-
-function cerrarAventon(event){
-    console.log("cerrar");
-    $("#Pantalla_Aventon").css('visibility','hidden');
-    $("#Pantalla_Aventon").css('opacity','0');
-    $("#contenedor_rutas").css('opacity','1');
-}
-
-function ubicarMarcador(location, map) {
-  if ( marker ) {
-    marker.setPosition(location);
-  } else {
-    marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-  }
 }
 
 function guardarRuta(){
@@ -231,10 +194,87 @@ function guardarPuntos(){
 function guardarDatos(){
   infoRuta.publicador=nickname.innerHTML;
   infoRuta.capacidad=parseInt(RutaCapacidad.value);
-  infoRuta.costo=parseFloat(RutaCosto.value);
+  infoRuta.precio=parseFloat(RutaCosto.value);
   infoRuta.fecha=Fecha.value;
   infoRuta.hora=obtenerHora();
 }
+/****/
+
+
+/*Aventon*/
+function crearAventon(event){
+  var posicion=new google.maps.LatLng(miPosicion.latitud,miPosicion.longitude) //se crea un punto en el mapa con mi posicion actual
+  map=null;
+  establecerMapa(document.getElementById("googleMap2"),posicion);
+  google.maps.event.addListener(map, 'click', function(event) {
+    marcarAventon(event.latLng, map);
+  });
+
+  $("#contenedor_rutas").css('opacity','0.5');
+  $("#Pantalla_Aventon").css('visibility','visible');
+  $("#Pantalla_Aventon").css('opacity','1');
+
+  //configuracion y validacion de fecha y hora
+  var txtFecha = new Date().toDateInputValue();
+  $('#Fecha_Aventon').val(txtFecha);
+  $('#Fecha_Aventon').attr('min',txtFecha);
+
+  var txtTiempo = obtenerHora();
+  hora_referencia = txtTiempo;
+  $('#Hora_Aventon').val(txtTiempo);
+
+  //validaciones para la hora
+  $('#Hora_Aventon')[0].checkValidity();
+  $('#Fecha_Aventon')[0].checkValidity();
+
+  document.getElementById('Fecha_Aventon').addEventListener('change', erroresFechaHoraAventon, false);
+  document.getElementById('Hora_Aventon').addEventListener('change', erroresFechaHoraAventon, false);  
+}
+
+function guardarAventon(){
+  var valid=document.forms["formAventon"].checkValidity();
+  if(valid){
+    infoAventon.publicador=nickname.innerHTML;
+    infoAventon.fecha=Fecha_Aventon.value;
+    infoAventon.hora=Hora_Aventon.value;
+    infoAventon.ubicacion={
+      'x': puntoAventon.position.lat(),
+      'y': puntoAventon.position.lng()
+    }
+
+    crearVisualizadorAventon(infoAventon);
+    console.log(infoAventon);
+
+    cerrarAventon();
+
+    puntoAventon=null;
+    infoAventon={};//se reinicia el objeto infoAventon
+    infoAventon.publicador;
+    infoAventon.fecha;
+    infoAventon.hora;
+    infoAventon.ubicacion={};
+  }
+}
+
+function cerrarAventon(event){
+    console.log("cerrar");
+    $("#Pantalla_Aventon").css('visibility','hidden');
+    $("#Pantalla_Aventon").css('opacity','0');
+    $("#contenedor_rutas").css('opacity','1');
+}
+
+function marcarAventon(location, map) {//marca el punto del aventon en el mapa
+  if ( puntoAventon ) {
+    puntoAventon.setPosition(location);
+  } else {
+    puntoAventon = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  }
+}
+
+/****/
 
 //validaciones 
 Date.prototype.toDateInputValue = (function() {
@@ -325,10 +365,13 @@ function inicializar(){
   };
   directionsDisplay=new google.maps.DirectionsRenderer(rendererOptions);
   queryCoords();
-
   btnAceptarRuta.addEventListener('click',guardarRuta,false);
 
+  btnAceptarAventon.addEventListener('click',guardarAventon,false);
 }
 
+window.addEventListener('resize', function(){
+  console.log("hello world");
+}, true);
 
 window.addEventListener('load',inicializar,false);
