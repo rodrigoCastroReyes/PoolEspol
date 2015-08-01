@@ -1,5 +1,8 @@
 {"rutas":[
-    {"publicador": "Kevin",
+    {
+     "idPublicador":"1345",
+     "publicador": "Kevin",
+     "urlNickname":"imagenes/kevin.jpg",
      "fecha" :"13/07/2015",
      "hora": "9:30",
      "precio": 0.40,
@@ -16,7 +19,9 @@
      {"x":-2.1522024709832657, "y": -79.95297074317932}]
  },
  {
+    "idPublicador":"2121",
     "publicador": "Rodrigo",
+    "urlNickname":"imagenes/castro.jpg",
      "fecha" :"13/07/2015",
      "hora": "10:30",
      "precio": 0.25,
@@ -28,5 +33,4 @@
      {"x":-2.155767288377049 , "y":-79.9485182762146},
      {"x":-2.152320404925176 , "y":-79.95322287082672}]
  }   
-    
 ]}

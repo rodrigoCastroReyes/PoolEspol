@@ -13,7 +13,9 @@ var directionsDisplay;
 
 //objeto usado para almacenar la informacion de una ruta
 var infoRuta={
+  idPublicador:"",
   publicador:"",
+  urlNickname:"",
   fecha:"",
   hora:"",
   precio:0.0,
@@ -22,7 +24,9 @@ var infoRuta={
 };
 
 var infoAventon={
+  idPublicador:"",
   publicador:"",
+  urlNickname:"",
   fecha:"",
   hora:"",
   ubicacion:{}
@@ -51,7 +55,6 @@ function getCoords(position){
   miPosicion.error=true;
   miPosicion.latitud=lat;
   miPosicion.longitude=lon;
-  console.log("Your position is: "+ lat +";"+ lon);
 };
 
 function establecerMapa(contenedor,posicion){
@@ -122,6 +125,7 @@ function agregarMarcador(event){//Cuando el usuario hace click en el mapa se mar
     firstMarker.setMap(map);
     return;
   }else if(end==null){
+    console.log("dentro de end");
     firstMarker.setMap(null);
     firstMarker=null;
     end=new google.maps.LatLng(event.latLng.A,event.latLng.F);
@@ -196,7 +200,7 @@ function guardarDatos(){
   infoRuta.capacidad=parseInt(RutaCapacidad.value);
   infoRuta.precio=parseFloat(RutaCosto.value);
   infoRuta.fecha=Fecha.value;
-  infoRuta.hora=obtenerHora();
+  infoRuta.hora=Hora.value;
 }
 /****/
 
@@ -235,6 +239,7 @@ function guardarAventon(){
   var valid=document.forms["formAventon"].checkValidity();
   if(valid){
     infoAventon.publicador=nickname.innerHTML;
+    infoAventon.urlNickname="imagenes/Oswaldo.jpg"
     infoAventon.fecha=Fecha_Aventon.value;
     infoAventon.hora=Hora_Aventon.value;
     infoAventon.ubicacion={
@@ -243,6 +248,7 @@ function guardarAventon(){
     }
 
     crearVisualizadorAventon(infoAventon);
+
     console.log(infoAventon);
 
     cerrarAventon();
@@ -257,7 +263,6 @@ function guardarAventon(){
 }
 
 function cerrarAventon(event){
-    console.log("cerrar");
     $("#Pantalla_Aventon").css('visibility','hidden');
     $("#Pantalla_Aventon").css('opacity','0');
     $("#contenedor_rutas").css('opacity','1');
@@ -345,7 +350,6 @@ function erroresFechaHoraAventon(event){
 
 }
 
-
 function inicializar(){
   btnRuta.addEventListener('click',crearRuta,false);
   btnCancelarRuta.addEventListener('click', cerrarRuta,false);
@@ -366,12 +370,8 @@ function inicializar(){
   directionsDisplay=new google.maps.DirectionsRenderer(rendererOptions);
   queryCoords();
   btnAceptarRuta.addEventListener('click',guardarRuta,false);
-
   btnAceptarAventon.addEventListener('click',guardarAventon,false);
 }
 
-window.addEventListener('resize', function(){
-  console.log("hello world");
-}, true);
 
 window.addEventListener('load',inicializar,false);

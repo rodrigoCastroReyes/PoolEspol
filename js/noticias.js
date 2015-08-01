@@ -1,5 +1,7 @@
 var mapProp, mapProp2, mapProp3;
 
+var puntoSolicitud;
+
 function punto(x,y) { 
   this.x = x;
   this.y = y;
@@ -10,9 +12,40 @@ var ptoAventon = new punto(-2.2845962215476465 ,-79.88536566495895);
 
 var ruta1, ruta2;
 
+/*Ruta*/
+function crearVisualizadorRuta(RutaInfo){
+  var contenedor=document.createElement('div');
+  contenedor.setAttribute('class','VisualizadorRuta');
+  contenedor_rutas.appendChild(contenedor);
+
+  //crear menu superior del visualizador: nickname,mensajes
+  var menuSuperior=crearMenuSuperior(RutaInfo);
+  contenedor.appendChild(menuSuperior);
+
+  //crear el mapa en donde se mostrara la ruta
+  var contenedorMapa=document.createElement('div');
+  contenedorMapa.setAttribute('class','VisualizadorRuta-mapa');
+  contenedorMapa.setAttribute('id','mapaGoogle1');
+  contenedor.appendChild(contenedorMapa);
+  //opciones del mapa
+  var mapOptions = {
+    zoom: 15,
+    center:new google.maps.LatLng(RutaInfo.ruta[0].x,RutaInfo.ruta[0].y),
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  //crea el mapa y ubica los puntas de la ruta sobre el
+  crearMapa(RutaInfo.ruta,contenedorMapa,mapOptions);
+
+  //crear menu inferior del visualizador: agregar, precio, capacidad
+  var menuInferior=crearMenuInferior(RutaInfo,true);
+  contenedor.appendChild(menuInferior);
+}
+
+
 function crearMapa(ruta,contenedor,mapOptions){
   var newMap = new google.maps.Map(contenedor,mapOptions);//se crea el mapa
   colocarMarcadores(newMap,ruta);//se colocan los puntos sobre el mapa
+  return newMap;
 }
 
 function colocarMarcadores(map, puntos){
@@ -52,8 +85,8 @@ function crearMenuSuperior(RutaInfo){
   infoUsuario.setAttribute('class','VisualizadorRuta-opcion u-flex_start');
   //foto del usurio
   var foto=document.createElement('img');
-  foto.setAttribute('class','nickname u-cursor_pointer');
-  foto.setAttribute('src','imagenes/fajada.jpg');//RutaInfo['url-nickname']
+  foto.setAttribute('class','nickname u-cursor_pointer');;
+  foto.setAttribute('src', RutaInfo['urlNickname']);
   //nick name del usuario
   var nickname=document.createElement('span');
   nickname.setAttribute('class','VisualizadorRuta-info');
@@ -86,7 +119,9 @@ function crearMenuInferior(RutaInfo,opcionesRuta){
   var infoAgregar=document.createElement('div');
   infoAgregar.setAttribute('class','VisualizadorRuta-opcion u-flex_start');
   var iconoAgregar=document.createElement('span');
+  iconoAgregar.setAttribute('data-idPublicador',RutaInfo["idPublicador"]);
   iconoAgregar.setAttribute('class','VisualizadorRuta-info icon-plus u-cursor_pointer');
+  iconoAgregar.addEventListener('click',solicitarRuta,false);
   infoAgregar.appendChild(iconoAgregar);
 
   var infoHorario=document.createElement('div');
@@ -104,7 +139,6 @@ function crearMenuInferior(RutaInfo,opcionesRuta){
     //precio de la ruta
     var precio=document.createElement('span');
     precio.setAttribute('class','VisualizadorRuta-info');
-    console.log(RutaInfo["precio"]);
     precio.innerHTML="$"+ RutaInfo["precio"];
     //icono Ruta
     var iconoRuta=document.createElement('span');
@@ -120,31 +154,9 @@ function crearMenuInferior(RutaInfo,opcionesRuta){
   }
   return menuInferior;
 }
+/****/
 
-function crearVisualizadorRuta(RutaInfo){
-  var contenedor=document.createElement('div');
-  contenedor.setAttribute('class','VisualizadorRuta');
-  contenedor_rutas.appendChild(contenedor);
-
-  var menuSuperior=crearMenuSuperior(RutaInfo);
-  contenedor.appendChild(menuSuperior);
-
-  //mapa
-  var contenedorMapa=document.createElement('div');
-  contenedorMapa.setAttribute('class','VisualizadorRuta-mapa');
-  contenedorMapa.setAttribute('id','mapaGoogle1');
-  contenedor.appendChild(contenedorMapa);
-  var mapOptions = {
-    zoom: 15,
-    center:new google.maps.LatLng(RutaInfo.ruta[0].x,RutaInfo.ruta[0].y),
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  crearMapa(RutaInfo.ruta,contenedorMapa,mapOptions);
-
-  var menuInferior=crearMenuInferior(RutaInfo,true);
-  contenedor.appendChild(menuInferior);
-}
-
+/*Aventon*/
 function crearVisualizadorAventon(AventonInfo){
   var contenedor=document.createElement('div');
   contenedor.setAttribute('class','VisualizadorRuta');
@@ -164,20 +176,68 @@ function crearVisualizadorAventon(AventonInfo){
     mapTypeId:google.maps.MapTypeId.ROADMAP
   };  
   var map=new google.maps.Map(contenedorMapa,mapOptions);
-  colocarPunto(map,AventonInfo.ubicacion);
+  var marker= new google.maps.Marker({
+    position: new google.maps.LatLng(AventonInfo.ubicacion.x,AventonInfo.ubicacion.y),
+    title:'#',
+    draggable:false,
+    map:map
+  });//ubica el punto del aventon dentro del mapa
 
   var menuInferior=crearMenuInferior(AventonInfo,false);
   contenedor.appendChild(menuInferior);
 }
 
-function colocarPunto(map, punto){
-  var marker= new google.maps.Marker({
-    position: new google.maps.LatLng(punto.x, punto.y),
-    title:'#',
-    draggable:false,
-    map:map
-  });
+/*Solicitud*/
+function solicitarRuta(event){
+  //evento generado cuando el usuario da click en el + de un visualizador de ruta
+  //se levanta un mapa que le permite al usuario seleccionar el punto en donde desea que lo lleven
+  var infoRuta;
+  infoRuta=JSON.parse(sessionStorage.getItem(this.getAttribute('data-idPublicador')));
+  //obtiene los datos que fueron almacenados en sessionStorage
+  if(infoRuta!=null){
+    console.log(infoRuta);
+    $("#contenedor_rutas").css('opacity','0.5');
+    $("#OpcionAgregar").css('visibility','visible');
+    $("#OpcionAgregar").css('opacity','1');
+    var contenedor=document.getElementById('MapaAgregar');
+    var mapOptions = {
+      zoom: 14,
+      center:new google.maps.LatLng(infoRuta.ruta[0].x,infoRuta.ruta[0].y),
+      mapTypeId:google.maps.MapTypeId.ROADMAP
+    };
+    var map=crearMapa(infoRuta.ruta,contenedor,mapOptions)
+    google.maps.event.addListener(map, 'click', function(event) {
+        marcarPunto(event.latLng,map);
+    });
+  }
 }
+
+
+function marcarPunto(location, map) {//marca el punto en donde un usuario espera que lo lleven en el mapa de la ruta de otro usuario
+  if ( puntoSolicitud ) {
+    puntoSolicitud.setPosition(location);
+  } else {
+    //ha que validar distancia: debe estar entre un rango definido
+    puntoSolicitud = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  }
+}
+
+function guardarSolicitud(){
+  console.log(puntoSolicitud.position);//se debe guardar el punto de esta solicitu + informacion adicional: 
+  puntoSolicitud=null;
+  cerrarSolicitarRuta();
+}
+
+function cerrarSolicitarRuta(){
+    $("#OpcionAgregar").css('visibility','hidden');
+    $("#OpcionAgregar").css('opacity','0');
+    $("#contenedor_rutas").css('opacity','1');
+}
+
+/*****/
 
 function procesarRutas(event){
   var respond = event.target.responseText;
@@ -185,6 +245,7 @@ function procesarRutas(event){
   rutasInfo=listRutas.rutas;
   for(var i=0;i<rutasInfo.length;i++){
     crearVisualizadorRuta(rutasInfo[i]);
+    sessionStorage.setItem(rutasInfo[i]['idPublicador'],JSON.stringify(rutasInfo[i]));//se guarda la informasion en sessionStorage
   }
 }
 
@@ -196,21 +257,23 @@ function procesarAventones(event){
   }
 }
 
+
 function cargarMapas(event){
-  
+  //extraer informacion de rutas
   var request = new XMLHttpRequest();
   request.open("GET","JSON/rutas.json",true);
   request.addEventListener('load',procesarRutas ,false);
   request.send(null);
-
+  //extraer informacion de aventones
   var request_aventones = new XMLHttpRequest();
   request_aventones.open("GET", "JSON/aventones.json", true);
   request_aventones.addEventListener('load', procesarAventones, false);
   request_aventones.send(null);
-
+  /*Manejadores de enventos de botones*/
+  btnAceptarAgregar.addEventListener('click',guardarSolicitud,false);
+  btnCancelarAgregar.addEventListener('click',cerrarSolicitarRuta,false);
+  btnCloseAgregar.addEventListener('click',cerrarSolicitarRuta,false);
 }
 
-
-//window.addEventListener('load',cargarMapas,false);
 
 google.maps.event.addDomListener(window, 'load',cargarMapas);
