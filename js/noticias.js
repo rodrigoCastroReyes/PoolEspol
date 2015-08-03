@@ -65,6 +65,7 @@ function colocarMarcadores(map, puntos){
     optimizeWaypoints:true,
     travelMode:google.maps.TravelMode.DRIVING
   }
+
   var directionsDisplay=new google.maps.DirectionsRenderer();
   directionsDisplay.setMap(map);
 

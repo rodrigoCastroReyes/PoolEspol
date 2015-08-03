@@ -3,7 +3,8 @@ var hora_referencia;
 
 var puntoAventon;
 var miPosicion={};//posicion actual 
-var map;//map
+var mapRuta;//map 
+var mapAventon;
 var waypoints=[];//puntos intermedios
 var start;//punto inicio de la ruta
 var end;//punto final
@@ -57,36 +58,34 @@ function getCoords(position){
   miPosicion.longitude=lon;
 };
 
-function establecerMapa(contenedor,posicion){
-  var mapProp = {
-    center:posicion,
-    zoom:17,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  map=new google.maps.Map(contenedor,mapProp);
-  var marker = new google.maps.Marker({
-    position: posicion ,
-    animation: google.maps.Animation.DROP,
-    map: map
-  });
-  google.maps.event.addListener(marker,'click',borrarMarcador);//si doy click en marker se borra
-}
-
-
 /*Rutas*/
 //Creacion de rutas
 function crearRuta(event){
   //evento generado cuando el usuario hace click en el boton crear ruta del cuadro publicador  
   var posicion=new google.maps.LatLng(miPosicion.latitud,miPosicion.longitude) //se crea un punto en el mapa con mi posicion actual
-  map=null;
-  establecerMapa(document.getElementById("googleMap"),posicion);//muestra el mapa en la pantalla
-  directionsDisplay.setMap(map);
+  
+  //muestra el mapa en la pantalla 
+  var mapProp = {
+    center:posicion,
+    zoom:17,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  
+  mapRuta=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+  
+  var marker = new google.maps.Marker({
+    position: posicion ,
+    animation: google.maps.Animation.DROP,
+    map: mapRuta
+  });
+
+  //google.maps.event.addListener(marker,'click',borrarMarcador);//si doy click en marker se borra  
+  directionsDisplay.setMap(mapRuta);
+  google.maps.event.addListener(mapRuta,'click',agregarMarcador);
   //variables para construir la ruta
   start=null
   end=null;
   waypoints=[];
-  google.maps.event.addListener(map,'click',agregarMarcador);
-
   //css
   $("#contenedor_rutas").css('opacity','0.5');
   $("#Pantalla_Ruta").css('visibility','visible');
@@ -118,23 +117,23 @@ function cerrarRuta(event){
 
 function agregarMarcador(event){//Cuando el usuario hace click en el mapa se marca ese punto en la ruta
   if(start==null){
-    start=new google.maps.LatLng(event.latLng.A,event.latLng.F); 
+    start=event.latLng;
     firstMarker=new google.maps.Marker({
-      position:new google.maps.LatLng(event.latLng.A,event.latLng.F)
+      position: event.latLng,
+      map:mapRuta
     });
-    firstMarker.setMap(map);
     return;
   }else if(end==null){
-    console.log("dentro de end");
     firstMarker.setMap(null);
     firstMarker=null;
-    end=new google.maps.LatLng(event.latLng.A,event.latLng.F);
+    end=event.latLng;
   }else{
     waypoints.push({
       location:end,
       stopover:false
     });
-    end=new google.maps.LatLng(event.latLng.A,event.latLng.F);
+    end=event.latLng;
+    console.log(end);
   }
 
   var request={
@@ -147,6 +146,8 @@ function agregarMarcador(event){//Cuando el usuario hace click en el mapa se mar
   directionsService.route(request,function(response,status){
     if(status==google.maps.DirectionsStatus.OK){
       directionsDisplay.setDirections(response);
+    }else{
+      console.log(status);
     }
   });
 }
@@ -197,6 +198,7 @@ function guardarPuntos(){
 
 function guardarDatos(){
   infoRuta.publicador=nickname.innerHTML;
+  infoRuta.urlNickname="imagenes/Oswaldo.jpg";
   infoRuta.capacidad=parseInt(RutaCapacidad.value);
   infoRuta.precio=parseFloat(RutaCosto.value);
   infoRuta.fecha=Fecha.value;
@@ -204,14 +206,26 @@ function guardarDatos(){
 }
 /****/
 
-
 /*Aventon*/
 function crearAventon(event){
   var posicion=new google.maps.LatLng(miPosicion.latitud,miPosicion.longitude) //se crea un punto en el mapa con mi posicion actual
-  map=null;
-  establecerMapa(document.getElementById("googleMap2"),posicion);
-  google.maps.event.addListener(map, 'click', function(event) {
-    marcarAventon(event.latLng, map);
+
+  var mapProp = {
+    center:posicion,
+    zoom:17,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+  mapAventon=new google.maps.Map(document.getElementById("googleMap2"),mapProp);
+ 
+  var marker = new google.maps.Marker({
+    position: posicion,
+    animation: google.maps.Animation.DROP,
+    map: mapAventon
+  });
+
+  google.maps.event.addListener(mapAventon, 'click', function(event) {
+    marcarAventon(event.latLng, mapAventon);
   });
 
   $("#contenedor_rutas").css('opacity','0.5');
