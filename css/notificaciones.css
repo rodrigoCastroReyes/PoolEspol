@@ -1,148 +1,108 @@
-/*Home Page*/
-@import "fonts.css";
-@import "barra.css";
-
-*{
-	margin: 0px;
-	padding: 0px;
-}
-
-html,body{
-	background-color:#e2e4e6;;
-}
-
-
-#contenedor_notif{
-	margin-top: 70px; 
-	width: 100%;
-	transition: all 0.5s ease;
-}
-
-.notif{
+#Contenedor_Notificaciones{
 	display: flex;
 	flex-direction:column;
-	align-items:center;
-	margin: 15px 0px;
-	height: 100%;
-	width: 100%;
+	justify-content:center;
+	background-color:#c3c3c3;
+	border-bottom:solid 2px #e2e4e6;
+	border-right:solid 2px #e2e4e6;
+	border-left:solid 2px #e2e4e6;
+	padding:8px;
+	display:none;
+	border-bottom-left-radius:8px;
+	border-bottom-right-radius:8px;
+	z-index: 999;
+	position: fixed;
+	left: 65%;
+	top: 5%;
 }
 
-
-
-.nick{
-	padding: 0px 5px 0px 5px;
-	border-radius: 30px;
-	height:30px;
-	width:30px;
-}
-
-#notificacion{
-
-	display: flex;
-	flex-direction:column;
-	width: 50%;
-	background: #e2e4e6;
-}
-
-#foto{
-	width: 60px;
-	height: 60px;
-	border-radius: 30px;
-	margin-top: 20px;
-}
-
-button{
-	width:100px;
-	height: 35px;
-	border-radius: 10px;
-	border: 2px solid #c3c3c3;
-	background: #0080FF;
-	color: #FFFFFF;
-	font-size: 100%;
-	margin-right: 30px;
-	font-family: opcionUno;
-	transition: background-color 0.5s ease;
+.Notificaciones-Mas{
+	color: black;
+	list-style: none;
+	font-family: opcionDos;
+	text-decoration: inherit;
 	cursor: pointer;
 }
 
-button:hover{
-	background: #23b7e5;
-}
-
-h3{
-	flex-grow:1;
-	color:#000000;
-	font-size: 26px;
-	font-family: opcionUno;
-	margin: 20px;
-}
-
-#cabezera{
+.Notificaciones{
+	display: flex;
+	flex-direction: row;
+	align-items:center;
+	justify-content:space-around;
+	height: 90px;
+ 	width: 400px;
+	border-radius: 5px 5px 5px 5px;
 	background: white;
-	color: #0E1456;
-	padding: 10px 10px;
-	display:flex;
-	justify-content: flex-start;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	color:black;
+}
+
+.Notificaciones-Foto{
+	display: flex;
+	align-items:center;
+	height: 100%;
+	margin-left: 10px;
+}
+
+.Notificaciones-Foto img{
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	border: 3px solid #e2e4e6;
+}
+
+.Notificaciones-info{
+	display: flex;
 	flex-direction:column;
-	align-items: center;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
-	border-bottom-width: 10px;	
-	border-bottom-style:solid;
-	border-bottom-color: #c3c3c3;
-}
-
-label{
+	justify-content:center;
+	align-items:center;
 	font-family: opcionUno;
-	font-size: 26px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 20px;
+	color: black;
 }
 
-.contenedorBotones{
+.Notificaciones-titulo{
+	font-family: opcionUno;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 10px 10px;
+	color: black;
+	margin: 0px;
+}
+
+.Notificaciones-Botones{
 	display: flex;
+	justify-content:center;
 	flex-direction:row;
+	width: 200px;
 }
 
-.superior{
-	display: flex;
-	flex-direction:row;
+.Notificaciones-boton{
+	border-radius: 8px 8px 8px 8px;
+	background: #0080FB;
+	font-family: opcionUno;
+	font-size: 16px;
+	color: white;
+	padding: 0px;
+	margin: 5px 5px;
+	text-align: center;
+	width: 100%;
+	height: 30px;
+	transition: all 0.5s ease;
 }
 
-#sign_box{
-	margin-top: -40px;
+.Notificaciones-boton:hover{
+	background: #23b7e5;
+	cursor: pointer;
 }
 
 
-
-
-@media screen and (max-width: 800px){
-	
-	#notificacion{
-		width: 90%;
-		height: 350px;
-	}
-
-	#foto{
-		width: 35px;
-		height: 35px;
-		border-radius: 17px;
-	}
-
-	button{
-		width: 65px;
-		height: 35px;
-		font-size: 10px;
-		margin-right: 10px;
-	}
-
-	button:hover{
-		background: #23b7e5;
-	}
-
-	h3{
-		font-size: 18px;
-	}
-
-	label{
-		font-size: 18px;
+@media screen and (max-width:736px){
+	#sign_box{
+		display: none;
 	}
 }

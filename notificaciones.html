@@ -7,14 +7,15 @@
 		<meta name="description" content="Este es un proyecto innovador XD">
 		<meta name="keywords" content="DAW, aventon, red social,ESPOL">
 		<link rel="shortcut icon" type="image/png" href="imagenes/LogoPoolEspol.png">
-		<link rel="stylesheet" type="text/css" href="css/notificaciones.css">
+		<link rel="stylesheet" type="text/css" href="css/notificaciones2.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script src = "js/jquery-1.11.3.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<script src = "js/barra.js"> </script>
-		<script src = "js/desplegableNotificaciones.js"> </script>
+		<script src = "js/notificaciones.js"> </script>
 	</head>
 	<body>
+		
 		<div id="contenedor_navegacion">
 			<div id="contenedor_logo">
 				<figure id="logo" onclick="">
@@ -52,6 +53,7 @@
 				</nav>
 			</div>
 		</div>
+
 		<div id="menu_salir">
 			<div >
 				<span id="leyenda_menu">Esta seguro que desea salir?</span>
@@ -63,69 +65,22 @@
 			</div>
 		</div>
 
-		<div id="sign_box">
-                <div class="subnotif">
-                    <div class="contenedorFotoPerfil">
-                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/noticiasconpersonaje.jpg">
-                    </div>
-				    <div class="infoNotificacion">
-                        <div> 
-                            <h3 class="tituloNotificacion">Ha solicitado un aventon</h3>
-                        </div>
-                        <div class="contenedorBotones">
-                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
-                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
-                        </div>
-                    </div>
-				</div>
-                <div class="subnotif">
-                    <div class="contenedorFotoPerfil">
-                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/castro.jpg">
-                    </div>
-                    <div class="infoNotificacion">
-                        <div>
-                            <h3 class="tituloNotificacion">Oswaldo ha solicitado un aventon</h3>
-                        </div>
-                        <div class="contenedorBotones">
-                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
-                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
-                        </div>
-                    </div>
-				</div>
-                <div class="subnotif">
-                    <div class="contenedorFotoPerfil">
-                        <img class="fotoPerfil" src="imagenes/ImagenesDesarrollador/kevin.jpg">
-                    </div>
-                    <div class="infoNotificacion">
-                        <div>
-                            <h3 class="tituloNotificacion">Mafia ha solicitado un aventon</h3>
-                        </div>
-                        <div class="contenedorBotones">
-                        <input class="botonNotificacion" id="btnAceptar" type="submit" value="Aceptar"/> 
-                        <input class="botonNotificacion" id="btnCancelar" type="submit" value="Cancelar"/> 
-                        </div>
-                    </div>
-                </div>
-                <center><a id="mas">Ver todas</a></center>
+		<div id="Contenedor_Notificaciones">
+            
         </div>
 
 		<section id="contenedor_notif">
-
 			<div id="subnotif" class="notif">
-
 				<div id = "notificacion">
-					
 					<div id = "cabezera">
 						<div class="superior">
 							<img id = "foto" src = "imagenes/imagenPerfil.jpg"/>&nbsp;&nbsp;
 							<h3 id = "nick" >Oswaldito ha solicitado un aventon</h3>
                         </div>
-
                         <div class="contenedorBotones">
                         	<button type="button" id = "btnAceptar">Aceptar</button>
 							<button type="button" id = "btnNegar" >Cancerlar</button>
 						</div>
-
 					</div>
 					</br>
 					<div id = "cabezera">
@@ -133,7 +88,6 @@
 							<img id = "foto" src = "imagenes/mafia.jpg"/>&nbsp;&nbsp;
 							<h3 id = "nick" >Mafia Chumi Quiere llevarte</h3>
                         </div>
-
                         <div class="contenedorBotones">
                         	<button type="button" id = "btnAceptar">Aceptar</button>
 							<button type="button" id = "btnNegar" >Cancelar</button>
@@ -146,14 +100,9 @@
 							<img id = "foto" src = "imagenes/fajada.jpg"/>&nbsp;&nbsp;
 							<h3 id = "nick" >Fajada confirmo el aventon</h3>
                         </div>
-
 					</div>
-					
 				</div>
 			</div>
-
-            
 		</section>
-		
 	</body>
 </html>
