@@ -1,6 +1,0 @@
-{
-	"conversaciones": [
-	{"nick": "Fajada","foto": "imagenes/fajada.jpg","conversacion":"JSON/conversacion_fajada.json"},
-	{"nick": "Mafia_Chumi","foto": "imagenes/mafia.jpg","conversacion":"JSON/conversacion_mafia.json"}
-	]
-}
