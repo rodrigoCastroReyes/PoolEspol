@@ -61,10 +61,10 @@ function guardarDatos(evt){
 	$(".error").fadeOut().remove();
 	if(val==false){
 		if(!inputs[0].checkValidity()){
-			$("#datosPersona .input_text:nth-child(1)").focus().after('<span class="error">Este campo solo puede contener letras!</span>'); 
+			$("#datosPersona .input_text:nth-child(1)").focus().after('<span class="error">Solo puede contener letras!</span>'); 
 		}
 		if(!inputs[1].checkValidity()){
-			$("#datosPersona .input_text:nth-child(2)").focus().after('<span class="error">Este campo solo puede contener letras!</span>'); 
+			$("#datosPersona .input_text:nth-child(2)").focus().after('<span class="error">Solo puede contener letras!</span>'); 
 		}
 		if(!inputs[2].checkValidity()){
 			$("#datosPersona .input_text:nth-child(3)").focus().after('<span class="error">Solo se ingresa numeros</span>'); 
@@ -118,7 +118,7 @@ function guardarDatosAuto(evt){
 
 	if(val==false){
 		if(!inputs[0].checkValidity()){
-			$("#datosAuto .input_text:nth-child(1)").focus().after('<span class="error">Este campo debe tener al menos 6 caracteres alfanumerico</span>'); 
+			$("#datosAuto .input_text:nth-child(1)").focus().after('<span class="error">Debe tener al menos 6 caracteres alfanumerico</span>'); 
 		}
 		if(!inputs[1].checkValidity()){
 			$("#datosAuto .input_text:nth-child(2)").focus().after('<span class="error">Este dato debe estar entre [1-6]</span>'); 
