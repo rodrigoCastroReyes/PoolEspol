@@ -1,0 +1,323 @@
+@import "barra.css";
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+
+
+
+.input_text:invalid{
+    background-color: red;
+}
+
+.flex_container{
+    display: flex;
+    justify-content:flex-start;
+    align-items:center;
+    height: 100%;
+}
+
+#infoPerfil{
+    background-color: #e2e4e6;
+    height: 100%;
+    width: 25%;
+    margin-top: 40px;
+    border-right: 2px solid #c3c3c3;
+    border-bottom: 2px solid #c3c3c3;
+    position:fixed;
+}
+
+#infoUsuario{
+    width: 100%;
+    height: 60%;
+}
+
+#nickName{
+    background-color: #e2e4e6;
+    font-family: opcionUno;
+    height: 60%;
+}
+
+#nickName img{
+    width: 80px; 
+    height: 80px;
+    border-radius: 150px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    transition: all 0.5s ease;
+}
+
+#nickName img:hover{
+    width:90px;
+    height:90px;
+}  
+
+#datosPersonales{
+    align-items:center;
+    background:#0080FB; 
+    color:white;   
+    font-family: opcionUno;
+    height: 80%;
+    padding: 5px 0px;
+    width: auto;
+}
+
+.tabla{
+    display: flex;
+    flex-direction:row;
+    margin: 10px 0px 20px 0px;
+    width: 100%;
+}
+
+.tabla_item{
+    font-size:20px;
+    width: 50%;
+    height: 100%;
+}
+
+.label{
+    font-family: opcionUno;
+    padding:0px;
+    width:90%;
+    font-size: 18px;
+    text-align: center;
+    margin: 4px;
+    color:black;
+}
+
+
+.input_text{
+    padding:0px;
+    border-style:none;
+    width:90%;
+    color:black;
+    background-color: #0080FB;
+    font-family: opcionUno;
+    font-size: 18px;
+    margin: 4px;
+}
+
+.columna_flexible{
+  display: flex;
+  flex-direction:column;
+}
+
+.flex_center{
+    justify-content:center;
+    align-items:center;
+}
+
+.flex_justify_content_center{
+    justify-content:center;
+}
+
+.flex_align_items_center{
+    align-items:center;   
+}
+
+.flex_end{
+  align-items:flex-end;
+}
+
+.lapiz{
+    background-color:#0080FB;
+    border-radius: 120px;
+    border: 2px solid #0080FB;
+    color: white;
+    cursor:pointer;
+    font-size: 28px;
+    height:40px;
+    padding: 5px 5px;
+    transition: all 0.5s ease;
+    width:40px;
+}
+
+.lapiz_auto{/*lapiz*/
+    background-color: #e2e4e6;
+    border-radius: 120px;
+    border: 2px solid #e2e4e6;
+    color:#0080FB;
+    cursor:pointer;
+    font-size: 28px;
+    height:40px;
+    padding: 5px 5px;
+    transition: all 0.5s ease;
+    width:40px;
+}
+
+.lapiz:hover{
+    border: 2px solid white;
+}
+
+.lapiz_auto:hover{
+   border: 2px solid #0080FB;
+}
+
+#contenedor_botones{
+    display: flex;
+    flex-direction:row;
+    justify-content:space-around;
+    width: 100%;
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+
+.candado{
+  color:white;
+  border-radius: 120px;
+  width:40px;
+  height:40px;
+  font-size: 28px;
+  display: none;
+  cursor: pointer;
+}
+
+#botonGuardarAuto,#botonCancelarAuto{
+    color:#0080FB;
+}
+
+.cancelado{
+    color:white;
+    border-radius: 120px;
+    width:40px;
+    height:40px;
+    font-size: 28px;
+    display: none;
+    cursor: pointer;
+}
+
+#infoVehiculo{
+    width: auto;
+    padding: 10px 10px 0px 10px;
+    font-family: opcionUno;
+}
+
+#datosAuto input{
+  background-color: #e2e4e6; 
+}
+
+.error{
+    background-color: #BC1010;
+    border-radius: 4px 4px 4px 4px;
+    color: white;
+    font-weight: bold;
+    margin-left: 120px;
+    margin-top: -30px;
+    padding: 6px 12px;
+    position: absolute;
+}
+.error:before{
+    border-color: transparent #BC1010 transparent transparent;
+    border-style: solid;
+    border-width: 6px 8px;
+    content: "";
+    display: block;
+    height: 0;
+    left: -16px;
+    position: absolute;
+    top: 8px;
+    width: 0;
+}
+
+#infoRutas{
+    width: 75%;
+    height: 100%;
+}
+
+#tituloRutas{
+    font-family: opcionUno;
+    font-size: 32px;
+    font-weight: bold;
+    color:#0080FB;
+    text-align: center;
+}
+
+#contenedor_rutas_perfil{
+    background: white;
+    margin-left: 25%;
+    margin-top: 70px;
+    width: 100%;
+}
+
+#contenedor_perfil{
+    transition: all 0.5s ease;
+}
+
+@media screen and (max-width:800px){
+
+    #infoRutas{
+        width: 95%;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    #nickName{
+        height: 50%;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    
+    #infoUsuario{
+        height: 65%;
+    }
+
+    #infoPerfil{
+        background-color: #e2e4e6;
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        border-right: transparent;
+    }
+
+    #contenedor_botones{
+        margin-top: 10px;
+        margin-bottom: 0px;
+        height: 40px;
+    }
+
+    #datosPersonales{
+        width: 100%;
+        height: 80%;
+        padding-bottom: 10px;    
+    }
+
+    #infoVehiculo{
+        height: auto;
+    }
+
+    .tabla{
+        margin: 5px;
+    }
+    
+    .lapiz,.lapiz_auto{
+        font-size: 20px;
+        height: 20px;
+        border: 60px;
+        padding: 0px;
+    }
+
+    .flex_container{
+        flex-direction:column;
+        justify-content:flex-start;
+        height: auto;
+    }
+
+    #infoPerfil{
+        position: relative;
+        margin-top: 50px;
+    }
+
+    #contenedor_rutas_perfil{
+        width: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+

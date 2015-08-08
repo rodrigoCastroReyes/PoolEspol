@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="stylesheet"  href="css/chat.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/noticias.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+	<script type="text/javascript" src="js/chat.js"></script>
+	<script src = "js/barra.js"> </script>
+	<script src = "js/notificaciones.js"> </script>
+{% endblock %}
+
+{% block content %}
+	{% include './barra.html' %}
+	<div id="menu_salir">
+		<div >
+			<span id="leyenda_menu">Esta seguro que desea salir?</span>
+			<span class="icon-sad2 iconos_menu"></span>
+		</div>
+		<div>
+			<span id="aceptar_cierre" class="icon-checkmark iconos_menu"></span>
+			<span id="cancelar_cierre" class="icon-cancel-circle iconos_menu"></span>
+		</div>
+	</div>
+
+	<div id="Contenedor_Notificaciones">
+    </div>
+
+	<section id="contenido">
+			<div id="personas" class=" visible" >
+				
+			</div>
+
+			<div id="conversacion">
+
+				<div class="regresar" >Mostar Conversaciones</div>
+
+				<div id="cabezeraMensaje">
+					
+				</div>
+				<div id="areaMensajes">
+
+				</div>
+
+				<div id="envio" >
+					<input type="text" id="txtMensaje" placeholder="escriba su mensaje..."/> 
+					<input id="btnEnviar" type="submit" value="Enviar"/>
+				</div>
+			</div>
+
+			</div>	
+	</section>
+{% endblock%}

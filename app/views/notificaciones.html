@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="shortcut icon" type="image/png" href="imagenes/LogoPoolEspol.png">
+	<link rel="stylesheet" type="text/css" href="css/notificaciones.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src = "js/jquery-1.11.3.min.js"></script>
+	<script src = "js/barra.js"> </script>
+	<script src = "js/notificaciones.js"> </script>
+{% endblock %}
+
+{% block content %}
+	{% include './barra.html' %}
+	<div id="menu_salir">
+		<div >
+			<span id="leyenda_menu">Esta seguro que desea salir?</span>
+			<span class="icon-sad2 iconos_menu"></span>
+		</div>
+		<div>
+			<span id="aceptar_cierre" class="icon-checkmark iconos_menu"></span>
+			<span id="cancelar_cierre" class="icon-cancel-circle iconos_menu"></span>
+		</div>
+	</div>
+	<div id="Contenedor_Notificaciones">
+    </div>
+	<div class="Notificaciones">
+		<div class="Notificacion Notificacion-grande">
+			<div class="Notificacion-Foto" style="margin-right:10px">
+				<img src="imagenes/kevin.jpg">
+			</div>
+			<div class="Notificacion-info" style="margin-left:10px">
+				<div>
+					<h3 class="Notificacion-titulo Titulo-grande">Kevin ha solicitado un aventon</h3>
+				</div>
+				<div class="Notificacion-Botones">
+					<input class="Notificacion-boton Boton-grande" type="submit" id="btnAceptar" value="Aceptar">
+					<input class="Notificacion-boton Boton-grande" type="submit" id="btnCancelar" value="Cancelar">
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

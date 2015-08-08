@@ -1,0 +1,15 @@
+{"notificaciones":[
+     {"idPublicador": "1345",
+      "publicador": "Kevin",
+      "urlNickname": "imagenes/kevin.jpg"
+     },
+     {"idPublicador": "7745",
+      "publicador": "rodrigo",
+      "urlNickname": "imagenes/castro.jpg"
+     },
+     {
+      "idPublicador": "12345",
+      "publicador": "jorge",
+      "urlNickname": "imagenes/jorge.jpg"
+     }
+]}

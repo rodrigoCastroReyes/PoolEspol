@@ -1,0 +1,14 @@
+{ 
+	"fotoReceptor":"imagenes/kevin.jpg",
+	"nickReceptor":"Kevin",
+	"fotoEmisor":"imagenes/fajada.jpg",
+	"nickEmisor":"fajada",
+	"mensajes":[
+		{"tipo":"emisor","contenido":"Kevin donde estas?"},
+		{"tipo":"receptor","contenido":"donde siempre"},
+		{"tipo":"emisor","contenido":"listo ya voy por ti"},
+		{"tipo":"receptor","contenido":"Quieres un aventon?"},
+		{"tipo":"emisor","contenido":"siiiiii"},
+		{"tipo":"receptor","contenido":"vengase"}
+	]
+}
