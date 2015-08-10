@@ -3,7 +3,6 @@
 {% block head %}
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/noticias.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/estiloMapa.css">
 	<link rel="stylesheet" href="css/perfil.css">
 	<link rel = "stylesheet" href = "css/cuadroPublicador.css"/>
@@ -95,91 +94,11 @@
 				</div>
 			</div>
 	   	</div>
+	   	
 		<div id="infoRutas">
-			<div id="contenedor_rutas_perfil">
-				<div id="cuadroPublicador" class="CuadroPublicador">
-					<div class = "CuadroPublicador-contenedor">
-						<div class = "CuadroPublicador-cabezera">
-							<img class = "CuadroPublicador-foto" src = "imagenes/imagenPerfil.jpg"/>&nbsp;&nbsp;
-							<h3 id = "nickname" >oswaldito</h3>
-						</div>
-						<hr>
-						<form class="CuadroPublicador-formulario">
-							<label>Publicar </label>
-							<span >
-								<button class="CuadroPublicador-Boton" type="button" id = "btnRuta">Crear ruta</button>
-								<button class ="CuadroPublicador-Boton" type="button" id = "btnAventon" >Pedir Avent&oacute;n</button>
-							</span>
-						</form>
-					</div>
-				</div>
-				<h1 id="tituloRutas">Mis Rutas</h1>
-			</div>
-			<div id = "Pantalla_Ruta">	
-				<div id = "Contenido_Ruta">
-					<input id = "btnClose" value = "X" type = "button" class = "IngresoRuta-cerrar"/>
-					<div id="googleMap" style="height:60%;">
-					</div>
-	 				<div class = "IngresoRuta-Titulo">
-						<span >Ingrese una sucesi&oacute;n de puntos para marcar el camino</span>
-					</div>
-					<div class="tabla flex_between_around ">
-						<div class="tabla">
-							<div class="tabla_item columna_flexible flex_end">
-								<label class="etiqueta">Fecha: </label>
-								<label class="etiqueta">Hora: </label>
-							</div>
-							<div class="tabla_item columna_flexible ">
-								<form id = "formRuta" class="formulario" action="noticias.html">
-									<input class="entradaDatos" id = "Fecha" type ="date" />
-									<input class="entradaDatos" id = "Hora" type ="time" />	
-								</form>
-							</div>
-						</div>
-						<div class="tabla margin_right">
-							<div class="tabla_item columna_flexible flex_end">
-								<label class="etiqueta">Capacidad: </label>
-								<label class="etiqueta">Costo: $</label>
-							</div>
-							<div class="tabla_item columna_flexible ">
-								<input form= "formRuta" class="entradaDatos" type ="number" 
-								min = "1" max = "20" value ="1"/>
-								<input form="formRuta" class="entradaDatos" type ="number" 
-								min = "0.00" value = "0.00" step="0.01" max="2.00"/>	
-							</div>
-						</div>
-					</div>
-					<div class="tabla flex_center">
-						<button class="IngresoRuta-Boton" form="formRuta" id ="btnAceptarRuta" type="submit">Aceptar</button>
-						<button class="IngresoRuta-Boton" form="formRuta" id="btnCancelarRuta" type = "button">Cancelar</button>
-					</div>
-				</div>
-			</div>
-			<div id = "Pantalla_Aventon">	
-				<div id = "Contenido_Aventon">
-					<input id = "btnCloseAventon" value = "X" type = "button" class = "close"/>
-					<div id="googleMap2" style="height:70%;"></div>
-					<div class = "IngresoAventon-Titulo">
-						<span> Ingrese un punto en el mapa que ser&aacute; su paradero</span>
-					</div>
-					<div class="tabla flex_center">
-						<div class="tabla_item columna_flexible" >
-								<label class="etiqueta">Fecha: </label>
-								<label class="etiqueta">Hora: </label>
-						</div>
-						<div class="tabla_item columna_flexible" >
-							<form id = "formAventon" class="formulario">
-								<input class="entradaDatos" id = "Fecha_Aventon" type ="date" />
-								<input class="entradaDatos" id = "Hora_Aventon" type ="time" />
-							</form>
-						</div>
-					</div>
-					<div class="tabla flex_center">
-						<button class="IngresoAventon-Boton" form="formAventon" id = "btnAceptarAventon" type="submit">Aceptar</button>
-						<button class="IngresoAventon-Boton" form="formAventon" id="btnCancelarAventon" type = "button">Cancelar</button>
-					</div>
-				</div>
-			</div>		
+			{% include './cuador_publicador.html' %}
+			<h1 id="tituloRutas">Mis Rutas</h1>		
 		</div>
+		
 	</div>
 {% endblock %}

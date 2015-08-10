@@ -239,11 +239,14 @@ html,body{
     text-align: center;
 }
 
-#contenedor_rutas_perfil{
+#contenedor_rutas{
     background: white;
     margin-left: 25%;
     margin-top: 70px;
     width: 100%;
+}
+#tituloRutas{
+    margin-left: 50%;
 }
 
 #contenedor_perfil{
