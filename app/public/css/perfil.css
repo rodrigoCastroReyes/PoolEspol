@@ -322,5 +322,14 @@ html,body{
         margin-left: 10px;
         margin-right: 10px;
     }
+
+    #contenedor_rutas{
+        margin-top: 70px;
+        width: 90%;
+    }
+    #tituloRutas{
+        margin-left: 0%;
+    }
+
 }
 
