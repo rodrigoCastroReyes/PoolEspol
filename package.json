@@ -5,6 +5,7 @@
   "dependencies": {
     "express": "4.13.1",
     "pg": "^2.6.2",
+    "sequelize": "^3.5.1",
     "serve-favicon": "^2.1.6",
     "swig": "^1.4.2"
   }
