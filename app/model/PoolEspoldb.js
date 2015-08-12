@@ -164,5 +164,5 @@ exports.module.Mensaje = Mensaje;
 exports.module.Notificacion = Notificacion;
 exports.module.Ruta = Ruta;
 exports.module.Usuario_Ruta = Usuario_Ruta;
-exports.module.carro = carro;
-exports.module.usuario = usuario;
+exports.module.Carro = Carro;
+exports.module.Usuario = Usuario;
