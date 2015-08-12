@@ -5,6 +5,8 @@ var settings    = require('./config/settings');
 var environment = require('./config/environment');
 var routes      = require('./config/routes');
 var models      = require('./app/models/');
+//hago referencia al archivo PoolEspoldb y puedo acceder a las clases exportables
+var modelos = require('./app/model/PoolEspoldb.js');
 
 module.exports.start = function (done) {
   var app = express();
