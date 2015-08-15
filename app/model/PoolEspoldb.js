@@ -1,168 +1,477 @@
+
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('PoolEspol','postgres','root',{
-	dialect: "postgres",
+var sequelize = new Sequelize("PoolEspol","postgres","root",{
+	host: 'localhost',
+	dialect: 'postgres',
 	define:{
-		timestamps: false,
-		freezeTableName: true
+		timestamps: false
+	},
+	pool:{
+		max: 5,
+		min: 0,
+		idle: 10000
 	}
 });
 
-sequelize.authenticate().success(function(){
-	console.log("OK");	
-});
+sequelize.authenticate();
 
-var  Aventon = sequelize.define('Aventon',{
+var  Aventon = sequelize.define('aventon',{
 	id_aventon:{
 		primaryKey:true,
-		type:Sequelize.INTEGER
+		type:Sequelize.INTEGER,
+		unique: true,
+		//field hago referencia al nombre de la columna de la tabla aventon
+		field: 'id_aventon',
+		allowNull: false
 	},
-	longitud:Sequelize.DOUBLE,
-	latitud:Sequelize.DOUBLE,
-	fecha:Sequelize.DATE,
-	hora:Sequelize.TIME
+	longitud:{
+		type: Sequelize.DOUBLE,
+		field: 'longitud',
+		get: function(){
+			return this.getDataValue('longitud');
+		},
+		set: function(valor){
+			this.setDataValue('longitud',valor);
+		}
+	},
+	latitud:{
+		type: Sequelize.DOUBLE,
+		field: 'latitud',
+		get: function(){
+			return this.getDataValue('latitud');
+		},
+		set: function(valor){
+			this.setDataValue('latitud',valor);
+		}
+	},
+	fecha:{
+		type: Sequelize.DATE,
+		field: 'fecha',
+		get: function(){
+			return this.getDataValue('fecha');
+		},
+		set: function(valor){
+			this.setDataValue('facha',valor);
+		}
+	},
+	hora:{
+		type: Sequelize.TIME,
+		field: 'hora',
+		get: function(){
+			return this.getDataValue('hora');
+		},
+		set: function(valor){
+			this.setDataValue('hora',valor);
+		}
+	}
 },{
-	tableName: "aventon"
+	//el nombre del modelo de la tabla hace referencia al nombre de la tabla de la base de datos
+	freezeTableName: true,
+	tableName: 'aventon'
 });
 
-var Mensaje = sequelize.define('Mensaje',{
+
+var Mensaje = sequelize.define('mensaje',{
 	id_mensaje:{
 		primaryKey:true,
-		type:Sequelize.INTEGER
+		type:Sequelize.INTEGER,
+		unique: true,
+		field: 'id_mensaje',
+		allowNull: false
 	},
-	fecha:Sequelize.DATE,
-	hora:Sequelize.TIME,
-	contenido:Sequelize.TEXT
+	fecha:{
+		type:Sequelize.DATE,
+		field: 'fecha',
+		get: function(){
+			return this.getDataValue('fecha');
+		},
+		set: function(valor){
+			this.setDataValue('fecha',valor);
+		}
+	},
+	hora:{
+		type: Sequelize.TIME,
+		field: 'hora',
+		get: function(){
+			return this.getDataValue('hora');
+		},
+		set: function(valor){
+			this.setDataValue('hora',valor);
+		}
+	},
+	contenido:{
+		type: Sequelize.STRING,
+		field: 'contenido',
+		get: function(){
+			return this.getDataValue('contenido');
+		},
+		set: function(valor){
+			this.setDataValue('contenido',valor);
+		}
+	}
 },{
-	tableName: "mensaje"
+	freezeTableName: true,
+	tableName: 'mensaje'
 });
 
-var Notificacion = sequelize.define('Notificacion',{
+var Notificacion = sequelize.define('notificacion',{
 	id_Notificacion:{
 		primaryKey:true,
-		type:Sequelize.INTEGER
+		type:Sequelize.INTEGER,
+		unique: true,
+		allowNull: false,
+		field: 'id_notificacion'
 	},
-	tipo:Sequelize.TEXT,
-	estado:Sequelize.TEXT
+	tipo:{
+		type: Sequelize.STRING,
+		field: 'tipo',
+		get: function(){
+			return this.getDataValue('tipo');
+		},
+		set: function(valor){
+			this.setDataValue('tipo',valor);
+		}
+	},
+	estado:{
+		type: Sequelize.STRING,
+		field: 'estado',
+		get: function(){
+			return this.getDataValue('estado');
+		},
+		set: function(valor){
+			this.setDataValue('estado',valor);
+		}
+	}
 
 },{
-	tableName: "notificacion"
+	freezeTableName: true,
+	tableName: 'notificacion'
 });
 
-var Ruta = sequelize.define('Ruta',{
+
+
+var Ruta = sequelize.define('ruta',{
 	id_ruta:{
 		primaryKey:true,
-		type:Sequelize.INTEGER
+		type:Sequelize.INTEGER,
+		allowNull: false,
+		unique: true,
+		field: 'id_ruta'
 	},
-	fecha:Sequelize.DATE,
-	costo:Sequelize.FLOAT,
-	capacidad:Sequelize.INTEGER,
-	hora:Sequelize.TIME,
-	estado:Sequelize.TEXT,
-	puntosx:ARRAY(Sequelize.FLOAT),
-	puntosy:ARRAY(Sequelize.FLOAT)
+	fecha:{
+		type:Sequelize.DATE,
+		field: 'fecha',
+		allowNull: false,
+		get: function(){
+			return this.getDataValue('fecha');
+		},
+		set: function(valor){
+			this.setDataValue('fecha',valor);
+		}
+	},
+	costo:{
+		type:Sequelize.FLOAT,
+		field: 'costo',
+		get: function(){
+			return this.getDataValue('costo');
+		},
+		set: function(valor){
+			this.setDataValue('costo',valor);
+		}
+	},
+	capacidad:{
+		type: Sequelize.INTEGER,
+		field: 'capacidad',
+		allowNull: false,
+		get: function(){
+			return this.getDataValue('capacidad');
+		},
+		set: function(valor){
+			this.setDataValue('capacidad',valor);
+		}
+	},
+	hora:{
+		type: Sequelize.TIME,
+		allowNull: false,
+		field: 'hora',
+		get: function(){
+			return this.getDataValue('hora');
+		},
+		set: function(valor){
+			this.setDataValue('hora',valor);
+		}
+	},
+	estado:{
+		type: Sequelize.STRING,
+		allowNull: false,
+		field: 'estado',
+		get: function(){
+			return this.getDataValue('estado');
+		},
+		set: function(valor){
+			this.setDataValue('estado',valor);
+		}
+	},
+	puntosx:{
+		type: Sequelize.ARRAY(Sequelize.DOUBLE),
+		allowNull: true,
+		field: 'puntosx',
+		get: function(){
+			return this.getDataValue('puntosx');
+		},
+		set: function(valor){
+			this.setDataValue('puntosx',valor);
+		}
+	},
+	puntosy:{
+		type: Sequelize.ARRAY(Sequelize.DOUBLE),
+		allowNull: true,
+		field: 'puntosy',
+		get: function(){
+			return this.getDataValue('puntosy');
+		},
+		set: function(valor){
+			this.setDataValue('puntosy',valor);
+		}
+	}
 
 },{
-	tableName: "ruta"
+	freezeTableName: true,
+	tableName: 'ruta'
 });
 
 
-var Usuario_Ruta = Sequelize.define('Usuario_Ruta',{
+var Usuario_Ruta = sequelize.define('usuario_ruta',{
 	id_usuario_ruta:{
 		primaryKey:true,
-		type:Sequelize.INTEGER
+		type:Sequelize.INTEGER,
+		allowNull: false,
+		unique: true,
+		field: 'id_usuario_ruta'
 	},
-	lat:Sequelize.DOUBLE,
-	longit:Sequelize.DOUBLE
+	lat:{
+		type: Sequelize.DOUBLE,
+		field: 'lat',
+		get: function(){
+			return this.getDataValue('lat');
+		},
+		set: function(valor){
+			this.setDataValue('lat',valor);
+		}
+	},
+	longit:{
+		type: Sequelize.DOUBLE,
+		field: 'longit',
+		get: function(){
+			return this.getDataValue('longit');
+		},
+		set: function(valor){
+			this.setDataValue('longit',valor);
+		}
+	}
 
 },{
-	tableName: "usuario_ruta"
+	freezeTableName: true,
+	tableName: 'usuario_ruta'
 });
 
-var Carro = Sequelize.define('Carro',{
+
+var Carro = sequelize.define('carro',{
 	id_carro:{
 		primaryKey:true,
-		type:Sequelize.INTEGER
+		type:Sequelize.INTEGER,
+		field: 'id_carro',
+		allowNull: false,
+		unique: true
 	},
-	placa:Sequelize.TEXT,
-	foto:Sequelize.TEXT,
-	capacidad:Sequelize.INTEGER
+	placa:{
+		type: Sequelize.STRING,
+		field: 'placa',
+		get: function(){
+			return this.getDataValue('placa');
+		},
+		set: function(valor){
+			this.setDataValue('placa',valor);
+		}
+	},
+	foto:{
+		type: Sequelize.STRING,
+		field: 'foto',
+		get: function(){
+			return this.getDataValue('foto');
+		},
+		set: function(valor){
+			this.setDataValue('foto',valor);
+		}
+	},
+	capacidad:{
+		type: Sequelize.INTEGER,
+		field: 'capacidad',
+		allowNull: false,
+		get: function(){
+			return this.getDataValue('capacidad');
+		},
+		set: function(valor){
+			this.setDataValue('capacidad',valor);
+		}
+	}
 },{
-	tableName: "carro"
+	freezeTableName: true,
+	tableName: 'carro'
 });
 
-var Usuario = Sequelize.define('Usuario',{
+
+
+var Usuario = sequelize.define('usuario',{
 	id:{
 		primaryKey:true,
-		type:Sequelize.INTEGER
+		type:Sequelize.INTEGER,
+		allowNull: false,
+		unique: true,
+		field: 'id'
 	},
-	nick:Sequelize.TEXT,
-	password:Sequelize.TEXT,
-	nombre:Sequelize.TEXT,
-	apellidos:Sequelize.TEXT,
-	sexo:Sequelize.TEXT,
-	telefono:Sequelize.TEXT,
-	foto:Sequelize.TEXT
+	nick:{
+		type: Sequelize.STRING,
+		allowNull:false,
+		field: 'nick',
+		get: function(){
+			return this.getDataValue('nick');
+		},
+		set: function(valor){
+			this.setDataValue('nick',valor);
+		}
+
+	},
+	password:{
+		type: Sequelize.STRING,
+		allowNull: false,
+		field: 'password',
+		get: function(){
+			return this.getDataValue('password');
+		},
+		set: function(valor){
+			this.setDataValue('password',valor);
+		}
+	},
+	nombre:{
+		type: Sequelize.STRING,
+		allowNull: false,
+		field: 'nombre',
+		get: function(){
+			return this.getDataValue('nombre');
+		},
+		set: function(valor){
+			this.setDataValue('nombre',valor);
+		}
+	},
+	apellidos:{
+		type: Sequelize.STRING,
+		allowNull: false,
+		field: 'apellidos',
+		get: function(){
+			return this.getDataValue('apellidos');
+		},
+		set: function(valor){
+			this.setDataValue('apellidos',valor);
+		}
+	},
+	sexo:{
+		type: Sequelize.STRING,
+		allowNull: false,
+		field: 'sexo',
+		get: function(){
+			return this.getDataValue('sexo');
+		},
+		set: function(valor){
+			this.setDataValue('sexo',valor);
+		}
+	},
+	telefono:{
+		type: Sequelize.STRING,
+		allowNull: false,
+		field: 'telefonos',
+		get: function(){
+			return this.getDataValue('telefono');
+		},
+		set: function(valor){
+			this.setDataValue('telefono',valor);
+		}
+	},
+	foto:{
+		type: Sequelize.STRING,
+		allowNull: false,
+		field: 'foto',
+		get: function(){
+			return this.getDataValue('foto');
+		},
+		set: function(valor){
+			this.setDataValue('foto',valor);
+		}
+	}
 },{
-	tableName: "usuario"
+	freezeTableName: true,
+	tableName: 'usuario'
 });
 
-//RELACIONES ENTRE LAS TABLAS////////
 
-Usuario.hasOne(Carro,{
-	foreignKey: "id_carro",
-	as: "usuario"
+Usuario.belongsTo(Carro,{
+	foreignKey: 'id_carro',
+	as: 'Usuario_Carro'
 });
+Notificacion.belongsTo(Usuario,{
+	foreignKey: 'id_emisor',
+	as: 'Emisor_Notifica'
+});
+
+Notificacion.belongsTo(Usuario,{
+	foreignKey: 'id_receptor',
+	as: 'Receptor_Notificado'
+});
+
+Usuario.hasMany(Mensaje,{
+	foreignKey: 'id_emisor',
+	as: 'Emisor_Mensaje'
+});
+
+Usuario.hasMany(Mensaje,{
+	foreignKey: 'id_receptor',
+	as: 'Receptor_Mensaje'
+});
+
+Usuario.hasMany(Aventon,{
+	foreignKey: 'id_usuario_da',
+	as: 'Usuario_Da_Aventon'
+});
+
+Usuario.hasMany(Aventon,{
+	foreignKey: 'id_usuario_pide',
+	as: 'Usuario_Pide_Aventon'
+});
+
 
 Usuario.hasMany(Ruta,{
-	foreignKey: "idcreador",
-	as: "ruta"
+	foreignKey: 'idcreador',
+	as: 'Usuario_tiene_Rutas'
+});
+
+
+Ruta.hasMany(Usuario_Ruta,{
+	foreignKey: 'id_ruta',
+	as: 'Ruta_tiene_Usuarios'
 });
 
 Usuario.hasMany(Usuario_Ruta,{
-	foreignKey: "id_usuario",
-	as: "usuario_ruta"
+	foreignKey: 'id_usuario',
+	as: 'Usuario_anade_usuariosRutas'
 });
 
-Ruta.hasMany(Usuario_Ruta,{
-	foreignKey: "id_ruta",
-	as: "usuario_ruta"
-});
 
-Usuario.hasMany(Mensaje,{
-	foreignKey: "id_emisor",
-	as: "mensaje"
-});
 
-Usuario.hasMany(Mensaje,{
-	foreignKey: "id_receptor",
-	as: "mensaje"
-});
 
-Notificacion.hasOne(Usuario,{
-	foreignKey: "id_emisor",
-	as: "notificacion"
-});
-
-Notificacion.hasOne(Usuario,{
-	foreignKey: "id_receptor",
-	as: "notificacion"
-});
-
-Usuario.hasMany(Aventon,{
-	foreignKey: "usuario_pide"
-	as: "aventon"
-});
-
-Usuario.hasMany(Aventon,{
-	foreignKey: "usuario_da"
-	as: "aventon"
-});
-///////////--------------------------
-
-exports.module.Aventon = Aventon;
-exports.module.Mensaje = Mensaje;
-exports.module.Notificacion = Notificacion;
-exports.module.Ruta = Ruta;
-exports.module.Usuario_Ruta = Usuario_Ruta;
-exports.module.Carro = Carro;
-exports.module.Usuario = Usuario;
+module.exports.Mensaje = Mensaje;
+module.exports.Notificacion = Notificacion;
+module.exports.Ruta = Ruta;
+module.exports.Usuario_Ruta = Usuario_Ruta;
+module.exports.Carro = Carro;
+module.exports.Usuario = Usuario;
+module.exports.Aventon = Aventon;

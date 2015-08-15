@@ -1,12 +1,32 @@
 {
-  "name": "MVC-Express-Application",
-  "description": "An Express.js app using mvc",
-  "version": "0.0.1",
+  "name": "proyectofinal",
+  "version": "1.0.0",
+  "description": "Proyecto de desarrollo de aplicaciones web ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigoCastroReyes/PoolEspol.git"
+  },
+  "keywords": [
+    "PoolEspol"
+  ],
+  "author": "Grupon6",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigoCastroReyes/PoolEspol/issues"
+  },
+  "homepage": "https://github.com/rodrigoCastroReyes/PoolEspol#readme",
   "dependencies": {
-    "express": "4.13.1",
-    "pg": "^2.6.2",
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "pg": "^4.4.1",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^3.5.1",
-    "serve-favicon": "^2.1.6",
+    "serve-favicon": "^2.3.0",
     "swig": "^1.4.2"
   }
 }
