@@ -19,10 +19,9 @@ var  Aventon = sequelize.define('aventon',{
 	id_aventon:{
 		primaryKey:true,
 		type:Sequelize.INTEGER,
-		unique: true,
+		autoIncrement: true,
 		//field hago referencia al nombre de la columna de la tabla aventon
-		field: 'id_aventon',
-		allowNull: false
+		field: 'id_aventon'
 	},
 	longitud:{
 		type: Sequelize.DOUBLE,
@@ -75,9 +74,8 @@ var Mensaje = sequelize.define('mensaje',{
 	id_mensaje:{
 		primaryKey:true,
 		type:Sequelize.INTEGER,
-		unique: true,
-		field: 'id_mensaje',
-		allowNull: false
+		autoIncrement: true,
+		field: 'id_mensaje'
 	},
 	fecha:{
 		type:Sequelize.DATE,
@@ -100,7 +98,7 @@ var Mensaje = sequelize.define('mensaje',{
 		}
 	},
 	contenido:{
-		type: Sequelize.STRING,
+		type: Sequelize.TEXT,
 		field: 'contenido',
 		get: function(){
 			return this.getDataValue('contenido');
@@ -118,8 +116,7 @@ var Notificacion = sequelize.define('notificacion',{
 	id_Notificacion:{
 		primaryKey:true,
 		type:Sequelize.INTEGER,
-		unique: true,
-		allowNull: false,
+		autoIncrement: true,
 		field: 'id_notificacion'
 	},
 	tipo:{
@@ -154,8 +151,7 @@ var Ruta = sequelize.define('ruta',{
 	id_ruta:{
 		primaryKey:true,
 		type:Sequelize.INTEGER,
-		allowNull: false,
-		unique: true,
+		autoIncrement: true,
 		field: 'id_ruta'
 	},
 	fecha:{
@@ -245,8 +241,7 @@ var Usuario_Ruta = sequelize.define('usuario_ruta',{
 	id_usuario_ruta:{
 		primaryKey:true,
 		type:Sequelize.INTEGER,
-		allowNull: false,
-		unique: true,
+		autoIncrement: true,
 		field: 'id_usuario_ruta'
 	},
 	lat:{
@@ -281,8 +276,8 @@ var Carro = sequelize.define('carro',{
 		primaryKey:true,
 		type:Sequelize.INTEGER,
 		field: 'id_carro',
-		allowNull: false,
-		unique: true
+		autoIncrement: true
+	
 	},
 	placa:{
 		type: Sequelize.STRING,
@@ -326,8 +321,7 @@ var Usuario = sequelize.define('usuario',{
 	id:{
 		primaryKey:true,
 		type:Sequelize.INTEGER,
-		allowNull: false,
-		unique: true,
+		autoIncrement: true,
 		field: 'id'
 	},
 	nick:{
@@ -354,7 +348,7 @@ var Usuario = sequelize.define('usuario',{
 		}
 	},
 	nombre:{
-		type: Sequelize.STRING,
+		type: Sequelize.TEXT,
 		allowNull: false,
 		field: 'nombre',
 		get: function(){
@@ -365,7 +359,7 @@ var Usuario = sequelize.define('usuario',{
 		}
 	},
 	apellidos:{
-		type: Sequelize.STRING,
+		type: Sequelize.TEXT,
 		allowNull: false,
 		field: 'apellidos',
 		get: function(){
@@ -387,7 +381,7 @@ var Usuario = sequelize.define('usuario',{
 		}
 	},
 	telefono:{
-		type: Sequelize.STRING,
+		type: Sequelize.TEXT,
 		allowNull: false,
 		field: 'telefonos',
 		get: function(){
