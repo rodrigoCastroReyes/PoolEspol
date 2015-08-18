@@ -25,16 +25,17 @@ var routes=require('./app/router.js');
 app.use('/',routes);
 
 app.listen(app.get('port'));
+//**********************************
 
 var carro = new Object();
-carro.placa = "KJJSq";
+carro.placa = "KJJSqAA";
 carro.foto = "/user/document/picture";
 carro.capacidad = 5;
 
 var usuario = new Object();
-usuario.nick = "kevincito";
+usuario.nick = "kevin";
 usuario.password = "kjdk";
-usuario.nombre = "Kevin Andres";
+usuario.nombre = "Kevin";
 usuario.apellidos = "Ortiz Merchan";
 usuario.sexo = "masculino";
 usuario.telefono = '0997298159';
@@ -43,15 +44,15 @@ usuario.foto = "/user/document";
 var mensaje = new Object();
 mensaje.fecha = new Date();
 mensaje.hora = new Date();
-mensaje.contenido = "hola como estas te ves bien";
+mensaje.contenido = "hola te ves bien";
 
 var notificacion = new Object();
-notificacion.tipo = "pendiente";
-notificacion.estado = "pendiente";
+notificacion.tipo = "exclusivo";
+notificacion.estado = "exclusivo";
 
 var aventon = new Object();
-aventon.longitud = 2.33343444;
-aventon.latitud = -3.33434334;
+aventon.longitud = 2.43444;
+aventon.latitud = -3.0034334;
 aventon.fecha = new Date();
 aventon.hora = new Date();
 
@@ -61,22 +62,23 @@ ruta.costo = 2.34;
 ruta.capacidad = 3;
 ruta.hora = new Date();
 ruta.estado = "pendiente";
-ruta.puntosx = [2.323232323,2.333333333,3.23333333,4.56666666];
-ruta.puntosy = [1.223333333,2.33322323, 3,23333333, 1.34444444];
+ruta.puntosx = [2.321111323,2.331111333,3.23333333,4.56666666];
+ruta.puntosy = [1.221111333,2.331111123, 3,23333333, 1.34444444];
 
 var usuarioruta = new Object();
-usuarioruta.lat = 23.4444;
-usuarioruta.longit = 233.4444;
+usuarioruta.lat = 23.444;
+usuarioruta.longit = 23.4444;
 
-
-modulo_guardado.guardarCarro(carro);
+/*
+modulo_guardado.guardarCarro(carro); 
 modulo_guardado.guardarUsuario(usuario);
 modulo_guardado.guardarMensaje(mensaje);
 modulo_guardado.guardarNotificaciones(notificacion);
 modulo_guardado.guardarAventon(aventon);
 modulo_guardado.guardarRuta(ruta);
 modulo_guardado.guardarUsuarioRuta(usuarioruta);
-
+*/
+modulo_guardado.actualizarCarro(1,carro);
 
 
 
