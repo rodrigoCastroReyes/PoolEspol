@@ -50,7 +50,7 @@ var  Aventon = sequelize.define('aventon',{
 			return this.getDataValue('fecha');
 		},
 		set: function(valor){
-			this.setDataValue('facha',valor);
+			this.setDataValue('fecha',valor);
 		}
 	},
 	hora:{
