@@ -26,7 +26,7 @@ app.use('/',routes);
 
 app.listen(app.get('port'));
 //**********************************
-
+/*
 var carro = new Object();
 carro.placa = "KJJSqAA";
 carro.foto = "/user/document/picture";
@@ -68,7 +68,7 @@ ruta.puntosy = [1.221111333,2.331111123, 3,23333333, 1.34444444];
 var usuarioruta = new Object();
 usuarioruta.lat = 23.444;
 usuarioruta.longit = 23.4444;
-
+*/
 /*
 modulo_guardado.guardarCarro(carro); 
 modulo_guardado.guardarUsuario(usuario);
@@ -78,7 +78,6 @@ modulo_guardado.guardarAventon(aventon);
 modulo_guardado.guardarRuta(ruta);
 modulo_guardado.guardarUsuarioRuta(usuarioruta);
 */
-modulo_guardado.actualizarCarro(1,carro);
 
 
 

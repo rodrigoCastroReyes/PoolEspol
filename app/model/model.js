@@ -82,13 +82,19 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 };
 
  exports.guardarRuta = function(_ruta){
+ 	var puntosx = [];
+ 	var puntosy = [];
+ 	puntosx[0]=_ruta.ruta[0].x;
+ 	puntosx[1]=_ruta.ruta[1].x;
+ 	puntosy[0]=_ruta.ruta[0].y;
+ 	puntosy[1]=_ruta.ruta[1].y;	
 	modelos.Ruta.create({fecha: _ruta.fecha,
-						 costo: _ruta.costo, 
+						 costo: _ruta.precio, 
 						 capacidad: _ruta.capacidad, 
 						 hora: _ruta.hora, 
-						 estado: _ruta.estado,
-						 puntosx: _ruta.puntosx, 
-						 puntosy: _ruta.puntosy, 
+						 estado: "satisfecho",
+						 puntosx: puntosx, 
+						 puntosy: puntosy, 
 						 idcreador: _ruta.idcreador})
 	.then( function (ruta){
 		console.log(ruta.get('fecha'));

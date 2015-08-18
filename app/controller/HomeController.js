@@ -37,7 +37,7 @@ exports.Cerrar=function(request,response){
 
 exports.Other = function(request, response){
 	console.log("Got response: " + response.statusCode);
-	//db.guardarRutas(request.body);
+	db.guardarRuta(request.body);
     console.log(request.body);
 	console.log("entre");
 };
