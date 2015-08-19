@@ -1,22 +1,13 @@
-var mapProp, mapProp2, mapProp3;
+var socket;
 
-var puntoSolicitud;
-
-function punto(x,y) { 
-  this.x = x;
-  this.y = y;
-}
-
-//datos que llegan desde el servidor
-var ptoAventon = new punto(-2.2845962215476465 ,-79.88536566495895);
-
-var ruta1, ruta2;
+var usuario;
+var puntoSolicitud;//Solicitud
 
 /*Ruta*/
 function crearVisualizadorRuta(RutaInfo){
   var contenedor=document.createElement('div');
   contenedor.setAttribute('class','VisualizadorRuta');
-  contenedor_rutas.appendChild(contenedor);
+  contenedor_rutas.insertBefore(contenedor,contenedor_rutas.firstChild);
 
   //crear menu superior del visualizador: nickname,mensajes
   var menuSuperior=crearMenuSuperior(RutaInfo);
@@ -35,7 +26,6 @@ function crearVisualizadorRuta(RutaInfo){
   };
   //crea el mapa y ubica los puntas de la ruta sobre el
   crearMapa(RutaInfo.ruta,contenedorMapa,mapOptions);
-
   //crear menu inferior del visualizador: agregar, precio, capacidad
   var menuInferior=crearMenuInferior(RutaInfo,true);
   contenedor.appendChild(menuInferior);
@@ -120,7 +110,8 @@ function crearMenuInferior(RutaInfo,opcionesRuta){
   var infoAgregar=document.createElement('div');
   infoAgregar.setAttribute('class','VisualizadorRuta-opcion u-flex_start');
   var iconoAgregar=document.createElement('span');
-  iconoAgregar.setAttribute('data-idPublicador',RutaInfo["idPublicador"]);
+  iconoAgregar.setAttribute('data-idPublicador',RutaInfo["idPublicador"]);//idPublicador: dueño de la ruta
+  
   iconoAgregar.setAttribute('class','VisualizadorRuta-info icon-plus u-cursor_pointer');
   iconoAgregar.addEventListener('click',solicitarRuta,false);
   infoAgregar.appendChild(iconoAgregar);
@@ -135,6 +126,9 @@ function crearMenuInferior(RutaInfo,opcionesRuta){
   menuInferior.appendChild(infoHorario)
   
   if(opcionesRuta==true){//visualizador ruta
+
+    iconoAgregar.setAttribute('data-idRuta',RutaInfo["idRuta"]);
+
     var contRuta=document.createElement('div');
     contRuta.setAttribute('class','VisualizadorRuta-opcion u-flex_end');
     //precio de la ruta
@@ -152,6 +146,9 @@ function crearMenuInferior(RutaInfo,opcionesRuta){
     contRuta.appendChild(iconoRuta);
     contRuta.appendChild(capacidad);
     menuInferior.appendChild(contRuta);
+  }else{
+    iconoAgregar.setAttribute('data-idAventon',RutaInfo["idAventon"]);
+    iconoAgregar.addEventListener('click',aceptarAventon,false);
   }
   return menuInferior;
 }
@@ -161,7 +158,7 @@ function crearMenuInferior(RutaInfo,opcionesRuta){
 function crearVisualizadorAventon(AventonInfo){
   var contenedor=document.createElement('div');
   contenedor.setAttribute('class','VisualizadorRuta');
-  contenedor_rutas.appendChild(contenedor);
+  contenedor_rutas.insertBefore(contenedor,contenedor_rutas.firstChild);
 
   var menuSuperior=crearMenuSuperior(AventonInfo);
   contenedor.appendChild(menuSuperior);
@@ -188,31 +185,42 @@ function crearVisualizadorAventon(AventonInfo){
   contenedor.appendChild(menuInferior);
 }
 
+function aceptarAventon(event){
+  console.log("Acepte llevar a este cojudo");
+  //se envia una notificacion al solicitante del aventon que el usuario desea llevarlo
+  var idAventon=this.getAttribute('data-idAventon');
+  var idEmisor=this.getAttribute('data-idPublicador');
+  var idReceptor=usuario.id;
+  var aventon={id:idAventon,emisor:idEmisor,receptor:idReceptor}
+  socket.emit('aceptarAventon',aventon);
+}
+
 /*Solicitud*/
 function solicitarRuta(event){
   //evento generado cuando el usuario da click en el + de un visualizador de ruta
   //se levanta un mapa que le permite al usuario seleccionar el punto en donde desea que lo lleven
-  var infoRuta;
-  infoRuta=JSON.parse(sessionStorage.getItem(this.getAttribute('data-idPublicador')));
-  //obtiene los datos que fueron almacenados en sessionStorage
-  if(infoRuta!=null){
-    console.log(infoRuta);
+  var idRuta=this.getAttribute('data-idRuta');
+  var rutaActual=usuario.consultarRuta(idRuta);
+  var solicitud=usuario.obtenerSolicitud(idRuta);//verifica si ya existe una solicitud para esta ruta
+  if(rutaActual!=null && solicitud==null ){
     $("#contenedor_rutas").css('opacity','0.5');
     $("#OpcionAgregar").css('visibility','visible');
     $("#OpcionAgregar").css('opacity','1');
+    btnAceptarAgregar.setAttribute('data-idRuta',idRuta);//guarda el id de la ruta en el boton aceptar
     var contenedor=document.getElementById('MapaAgregar');
     var mapOptions = {
       zoom: 14,
-      center:new google.maps.LatLng(infoRuta.ruta[0].x,infoRuta.ruta[0].y),
+      center:new google.maps.LatLng(rutaActual.ruta[0].x,rutaActual.ruta[0].y),
       mapTypeId:google.maps.MapTypeId.ROADMAP
     };
-    var map=crearMapa(infoRuta.ruta,contenedor,mapOptions)
+    var map=crearMapa(rutaActual.ruta,contenedor,mapOptions)
     google.maps.event.addListener(map, 'click', function(event) {
         marcarPunto(event.latLng,map);
     });
+    //se crea una nueva solicitud para la ruta actual
+    usuario.agregarSolicitud(idRuta,this.getAttribute('data-idPublicador'));
   }
 }
-
 
 function marcarPunto(location, map) {//marca el punto en donde un usuario espera que lo lleven en el mapa de la ruta de otro usuario
   if ( puntoSolicitud ) {
@@ -226,8 +234,12 @@ function marcarPunto(location, map) {//marca el punto en donde un usuario espera
   }
 }
 
-function guardarSolicitud(){
-  console.log(puntoSolicitud.position);//se debe guardar el punto de esta solicitu + informacion adicional: 
+function guardarSolicitud(event){
+  var idRuta=this.getAttribute('data-idRuta');
+  var solicitud=usuario.obtenerSolicitud(idRuta);//se agregan campos faltantes
+  solicitud.latitud=puntoSolicitud.position.lat();
+  solicitud.longitud=puntoSolicitud.position.lng();
+  socket.emit('solicitarRuta',solicitud);
   puntoSolicitud=null;
   cerrarSolicitarRuta();
 }
@@ -239,14 +251,12 @@ function cerrarSolicitarRuta(){
 }
 
 /*****/
-
 function procesarRutas(event){
-  var respond = event.target.responseText;
-  var listRutas = JSON.parse(respond);//contiene la informacion de las rutas
-  rutasInfo=listRutas.rutas;
+  var respond = JSON.parse(event.target.responseText);
+  var rutasInfo=respond.rutas;
   for(var i=0;i<rutasInfo.length;i++){
     crearVisualizadorRuta(rutasInfo[i]);
-    sessionStorage.setItem(rutasInfo[i]['idPublicador'],JSON.stringify(rutasInfo[i]));//se guarda la informasion en sessionStorage
+    usuario.agregarInfoRuta(rutasInfo[i]);
   }
 }
 
@@ -255,16 +265,20 @@ function procesarAventones(event){
   var aventonesInfo=respond.aventones;
   for(var i=0;i<aventonesInfo.length;i++){
     crearVisualizadorAventon(aventonesInfo[i]);
+    usuario.agregarInfoAventon(aventonesInfo[i]);
   }
 }
 
-
 function cargarMapas(event){
   //extraer informacion de rutas
+  usuario=new Usuario(1,"rodrigo","rodrigo2323");
+
+  //extracion de informacion de rutas
   var request = new XMLHttpRequest();
   request.open("GET","JSON/rutas.json",true);
   request.addEventListener('load',procesarRutas ,false);
   request.send(null);
+
   //extraer informacion de aventones
   var request_aventones = new XMLHttpRequest();
   request_aventones.open("GET", "JSON/aventones.json", true);
@@ -274,7 +288,28 @@ function cargarMapas(event){
   btnAceptarAgregar.addEventListener('click',guardarSolicitud,false);
   btnCancelarAgregar.addEventListener('click',cerrarSolicitarRuta,false);
   btnCloseAgregar.addEventListener('click',cerrarSolicitarRuta,false);
+
+  connectSocket();
+
 }
 
+function connectSocket(){
+  socket = io.connect();
+  
+  socket.on('actualizarRuta',function(infoRuta){
+    usuario.agregarInfoRuta(infoRuta);
+    crearVisualizadorRuta(infoRuta);//se crea el visualizador de la ruta
+  });
+  
+  socket.on('actualizarAventon',function(infoAventon){
+    usuario.agregarInfoRuta(infoRuta);
+    crearVisualizadorAventon(infoAventon);//se crea el visualizador de la ruta
+  });
+
+  socket.on('actualizarNotificacion',function(notificacion){
+    crearNotificacion(notificacion);
+  });
+
+}
 
 google.maps.event.addDomListener(window, 'load',cargarMapas);

@@ -70,11 +70,10 @@ function guardarDatos(evt){
 			$("#datosPersona .input_text:nth-child(3)").focus().after('<span class="error">Solo se ingresa numeros</span>'); 
 		}
 		if(!inputs[3].checkValidity()){
-					
 			$("#datosPersona .input_text:nth-child(4)").focus().after('<span class="error">Solamente datos alfabeticos y de longitud mayor a 6 caracteres</span>'); 
-
 		}
 		inputs[0].focus();
+		datosPersona.submit();
 	}else{
 		botonEditarUsuario.style.display='flex'
 		botonGuardarUsuario.style.display = 'none';

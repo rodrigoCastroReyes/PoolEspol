@@ -30,7 +30,7 @@ function salir(){
 		botonesOff()
 	}
 
-	if(chat!=null){
+	if(chat!=null){//chat
 		chat.style.opacity=0.5;
 		botonesOff()
 	}
@@ -56,7 +56,7 @@ function cancelarCierre(){
 		botonesOn()
 	}
 
-	if(chat!=null){
+	if(chat!=null){//chat
 		chat.style.opacity=1;
 		botonesOn()
 	}

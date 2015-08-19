@@ -21,30 +21,37 @@ function crearInfoNotificacion(InfoNot){
 	var contTitulo=document.createElement('div');
 	var titulo=document.createElement('h3');
 	titulo.setAttribute('class','Notificacion-titulo');
-	titulo.innerHTML=InfoNot['publicador'] + " ha solicitado un aventon";
-	contTitulo.appendChild(titulo);
 
-	var contBotones=document.createElement('div');
-	contBotones.setAttribute('class','Notificacion-Botones');
+	if(InfoNot['tipo']=="Solicitud"){
+		titulo.innerHTML=InfoNot['publicador'] + " ha solicitado unirse a tu ruta";
+		contTitulo.appendChild(titulo);
 
-	var inputAceptar=document.createElement('input');
-	inputAceptar.setAttribute('class','Notificacion-boton');
-	inputAceptar.setAttribute('type','submit');
+		var contBotones=document.createElement('div');
+		contBotones.setAttribute('class','Notificacion-Botones');
 
-	inputAceptar.setAttribute('id','btnAceptar');
-	inputAceptar.setAttribute('value','Aceptar');
+		var inputAceptar=document.createElement('input');
+		inputAceptar.setAttribute('class','Notificacion-boton');
+		inputAceptar.setAttribute('type','submit');
 
-	var inputCancelar=document.createElement('input');
-	inputCancelar.setAttribute('class','Notificacion-boton');
-	inputCancelar.setAttribute('type','submit');
-	inputCancelar.setAttribute('id','btnCancelar');
-	inputCancelar.setAttribute('value','Cancelar');
+		inputAceptar.setAttribute('id','btnAceptar');
+		inputAceptar.setAttribute('value','Aceptar');
 
-	contBotones.appendChild(inputAceptar);
-	contBotones.appendChild(inputCancelar);
+		var inputCancelar=document.createElement('input');
+		inputCancelar.setAttribute('class','Notificacion-boton');
+		inputCancelar.setAttribute('type','submit');
+		inputCancelar.setAttribute('id','btnCancelar');
+		inputCancelar.setAttribute('value','Cancelar');
 
-	info.appendChild(contTitulo);
-	info.appendChild(contBotones);
+		contBotones.appendChild(inputAceptar);
+		contBotones.appendChild(inputCancelar);
+
+		info.appendChild(contTitulo);
+		info.appendChild(contBotones);
+	}else{
+		titulo.innerHTML=InfoNot['publicador'] + "ha aceptado tu solicitud";
+	}
+
+	
 
 	return info;
 }
@@ -59,9 +66,7 @@ function crearNotificacion(InfoNotificacion){
 
 	contenedor.appendChild(contFoto);
 	contenedor.appendChild(info);
-
-	Contenedor_Notificaciones.appendChild(contenedor);
-
+	Contenedor_Notificaciones.insertBefore(contenedor,Contenedor_Notificaciones.firstChild);
 }
 
 function crearNotificacionGrande(InfoNotificacion){

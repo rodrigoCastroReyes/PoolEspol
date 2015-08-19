@@ -13,25 +13,8 @@ var directionsService=new google.maps.DirectionsService();
 var directionsDisplay;
 
 //objeto usado para almacenar la informacion de una ruta
-var infoRuta={
-  idPublicador:"",
-  publicador:"",
-  urlNickname:"",
-  fecha:"",
-  hora:"",
-  precio:0.0,
-  capacidad:0,
-  ruta:[]
-};
-
-var infoAventon={
-  idPublicador:"",
-  publicador:"",
-  urlNickname:"",
-  fecha:"",
-  hora:"",
-  ubicacion:{}
-}
+var infoRuta=new InfoRuta();
+var infoAventon=new InfoAventon();
 
 //Geolocalizacion
 function queryCoords(){//consulta al navegador si es posible usar geolocation
@@ -161,13 +144,8 @@ function guardarRuta(){
   if(valid){
     guardarPuntos();
     guardarDatos();
-    //se envia los datos
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("POST", "/other");
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.send(JSON.stringify(infoRuta));
-
-    crearVisualizadorRuta(infoRuta);//se crea el visualizador de la ruta
+    //se envia los datos al servidor
+    socket.emit('nuevaRuta',infoRuta);
     //document.forms["formRuta"].submit();
     console.log(infoRuta);
     cerrarRuta();//se cierra el cuadro publicador de ruta
@@ -203,7 +181,7 @@ function guardarPuntos(){
 
 function guardarDatos(){
   infoRuta.publicador=nickname.innerHTML;
-  infoRuta.urlNickname="imagenes/Oswaldo.jpg";
+  infoRuta.urlNickname="imagenes/oswaldo.jpg";
   infoRuta.capacidad=parseInt(RutaCapacidad.value);
   infoRuta.precio=parseFloat(RutaCosto.value);
   infoRuta.fecha=Fecha.value;
@@ -258,20 +236,15 @@ function guardarAventon(){
   var valid=document.forms["formAventon"].checkValidity();
   if(valid){
     infoAventon.publicador=nickname.innerHTML;
-    infoAventon.urlNickname="imagenes/Oswaldo.jpg"
+    infoAventon.urlNickname="imagenes/oswaldo.jpg"
     infoAventon.fecha=Fecha_Aventon.value;
     infoAventon.hora=Hora_Aventon.value;
     infoAventon.ubicacion={
       'x': puntoAventon.position.lat(),
       'y': puntoAventon.position.lng()
     }
-
-    crearVisualizadorAventon(infoAventon);
-
-    console.log(infoAventon);
-
+    socket.emit('nuevoAventon',infoAventon);
     cerrarAventon();
-
     puntoAventon=null;
     infoAventon={};//se reinicia el objeto infoAventon
     infoAventon.publicador;
