@@ -22,7 +22,7 @@ function queryCoords(){//consulta al navegador si es posible usar geolocation
       navigator.geolocation.getCurrentPosition(getCoords,errorFound);
       //se obtiene las posiciones actuales
     }else{
-      alert("Actualiza tu guevada");
+      alert("Actualiza tus coordenadas");
     }
 }
 
