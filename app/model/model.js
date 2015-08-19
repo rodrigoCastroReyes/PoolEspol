@@ -4,8 +4,6 @@ var modelos = require('../model/PoolEspoldb.js');
 	
 /*
 FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
-
-
 */
  exports.guardarCarro = function (datosCarro){
 	modelos.Carro.create({placa: datosCarro.placa, 
