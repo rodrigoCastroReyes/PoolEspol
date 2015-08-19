@@ -90,10 +90,10 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 						 costo: _ruta.precio, 
 						 capacidad: _ruta.capacidad, 
 						 hora: _ruta.hora, 
-						 estado: "satisfecho",
+						 estado: "pendiente",
 						 puntosx: puntosx, 
 						 puntosy: puntosy, 
-						 idcreador: _ruta.idcreador})
+						 idcreador: _ruta.idPublicador})
 	.then( function (ruta){
 		console.log(ruta.get('fecha'));
 		console.log(ruta.get('costo'));

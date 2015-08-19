@@ -28,4 +28,16 @@ http.listen(app.get('port'),function(){
     console.log("Pool Espol Aplication running in a port " + app.get('port'));
 });
 
+/*
+var modulo_guardado=require('./app/model/model.js');
+var usuario = new Object();
+usuario.nick = "kevin";
+usuario.password = "kjdk";
+usuario.nombre = "Kevin";
+usuario.apellidos = "Ortiz Merchan";
+usuario.sexo = "masculino";
+usuario.telefono = '0997298159';
+usuario.foto = "/user/document";
+modulo_guardado.guardarUsuario(usuario);*/
+
 realtime.socketNoticias(http);

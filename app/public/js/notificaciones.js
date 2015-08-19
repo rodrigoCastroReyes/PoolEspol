@@ -51,8 +51,6 @@ function crearInfoNotificacion(InfoNot){
 		titulo.innerHTML=InfoNot['publicador'] + "ha aceptado tu solicitud";
 	}
 
-	
-
 	return info;
 }
 

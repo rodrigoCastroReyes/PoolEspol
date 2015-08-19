@@ -181,6 +181,7 @@ function guardarPuntos(){
 
 function guardarDatos(){
   infoRuta.publicador=nickname.innerHTML;
+  infoRuta.idPublicador=1;
   infoRuta.urlNickname="imagenes/oswaldo.jpg";
   infoRuta.capacidad=parseInt(RutaCapacidad.value);
   infoRuta.precio=parseFloat(RutaCosto.value);
@@ -188,7 +189,6 @@ function guardarDatos(){
   infoRuta.hora=Hora.value;
 }
 /****/
-
 /*Aventon*/
 function crearAventon(event){
   var posicion=new google.maps.LatLng(miPosicion.latitud,miPosicion.longitude) //se crea un punto en el mapa con mi posicion actual

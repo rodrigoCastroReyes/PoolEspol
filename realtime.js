@@ -1,3 +1,5 @@
+var db = require('./app/model/model.js');
+
 function socketNoticias(http){
     var clients={};//tabla de hash con referencia a las conecciones de los clientes
     var io = require('socket.io')(http);
@@ -11,6 +13,7 @@ function socketNoticias(http){
         });
 
         client.on('nuevaRuta',function(infoRuta){
+            db.guardarRuta(infoRuta);
             for (var key in clients){
                 if(key!=client.id)
                     clients[key].emit('actualizarRuta',infoRuta);//broadcast de la nueva ruta a los usuarios conectados
