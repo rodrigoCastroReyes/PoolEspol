@@ -90,6 +90,9 @@ function registrar(){
 function login(){
 	var valid=document.formulario_inicio_sesion.checkValidity();
 	if(valid){
+		/*autenticacion con espol, si el usuario existe en la base de espol, 
+		enviar el formulario :document.formulario_inicio_sesion.submit();
+		si no existe, vale trozo*/
 		document.formulario_inicio_sesion.submit();
 	}else{
 		var inputs=document.querySelectorAll("#formulario_inicio_sesion input");

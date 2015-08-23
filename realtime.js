@@ -20,39 +20,26 @@ function socketNoticias(http){
             }
         });
 
-        client.on('solicitarRuta',function(solicitud){
-            /*
-            update usuario-ruta
-            var idReceptor=solicitud.idReceptor;
-            solicitud.idRuta 
-            solicitud.idReceptor
-            solicitud.latitud 
-            solicitud.longitud */
-            //buscar en clients: id==idReceptor para enviar notificacion
-            //con el idReceptor recuperar: nickname, urlnickname del receptor de la notificacion
-            var notificacion={};//construir la notificacion
-            notificacion.idEmisor=1234;
-            notificacion.publicador='Oswaldo';
-            notificacion.urlNickname='imagenes/oswaldo.jpg';
-            notificacion.tipo='Solicitud';
-            client.broadcast.emit('actualizarNotificacion',notificacion);
+        client.on('solicitarRuta',function(solicitud){ 
+            db.enviarNotificacion(solicitud,client); 
         });
 
         client.on('nuevoAventon',function(infoAventon){
+            db.guardarAventon(infoAventon);
             for (var key in clients){
                 if(key!=client.id)
                     clients[key].emit('actualizarAventon',infoAventon);//broadcast de la nueva ruta a los usuarios conectados
             }
         });
 
-        client.on('aceptarAventon',function(aventon){
+        client.on('aceptarAventon',function(confirmacion){
             /*update aventon
             var notificacion={};//construir la notificacion
             notificacion.idEmisor=aventon.emisor;
             notificacion.publicador='';
             notificacion.urlNickname='';
             client.broadcast.emit('actualizarNotificacion',notificacion);*/
-            console.log(aventon);
+            db.enviarConfirmacion(confirmacion,client);
         });    
     }); 
 }

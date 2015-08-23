@@ -43,11 +43,11 @@
 							<label for="contraseña" class="etiqueta ">Contraseña:</label>
 						</div>
 						<div class="tabla_item columna_flexible flex_start">
-							<form id="formulario_inicio_sesion" name="formulario_inicio_sesion" method="post" action="/LogIn">
+							<form id="formulario_inicio_sesion" name="formulario_inicio_sesion" method="post" action="/login">
 								<input class="entrada_texto" name="usuario" id="usuario" type="text" placeholder="Usuario"
-								pattern="[a-z]{6,20}"
+								pattern="[a-z]{5,20}"
 								autofocus="autofocus" required>
-								<input class="entrada_texto" name="contraseña" id="contraseña" type="password" 
+								<input class="entrada_texto" name="contraseña" id="contraseña" type="password"
 								placeholder="Contraseña" 
 								pattern="[A-Za-z0-9]{6,20}"
 								required>

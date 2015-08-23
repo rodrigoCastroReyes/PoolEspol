@@ -48,7 +48,9 @@ function crearInfoNotificacion(InfoNot){
 		info.appendChild(contTitulo);
 		info.appendChild(contBotones);
 	}else{
-		titulo.innerHTML=InfoNot['publicador'] + "ha aceptado tu solicitud";
+		titulo.innerHTML=InfoNot['publicador'] + " ha aceptado llevarte";
+		contTitulo.appendChild(titulo);
+		info.appendChild(contTitulo);
 	}
 
 	return info;

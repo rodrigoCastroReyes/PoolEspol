@@ -1,7 +1,52 @@
 //var pg = require('pg');
 //var conString = "tcp://postgres:postgres@localhost:5432/PoolEspol";
 var modelos = require('../model/PoolEspoldb.js');
-	
+
+exports.encontrarUsuario = function(nickname){
+	return modelos.Usuario.findOne({
+		where:{
+			nick:nickname
+		}
+	});
+}
+
+/*Querys*/
+exports.enviarNotificacion=function(solicitud,socketClient){
+	modelos.Usuario.findById(solicitud.idEmisor).then(function(usuario){
+        if(usuario!=null){
+        	var dueñoRuta=usuario.dataValues;
+            var notificacion={};//construir la notificacion
+            notificacion.idEmisor=solicitud.idEmisor;
+            notificacion.idReceptor=solicitud.idReceptor;
+            notificacion.publicador=dueñoRuta.nick;
+            notificacion.urlNickname=dueñoRuta.foto;
+            notificacion.tipo='Solicitud';
+            socketClient.broadcast.emit('actualizarNotificacion',notificacion);
+            //guardar notificacion
+            //guardar en tabla usuario-ruta
+            /*update usuario-ruta
+            solicitud.idRuta 
+            solicitud.idReceptor
+            solicitud.latitud 
+            solicitud.longitud */ 
+     	}
+ 	});
+}
+
+exports.enviarConfirmacion=function(confirmacion,socketClient){
+	modelos.Usuario.findById(confirmacion.idEmisor).then(function(usuario){
+        if(usuario!=null){
+        	var dueñoRuta=usuario.dataValues;
+            var notificacion={};//construir la notificacion
+            notificacion.idEmisor=confirmacion.idEmisor;
+            notificacion.idReceptor=confirmacion.idReceptor;
+            notificacion.publicador=dueñoRuta.nick;
+            notificacion.urlNickname=dueñoRuta.foto;
+            notificacion.tipo='Informacion';
+            socketClient.broadcast.emit('actualizarNotificacion',notificacion);
+     	}
+ 	});
+}
 /*
 FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 */
@@ -10,8 +55,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 							foto: datosCarro.foto, 
 							capacidad: datosCarro.capacidad})
 	.then(function (carro){
-		console.log(carro.get('placa'));
-		console.log(carro.get('capacidad'));
+		console.log(carro);
 	});
 };
 
@@ -25,11 +69,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 							id_carro: datosUsuario.id_carro,
 							foto: datosUsuario.foto })
 	.then(function (usuario){
-		console.log(usuario.get('nick'));
-		console.log(usuario.get('nombre'));
-		console.log(usuario.get('apellidos'));
-		console.log(usuario.get('id_carro'));
-		
+		console.log(usuario);	
 	});
 };
 
@@ -40,11 +80,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 							id_emisor: datosUsuario.id_emisor, 
 							id_receptor: datosUsuario.id_receptor})
 	.then( function (mensaje){
-		console.log(mensaje.get('fecha'));
-		console.log(mensaje.get('hora'));
-		console.log(mensaje.get('contenido'));
-		console.log(mensaje.get('id_emisor'));
-		console.log(mensaje.get('id_receptor'));
+		console.log(mensaje);
 	});
 };
 
@@ -54,28 +90,19 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 								id_emisor: datosUsuario.id_emisor, 
 								id_receptor:datosUsuario.id_receptor})
 	.then( function (notificaciones){
-		console.log(notificaciones.get('tipo'));
-		console.log(notificaciones.get('estado'));
-		console.log(notificaciones.get('id_emisor'));
-		console.log(notificaciones.get('id_receptor'));
+		console.log(notificaciones);
 	});
 };
 
- exports.guardarAventon = function(UsuarioAventon){
-
-	modelos.Aventon.create({longitud: UsuarioAventon.longitud, 
-							latitud: UsuarioAventon.latitud, 
-							fecha: UsuarioAventon.fecha, 
-							hora: UsuarioAventon.hora, 
-							id_usuario_pide: UsuarioAventon.id_usuario_pide,
-						    id_usuario_da: UsuarioAventon.id_usuario_da})
+ exports.guardarAventon = function(InfoAventon){
+	modelos.Aventon.create({latitud: InfoAventon.ubicacion.x,
+							longitud: InfoAventon.ubicacion.y,  
+							fecha: InfoAventon.fecha, 
+							hora: InfoAventon.hora, 
+							id_usuario_pide: InfoAventon.idPublicador,
+						    id_usuario_da: null})
 	.then( function (aventon){
-		console.log(aventon.get('longitud'));
-		console.log(aventon.get('latitud'));
-		console.log(aventon.get('fecha'));
-		console.log(aventon.get('hora'));
-		console.log(aventon.get('id_usuario_pide'));
-		console.log(aventon.get('id_usuario_da'));
+		console.log(aventon);
 	});
 };
 
@@ -95,10 +122,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 						 puntosy: puntosy, 
 						 idcreador: _ruta.idPublicador})
 	.then( function (ruta){
-		console.log(ruta.get('fecha'));
-		console.log(ruta.get('costo'));
-		console.log(ruta.get('capacidad'));
-		console.log(ruta.get('idcreador'));
+		console.log(ruta);
 	});
 };
 
@@ -108,17 +132,12 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 								 lat: usuario_Ruta.lat, 
 								 longit: usuario_Ruta.longit})
 	.then(function (usuarioruta){
-		console.log(usuarioruta.get('lat'));
-		console.log(usuarioruta.get('longit'));
+		console.log(usuarioruta);
 	});
 };
-
-
 /* 
-
 FUNCIONES DE ACTUALIZAR 
 */
-
 exports.actualizarCarro = function (idcarro, datos_carro){
 
 	modelos.Carro.update({ placa: datos_carro.placa,
@@ -126,12 +145,9 @@ exports.actualizarCarro = function (idcarro, datos_carro){
 						   capacidad: datos_carro.capacidad},
 						   { where: {id_carro: idcarro}})
 	.then(function (carro){
-	console.log('ACTUALIZADO CORRECTAMENTE');
-
+		console.log('ACTUALIZADO CORRECTAMENTE');
 	});
 };
-
-
 exports.actualizarUsuario = function (idusuario, datos_usuario){
 	modelos.Usuario.update({nick: datos_usuario.nick, 
 							password: datos_usuario.password, 
@@ -141,8 +157,7 @@ exports.actualizarUsuario = function (idusuario, datos_usuario){
 							foto: datos_usuario.foto},
 										{ where: { id: idusuario}})
 	.then( function (usuario){
-	console.log('ACTUALIZADO CORRECTAMENTE');
-
+		console.log('ACTUALIZADO CORRECTAMENTE');
 	});
 };
 
@@ -187,11 +202,8 @@ exports.actualizarRuta = function(idruta, datos_ruta){
   						puntosy: datos_ruta.puntosy},
 						{where: {id_ruta: idruta}})
 	.then(function (ruta){
-			
 			console.log('ENTROOOOOO');			
-
 	});
-
 };
 
 exports.actualizarUsuarioRuta = function(idusuarioruta, datos_usuario_ruta){

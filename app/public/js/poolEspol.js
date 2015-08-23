@@ -4,9 +4,10 @@ function punto(x,y) {
   this.y = y;
 }
 
-var Solicitud = function(idRuta,idReceptor,latitud,longitud){
+var Solicitud = function(idRuta,idEmisor,idReceptor,latitud,longitud){
   //idReceptor: id del dueño de la ruta
   this.idRuta = idRuta || '' ;
+  this.idEmisor= idEmisor || '';
   this.idReceptor= idReceptor || '' ;
   this.latitud = latitud || 0.0 ;
   this.longitud = longitud || 0.0 ;
@@ -24,8 +25,8 @@ var InfoRuta= function(idPublicador,publicador,urlNickname,fecha,hora,precio,cap
 }
 
 var InfoAventon = function(idPublicador,publicador,urlNickname,fecha,hora,ubicacion){
-  this.idPublicador= idPublicador || '';
-  this.publicador=  publicador || '';//nickname
+  this.idPublicador= idPublicador || "";
+  this.publicador=  publicador || "";//nickname
   this.urlNickname= urlNickname || "";
   this.fecha= fecha || "";
   this.hora= hora || "";
@@ -88,7 +89,7 @@ var Usuario=function(id,nickname,urlFoto){
   }
 
   this.agregarSolicitud=function(idRuta,idReceptor,latitud,longitud){
-    this.solicitudes[idRuta]=new Solicitud(idRuta,idReceptor,latitud,longitud);
+    this.solicitudes[idRuta]=new Solicitud(idRuta,this.idUsuario,idReceptor,latitud,longitud);
   }
 }
 

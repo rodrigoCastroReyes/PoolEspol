@@ -13,8 +13,8 @@ var directionsService=new google.maps.DirectionsService();
 var directionsDisplay;
 
 //objeto usado para almacenar la informacion de una ruta
-var infoRuta=new InfoRuta();
-var infoAventon=new InfoAventon();
+var infoRuta=new InfoRuta(2);
+var infoAventon=new InfoAventon(2);
 
 //Geolocalizacion
 function queryCoords(){//consulta al navegador si es posible usar geolocation
@@ -180,9 +180,8 @@ function guardarPuntos(){
 }
 
 function guardarDatos(){
-  infoRuta.publicador=nickname.innerHTML;
-  infoRuta.idPublicador=1;
-  infoRuta.urlNickname="imagenes/oswaldo.jpg";
+  infoRuta.publicador=usuario.nickname;
+  infoRuta.urlNickname=usuario.foto;
   infoRuta.capacidad=parseInt(RutaCapacidad.value);
   infoRuta.precio=parseFloat(RutaCosto.value);
   infoRuta.fecha=Fecha.value;
@@ -235,8 +234,8 @@ function crearAventon(event){
 function guardarAventon(){
   var valid=document.forms["formAventon"].checkValidity();
   if(valid){
-    infoAventon.publicador=nickname.innerHTML;
-    infoAventon.urlNickname="imagenes/oswaldo.jpg"
+    infoAventon.publicador=usuario.nickname;
+    infoAventon.urlNickname=usuario.foto;
     infoAventon.fecha=Fecha_Aventon.value;
     infoAventon.hora=Hora_Aventon.value;
     infoAventon.ubicacion={

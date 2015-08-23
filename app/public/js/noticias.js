@@ -188,11 +188,12 @@ function crearVisualizadorAventon(AventonInfo){
 function aceptarAventon(event){
   console.log("Acepte llevar a este cojudo");
   //se envia una notificacion al solicitante del aventon que el usuario desea llevarlo
-  var idAventon=this.getAttribute('data-idAventon');
-  var idEmisor=this.getAttribute('data-idPublicador');
-  var idReceptor=usuario.id;
-  var aventon={id:idAventon,emisor:idEmisor,receptor:idReceptor}
-  socket.emit('aceptarAventon',aventon);
+  var idAventon=this.getAttribute('data-idaventon');
+  var idReceptor=this.getAttribute('data-idpublicador');
+  var idEmisor=usuario.idUsuario;
+  var confirmacion={idAventon:idAventon,idEmisor:idEmisor,idReceptor:idReceptor}
+  console.log(confirmacion);
+  socket.emit('aceptarAventon',confirmacion);
 }
 
 /*Solicitud*/
@@ -270,9 +271,8 @@ function procesarAventones(event){
 }
 
 function cargarMapas(event){
-  //extraer informacion de rutas
-  usuario=new Usuario(1,"rodrigo","rodrigo2323");
-
+  //se crea un nuevo usuario con la informacion envia desde el server
+  usuario=new Usuario(userid,userNick,userFoto);
   //extracion de informacion de rutas
   var request = new XMLHttpRequest();
   request.open("GET","JSON/rutas.json",true);
