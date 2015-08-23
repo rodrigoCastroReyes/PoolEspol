@@ -146,8 +146,6 @@ function guardarRuta(){
     guardarDatos();
     //se envia los datos al servidor
     socket.emit('nuevaRuta',infoRuta);
-    //document.forms["formRuta"].submit();
-    console.log(infoRuta);
     cerrarRuta();//se cierra el cuadro publicador de ruta
     infoRuta={};//se reinicia infoRuta
     infoRuta.publicador;

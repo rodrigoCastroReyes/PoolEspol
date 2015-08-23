@@ -22,7 +22,7 @@ app.set('port', 4000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(session({
+var sessionMiddleware = session({
 	secret: 'bobneuman',
 	store: new redisStore({
 			host:'localhost',
@@ -31,7 +31,9 @@ app.use(session({
 			ttl: 260 }),
 	saveUninitialized: false,
 	resave: false
-}));
+});
+
+app.use(sessionMiddleware);
 
 /*Statics*/
 app.use(express.static('./app/public'));
@@ -44,16 +46,8 @@ http.listen(app.get('port'),function(){
     console.log("Pool Espol Aplication running in a port " + app.get('port'));
 });
 
-/*
-var modulo_guardado=require('./app/model/model.js');
-var usuario = new Object();
-usuario.nick = "rodfcast";
-usuario.password = "123456";
-usuario.nombre = "Rodrigo Fabricio";
-usuario.apellidos = "Castro Reyes";
-usuario.sexo = "masculino";
-usuario.telefono = '0982710495';
-usuario.foto = "imagenes/castro.jpg";
-modulo_guardado.guardarUsuario(usuario);*/
+realtime.socketNoticias(http,sessionMiddleware);
 
-realtime.socketNoticias(http);
+/*
+var insert=require('./insert.js');
+insert.insertarUsuarios();*/

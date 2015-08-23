@@ -11,26 +11,8 @@ exports.encontrarUsuario = function(nickname){
 }
 
 /*Querys*/
-exports.enviarNotificacion=function(solicitud,socketClient){
-	modelos.Usuario.findById(solicitud.idEmisor).then(function(usuario){
-        if(usuario!=null){
-        	var dueñoRuta=usuario.dataValues;
-            var notificacion={};//construir la notificacion
-            notificacion.idEmisor=solicitud.idEmisor;
-            notificacion.idReceptor=solicitud.idReceptor;
-            notificacion.publicador=dueñoRuta.nick;
-            notificacion.urlNickname=dueñoRuta.foto;
-            notificacion.tipo='Solicitud';
-            socketClient.broadcast.emit('actualizarNotificacion',notificacion);
-            //guardar notificacion
-            //guardar en tabla usuario-ruta
-            /*update usuario-ruta
-            solicitud.idRuta 
-            solicitud.idReceptor
-            solicitud.latitud 
-            solicitud.longitud */ 
-     	}
- 	});
+exports.encontrarUsuarioPorID=function(id){
+	return modelos.Usuario.findById(id);
 }
 
 exports.enviarConfirmacion=function(confirmacion,socketClient){

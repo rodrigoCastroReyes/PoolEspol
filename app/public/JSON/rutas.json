@@ -1,6 +1,6 @@
 {"rutas":[
     {
-     "idPublicador":"1345",
+     "idPublicador":"1",
      "publicador": "Kevin",
      "urlNickname":"imagenes/kevin.jpg",
      "fecha" :"13/07/2015",
@@ -20,7 +20,7 @@
      {"x":-2.1522024709832657, "y": -79.95297074317932}]
  },
  {
-    "idPublicador":"2121",
+    "idPublicador":"4",
     "publicador": "Rodrigo",
     "urlNickname":"imagenes/castro.jpg",
      "fecha" :"13/07/2015",

@@ -32,7 +32,8 @@ function crearInfoNotificacion(InfoNot){
 		var inputAceptar=document.createElement('input');
 		inputAceptar.setAttribute('class','Notificacion-boton');
 		inputAceptar.setAttribute('type','submit');
-
+		inputAceptar.setAttribute('data-idEmisor',InfoNot['idEmisor']);
+		inputAceptar.setAttribute('data-idRuta',InfoNot['idRuta']);
 		inputAceptar.setAttribute('id','btnAceptar');
 		inputAceptar.setAttribute('value','Aceptar');
 
@@ -129,6 +130,9 @@ function iniciar () {
 	request.open("GET","JSON/notificaciones.json",true);
 	request.addEventListener('load',procesarNotificaciones ,false);
 	request.send(null);
+
+	
+	
 }
 
 window.addEventListener('load',iniciar,false);

@@ -3,7 +3,7 @@ var db = require('../model/model.js');
 
 
 exports.index = function(request, response){
-	if(request.session.usuario){
+	if(request.session.user){
 		response.redirect('/noticias');
 	}else{
 		response.sendfile(html_dir + 'index.html');
@@ -20,7 +20,7 @@ exports.login=function(request,response){
 			response.redirect('/noticias');
 		}
 	}).catch(function(err){
-		consolo.log(err);
+		console.log(err);
 		response.sendfile(html_dir + 'index.html');
 	});
 }

@@ -39,19 +39,19 @@ function crearMapa(ruta,contenedor,mapOptions){
 }
 
 function colocarMarcadores(map, puntos){
-  for (var i =0; i < puntos.length; i++){
+  
+  var waypoints = [];
+
+  for (var i =1; i < puntos.length-2; i++){
     var coordenada = puntos[i];
     var position = new google.maps.LatLng(coordenada.x, coordenada.y);
-    var marker= new google.maps.Marker({
-    position: position,
-    title:'#',
-    draggable:false,
-    map:map
-    });
+    waypoints.push({location : position, stopover:false });
   }
+
   var request={
     origin: new google.maps.LatLng(puntos[0].x, puntos[0].y),
     destination: new google.maps.LatLng(puntos[puntos.length -1].x, puntos[puntos.length -1].y),
+    waypoints,
     optimizeWaypoints:true,
     travelMode:google.maps.TravelMode.DRIVING
   }
