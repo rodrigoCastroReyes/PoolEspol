@@ -42,6 +42,7 @@ app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/app/views');
 app.use('/',routes);
+
 http.listen(app.get('port'),function(){
     console.log("Pool Espol Aplication running in a port " + app.get('port'));
 });

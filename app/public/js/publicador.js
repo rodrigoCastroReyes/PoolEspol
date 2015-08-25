@@ -13,8 +13,8 @@ var directionsService=new google.maps.DirectionsService();
 var directionsDisplay;
 
 //objeto usado para almacenar la informacion de una ruta
-var infoRuta=new InfoRuta(2);
-var infoAventon=new InfoAventon(2);
+var infoRuta=new InfoRuta();
+var infoAventon=new InfoAventon();
 
 //Geolocalizacion
 function queryCoords(){//consulta al navegador si es posible usar geolocation
@@ -147,13 +147,7 @@ function guardarRuta(){
     //se envia los datos al servidor
     socket.emit('nuevaRuta',infoRuta);
     cerrarRuta();//se cierra el cuadro publicador de ruta
-    infoRuta={};//se reinicia infoRuta
-    infoRuta.publicador;
-    infoRuta.fecha;
-    infoRuta.hora;
-    infoRuta.precio;
-    infoRuta.capacidad;
-    infoRuta.ruta=[];
+    infoRuta=new InfoRuta();//se reinicia infoRuta
   }
 }
 
@@ -179,6 +173,7 @@ function guardarPuntos(){
 
 function guardarDatos(){
   infoRuta.publicador=usuario.nickname;
+  infoRuta.idPublicador=usuario.id;
   infoRuta.urlNickname=usuario.foto;
   infoRuta.capacidad=parseInt(RutaCapacidad.value);
   infoRuta.precio=parseFloat(RutaCosto.value);
@@ -232,6 +227,8 @@ function crearAventon(event){
 function guardarAventon(){
   var valid=document.forms["formAventon"].checkValidity();
   if(valid){
+
+  	infoAventon.idPublicador=usuario.id;
     infoAventon.publicador=usuario.nickname;
     infoAventon.urlNickname=usuario.foto;
     infoAventon.fecha=Fecha_Aventon.value;
@@ -243,11 +240,7 @@ function guardarAventon(){
     socket.emit('nuevoAventon',infoAventon);
     cerrarAventon();
     puntoAventon=null;
-    infoAventon={};//se reinicia el objeto infoAventon
-    infoAventon.publicador;
-    infoAventon.fecha;
-    infoAventon.hora;
-    infoAventon.ubicacion={};
+    infoAventon=new InfoAventon();//se reinicia el objeto infoAventon
   }
 }
 

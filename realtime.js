@@ -23,7 +23,7 @@ function socketNoticias(http,sessionMiddleware){
             client.on('nuevaRuta',function(infoRuta){
                 db.guardarRuta(infoRuta);
                 for (var key in clients){
-                    if(key!=client.id)
+                    if(key!=session.user.id)
                         clients[key].emit('actualizarRuta',infoRuta);//broadcast de la nueva ruta a los usuarios conectados
                 }
             });
@@ -39,11 +39,9 @@ function socketNoticias(http,sessionMiddleware){
                         notificacion.publicador = solicitante.nick;
                         notificacion.urlNickname = solicitante.foto;
                         notificacion.tipo = 'Solicitud';
-                        for (var key in clients){
-                            if( key == solicitud.idReceptor){
-                                clients[key].emit('actualizarNotificacion',notificacion);
-                            }
-                        }
+
+                        if(clients[solicitud.idReceptor]!=null)
+                            clients[solicitud.idReceptor].emit('actualizarNotificacion',notificacion);
                         //guardar notificacion
                         //guardar en tabla usuario-ruta
                         /*update usuario-ruta
@@ -58,7 +56,7 @@ function socketNoticias(http,sessionMiddleware){
             client.on('nuevoAventon',function(infoAventon){
                 db.guardarAventon(infoAventon);
                 for (var key in clients){
-                    if(key!=client.id)
+                    if(key!=session.user.id)
                         clients[key].emit('actualizarAventon',infoAventon);//broadcast de la nueva ruta a los usuarios conectados
                 }
             });
@@ -76,11 +74,8 @@ function socketNoticias(http,sessionMiddleware){
                         notificacion.publicador=dueñoRuta.nick;
                         notificacion.urlNickname=dueñoRuta.foto;
                         notificacion.tipo='Informacion';
-                        for (var key in clients){
-                            if( key == confirmacion.idReceptor){
-                                clients[key].emit('actualizarNotificacion',notificacion);
-                            }
-                        }
+                        if(clients[confirmacion.idReceptor]!=null)
+                             clients[confirmacion.idReceptor].emit('actualizarNotificacion',notificacion);
                     }
                 });
             });
