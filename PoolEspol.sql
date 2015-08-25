@@ -91,3 +91,14 @@ FOREIGN KEY (id_Emisor) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON 
 
 insert into public.usuario (nick, password, Nombre, Apellidos, sexo, telefonos, id_carro, foto) values('oswaldito' , 'eloy', 'Oswaldo', 'Bayona', 'masculino', '0989666933', null,'imagenes/oswaldito.png'  );
 
+insert into public.usuario (nick, password, Nombre, Apellidos, sexo, telefonos, id_carro, foto) values('Mafia' , 'chumi', 'Mafia', 'Chumi', 'Femenino', '0987666936', null,'imagenes/mafia.png'  );
+
+insert into public.Ruta(fecha, costo, capacidad, hora, estado, puntosx, puntosy, idcreador) values( '2015-08-06', 12, 1, '15:13', 'activo',
+ '{-2.1689967, -2.1675825, -2.1674119}' , '{-79.9197839, -79.9210769, -79.9163315}',  2 ); 
+
+insert into public.Ruta(fecha, costo, capacidad, hora, estado, puntosx, puntosy, idcreador) values( '2016-08-06', 12, 1, '15:13', 'activo',
+ '{-2.1689967, -2.1675825, -2.1674119}' , '{-79.9197839, -79.9210769, -79.9163315}',  2 );
+
+insert into public.Ruta(fecha, costo, capacidad, hora, estado, puntosx, puntosy, idcreador) values( '2016-07-06', 12, 1, '13:13', 'activo',
+ '{-2.1689967, -2.1675825, -2.1674119}' , '{-79.9197839, -79.9210769, -79.9163315}',  2 );
+
