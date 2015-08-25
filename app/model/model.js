@@ -211,6 +211,26 @@ retornar ruta
 */
 
 
+exports.consultarUsuario = function (idusuario){
+	return modelos.Usuario.findOne({where :{id: idusuario}});
+};
+//aqui hago un join
+exports.consultarUsuarioCarro = function (idcarro){
+ 			return modelos.Usuario.find({
+	 			include: [{model:modelos.Carro, as: 'Usuario_Carro'}],
+	 			where : {id_carro:idcarro}
+	 		});
+   	
+    };
+
+
+exports.consultarRuta = function (idruta){
+	return modelos.Ruta.findOne({ where:{id_ruta:idruta}});
+};
+
+exports.consultarNotificacion = function (idnotificacion){
+	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
+};
 
 
 
