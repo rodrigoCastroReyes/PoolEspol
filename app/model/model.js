@@ -15,20 +15,6 @@ exports.encontrarUsuarioPorID=function(id){
 	return modelos.Usuario.findById(id);
 }
 
-exports.enviarConfirmacion=function(confirmacion,socketClient){
-	modelos.Usuario.findById(confirmacion.idEmisor).then(function(usuario){
-        if(usuario!=null){
-        	var dueñoRuta=usuario.dataValues;
-            var notificacion={};//construir la notificacion
-            notificacion.idEmisor=confirmacion.idEmisor;
-            notificacion.idReceptor=confirmacion.idReceptor;
-            notificacion.publicador=dueñoRuta.nick;
-            notificacion.urlNickname=dueñoRuta.foto;
-            notificacion.tipo='Informacion';
-            socketClient.broadcast.emit('actualizarNotificacion',notificacion);
-     	}
- 	});
-}
 /*
 FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 */
