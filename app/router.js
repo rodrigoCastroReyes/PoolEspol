@@ -11,9 +11,11 @@ var router=express.Router();
 router.get('/',LoginController.index);
 router.post('/login',LoginController.login);
 router.get('/noticias',NoticiasController.noticias);
+router.get('/Rutas',NoticiasController.obtenerRutasNoticias);
 router.get('/perfil',PerfilController.perfil);
 router.get('/chat',MensajesController.mensajes);
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/cerrar_sesion',LogoutController.cerrar);
+
 
 module.exports = router;

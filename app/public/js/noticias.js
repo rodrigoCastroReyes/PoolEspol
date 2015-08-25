@@ -275,7 +275,7 @@ function cargarMapas(event){
   usuario=new Usuario(userid,userNick,userFoto);
   //extracion de informacion de rutas
   var request = new XMLHttpRequest();
-  request.open("GET","JSON/rutas.json",true);
+  request.open("GET","/Rutas",true);
   request.addEventListener('load',procesarRutas ,false);
   request.send(null);
 
