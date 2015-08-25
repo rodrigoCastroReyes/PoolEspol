@@ -1,5 +1,6 @@
 
 var html_dir = './app/views/';
+var db = require('../model/model');
 
 
 exports.noticias=function(request,response){
@@ -15,4 +16,9 @@ exports.noticias=function(request,response){
 	}else{
 		response.sendfile(html_dir + 'index.html');
 	}
+}
+
+exports.obtenerRutasNoticias = function(request, response){
+	db.obtenerRutasNoticias(1, request, response);
+
 }

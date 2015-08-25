@@ -1,5 +1,9 @@
 var Sequelize = require('sequelize');
+<<<<<<< HEAD
 var sequelize = new Sequelize("PoolEspol","postgres","root",{
+=======
+var sequelize = new Sequelize("PoolEspol","postgres","obayona",{
+>>>>>>> 51bd0b712ad15b1204373922b3784f2ed62a18d0
 	host: 'localhost',
 	dialect: 'postgres',
 	define:{
@@ -447,6 +451,9 @@ Usuario.hasMany(Ruta,{
 	as: 'Usuario_tiene_Rutas'
 });
 
+Ruta.belongsTo(Usuario, {
+	foreignKey: 'idcreador'
+});
 
 Ruta.hasMany(Usuario_Ruta,{
 	foreignKey: 'id_ruta',
