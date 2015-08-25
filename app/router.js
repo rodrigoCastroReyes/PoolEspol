@@ -1,5 +1,5 @@
 var LoginController = require('./controller/LoginController');
-var NoticiasController = require('./controller/NoticiasController');
+var NoticiasController = require('./controller/NoticiasController.js');
 var PerfilController = require('./controller/PerfilController');
 var MensajesController = require('./controller/MensajesController');
 var NotificacionesController = require('./controller/NotificacionesController');
