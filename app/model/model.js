@@ -130,14 +130,13 @@ exports.actualizarCarro = function (idcarro, datos_carro){
 		console.log('ACTUALIZADO CORRECTAMENTE');
 	});
 };
-exports.actualizarUsuario = function (idusuario, datos_usuario){
-	modelos.Usuario.update({nick: datos_usuario.nick, 
-							password: datos_usuario.password, 
+exports.actualizarUsuario = function (datos_usuario){
+	modelos.Usuario.update({nick: datos_usuario.nick,  
 							nombre: datos_usuario.nombre, 
 							apellidos: datos_usuario.apellidos, 
 							telefono: datos_usuario.telefono, 
 							foto: datos_usuario.foto},
-										{ where: { id: idusuario}})
+										{ where: { id: datos_usuario.id}})
 	.then( function (usuario){
 		console.log('ACTUALIZADO CORRECTAMENTE');
 	});

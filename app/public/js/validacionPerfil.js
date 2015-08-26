@@ -5,6 +5,8 @@
  */
 var nombre, apellido,cedula,nickname;
 var placa,capacidad;
+var datosUsuario= new Object();
+var socket;
 
 function editarUsuario(){
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
@@ -73,13 +75,22 @@ function guardarDatos(evt){
 			$("#datosPersona .input_text:nth-child(4)").focus().after('<span class="error">Solamente datos alfabeticos y de longitud mayor a 6 caracteres</span>'); 
 		}
 		inputs[0].focus();
+
 		datosPersona.submit();
 	}else{
+
+		datosUsuario.nombre = inputs[0].value;
+		datosUsuario.apellidos = inputs[1].value;
+		datosUsuario.telefonos = inputs[2].value;
+		datosUsuario.nick = inputs[3].value;
+		datosUsuario.id = 12;
+		socket.emit('actualizarDatosUsuario',datosUsuario);
+		alert("se guardo correctamente");
 		botonEditarUsuario.style.display='flex'
 		botonGuardarUsuario.style.display = 'none';
 		botonCancelarUsuario.style.display = 'none';
 		deshabilitarEntradas(inputs,'#0080FB');
-		alert("se guardo correctamente");
+
 	}
 }
 
@@ -134,7 +145,6 @@ function guardarDatosAuto(evt){
 
 function inicio(){
 	console.log("editar perfil");
-
 	document.getElementById("botonEditarUsuario").addEventListener('click',editarUsuario,false);
 	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
 	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatos,false);
@@ -143,5 +153,7 @@ function inicio(){
 	document.getElementById("botonCancelarAuto").addEventListener('click',cancelarEdicionAuto,false);
 	document.getElementById("botonGuardarAuto").addEventListener('click',guardarDatosAuto,false);
 }
+
+
 
 window.addEventListener('load',inicio,false);
