@@ -29,6 +29,9 @@ html,body{
 	padding: 5px 5px;
 	font-size: 20px;
 }
+.texto_oculto{
+	visibility: hidden;
+}
 
 #contenido{
 	display: flex;

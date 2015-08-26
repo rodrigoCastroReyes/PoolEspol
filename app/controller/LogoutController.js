@@ -1,6 +1,5 @@
 
 exports.cerrar=function(request,response){
-
 	request.session.destroy(function(err){
 		if(err){
 			console.log(err);
@@ -8,5 +7,4 @@ exports.cerrar=function(request,response){
 			response.render('cerrar_sesion');
 		}
 	});
-	response.render('cerrar_sesion');
 }

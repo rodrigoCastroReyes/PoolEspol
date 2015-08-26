@@ -34,7 +34,7 @@ var InfoAventon = function(idPublicador,publicador,urlNickname,fecha,hora,ubicac
 }
 
 var Usuario=function(id,nickname,urlFoto){
-  this.idUsuario=id;
+  this.id=id;
   this.nickname=nickname;
   this.foto=urlFoto;
   this.posicionActual={};
@@ -89,7 +89,7 @@ var Usuario=function(id,nickname,urlFoto){
   }
 
   this.agregarSolicitud=function(idRuta,idReceptor,latitud,longitud){
-    this.solicitudes[idRuta]=new Solicitud(idRuta,this.idUsuario,idReceptor,latitud,longitud);
+    this.solicitudes[idRuta]=new Solicitud(idRuta,this.id,idReceptor,latitud,longitud);
   }
 }
 
