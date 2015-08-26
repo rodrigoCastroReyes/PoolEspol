@@ -11,42 +11,10 @@ exports.encontrarUsuario = function(nickname){
 }
 
 /*Querys*/
-exports.enviarNotificacion=function(solicitud,socketClient){
-	modelos.Usuario.findById(solicitud.idEmisor).then(function(usuario){
-        if(usuario!=null){
-        	var dueñoRuta=usuario.dataValues;
-            var notificacion={};//construir la notificacion
-            notificacion.idEmisor=solicitud.idEmisor;
-            notificacion.idReceptor=solicitud.idReceptor;
-            notificacion.publicador=dueñoRuta.nick;
-            notificacion.urlNickname=dueñoRuta.foto;
-            notificacion.tipo='Solicitud';
-            socketClient.broadcast.emit('actualizarNotificacion',notificacion);
-            //guardar notificacion
-            //guardar en tabla usuario-ruta
-            /*update usuario-ruta
-            solicitud.idRuta 
-            solicitud.idReceptor
-            solicitud.latitud 
-            solicitud.longitud */ 
-     	}
- 	});
+exports.encontrarUsuarioPorID=function(id){
+	return modelos.Usuario.findById(id);
 }
 
-exports.enviarConfirmacion=function(confirmacion,socketClient){
-	modelos.Usuario.findById(confirmacion.idEmisor).then(function(usuario){
-        if(usuario!=null){
-        	var dueñoRuta=usuario.dataValues;
-            var notificacion={};//construir la notificacion
-            notificacion.idEmisor=confirmacion.idEmisor;
-            notificacion.idReceptor=confirmacion.idReceptor;
-            notificacion.publicador=dueñoRuta.nick;
-            notificacion.urlNickname=dueñoRuta.foto;
-            notificacion.tipo='Informacion';
-            socketClient.broadcast.emit('actualizarNotificacion',notificacion);
-     	}
- 	});
-}
 /*
 FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 */
@@ -216,6 +184,59 @@ exports.actualizarUsuarioRuta = function(idusuarioruta, datos_usuario_ruta){
 	});
 };
 
+exports.obtenerRutasNoticias = function (id_usuario, request, response){
+
+	modelos.Ruta.findAll({
+		include: [{ model: modelos.Usuario, required: true} ],
+		where:{
+			fecha :{ $gt: new Date()  },
+			idcreador: { $ne: id_usuario }
+		}
+	
+	}).then(function (result){
+
+	var listRutas= [];
+		 for(var i =0 ; i< result.length; i++){
+		 	var registro = result[i].dataValues;
+		 	var ruta = crearObjetoRuta(registro);
+		 	listRutas.push(ruta);
+		 }
+		 var j = {rutas:listRutas};
+		 response.json(j);
+	});
+
+};
+
+function crearObjetoRuta(registro){
+	
+	var puntos = [];
+	var limit = registro.puntosx.length;
+
+	for (var i =0; i< limit; i++ ){
+		var punto = {x: registro.puntosx[i], y: registro.puntosy[i]};
+		puntos.push(punto);
+	}
+
+	var dateObj = new Date(registro.fecha);
+	var month = dateObj.getUTCMonth() + 1; 
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+
+	var stringFecha = day + "/" + month + "/" + year;
+ 
+
+	var ruta = {idPublicador: registro.idcreador,
+		 		publicador: registro.usuario.nick, 
+		 		urlNickname: registro.usuario.foto,
+		 		fecha: stringFecha,
+		 		hora: registro.hora,
+		 		precio: registro.costo,
+		 		capacidad: registro.capacidad,
+		 		idRuta: registro.id_ruta,
+		 		ruta: puntos
+		 		}
+	return ruta;
+}
 /* 
 
 tabla usuario
@@ -237,6 +258,26 @@ exports.obtenerConversaciones = function(id){
 };
 
 
+exports.consultarUsuario = function (idusuario){
+	return modelos.Usuario.findOne({where :{id: idusuario}});
+};
+//aqui hago un join
+exports.consultarUsuarioCarro = function (idcarro){
+ 			return modelos.Usuario.find({
+	 			include: [{model:modelos.Carro, as: 'Usuario_Carro'}],
+	 			where : {id_carro:idcarro}
+	 		});
+   	
+    };
+
+
+exports.consultarRuta = function (idruta){
+	return modelos.Ruta.findOne({ where:{id_ruta:idruta}});
+};
+
+exports.consultarNotificacion = function (idnotificacion){
+	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
+};
 
 
 

@@ -1,6 +1,6 @@
 {"rutas":[
     {
-     "idPublicador":"1345",
+     "idPublicador":"1",
      "publicador": "Kevin",
      "urlNickname":"imagenes/kevin.jpg",
      "fecha" :"13/07/2015",
@@ -27,7 +27,7 @@
      "hora": "10:30",
      "precio": 0.25,
      "capacidad": 5,
-     "idRuta": "10",
+     "idRuta": "11",
      "ruta": [{"x":-2.163802838596867, "y": -79.9209451675415},
      {"x":-2.1651858709684997, "y":-79.9229085445404},
      {"x":-2.1621732174395216, "y":-79.92952823638916},

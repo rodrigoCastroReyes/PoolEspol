@@ -24,8 +24,9 @@
 		<div id="infoPerfil">
 			<div id="infoUsuario" class="columna_flexible">
 				<div id="nickName" class="columna_flexible flex_center">
-					<img width="100" height="100" src="imagenes/imagenPerfil.jpg" >
+					<img width="100" height="100" src={{imagenPerfil}} >
 					<h1 >{{nickname}}</h1>
+
 				</div>
 				<div id="datosPersonales" class="columna_flexible ">
 					<h2>Informacion Personal</h2>
@@ -38,10 +39,10 @@
 						</div>
 						<div class="tabla_item columna_flexible flex_align_items_center">
 							<form id="datosPersona" class="columna_flexible" accept-charset="utf-8" action="/editarUsuario" method="get">
-								<input class="input_text" type="text" value="Oswaldo Alejandro" disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos" />
-								<input class="input_text" type="text"  value="Bayona Andrade" disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos"/>
-								<input class="input_text" type="text"   value="0991209877" max="11" required disabled=true pattern="[0-9]{10}" title="Datos solamente numerico" />
-								<input class="input_text" type="text" value="oswaldito"  disabled=true
+								<input class="input_text" type="text" value={{nombre}} disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos" />
+								<input class="input_text" type="text"  value={{apellido}} disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos"/>
+								<input class="input_text" type="text"   value={{celular}} max="11" required disabled=true pattern="[0-9]{10}" title="Datos solamente numerico" />
+								<input class="input_text" type="text" value={{nickname}}  disabled=true
 								pattern="[a-z]{6,15}" 
 								required/>
 							</form>
@@ -58,6 +59,10 @@
 					</div>
 				</div>
 			</div>
+
+
+			{% if idcarro != 0 %}
+
 			<div id="infoVehiculo" class="columna_flexible flex_align_items_center">
 				<h2 >Informacion del Vehiculo</h2>	
 				<div class="tabla">
@@ -67,9 +72,9 @@
 					</div>
 					<div class="tabla_item columna_flexible">
 						<form id="datosAuto" class="columna_flexible" accept-charset="utf-8" >
-							<input type="text" name="Placa"class="input_text" value="PVY0323" disabled=true required pattern="[A-Z0-9]{6,7}" 
+							<input type="text" name="Placa"class="input_text" value={{placa}} disabled=true required pattern="[A-Z0-9]{6,7}" 
 							title="Se requiere que los datos sea alfanumerico de longitud de 6 a 7 caracteres" />
-							<input type="text" name="Capacidad" class="input_text" value="3" disabled=true required 
+							<input type="text" name="Capacidad" class="input_text" value={{cantidad}} disabled=true required 
 							pattern="[0-6]{1}" title="Solamente datos numericos de un solo digito" />
 						</form>
 					</div>	
@@ -83,16 +88,16 @@
 					</div>
 				</div>
 			</div>
+
+			{% endif %}
+
 	   	</div>
 	   	
 		<div id="infoRutas">
-			{% include './cuador_publicador.html' %}
+			{% include './cuadro_publicador.html' %}
 			<h1 id="tituloRutas">Mis Rutas</h1>	
 			<div id="contenedor_rutas">
 			</div>	
 		</div>
-
-
-		
 	</div>
 {% endblock %}
