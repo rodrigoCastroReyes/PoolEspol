@@ -16,4 +16,7 @@ router.get('/chat',MensajesController.mensajes);
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/cerrar_sesion',LogoutController.cerrar);
 
+router.get('/conversaciones',MensajesController.enviarConversaciones);
+router.get('/conversacion',MensajesController.enviarConversacion);
+
 module.exports = router;

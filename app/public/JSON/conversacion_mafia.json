@@ -1,8 +1,7 @@
 { 
-	"fotoReceptor":"imagenes/kevin.jpg",
-	"nickReceptor":"Kevin",
-	"fotoEmisor":"imagenes/mafia.jpg",
-	"nickEmisor":"mafia",
+	"id":5,
+	"foto":"imagenes/mafia.jpg",
+	"nick":"mafia",
 	"mensajes":[
 		{"tipo":"emisor","contenido":"Kevin a lo diri diri?"},
 		{"tipo":"receptor","contenido":"claro!"},

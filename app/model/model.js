@@ -228,6 +228,14 @@ retornar ruta
 
 */
 
+//Querys Chat
+
+exports.obtenerConversaciones = function(id){
+	return model.Mensaje.findAll({
+		where:{id_emisor:id}
+	});
+};
+
 
 
 

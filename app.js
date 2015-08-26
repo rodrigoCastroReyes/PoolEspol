@@ -16,6 +16,7 @@ var redisStore=require('connect-redis')(session);
 
 var realtime=require('./realtime.js');
 var routes=require('./app/router.js');
+var realTimeChat=require('./realTimeChat.js');
 
 app.set('port', 4000);
 
@@ -44,16 +45,17 @@ http.listen(app.get('port'),function(){
     console.log("Pool Espol Aplication running in a port " + app.get('port'));
 });
 
-/*
+
 var modulo_guardado=require('./app/model/model.js');
 var usuario = new Object();
-usuario.nick = "rodfcast";
+usuario.nick = "fajada";
 usuario.password = "123456";
-usuario.nombre = "Rodrigo Fabricio";
-usuario.apellidos = "Castro Reyes";
-usuario.sexo = "masculino";
-usuario.telefono = '0982710495';
-usuario.foto = "imagenes/castro.jpg";
-modulo_guardado.guardarUsuario(usuario);*/
+usuario.nombre = "Lady Linda";
+usuario.apellidos = "Cardenas Vaca";
+usuario.sexo = "femenino";
+usuario.telefono = '0982740495';
+usuario.foto = "imagenes/fajada.jpg";
+modulo_guardado.guardarUsuario(usuario);
 
-realtime.socketNoticias(http);
+//realtime.socketNoticias(http);
+realTimeChat.socketChat(http);

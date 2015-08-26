@@ -1,22 +1,30 @@
+var socket;
+
 function procesarConversacion(event){
 	var respond = event.target.responseText;
 	var conver = JSON.parse(respond);
-	var fotoEmisor=conver.fotoEmisor;
-	var nickEmisor=conver.nickEmisor;
-	var fotoReceptor=conver.fotoReceptor;
-	var nickReceptor=conver.nickReceptor;
+	var fotoEmisor=conver.foto;
+	var nickEmisor=conver.nick;
+	var fotoReceptor=userFoto;
+	var nickReceptor=userNick;
 	var mensajes = conver.mensajes;
 	var imagen;
 	cabezeraMensaje.innerHTML="";
 	areaMensajes.innerHTML="";
 	imagen=document.createElement("img");
-	imagen.setAttribute("src",fotoReceptor);
+	imagen.setAttribute("src",fotoEmisor);
 	imagen.setAttribute("class","fotoPerfil");
 	cabezeraMensaje.appendChild(imagen);
 
 	span=document.createElement("span");
-	span.innerHTML=nickReceptor;
+	span.innerHTML=nickEmisor;
 	span.setAttribute("class","texto_simple")
+	cabezeraMensaje.appendChild(span);
+
+	span=document.createElement("span");
+	span.innerHTML=conver.id;
+	span.setAttribute("class","texto_oculto");
+	span.setAttribute("id","id_destino");
 	cabezeraMensaje.appendChild(span);
 
 	for(i=0;i<mensajes.length;i++){
@@ -51,6 +59,7 @@ function procesarConversacion(event){
 		contenedorMensaje.appendChild(p2);
 		areaMensajes.appendChild(contenedor);		
 	}
+	$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
 	
 }
 
@@ -123,9 +132,9 @@ function enviarMensaje(){
 	var p2=document.createElement("p");
 
 	contenedor.setAttribute("class","self");
-	imagen.setAttribute("src","imagenes/kevin.jpg");
+	imagen.setAttribute("src",userFoto);
 	imagen.setAttribute("class","fotoPerfil");
-	p1.innerHTML="kevin";
+	p1.innerHTML=userNick;
 	p2.innerHTML=texto;
 	contenedorMensaje.setAttribute("class","mensaje");
 	contenerPerfil.setAttribute("class","infoPer");
@@ -135,6 +144,20 @@ function enviarMensaje(){
 	contenerPerfil.appendChild(p1);
 	contenedorMensaje.appendChild(p2);
 	areaMensajes.appendChild(contenedor);
+	$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
+	console.log(id_destino.innerHTML);
+	socket.emit('enviarServidor',{'idEmisor':userId,'idDestino':id_destino.innerHTML,'mensaje':texto});
+
+}
+
+function connectSocket(){
+  socket = io.connect();
+  
+  socket.on('enviarCliente',function(data){
+    console.log("el servidor me envio algo");
+    console.log(data);
+  });
+  
 
 }
 
@@ -145,6 +168,7 @@ function inicializar(){
 	cargarConversaciones();
 	$('#conversacion').css("display","none");
 	$('#btnEnviar').click(enviarMensaje);
+	connectSocket();
 }
 
 

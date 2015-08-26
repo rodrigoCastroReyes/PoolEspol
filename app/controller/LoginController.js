@@ -20,7 +20,7 @@ exports.login=function(request,response){
 			response.redirect('/noticias');
 		}
 	}).catch(function(err){
-		consolo.log(err);
+		console.log(err);
 		response.sendfile(html_dir + 'index.html');
 	});
 }
