@@ -13,6 +13,8 @@ router.post('/login',LoginController.login);
 router.get('/noticias',NoticiasController.noticias);
 router.get('/Rutas',NoticiasController.obtenerRutasNoticias);
 router.get('/perfil',PerfilController.perfil);
+router.post('/actualizarperfil',PerfilController.actualizarPerfil);
+router.post('/actualizarcarro',PerfilController.actualizarCarro);
 router.get('/chat',MensajesController.mensajes);
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/cerrar_sesion',LogoutController.cerrar);
