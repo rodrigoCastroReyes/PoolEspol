@@ -1,4 +1,5 @@
 var LoginController = require('./controller/LoginController');
+var RegistroController = require('./controller/RegistroController');
 var NoticiasController = require('./controller/NoticiasController.js');
 var PerfilController = require('./controller/PerfilController');
 var MensajesController = require('./controller/MensajesController');
@@ -10,6 +11,7 @@ var router=express.Router();
 
 router.get('/',LoginController.index);
 router.post('/login',LoginController.login);
+router.post('/registro',RegistroController.registrar);
 router.get('/noticias',NoticiasController.noticias);
 router.get('/Rutas',NoticiasController.obtenerRutasNoticias);
 router.get('/perfil',PerfilController.perfil);
