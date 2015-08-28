@@ -1,7 +1,5 @@
 var Sequelize = require('sequelize');
-
-var sequelize = new Sequelize("PoolEspol","postgres","",{
-
+var sequelize = new Sequelize("PoolEspol","postgres","root",{
 	host: 'localhost',
 	dialect: 'postgres',
 	define:{
@@ -98,6 +96,17 @@ var Mensaje = sequelize.define('mensaje',{
 			this.setDataValue('hora',valor);
 		}
 	},
+	leido:{
+		type: Sequelize.BOOLEAN,
+		field: 'leido',
+		get: function(){
+			return this.getDataValue('leido');
+		},
+		set: function(valor){
+			this.setDataValue('leido',valor);
+		}
+	},
+	
 	contenido:{
 		type: Sequelize.TEXT,
 		field: 'contenido',
@@ -253,6 +262,16 @@ var Usuario_Ruta = sequelize.define('usuario_ruta',{
 		},
 		set: function(valor){
 			this.setDataValue('lat',valor);
+		}
+	},
+	estado:{
+		type: Sequelize.STRING,
+		field: 'estado',
+		get: function(){
+			return this.getDataValue('estado');
+		},
+		set: function(valor){
+			this.setDataValue('estado',valor);
 		}
 	},
 	longit:{
@@ -413,6 +432,12 @@ Usuario.belongsTo(Carro,{
 	foreignKey: 'id_carro',
 	as: 'Usuario_Carro'
 });
+
+Notificacion.belongsTo(Usuario_Ruta,{
+	foreignKey: 'usuarioruta',
+	as: 'Notificacion_Usuario_Ruta'
+});
+
 Notificacion.belongsTo(Usuario,{
 	foreignKey: 'id_emisor',
 	as: 'Emisor_Notifica'

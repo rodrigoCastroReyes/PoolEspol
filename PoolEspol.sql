@@ -42,9 +42,12 @@ tipo varchar(40),
 estado varchar(40),
 id_emisor int4,
 id_receptor int4,
+usuarioruta int4,
 PRIMARY KEY (id_Notificacion),
 FOREIGN KEY (id_receptor) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,
+FOREIGN KEY (usuarioruta) REFERENCES public.Usuario_Ruta (id_usuario_ruta) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,
 FOREIGN KEY (id_emisor) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT
+
 );
 
 
@@ -69,6 +72,7 @@ id_usuario_ruta serial,
 id_usuario int4,
 id_ruta int4,
 lat float8,
+estado varchar(20) NOT NULL,
 longit float8,
 PRIMARY KEY (id_usuario_ruta),
 FOREIGN KEY (id_ruta) REFERENCES public.Ruta (id_ruta) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,
@@ -82,6 +86,7 @@ fecha date,
 hora time(6),
 contenido varchar(30),
 id_Emisor int4,
+leido boolean,
 id_Receptor int4,
 PRIMARY KEY (id_mensaje),
 FOREIGN KEY (id_Receptor) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,

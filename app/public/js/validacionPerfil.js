@@ -5,6 +5,9 @@
  */
 var nombre, apellido,cedula,nickname;
 var placa,capacidad;
+var datosUsuario= new Object();
+var datosCarro= new Object();
+var socket;
 
 function editarUsuario(){
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
@@ -73,13 +76,25 @@ function guardarDatos(evt){
 			$("#datosPersona .input_text:nth-child(4)").focus().after('<span class="error">Solamente datos alfabeticos y de longitud mayor a 6 caracteres</span>'); 
 		}
 		inputs[0].focus();
-		datosPersona.submit();
+
 	}else{
+		/*
+		@Descripcion esta funcion mediante peticion ajax envia los datos de este objeto
+		al controlador perfil para actualizar datos a la base de datos
+		@parameter datosUsuario
+		*/
 		botonEditarUsuario.style.display='flex'
 		botonGuardarUsuario.style.display = 'none';
 		botonCancelarUsuario.style.display = 'none';
 		deshabilitarEntradas(inputs,'#0080FB');
-		alert("se guardo correctamente");
+
+		datosUsuario.nombre = inputs[0].value;
+		datosUsuario.apellidos = inputs[1].value;
+		datosUsuario.telefonos = inputs[2].value;
+		datosUsuario.nick = inputs[3].value;
+		ActualizarDatosUsuario(datosUsuario);
+
+
 	}
 }
 
@@ -128,13 +143,57 @@ function guardarDatosAuto(evt){
 		botonGuardarAuto.style.display ='none';
 		botonCancelarAuto.style.display ='none';
 		deshabilitarEntradas(inputs,'#e2e4e6');//deshabilita las entradas de texto
+		datosCarro.placa = inputs[0].value;
+		datosCarro.capacidad = inputs[1].value;
+		ActualizarDatosCarro(datosCarro);
 		alert("se guardo correctamente");
 	}
 }
 
+function ActualizarDatosUsuario(datosUsurio){
+
+$.ajax({
+		url : '/actualizarperfil',
+
+		data: datosUsurio,
+
+		type: 'POST',
+
+		success : function (){
+			alert("Los datos se actualizaron con exito");
+
+		},
+
+		complete : function (){
+			console.log("peticion realizada via ajax");
+		}
+
+	});
+}
+
+function ActualizarDatosCarro(datosCarro){
+
+$.ajax({
+		url : '/actualizarcarro',
+
+		data: datosCarro,
+
+		type: 'POST',
+
+		success : function (){
+			alert("Los datos se actualizaron con exito");
+
+		},
+
+		complete : function (){
+			console.log("peticion realizada via ajax");
+		}
+
+	});
+}
+
 function inicio(){
 	console.log("editar perfil");
-
 	document.getElementById("botonEditarUsuario").addEventListener('click',editarUsuario,false);
 	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
 	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatos,false);
@@ -143,5 +202,7 @@ function inicio(){
 	document.getElementById("botonCancelarAuto").addEventListener('click',cancelarEdicionAuto,false);
 	document.getElementById("botonGuardarAuto").addEventListener('click',guardarDatosAuto,false);
 }
+
+
 
 window.addEventListener('load',inicio,false);

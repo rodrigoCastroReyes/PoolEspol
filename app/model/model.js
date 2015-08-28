@@ -45,6 +45,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	modelos.Mensaje.create({fecha: datosUsuario.fecha, 
 							hora: datosUsuario.hora, 
 							contenido: datosUsuario.contenido, 
+							leido: datosUsuario.leido,
 							id_emisor: datosUsuario.id_emisor, 
 							id_receptor: datosUsuario.id_receptor})
 	.then( function (mensaje){
@@ -75,7 +76,8 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
  exports.guardarNotificaciones = function(datosUsuario){
 	modelos.Notificacion.create({tipo: datosUsuario.tipo, 
 								estado: datosUsuario.estado, 
-								id_emisor: datosUsuario.id_emisor, 
+								id_emisor: datosUsuario.id_emisor,
+								usuarioruta: datosUsuario.usuarioruta, 
 								id_receptor:datosUsuario.id_receptor})
 	.then( function (notificaciones){
 		console.log(notificaciones);
@@ -118,6 +120,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	modelos.Usuario_Ruta.create({id_usuario: usuario_Ruta.id_usuario,
 								 id_ruta: usuario_Ruta.id_ruta,
 								 lat: usuario_Ruta.lat, 
+								 estado: usuario_Ruta.estado,
 								 longit: usuario_Ruta.longit})
 	.then(function (usuarioruta){
 		console.log(usuarioruta);
@@ -126,23 +129,20 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 /* 
 FUNCIONES DE ACTUALIZAR 
 */
-exports.actualizarCarro = function (idcarro, datos_carro){
+exports.actualizarDatosCarro = function (idcarro, datos_carro){
 
 	modelos.Carro.update({ placa: datos_carro.placa,
-						   foto: datos_carro.foto,
 						   capacidad: datos_carro.capacidad},
 						   { where: {id_carro: idcarro}})
 	.then(function (carro){
 		console.log('ACTUALIZADO CORRECTAMENTE');
 	});
 };
-exports.actualizarUsuario = function (idusuario, datos_usuario){
-	modelos.Usuario.update({nick: datos_usuario.nick, 
-							password: datos_usuario.password, 
+exports.actualizarUsuario = function (idusuario,datos_usuario){
+	modelos.Usuario.update({nick: datos_usuario.nick,  
 							nombre: datos_usuario.nombre, 
 							apellidos: datos_usuario.apellidos, 
-							telefono: datos_usuario.telefono, 
-							foto: datos_usuario.foto},
+							telefono: datos_usuario.telefono},
 										{ where: { id: idusuario}})
 	.then( function (usuario){
 		console.log('ACTUALIZADO CORRECTAMENTE');

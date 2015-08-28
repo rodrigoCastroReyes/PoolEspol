@@ -14,18 +14,11 @@ exports.index = function(request, response){
 
 exports.login=function(request,response){
 	   db.encontrarUsuario(request.body.usuario).then(function (user){
-		console.log('mira mi nick '+user.nick);
-		console.log('mira mi nombre '+user.nombre);
 		if(!user){
 			//si no esta registrado lo redirecciona a index.html
-			console.log('estoy no registrado');
-
 			response.sendfile(html_dir + 'index.html');
-		}else{
-			console.log('estoy registrado');			
+		}else{			
 			request.session.user=user.dataValues;
-			console.log('conectado valor '+request.session.user);
-			console.log('id '+request.session.user.id);
 			response.redirect('/noticias');
 		}
 	}).catch(function(err){
