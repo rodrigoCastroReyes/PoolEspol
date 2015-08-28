@@ -18,8 +18,8 @@ router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/cerrar_sesion',LogoutController.cerrar);
 
 
-router.get('/conversaciones',MensajesController.enviarConversaciones);
-router.get('/conversacion',MensajesController.enviarConversacion);
+router.get('/chat/conversacion',MensajesController.enviarConversacion);
+//router.get('/chat/conversaciones',MensajesController.enviarConversaciones);
 
 
 module.exports = router;

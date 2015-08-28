@@ -6,7 +6,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var swig = require('swig');
 var session = require('express-session');
-var cookieParser = require('cookie-parser');
+//var cookieParser = require('cookie-parser');
 
 var app = express();
 var http=require('http').Server(app);
@@ -35,7 +35,7 @@ var sessionMiddleware = session({
 	resave: false
 });
 
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(sessionMiddleware);
 
 /*Statics*/

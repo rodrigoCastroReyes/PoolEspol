@@ -41,14 +41,34 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	});
 };
 
- exports.guardarMensaje = function(datosUsuario){
+ exports.guardarMensaje = function(datosUsuario,socket){
 	modelos.Mensaje.create({fecha: datosUsuario.fecha, 
 							hora: datosUsuario.hora, 
 							contenido: datosUsuario.contenido, 
 							id_emisor: datosUsuario.id_emisor, 
 							id_receptor: datosUsuario.id_receptor})
 	.then( function (mensaje){
-		console.log(mensaje);
+		//console.log(mensaje);
+		//el receptor del mensaje esta conectado, se le envia el mensaje en tiempo real
+		console.log("aqui 1");
+		if(socket!=null){
+			console.log("si entro al if");
+
+			modelos.Usuario.findOne({where:{id:mensaje.id_emisor}}).then(function(user){
+				foto=user.dataValues.foto;
+				nick=user.dataValues.nick;
+				var datos={
+					id_emisor:mensaje.id_emisor,
+					id_receptor:mensaje.id_receptor,
+					contenido:mensaje.contenido,
+					foto:foto,
+					nick:nick
+
+				};
+				socket.emit("enviarCliente",datos);
+
+			});
+		}
 	});
 };
 
@@ -251,11 +271,96 @@ retornar ruta
 
 //Querys Chat
 
-exports.obtenerConversaciones = function(id){
-	return model.Mensaje.findAll({
-		where:{id_emisor:id}
+exports.obtenerConversaciones = function(id,io){
+	modelos.Mensaje.findAll({
+		where:{$or:{id_emisor:id,id_receptor:id}}
+	}).then(function(result){
+		 var lista=[];
+		 var usuarios=[];
+		 for(var i =0 ; i< result.length; i++){
+		 	//obtenego el id de la persona con la que tengo la conversacion
+		 	var auxid;
+		 	if(result[i].dataValues.id_emisor==id){
+		 		auxid=result[i].dataValues.id_receptor;
+		 	}else{
+		 		auxid=result[i].dataValues.id_emisor;
+		 	}
+		 	var ban=1;
+		 	for(var j=0;j<lista.length;j++){
+		 		if(lista[j]==auxid ){
+		 			ban=0;
+		 			break;
+		 		}
+		 	}
+		 	//console.log(result[i].dataValues);
+		 	if(ban==1 && auxid!=null){
+		 		lista.push(auxid);
+		 		modelos.Usuario.findAll({where:{id:auxid}}).then(function (dato){
+		 			//enviamos el objeto {id,nick,foto}
+		 			var datosUsuario={
+		 				id:dato[0].id,
+		 				nick:dato[0].nick,
+		 				foto:dato[0].foto,
+		 				id_dueno:id
+		 			}
+		 			console.log(datosUsuario);
+		 			io.sockets.emit('enviarDatosConversacion',datosUsuario);
+		 			//usuarios.push(datosUsuario);
+		 			
+		 		});
+		 		
+		 		
+		 	}
+		 	
+		 }
+		 //console.log("el ajax");
+		 //console.log(usuarios);
+		 //io.json({personas:usuarios});
 	});
-};
+}
+
+exports.obtenerConversacion = function(id_emisor,id_receptor,response){
+	//response.json({idEmisor:id_emisor,idReceptor:id_receptor});
+	var json={
+		id:null,
+		foto: null,
+		nick:null,
+		mensajes:[]
+	};
+	modelos.Usuario.findOne({where:{id:id_receptor}}).then(function(user){
+		
+		modelos.Mensaje.findAll({where :{ $or:[
+										{id_emisor:id_receptor,id_receptor:id_emisor},
+										{id_emisor:id_emisor,id_receptor:id_receptor}
+										]
+									}
+		}).then(function (dato){
+			
+			for(i=0;i<dato.length;i++){
+				if(dato[i].dataValues.id_emisor==id_emisor){
+					tipo="receptor";
+					console.log('emisor '+dato[i].dataValues.id_emisor+" "+id_emisor)
+				}
+				else{
+					tipo="emisor";
+					console.log('receptor '+dato[i].dataValues.id_emisor+" "+id_emisor)
+				}
+				var mensaje={
+					tipo:tipo,
+					contenido:dato[i].dataValues.contenido,
+				};
+
+				json.mensajes.push(mensaje);
+				console.log(mensaje);
+			}
+			json.id=user.dataValues.id;
+			json.foto=user.dataValues.foto;
+			json.nick=user.dataValues.nick;
+			response.json(json);
+			
+		});
+	});
+}
 
 
 exports.consultarUsuario = function (idusuario){

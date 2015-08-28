@@ -10,13 +10,19 @@ exports.mensajes=function(request,response){
 	});
 };
 
-exports.enviarConversaciones=function(request,response){
-	
-
-};
 
 
 exports.enviarConversacion=function(request,response){
+	idReceptor=request.query.id;
+	console.log("emisor: "+request.session.user.id);
+	console.log("receptor: "+idReceptor);
+	db.obtenerConversacion(request.session.user.id,parseInt(idReceptor),response);	
+};
 
+exports.enviarConversaciones=function(request,response){
+	console.log("esta es");
+	console.log(request.session.user.id)
+	db.obtenerConversaciones(request.session.user.id,response);	
+	console.log("esta no es");
 };
 
