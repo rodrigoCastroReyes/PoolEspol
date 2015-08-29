@@ -5,15 +5,20 @@
 	<link rel="stylesheet" type="text/css" href="css/noticias.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/estiloMapa.css">
-	<link rel = "stylesheet" href = "css/cuadroPublicador.css"/>
+	<link rel = "stylesheet" type="text/css" href = "css/cuadroPublicador.css"/>
 	<script src = "js/jquery-1.11.3.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<script src="../socket.io/socket.io.js"></script>
 	<script src = "js/poolEspol.js"> </script>
+	
+	<script src = "js/visualizadorNoticias.js"> </script>
 	<script src = "js/noticias.js"> </script>
+
 	<script src = "js/publicador.js"> </script>
 	<script src = "js/barra.js"> </script>
-	<script src = "js/notificaciones.js"> </script>
+	
+	<script src = "js/menuNotificaciones.js"> </script>
+	
 	<script>
 		//datos del usuario enviado por el server
   		var userid = "{{id}}";
@@ -29,7 +34,12 @@
 {% block content %}
 	{% include './barra.html' %}
 	{% include './menu_salir.html' %}
-	<div id="Contenedor_Notificaciones">
+	
+	<div id="Menu_Notificaciones">
     </div>
+	
 	{% include './cuadro_publicador.html' %}
+	
+	<div id="contenedor_rutas">
+	</div>
 {% endblock %}

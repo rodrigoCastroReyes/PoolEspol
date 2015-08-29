@@ -10,18 +10,23 @@ var router=express.Router();
 
 router.get('/',LoginController.index);
 router.post('/login',LoginController.login);
+
 router.get('/noticias',NoticiasController.noticias);
 router.get('/Rutas',NoticiasController.obtenerRutasNoticias);
+router.get('/Aventones', NoticiasController.obtenerAventonesNoticias);
+
 router.get('/perfil',PerfilController.perfil);
 router.post('/actualizarperfil',PerfilController.actualizarPerfil);
 router.post('/actualizarcarro',PerfilController.actualizarCarro);
-router.get('/chat',MensajesController.mensajes);
-router.get('/notificaciones',NotificacionesController.notificaciones);
+router.get('/misRutas',PerfilController.obtenerMisRuta);
+
 router.get('/cerrar_sesion',LogoutController.cerrar);
 
+router.get('/chat',MensajesController.mensajes);
+router.get('/conversaciones',MensajesController.enviarConversaciones);
+router.get('/conversacion',MensajesController.enviarConversacion);
 
-router.get('/chat/conversacion',MensajesController.enviarConversacion);
-//router.get('/chat/conversaciones',MensajesController.enviarConversaciones);
-
+router.get('/notificaciones',NotificacionesController.notificaciones);
+router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificaciones);
 
 module.exports = router;

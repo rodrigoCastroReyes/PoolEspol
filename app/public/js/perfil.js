@@ -79,7 +79,7 @@ function guardarDatos(evt){
 
 	}else{
 		/*
-		@Descripcion esta funcion mediante peticion ajax envia los datos de este objeto
+		@Descripcion esta funcion mediante peticion ajax y socket.io envia los datos de este objeto
 		al controlador perfil para actualizar datos a la base de datos
 		@parameter datosUsuario
 		*/
@@ -93,8 +93,6 @@ function guardarDatos(evt){
 		datosUsuario.telefonos = inputs[2].value;
 		datosUsuario.nick = inputs[3].value;
 		ActualizarDatosUsuario(datosUsuario);
-
-
 	}
 }
 
@@ -150,12 +148,11 @@ function guardarDatosAuto(evt){
 	}
 }
 
-function ActualizarDatosUsuario(datosUsurio){
-
-$.ajax({
+function ActualizarDatosUsuario(datosUsuario){
+	$.ajax({
 		url : '/actualizarperfil',
 
-		data: datosUsurio,
+		data: datosUsuario,
 
 		type: 'POST',
 
@@ -167,13 +164,11 @@ $.ajax({
 		complete : function (){
 			console.log("peticion realizada via ajax");
 		}
-
 	});
 }
 
 function ActualizarDatosCarro(datosCarro){
-
-$.ajax({
+	$.ajax({
 		url : '/actualizarcarro',
 
 		data: datosCarro,
@@ -188,20 +183,60 @@ $.ajax({
 		complete : function (){
 			console.log("peticion realizada via ajax");
 		}
-
 	});
 }
 
+function obtenerMisRutas(){
+	var request = new XMLHttpRequest();
+  	request.open("GET","/misRutas",true);
+  	request.addEventListener('load',procesarMisRutas,false);
+  	request.send(null);
+}
+
+function procesarMisRutas(event){
+  var respond = JSON.parse(event.target.responseText);
+  var rutasInfo=respond.rutas;
+  for(var i=0;i<rutasInfo.length;i++){
+    visualizarMiRuta(rutasInfo[i]);
+  }
+}
+
+function visualizarMiRuta(RutaInfo){
+	var contenedor=document.createElement('div');
+  	contenedor.setAttribute('class','VisualizadorRuta');
+  	contenedor_rutas.insertBefore(contenedor,contenedor_rutas.firstChild);
+  	
+  	var menuSuperior=crearMenuSuperior(RutaInfo,true);
+  	contenedor.appendChild(menuSuperior);
+  	
+  	var contenedorMapa=document.createElement('div');
+  	contenedorMapa.setAttribute('class','VisualizadorRuta-mapa');
+  	contenedorMapa.setAttribute('id','mapaGoogle1');
+  	contenedor.appendChild(contenedorMapa);
+  	crearMapa(RutaInfo,contenedorMapa);
+  	
+  	var menuInferior=crearMenuInferior(RutaInfo,true,true);
+  	contenedor.appendChild(menuInferior);
+}
+
 function inicio(){
-	console.log("editar perfil");
+	
+	obtenerMisRutas();
 	document.getElementById("botonEditarUsuario").addEventListener('click',editarUsuario,false);
 	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
 	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatos,false);
-
-	document.getElementById("botonEditarAuto").addEventListener('click',editarInfoAuto,false);
-	document.getElementById("botonCancelarAuto").addEventListener('click',cancelarEdicionAuto,false);
-	document.getElementById("botonGuardarAuto").addEventListener('click',guardarDatosAuto,false);
+	
+	/*if(botonEditarAuto){
+		botonEditarAuto.addEventListener('click',editarInfoAuto,false);
+	}
+	if(botonCancelarAuto){
+		botonCancelarAuto.addEventListener('click',cancelarEdicionAuto,false);
+	}
+	if(botonGuardarAuto){
+		botonGuardarAuto.addEventListener('click',guardarDatosAuto,false);
+	}	*/
 }
+
 
 
 

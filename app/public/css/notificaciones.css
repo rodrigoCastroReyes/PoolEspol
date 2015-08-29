@@ -10,7 +10,6 @@ body{
 	background-color: #e2e4e6;
 }
 
-
 .Notificaciones{
 	display: flex;
 	flex-direction:column;
@@ -18,7 +17,7 @@ body{
 	margin-top: 50px;
 }
 
-#Contenedor_Notificaciones{
+#Menu_Notificaciones{
 	display: flex;
 	flex-direction:column;
 	justify-content:center;
@@ -50,8 +49,8 @@ body{
 }
 
 .Notificacion-grande{
-	height: 110px;
-	width: 500px;
+	height: 90px;
+	width: 400px;
 	justify-content:center;
 }
 

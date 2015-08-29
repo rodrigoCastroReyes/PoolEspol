@@ -35,7 +35,6 @@ var sessionMiddleware = session({
 	resave: false
 });
 
-//app.use(cookieParser());
 app.use(sessionMiddleware);
 
 /*Statics*/
@@ -51,19 +50,5 @@ http.listen(app.get('port'),function(){
 });
 
 
-
-var modulo_guardado=require('./app/model/model.js');
-var usuario = new Object();
-usuario.nick = "fajada";
-usuario.password = "123456";
-usuario.nombre = "Lady Linda";
-usuario.apellidos = "Cardenas Vaca";
-usuario.sexo = "femenino";
-usuario.telefono = '0982740495';
-usuario.foto = "imagenes/fajada.jpg";
-modulo_guardado.guardarUsuario(usuario);
-
-//realtime.socketNoticias(http);
-realTimeChat.socketChat(http,sessionMiddleware);
-//ealtime.socketNoticias(http,sessionMiddleware);
-
+//realTimeChat.socketChat(http,sessionMiddleware);
+realtime.socketNoticias(http,sessionMiddleware);

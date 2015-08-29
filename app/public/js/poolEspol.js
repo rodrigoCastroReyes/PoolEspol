@@ -14,14 +14,15 @@ var Solicitud = function(idRuta,idEmisor,idReceptor,latitud,longitud){
 }
 
 var InfoRuta= function(idPublicador,publicador,urlNickname,fecha,hora,precio,capacidad,ruta){
-  this.idPublicador= idPublicador || '';
-  this.publicador=  publicador || '';//nickname
-  this.urlNickname= urlNickname || "";
-  this.fecha= fecha || "";
-  this.hora= hora || "";
-  this.precio= precio || 0.0;
-  this.capacidad= capacidad || 0;
-  this.ruta= ruta || [];
+  this.idPublicador = idPublicador || '';
+  this.publicador =  publicador || '';//nickname
+  this.urlNickname = urlNickname || "";
+  this.fecha = fecha || "";
+  this.hora = hora || "";
+  this.precio = precio || 0.0;
+  this.capacidad = capacidad || 0;
+  this.idRuta = 0.0;
+  this.ruta = ruta || [];
 }
 
 var InfoAventon = function(idPublicador,publicador,urlNickname,fecha,hora,ubicacion){

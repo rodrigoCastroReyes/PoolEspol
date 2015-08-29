@@ -2,10 +2,8 @@
 var html_dir = './app/views/';
 var db = require('../model/model');
 
-
 exports.noticias=function(request,response){
 	//pasarle a la vista los datos de : rutas y aventones, notificaciones mas recientes, datos del usuario
-	
 	if(request.session.user){
 		console.log(request.session.user);
 		response.render('noticias',{ title: 'Noticias', 
@@ -19,6 +17,10 @@ exports.noticias=function(request,response){
 }
 
 exports.obtenerRutasNoticias = function(request, response){
-	db.obtenerRutasNoticias(1, request, response);
+	db.obtenerRutasNoticias(request.session.user.id, request, response);
+}
 
+
+exports.obtenerAventonesNoticias = function(request, response){
+	db.obtenerAventonesNoticias(request.session.user.id, request, response);
 }

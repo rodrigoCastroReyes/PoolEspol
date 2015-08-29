@@ -7,27 +7,17 @@
 	<script src = "js/jquery-1.11.3.min.js"></script>
 	<script src = "js/barra.js"> </script>
 	<script src = "js/notificaciones.js"> </script>
+	<script src = "js/menuNotificaciones.js"> </script>
 {% endblock %}
 
 {% block content %}
 	{% include './barra.html' %}
 	{% include './menu_salir.html' %}
-	<div id="Contenedor_Notificaciones">
+
+	<div id="Menu_Notificaciones">
     </div>
-	<div class="Notificaciones">
-		<div class="Notificacion Notificacion-grande">
-			<div class="Notificacion-Foto" style="margin-right:10px">
-				<img src="imagenes/kevin.jpg">
-			</div>
-			<div class="Notificacion-info" style="margin-left:10px">
-				<div>
-					<h3 class="Notificacion-titulo Titulo-grande">Kevin ha solicitado un aventon</h3>
-				</div>
-				<div class="Notificacion-Botones">
-					<input class="Notificacion-boton Boton-grande" type="submit" id="btnAceptar" value="Aceptar">
-					<input class="Notificacion-boton Boton-grande" type="submit" id="btnCancelar" value="Cancelar">
-				</div>
-			</div>
-		</div>
-	</div>
+
+	<div id="Contenedor_Notificaciones" class="Notificaciones">
+    </div>
+
 {% endblock %}
