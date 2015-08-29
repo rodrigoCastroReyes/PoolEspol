@@ -121,7 +121,7 @@ function cargarMapas(event){
 
   //extraer informacion de aventones
   var request_aventones = new XMLHttpRequest();
-  request_aventones.open("GET", "JSON/aventones.json", true);
+  request_aventones.open("GET", "/Aventones", true);
   request_aventones.addEventListener('load', procesarAventones, false);
   request_aventones.send(null);
   /*Manejadores de enventos de botones*/

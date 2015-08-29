@@ -13,6 +13,7 @@ router.post('/login',LoginController.login);
 
 router.get('/noticias',NoticiasController.noticias);
 router.get('/Rutas',NoticiasController.obtenerRutasNoticias);
+router.get('/Aventones', NoticiasController.obtenerAventonesNoticias);
 
 router.get('/perfil',PerfilController.perfil);
 router.post('/actualizarperfil',PerfilController.actualizarPerfil);

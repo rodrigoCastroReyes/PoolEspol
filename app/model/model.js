@@ -32,7 +32,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	modelos.Mensaje.create({fecha: datosUsuario.fecha, 
 							hora: datosUsuario.hora, 
 							contenido: datosUsuario.contenido, 
-							leido: datosUsuario.leido,
+							leido: false,
 							id_emisor: datosUsuario.id_emisor, 
 							id_receptor: datosUsuario.id_receptor})
 	.then( function (mensaje){
@@ -222,42 +222,58 @@ exports.consultarNotificacion = function (idnotificacion){
 	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
 };
 
-exports.obtenerRutasUsuario = function (idUsuario, request, response ){
-	modelos.Ruta.findAll({
-		include: [{ model: modelos.Usuario, required: true} ],
-		where:{
-			idcreador: idUsuario
-		}
-	}).then(function (result){
-		var listRutas= [];
-		for(var i =0 ; i< result.length; i++){
-		 	var registro = result[i].dataValues;
-		 	var ruta = crearObjetoRuta(registro);
-		 	listRutas.push(ruta);
-		}
-		var j = {rutas:listRutas};
-		response.json(j);
-	});
+
+
+//Carga de rutas y aventones desde la base de datos
+
+function obtenerHora(){
+  var d = new Date();
+  var hora = d.getHours();
+  var minuto = d.getMinutes();
+  var txtHora = (hora<10)?("0" + hora):(hora);
+  var txtMinuto = (minuto<10)?("0" + minuto):(minuto);
+  return txtHora + ":" + txtMinuto;
 }
 
-exports.obtenerRutasNoticias = function (id_usuario, request, response){
-	modelos.Ruta.findAll({
-		include: [{ model: modelos.Usuario, required: true} ],
-		where:{
-			fecha :{ $gt: new Date()  },
-			idcreador: { $ne: id_usuario }
-		}
-	}).then(function (result){
-		var listRutas= [];
-		for(var i =0 ; i< result.length; i++){
-		 	var registro = result[i].dataValues;
-		 	var ruta = crearObjetoRuta(registro);
-		 	listRutas.push(ruta);
-		}
-		var j = { rutas: listRutas };
-		response.json(j);
-	});
-};
+function compararTiempo(Tiempo){ //devuelve false si el tiempo de la ruta/aventon es menor al tiempo actual
+
+	var tiempo_Ruta = Tiempo.split(":");
+	var tiempo_Actual = obtenerHora().split(":");
+
+	if((tiempo_Actual[0] > tiempo_Ruta[0]) || (tiempo_Actual[1] > tiempo_Ruta[1]) ){
+	 		return false; 
+	}
+	return true;
+
+}
+
+function compararFecha(Fecha){ 
+
+	var dateObj = new Date(Fecha);
+	var month = dateObj.getUTCMonth() + 1; 
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+
+	var Current = new Date();
+	var Cmonth = Current.getUTCMonth() + 1; 
+	var Cday = Current.getUTCDate() -1 ;
+	var Cyear = Current.getUTCFullYear();
+
+
+	var dateRuta = new Date(year + "/" + month+ "/" + day);
+	var dateCurrent = new Date(Cyear + "/" + Cmonth+ "/" + Cday);
+
+
+	if(dateCurrent> dateRuta){
+		return 0;
+	}
+	else if(dateCurrent == dateRuta){
+		return 1;
+	}
+	return -1;
+	
+
+}
 
 function crearObjetoRuta(registro){
 	
@@ -289,6 +305,129 @@ function crearObjetoRuta(registro){
 		 		}
 	return ruta;
 }
+
+
+
+exports.obtenerRutasNoticias = function (id_usuario, request, response){
+
+	modelos.Ruta.findAll({
+		include: [{ model: modelos.Usuario, required: true} ],
+		where:{
+			idcreador: { $ne: id_usuario }
+		},
+		order: [['fecha', 'DESC'], ['hora' ,'DESC'] ]
+	
+	}).then(function (result){
+	//console.log(result);
+	var listRutas= [];
+		 for(var i =0 ; i< result.length; i++){
+		 	var registro = result[i].dataValues;
+
+
+			if(compararFecha(registro.fecha) == 0){ //si la fecha actual es mayor a la fecha de la ruta
+				continue;
+			}
+
+		 	if( compararFecha(registro.fecha) == 1 ){ // si las fechas son iguales
+		 		
+		 		if(!compararTiempo(registro.hora)){
+			 		continue;
+			 	}
+		 	}
+
+		 	
+
+		 	var ruta = crearObjetoRuta(registro);
+		 	listRutas.push(ruta);
+		 }
+		 var j = {rutas:listRutas.reverse()};
+		 response.json(j);
+	});
+
+}
+
+function crearObjetoAventon(registro){
+	
+	var dateObj = new Date(registro.fecha);
+	var month = dateObj.getUTCMonth() + 1; 
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+
+	var stringFecha = day + "/" + month + "/" + year;
+	var aventon = {
+		idPublicador: registro.id_usuario_pide,
+		publicador: registro.publicador.nick,
+		urlNickname: registro.publicador.foto,
+		fecha: stringFecha,
+		hora: registro.hora,
+		id_Aventon: registro.id_aventon,
+		ubicacion: {x: registro.latitud, y: registro.longitud}
+		
+		
+	}
+	return aventon;
+
+}
+
+exports.obtenerAventonesNoticias = function (id_usuario, request, response){
+
+	modelos.Aventon.findAll({
+		include: [{ model: modelos.Usuario , as: 'publicador' } ],
+		where:{
+			id_usuario_da: null,
+			id_usuario_pide: {$ne: id_usuario}
+		},
+		order: [['fecha', 'DESC'], ['hora' ,'DESC'] ],
+		
+	}).then(function (result){
+		var listAventones = [];
+
+		for (var i =0; i< result.length; i++){
+			var registro =  result[i].dataValues;
+
+			if(compararFecha(registro.fecha) == 0){ //si la fecha actual es mayor a la fecha de la ruta
+				continue;
+			}
+
+		 	if( compararFecha(registro.fecha) == 1 ){ // si las fechas son iguales
+		 		
+		 		if(!compararTiempo(registro.hora)){
+			 		continue;
+			 	}
+		 	}
+
+
+			
+			var aventon = crearObjetoAventon(registro);
+			listAventones.push(aventon);
+		} 
+		var j = {aventones:listAventones.reverse()};
+		 response.json(j);
+	});
+
+};
+
+
+
+exports.obtenerRutasUsuario = function (idUsuario, request, response ){
+	modelos.Ruta.findAll({
+		include: [{ model: modelos.Usuario, required: true} ],
+		where:{
+			idcreador: idUsuario
+		}
+	}).then(function (result){
+		var listRutas= [];
+		for(var i =0 ; i< result.length; i++){
+		 	var registro = result[i].dataValues;
+		 	var ruta = crearObjetoRuta(registro);
+		 	listRutas.push(ruta);
+		}
+		var j = {rutas:listRutas};
+		response.json(j);
+	});
+}
+
+
 
 //querys notificaciones
 
