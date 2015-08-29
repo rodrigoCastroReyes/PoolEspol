@@ -45,7 +45,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	modelos.Mensaje.create({fecha: datosUsuario.fecha, 
 							hora: datosUsuario.hora, 
 							contenido: datosUsuario.contenido, 
-							leido: datosUsuario.leido,
+							leido: false,
 							id_emisor: datosUsuario.id_emisor, 
 							id_receptor: datosUsuario.id_receptor})
 	.then( function (mensaje){

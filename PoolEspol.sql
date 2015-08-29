@@ -36,22 +36,6 @@ FOREIGN KEY (id_usuario_da) REFERENCES public.usuario (id) ON DELETE SET DEFAULT
 );
 
 
-CREATE TABLE public.Notificacion (
-id_Notificacion serial,
-tipo varchar(40),
-estado varchar(40),
-id_emisor int4,
-id_receptor int4,
-usuarioruta int4,
-PRIMARY KEY (id_Notificacion),
-FOREIGN KEY (id_receptor) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,
-FOREIGN KEY (usuarioruta) REFERENCES public.Usuario_Ruta (id_usuario_ruta) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,
-FOREIGN KEY (id_emisor) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT
-
-);
-
-
-
 CREATE TABLE public.Ruta (
 id_ruta serial,
 fecha date NOT NULL,
@@ -78,6 +62,21 @@ PRIMARY KEY (id_usuario_ruta),
 FOREIGN KEY (id_ruta) REFERENCES public.Ruta (id_ruta) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,
 FOREIGN KEY (id_usuario) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT
 );
+
+CREATE TABLE public.Notificacion (
+id_Notificacion serial,
+tipo varchar(40),
+estado varchar(40),
+id_emisor int4,
+id_receptor int4,
+usuarioruta int4,
+PRIMARY KEY (id_Notificacion),
+FOREIGN KEY (id_receptor) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,
+FOREIGN KEY (usuarioruta) REFERENCES public.Usuario_Ruta (id_usuario_ruta) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT,
+FOREIGN KEY (id_emisor) REFERENCES public.usuario (id) ON DELETE SET DEFAULT ON UPDATE SET DEFAULT
+
+);
+
 
 
 CREATE TABLE public.Mensaje (
