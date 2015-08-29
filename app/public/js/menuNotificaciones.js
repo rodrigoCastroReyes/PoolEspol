@@ -25,11 +25,25 @@ function crearFoto(InfoNot){
 }
 
 function aceptarSolicitud(event){
-
+	var respuesta = {};
+	respuesta.idEmisor = usuario.id;
+	respuesta.idReceptor = this.getAttribute('data-idEmisor');
+	respuesta.idUsuarioRuta = this.getAttribute('data-idUsuario-Ruta');
+	respuesta.idRuta = this.getAttribute('data-idRuta');
+	respuesta.estado = 'Aceptada';
+	respuesta.tipo = 'Informacion';
+	socket.emit('aceptarRuta',respuesta);
 }
 
-function cancelarSolicitud(event){
-
+function rechazarSolicitud(event){
+	var respuesta = {};
+	respuesta.idEmisor = usuario.id;
+	respuesta.idReceptor = this.getAttribute('data-idEmisor');
+	respuesta.idUsuarioRuta = this.getAttribute('data-idUsuario-Ruta');
+	respuesta.idRuta = this.getAttribute('data-idRuta');
+	respuesta.estado = 'Rechazada';
+	respuesta.tipo = 'Informacion';
+	socket.emit('rechazarRuta',respuesta);
 }
 
 function crearInfoNotificacion(InfoNot){
@@ -56,24 +70,32 @@ function crearInfoNotificacion(InfoNot){
 		inputAceptar.setAttribute('value','Aceptar');
 		inputAceptar.addEventListener('click',aceptarSolicitud,false);
 
-		var inputCancelar=document.createElement('input');
-		inputCancelar.setAttribute('class','Notificacion-boton');
-		inputCancelar.setAttribute('type','submit');
-		inputCancelar.setAttribute('id','btnCancelar');
-		inputCancelar.setAttribute('value','Cancelar');
-		inputCancelar.addEventListener('click',cancelarSolicitud,false);
+		var inputRechazar=document.createElement('input');
+		inputRechazar.setAttribute('class','Notificacion-boton');
+		inputRechazar.setAttribute('type','submit');
+		inputRechazar.setAttribute('data-idEmisor',InfoNot['idEmisor']);
+		inputRechazar.setAttribute('data-idUsuario-Ruta',InfoNot['idUsuarioRuta']);
+		inputRechazar.setAttribute('data-idRuta',InfoNot['idRuta']);
+		inputRechazar.setAttribute('id','btnCancelar');
+		inputRechazar.setAttribute('value','Rechazar');
+		inputRechazar.addEventListener('click',rechazarSolicitud,false);
 
 		contBotones.appendChild(inputAceptar);
-		contBotones.appendChild(inputCancelar);
+		contBotones.appendChild(inputRechazar);
 
 		info.appendChild(contTitulo);
 		info.appendChild(contBotones);
 	}else{
-		titulo.innerHTML=InfoNot['publicador'] + " ha aceptado llevarte";
-		contTitulo.appendChild(titulo);
-		info.appendChild(contTitulo);
+		if(InfoNot['estado'] == 'Aceptada'){
+			titulo.innerHTML=InfoNot['publicador'] + " ha aceptado llevarte";
+			contTitulo.appendChild(titulo);
+			info.appendChild(contTitulo);
+		}else{
+			titulo.innerHTML=InfoNot['publicador'] + " ha rechazado tu solicitud";
+			contTitulo.appendChild(titulo);
+			info.appendChild(contTitulo);
+		}
 	}
-
 	return info;
 }
 
