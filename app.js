@@ -50,5 +50,5 @@ http.listen(app.get('port'),function(){
 });
 
 
-//realTimeChat.socketChat(http,sessionMiddleware);
-realtime.socketNoticias(http,sessionMiddleware);
+realTimeChat.socketChat(http,sessionMiddleware);
+//realtime.socketNoticias(http,sessionMiddleware);

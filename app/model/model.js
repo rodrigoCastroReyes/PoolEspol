@@ -49,7 +49,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 							id_emisor: datosUsuario.id_emisor, 
 							id_receptor: datosUsuario.id_receptor})
 	.then( function (mensaje){
-		//console.log(mensaje);
+		console.log(mensaje);
 		//el receptor del mensaje esta conectado, se le envia el mensaje en tiempo real
 		console.log("aqui 1");
 		if(socket!=null){
