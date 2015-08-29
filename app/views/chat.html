@@ -7,14 +7,21 @@
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
 	<script type="text/javascript" src="js/chat.js"></script>
 	<script src = "js/barra.js"> </script>
-	<script src = "js/notificaciones.js"> </script>
+	<script src = "js/menuNotificaciones.js"> </script>
+	<script src="../socket.io/socket.io.js"></script>
+	<script>
+		//datos del usuario enviado por el server
+  		var userId = "{{id}}";
+  		var userNick = "{{nickname}}";
+  		var userFoto = "{{foto}}"
+	</script>
 {% endblock %}
 
 {% block content %}
 	{% include './barra.html' %}
 	{% include './menu_salir.html' %}
 
-	<div id="Contenedor_Notificaciones">
+	<div id="Menu_Notificaciones">
     </div>
 
 	<section id="contenido">

@@ -1,8 +1,7 @@
-{ 
-	"fotoReceptor":"imagenes/kevin.jpg",
-	"nickReceptor":"Kevin",
-	"fotoEmisor":"imagenes/fajada.jpg",
-	"nickEmisor":"fajada",
+{
+	"id":6, 
+	"foto":"imagenes/fajada.jpg",
+	"nick":"fajada",
 	"mensajes":[
 		{"tipo":"emisor","contenido":"Kevin donde estas?"},
 		{"tipo":"receptor","contenido":"donde siempre"},

@@ -24,6 +24,7 @@ span,form{
     width: 60%;
 	bottom: 0;
 	border: 3px solid #c3c3c3;
+	z-index: 10;
 }
 
 .AgregarARuta{
@@ -38,6 +39,7 @@ span,form{
     height: 80%;
     width: 80%;
 	border: 5px solid #0080FB;
+	z-index: 10;
 }
 
 .AgregarARuta-contenedor{

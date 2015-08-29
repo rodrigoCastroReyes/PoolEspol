@@ -45,6 +45,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	modelos.Mensaje.create({fecha: datosUsuario.fecha, 
 							hora: datosUsuario.hora, 
 							contenido: datosUsuario.contenido, 
+							leido: datosUsuario.leido,
 							id_emisor: datosUsuario.id_emisor, 
 							id_receptor: datosUsuario.id_receptor})
 	.then( function (mensaje){
@@ -52,13 +53,14 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	});
 };
 
- exports.guardarNotificaciones = function(datosUsuario){
+ exports.guardarNotificacion = function(datosUsuario){
 	modelos.Notificacion.create({tipo: datosUsuario.tipo, 
 								estado: datosUsuario.estado, 
-								id_emisor: datosUsuario.id_emisor, 
-								id_receptor:datosUsuario.id_receptor})
-	.then( function (notificaciones){
-		console.log(notificaciones);
+								id_emisor: datosUsuario.idEmisor,
+								usuarioruta: datosUsuario.idUsuarioRuta, 
+								id_receptor:datosUsuario.idReceptor})
+	.then( function (notificacion){
+		console.log(notificacion);
 	});
 };
 
@@ -81,48 +83,40 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
  			puntosx.push(_ruta.ruta[i].x);
  			puntosy.push(_ruta.ruta[i].y);
  		}
-	modelos.Ruta.create({fecha: _ruta.fecha,
+	return modelos.Ruta.create({fecha: _ruta.fecha,
 						 costo: _ruta.precio, 
 						 capacidad: _ruta.capacidad, 
 						 hora: _ruta.hora, 
 						 estado: "pendiente",
 						 puntosx: puntosx, 
 						 puntosy: puntosy, 
-						 idcreador: _ruta.idPublicador})
-	.then( function (ruta){
-		console.log(ruta);
-	});
+						 idcreador: _ruta.idPublicador});
 };
 
  exports.guardarUsuarioRuta = function(usuario_Ruta){
-	modelos.Usuario_Ruta.create({id_usuario: usuario_Ruta.id_usuario,
-								 id_ruta: usuario_Ruta.id_ruta,
-								 lat: usuario_Ruta.lat, 
-								 longit: usuario_Ruta.longit})
-	.then(function (usuarioruta){
-		console.log(usuarioruta);
-	});
+	return modelos.Usuario_Ruta.create({id_usuario: usuario_Ruta.idEmisor,
+								 id_ruta: usuario_Ruta.idRuta,
+								 lat: usuario_Ruta.latitud, 
+								 estado: usuario_Ruta.estado,
+								 longit: usuario_Ruta.longitud});
 };
 /* 
 FUNCIONES DE ACTUALIZAR 
 */
-exports.actualizarCarro = function (idcarro, datos_carro){
+exports.actualizarDatosCarro = function (idcarro, datos_carro){
 
 	modelos.Carro.update({ placa: datos_carro.placa,
-						   foto: datos_carro.foto,
 						   capacidad: datos_carro.capacidad},
 						   { where: {id_carro: idcarro}})
 	.then(function (carro){
 		console.log('ACTUALIZADO CORRECTAMENTE');
 	});
 };
-exports.actualizarUsuario = function (idusuario, datos_usuario){
-	modelos.Usuario.update({nick: datos_usuario.nick, 
-							password: datos_usuario.password, 
+exports.actualizarUsuario = function (idusuario,datos_usuario){
+	modelos.Usuario.update({nick: datos_usuario.nick,  
 							nombre: datos_usuario.nombre, 
 							apellidos: datos_usuario.apellidos, 
-							telefono: datos_usuario.telefono, 
-							foto: datos_usuario.foto},
+							telefono: datos_usuario.telefono},
 										{ where: { id: idusuario}})
 	.then( function (usuario){
 		console.log('ACTUALIZADO CORRECTAMENTE');
@@ -151,14 +145,8 @@ exports.actualizarNotificaciones = function(idnotificacion, datos_notificacion){
 
 
 exports.actualizarAventon = function(idaventon, datos_aventon){
- 	modelos.Aventon.update({longitud: datos_aventon.longitud,
- 							latitud: datos_aventon.latitud,
- 							fecha: datos_aventon.fecha,
- 							hora: datos_aventon.hora},
- 							{ where: {id_aventon: idaventon}})
- 	.then( function (aventon){
- 			console.log('Actualizado con exito');
- 	});
+ 	return modelos.Aventon.update({id_usuario_da:datos_aventon.idReceptor},
+ 								  { where: {id_aventon: idaventon} });
 };
 
 
@@ -184,27 +172,71 @@ exports.actualizarUsuarioRuta = function(idusuarioruta, datos_usuario_ruta){
 	});
 };
 
-exports.obtenerRutasNoticias = function (id_usuario, request, response){
 
+//Consultas chat
+exports.obtenerConversaciones = function(id){
+	return model.Mensaje.findAll({
+		where:{id_emisor:id}
+	});
+};
+
+
+exports.consultarUsuario = function (idusuario){
+	return modelos.Usuario.findOne({where :{id: idusuario}});
+};
+
+//aqui hago un join
+exports.consultarUsuarioCarro = function (idcarro){
+ 			return modelos.Usuario.find({
+	 			include: [{ model:modelos.Carro, as: 'Usuario_Carro'}],
+	 			where : { id_carro:idcarro }
+	 		});   	
+};
+
+//Consultas Ruta
+exports.consultarRuta = function (idruta){
+	return modelos.Ruta.findOne({ where:{id_ruta:idruta}});
+};
+
+exports.consultarNotificacion = function (idnotificacion){
+	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
+};
+
+exports.obtenerRutasUsuario = function (idUsuario, request, response ){
+	modelos.Ruta.findAll({
+		include: [{ model: modelos.Usuario, required: true} ],
+		where:{
+			idcreador: idUsuario
+		}
+	}).then(function (result){
+		var listRutas= [];
+		for(var i =0 ; i< result.length; i++){
+		 	var registro = result[i].dataValues;
+		 	var ruta = crearObjetoRuta(registro);
+		 	listRutas.push(ruta);
+		}
+		var j = {rutas:listRutas};
+		response.json(j);
+	});
+}
+
+exports.obtenerRutasNoticias = function (id_usuario, request, response){
 	modelos.Ruta.findAll({
 		include: [{ model: modelos.Usuario, required: true} ],
 		where:{
 			fecha :{ $gt: new Date()  },
 			idcreador: { $ne: id_usuario }
 		}
-	
 	}).then(function (result){
-
-	var listRutas= [];
-		 for(var i =0 ; i< result.length; i++){
+		var listRutas= [];
+		for(var i =0 ; i< result.length; i++){
 		 	var registro = result[i].dataValues;
 		 	var ruta = crearObjetoRuta(registro);
 		 	listRutas.push(ruta);
-		 }
-		 var j = {rutas:listRutas};
-		 response.json(j);
+		}
+		var j = { rutas: listRutas };
+		response.json(j);
 	});
-
 };
 
 function crearObjetoRuta(registro){
@@ -237,47 +269,52 @@ function crearObjetoRuta(registro){
 		 		}
 	return ruta;
 }
-/* 
 
-tabla usuario
-valor : id
-retornar usuario
+//querys notificaciones
+//obtiene las tres notificaciones mas reciente del usuario
+exports.obtenerNotificacionesPaginacion = function(idReceptor,response){
+	modelos.Notificacion.findAll({
+		where : {
+			id_receptor: idReceptor
+		},
+		include : [
+			{ model :  modelos.Usuario , as: 'Emisor_Notifica' }
+		],
+		limit: 3
+	}).then(function(results){
+		var listNot = crearListaNotificaciones(results);
+		response.json({notificaciones: listNot});
+	});
+}
 
-tabla : ruta
-valor : id
-retornar ruta
+//obtiene todas las notificaciones del usuario
+exports.obtenerNotificacionesUsuario = function(idReceptor,response){
+	modelos.Notificacion.findAll({
+		where : {
+			id_receptor: idReceptor
+		},
+		include : [
+			{ model :  modelos.Usuario , as: 'Emisor_Notifica' }
+		]
+	}).then(function(results){
+		var listNot = crearListaNotificaciones(results);
+		response.json({notificaciones: listNot});
+	});
+}
 
-*/
-
-
-exports.consultarUsuario = function (idusuario){
-	return modelos.Usuario.findOne({where :{id: idusuario}});
-};
-//aqui hago un join
-exports.consultarUsuarioCarro = function (idcarro){
- 			return modelos.Usuario.find({
-	 			include: [{model:modelos.Carro, as: 'Usuario_Carro'}],
-	 			where : {id_carro:idcarro}
-	 		});
-   	
-    };
-
-
-exports.consultarRuta = function (idruta){
-	return modelos.Ruta.findOne({ where:{id_ruta:idruta}});
-};
-
-exports.consultarNotificacion = function (idnotificacion){
-	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
-};
-
-
-
-
-
-
-
-
-
-
-
+function crearListaNotificaciones(results){
+	var listNot = [];
+	for(var i = 0 ; i < results.length ; i++){
+		var result = results[i].dataValues;
+		var emisor = results[i].Emisor_Notifica.dataValues;
+		var notificacion = {};
+		notificacion.idEmisor = result.id_emisor;
+		notificacion.idUsuarioRuta = result.usuarioruta;
+  		notificacion.tipo = result.tipo;
+  		notificacion.estado = result.estado;
+  		notificacion.publicador = emisor.nick;
+  		notificacion.urlNickname = emisor.foto;
+  		listNot.push(notificacion);
+	}
+	return listNot;
+}

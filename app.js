@@ -1,5 +1,3 @@
-
-
 var modulo_guardado=require('./app/model/model.js');
 
 
@@ -19,6 +17,7 @@ var redisStore=require('connect-redis')(session);
 
 var realtime=require('./realtime.js');
 var routes=require('./app/router.js');
+var realTimeChat=require('./realTimeChat.js');
 
 app.set('port', 5000);
 
@@ -51,8 +50,6 @@ http.listen(app.get('port'),function(){
 });
 
 
+//realTimeChat.socketChat(http,sessionMiddleware);
 realtime.socketNoticias(http,sessionMiddleware);
 
-/*
-var insert=require('./insert.js');
-insert.insertarUsuarios();*/
