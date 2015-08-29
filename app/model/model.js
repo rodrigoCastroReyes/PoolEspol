@@ -422,16 +422,6 @@ exports.consultarNotificacion = function (idnotificacion){
 	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
 };
 
-
-
-
-
-
-
-
-
->>>>>>> 18e9e5a5a8528be9c2bb7a702a74d80ca0fbe209
-
 //obtiene todas las notificaciones del usuario
 exports.obtenerNotificacionesUsuario = function(idReceptor,response){
 	modelos.Notificacion.findAll({

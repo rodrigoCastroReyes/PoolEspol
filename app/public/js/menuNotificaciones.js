@@ -7,7 +7,6 @@ function cargarNotificaciones(){
 function verTodasNotificacion(){
 	var center=document.createElement('center');
 	var enlace=document.createElement('a');
-
 	enlace.setAttribute('class','Notificacion-Mas');
 	enlace.id='mas';
 	enlace.innerHTML="Ver todas";
@@ -23,6 +22,14 @@ function crearFoto(InfoNot){
 	foto.src=InfoNot['urlNickname'];
 	contFoto.appendChild(foto);
 	return contFoto;
+}
+
+function aceptarSolicitud(event){
+
+}
+
+function cancelarSolicitud(event){
+
 }
 
 function crearInfoNotificacion(InfoNot){
@@ -47,12 +54,14 @@ function crearInfoNotificacion(InfoNot){
 		inputAceptar.setAttribute('data-idRuta',InfoNot['idRuta']);
 		inputAceptar.setAttribute('id','btnAceptar');
 		inputAceptar.setAttribute('value','Aceptar');
+		inputAceptar.addEventListener('click',aceptarSolicitud,false);
 
 		var inputCancelar=document.createElement('input');
 		inputCancelar.setAttribute('class','Notificacion-boton');
 		inputCancelar.setAttribute('type','submit');
 		inputCancelar.setAttribute('id','btnCancelar');
 		inputCancelar.setAttribute('value','Cancelar');
+		inputCancelar.addEventListener('click',cancelarSolicitud,false);
 
 		contBotones.appendChild(inputAceptar);
 		contBotones.appendChild(inputCancelar);
