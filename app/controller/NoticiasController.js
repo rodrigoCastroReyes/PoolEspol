@@ -19,3 +19,8 @@ exports.noticias=function(request,response){
 exports.obtenerRutasNoticias = function(request, response){
 	db.obtenerRutasNoticias(request.session.user.id, request, response);
 }
+
+
+exports.obtenerAventonesNoticias = function(request, response){
+	db.obtenerAventonesNoticias(request.session.user.id, request, response);
+}
