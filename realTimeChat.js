@@ -1,9 +1,9 @@
 var db = require('./app/model/model.js');
 
 
-
 function crearObjetoMensaje(data){
-   var mensaje;
+   
+   console.log("culpable");
    mensaje={fecha: new Date(),
             hora: new Date(),
             contenido: data.mensaje,
@@ -11,7 +11,7 @@ function crearObjetoMensaje(data){
             id_receptor: data.idDestino
 
    };
-
+   console.log(mensaje.id_receptor);
    return mensaje;
 }
 
@@ -27,18 +27,30 @@ function socketChat(http,sessionMiddleware){
         if(session.user){
             clients[session.user.id]=client; // se almacena la tupla (idUsuario,socketCliente)
             console.log('Usuario conectado');
-            console.log(session.use.id);
-            console.log(db.obtenerConversaciones(session.use.id));
+            console.log(session.user.id);
+            
+
+            client.on('solicitarConversaciones', function(){
+                console.log('solicitarConversaciones');
+                db.obtenerConversaciones(session.user.id,io);
+            });
 
             client.on('disconnect', function(){
                 console.log('se desconecto');
             });
 
             client.on('enviarServidor',function(data){
-                console.log(data);
-                var mensaje= crearObjetoMensaje(data);
-                db.guardarMensaje(mensaje);
-                io.sockets.emit('enviarCliente',data);
+                console.log("soy el servidor me llego algo");
+                console.log(data.idDestino);
+                var socketDestino=clients[data.idDestino];
+                mensaje=crearObjetoMensaje(data);
+                //Sconsole.log(mensaje.dataValues);
+                db.guardarMensaje(mensaje,socketDestino);
+                
+                
+                
+                //io.sockets.emit('enviarCliente',data);
+                //socketDestino.emit('enviarCliente',data);
                 
             });
         }

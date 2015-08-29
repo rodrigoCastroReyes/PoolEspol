@@ -25,7 +25,6 @@ router.get('/chat',MensajesController.mensajes);
 router.get('/conversaciones',MensajesController.enviarConversaciones);
 router.get('/conversacion',MensajesController.enviarConversacion);
 
-
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificaciones);
 

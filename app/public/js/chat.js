@@ -3,6 +3,8 @@ var socket;
 function procesarConversacion(event){
 	var respond = event.target.responseText;
 	var conver = JSON.parse(respond);
+	console.log(conver);
+	
 	var fotoEmisor=conver.foto;
 	var nickEmisor=conver.nick;
 	var fotoReceptor=userFoto;
@@ -20,12 +22,14 @@ function procesarConversacion(event){
 	span.innerHTML=nickEmisor;
 	span.setAttribute("class","texto_simple")
 	cabezeraMensaje.appendChild(span);
-
+	cabezeraMensaje.setAttribute("data-id",conver.id);
+	/*
 	span=document.createElement("span");
 	span.innerHTML=conver.id;
 	span.setAttribute("class","texto_oculto");
 	span.setAttribute("id","id_destino");
 	cabezeraMensaje.appendChild(span);
+	*/
 
 	for(i=0;i<mensajes.length;i++){
 		var contenedor=document.createElement("div");
@@ -63,10 +67,11 @@ function procesarConversacion(event){
 	
 }
 
-function cargarConversacion(cadena){
+function cargarConversacion(id){
   
   var request = new XMLHttpRequest();
-  request.open("GET",cadena,true);
+  var url="/chat/conversacion?id="+id;
+  request.open("GET",url,true);
   request.addEventListener('load',procesarConversacion ,false);
   request.send(null);
 
@@ -75,7 +80,7 @@ function cargarConversacion(cadena){
 function mostrarChat(evt){
 	personas.classList.remove("visible");
 	personas.classList.add("invisible");
-	cargarConversacion(this.dataset.conversacion);
+	cargarConversacion(this.dataset.id);
 	$('#conversacion').css("display","flex");
 
 }
@@ -86,7 +91,7 @@ function regresar(evt){
 	$('#conversacion').css("display","none");
 
 }
-
+/*
 function procesarConversaciones(event){
 	var respond = event.target.responseText;
 	var conver = JSON.parse(respond);
@@ -110,15 +115,61 @@ function procesarConversaciones(event){
 	}
 	$('.persona').click(mostrarChat);
 }
+*/
+function procesarDatosConversacionAjax(event){
+	var respond = event.target.responseText;
+	var c = JSON.parse(respond);
+	conversaciones=c.conversaciones;
+	for(i=0;i<conversaciones.length;i++){
+		div=document.createElement("div");
+		div.setAttribute("class","persona");
+		div.setAttribute("data-id",conversaciones[i].id);
+
+		imagen=document.createElement("img");
+		imagen.setAttribute("src",conversaciones[i].foto);
+		imagen.setAttribute("class","fotoPerfil")
+		
+		h3=document.createElement("h3");
+		h3.innerHTML=conversaciones[i].nick;
+		
+		div.appendChild(imagen);
+		div.appendChild(h3);
+		personas.appendChild(div);
+	}
+	aux=$('.persona')
+	aux[aux.length-1].addEventListener('click',mostrarChat);
+}
 
 
 function cargarConversaciones(){
   
   var request = new XMLHttpRequest();
-  request.open("GET","JSON/conversaciones.json",true);
-  request.addEventListener('load',procesarConversaciones ,false);
+  var url="/chat/conversaciones";
+  request.open("GET",url,true);
+  request.addEventListener('load',procesarDatosConversacionAjax ,false);
   request.send(null);
 
+}
+
+
+function procesarDatosConversacion(persona){
+
+	div=document.createElement("div");
+	div.setAttribute("class","persona");
+	div.setAttribute("data-id",persona.id);
+
+	imagen=document.createElement("img");
+	imagen.setAttribute("src",persona.foto);
+	imagen.setAttribute("class","fotoPerfil")
+	
+	h3=document.createElement("h3");
+	h3.innerHTML=persona.nick;
+	
+	div.appendChild(imagen);
+	div.appendChild(h3);
+	personas.appendChild(div);
+	aux=$('.persona')
+	aux[aux.length-1].addEventListener('click',mostrarChat);
 }
 
 function enviarMensaje(){
@@ -145,17 +196,51 @@ function enviarMensaje(){
 	contenedorMensaje.appendChild(p2);
 	areaMensajes.appendChild(contenedor);
 	$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
-	console.log(id_destino.innerHTML);
-	socket.emit('enviarServidor',{'idEmisor':userId,'idDestino':id_destino.innerHTML,'mensaje':texto});
+	console.log(cabezeraMensaje.dataset.id);
+	socket.emit('enviarServidor',{'idEmisor':userId,'idDestino':cabezeraMensaje.dataset.id,'mensaje':texto});
 
+}
+
+function agregarMensaje(mensaje){
+	var contenedor=document.createElement("div");
+	var contenerPerfil=document.createElement("div");
+	var contenedorMensaje=document.createElement("div");
+	imagen=document.createElement("img");
+	var p1=document.createElement("p");
+	var p2=document.createElement("p");
+	imagen.setAttribute("class","fotoPerfil");
+	contenedorMensaje.setAttribute("class","mensaje");
+	contenerPerfil.setAttribute("class","infoPer");
+	contenedor.setAttribute("class","friend");
+	imagen.setAttribute("src",mensaje.foto);
+	p1.innerHTML=mensaje.nick;
+	contenedor.appendChild(contenerPerfil);
+	contenedor.appendChild(contenedorMensaje);
+	p2.innerHTML=mensaje.contenido;
+	contenerPerfil.appendChild(imagen);
+	contenerPerfil.appendChild(p1);
+	contenedorMensaje.appendChild(p2);
+	areaMensajes.appendChild(contenedor);
+	$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
 }
 
 function connectSocket(){
   socket = io.connect();
+  socket.emit('solicitarConversaciones');
   
   socket.on('enviarCliente',function(data){
-    console.log("el servidor me envio algo");
+  	id_emisor=data.id_emisor;
     console.log(data);
+    if(cabezeraMensaje.dataset.id==id_emisor){
+    	agregarMensaje(data);
+    }
+  });
+
+  socket.on('enviarDatosConversacion',function(data){
+    //console.log(data);
+    if(data.id_dueno==userId){
+   		procesarDatosConversacion(data);
+   	}
   });
   
 
@@ -165,7 +250,7 @@ function connectSocket(){
 function inicializar(){
 	$('.persona').click(mostrarChat);
 	$('.regresar').click(regresar);
-	cargarConversaciones();
+	//cargarConversaciones();
 	$('#conversacion').css("display","none");
 	$('#btnEnviar').click(enviarMensaje);
 	connectSocket();
