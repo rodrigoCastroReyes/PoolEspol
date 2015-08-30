@@ -24,25 +24,45 @@ function crearFoto(InfoNot){
 	return contFoto;
 }
 
+function borrarNotificacion(idNotificacion){
+	var lstNotificaciones = Menu_Notificaciones.childNodes;
+	for(var i=0 ; i < lstNotificaciones.length - 1 ; i++){
+		var notificacionInfo = lstNotificaciones[i];
+		if(idNotificacion == notificacionInfo.getAttribute('data-idNotificacion')){
+			notificacionInfo.parentNode.removeChild(notificacionInfo);
+		}
+	}
+	
+	console.log(Menu_Notificaciones.childNodes.length);
+
+	if(Menu_Notificaciones.childNodes.length == 1){
+		sinNotificaciones();
+	}
+}
+
 function aceptarSolicitud(event){
 	var respuesta = {};
+	respuesta.idNotificacion = this.getAttribute('data-idNotificacion');
 	respuesta.idEmisor = usuario.id;
 	respuesta.idReceptor = this.getAttribute('data-idEmisor');
 	respuesta.idUsuarioRuta = this.getAttribute('data-idUsuario-Ruta');
 	respuesta.idRuta = this.getAttribute('data-idRuta');
 	respuesta.estado = 'Aceptada';
 	respuesta.tipo = 'Informacion';
+	borrarNotificacion(respuesta.idNotificacion);
 	socket.emit('aceptarRuta',respuesta);
 }
 
 function rechazarSolicitud(event){
 	var respuesta = {};
+	respuesta.idNotificacion = this.getAttribute('data-idNotificacion');
 	respuesta.idEmisor = usuario.id;
 	respuesta.idReceptor = this.getAttribute('data-idEmisor');
 	respuesta.idUsuarioRuta = this.getAttribute('data-idUsuario-Ruta');
 	respuesta.idRuta = this.getAttribute('data-idRuta');
 	respuesta.estado = 'Rechazada';
 	respuesta.tipo = 'Informacion';
+	borrarNotificacion(respuesta.idNotificacion);
 	socket.emit('rechazarRuta',respuesta);
 }
 
@@ -63,6 +83,7 @@ function crearInfoNotificacion(InfoNot){
 		var inputAceptar=document.createElement('input');
 		inputAceptar.setAttribute('class','Notificacion-boton');
 		inputAceptar.setAttribute('type','submit');
+		inputAceptar.setAttribute('data-idNotificacion',InfoNot['idNotificacion']);
 		inputAceptar.setAttribute('data-idEmisor',InfoNot['idEmisor']);
 		inputAceptar.setAttribute('data-idUsuario-Ruta',InfoNot['idUsuarioRuta']);
 		inputAceptar.setAttribute('data-idRuta',InfoNot['idRuta']);
@@ -73,6 +94,7 @@ function crearInfoNotificacion(InfoNot){
 		var inputRechazar=document.createElement('input');
 		inputRechazar.setAttribute('class','Notificacion-boton');
 		inputRechazar.setAttribute('type','submit');
+		inputRechazar.setAttribute('data-idNotificacion',InfoNot['idNotificacion']);
 		inputRechazar.setAttribute('data-idEmisor',InfoNot['idEmisor']);
 		inputRechazar.setAttribute('data-idUsuario-Ruta',InfoNot['idUsuarioRuta']);
 		inputRechazar.setAttribute('data-idRuta',InfoNot['idRuta']);
@@ -100,9 +122,11 @@ function crearInfoNotificacion(InfoNot){
 }
 
 function crearNotificacion(InfoNotificacion){
+	
 	var contenedor=document.createElement('div');
 	contenedor.setAttribute('class','Notificacion');
-
+	contenedor.setAttribute('data-idNotificacion',InfoNotificacion['idNotificacion']);
+	
 	var contFoto=crearFoto(InfoNotificacion);//foto
 	var info=crearInfoNotificacion(InfoNotificacion);//tipo de notificacion
 
@@ -114,10 +138,35 @@ function crearNotificacion(InfoNotificacion){
 function procesarNotificaciones(event){
 	var respond = JSON.parse(event.target.responseText);
 	var notificaciones=respond.notificaciones;
-	for(var i=0;i<notificaciones.length;i++){
-		crearNotificacion(notificaciones[i]);
+
+	if(notificaciones.length == 0){
+		sinNotificaciones();
+	}else{
+		$('#Menu_Notificaciones').empty();
+		for(var i=0;i<notificaciones.length;i++){
+			crearNotificacion(notificaciones[i]);
+		}
 	}
 	verTodasNotificacion();
+}
+
+function sinNotificaciones(){
+	var contenedor= document.createElement('div');
+	contenedor.setAttribute('class','Notificacion');
+	contenedor.setAttribute('id','sinNotificaciones');
+
+	var text = document.createElement('span');
+	text.innerHTML = "No tiene notificaciones pendientes";
+	text.setAttribute('class','Notificacion-titulo');
+	contenedor.appendChild(text);
+
+	Menu_Notificaciones.insertBefore(contenedor,Menu_Notificaciones.firstChild);
+}
+
+function quitarSinNotificaciones(){
+	var cont = document.getElementById('sinNotificaciones');
+	if(cont!=null) 
+		cont.parentNode.removeChild(cont);
 }
 
 

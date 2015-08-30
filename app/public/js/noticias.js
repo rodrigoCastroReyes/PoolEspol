@@ -1,5 +1,6 @@
 var socket;
 
+var flag = false;
 var usuario;
 var puntoSolicitud;//Solicitud
 
@@ -113,12 +114,10 @@ function cargarMapas(event){
   //se crea un nuevo usuario con la informacion envia desde el server
   usuario=new Usuario(userid,userNick,userFoto);
   //extracion de informacion de rutas
-
   var request = new XMLHttpRequest();
   request.open("GET","/Rutas",true);
   request.addEventListener('load',procesarRutas ,false);
   request.send(null);
-
   //extraer informacion de aventones
   var request_aventones = new XMLHttpRequest();
   request_aventones.open("GET", "/Aventones", true);
@@ -146,6 +145,7 @@ function connectSocket(){
   });
 
   socket.on('actualizarNotificacion',function(notificacion){
+    quitarSinNotificaciones();
     crearNotificacion(notificacion);
   });
 

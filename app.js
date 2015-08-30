@@ -49,6 +49,5 @@ http.listen(app.get('port'),function(){
     console.log("Pool Espol Aplication running in a port " + app.get('port'));
 });
 
-
 //realTimeChat.socketChat(http,sessionMiddleware);
 realtime.socketNoticias(http,sessionMiddleware);

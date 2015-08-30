@@ -33,7 +33,7 @@ function socketNoticias(http,sessionMiddleware){
             client.on('solicitarRuta',function(solicitud){ 
                 //validar si esa ruta tiene capacidad
                 db.encontrarRutaPorID(solicitud.idRuta).then(function(ruta){
-                    if(ruta.capacidad > 0 ){
+                    if( ruta.capacidad > 0 ){
                         guardarSolicitud(solicitud);
                     }
                 });
@@ -42,7 +42,7 @@ function socketNoticias(http,sessionMiddleware){
             client.on('aceptarRuta',function(respuesta){
                 db.encontrarRutaPorID(respuesta.idRuta).then(function(ruta){
                     if(ruta.capacidad > 0 ){//si la ruta aun tiene capacidad actualizar usuario ruta
-                        aceptarSolicitudRuta(respuesta);
+                        aceptarSolicitudRuta(respuesta,ruta.capacidad);
                     }
                 });
             });
@@ -72,28 +72,34 @@ exports.clients=clients;
 
 
 function guardarSolicitud(solicitud){
-    db.encontrarUsuarioPorID(solicitud.idEmisor).then(function(usuario){
+    //encontrar el usuario que genero la solicitud
+    db.encontrarUsuarioPorID(solicitud.idEmisor).then(
+        function(usuario){
         if(usuario!=null){
             //guardar la solicitud como pendiente
             solicitud.estado = 'Pendiente';
             db.guardarUsuarioRuta(solicitud).then(function (usuarioruta){
-                //cuando ya haya guardado la solicitud enviar y guardar la notificacion
-                var solicitante=usuario.dataValues;
-                var notificacion={};//construir la notificacion
-                notificacion.idEmisor = solicitud.idEmisor;
-                notificacion.idReceptor = solicitud.idReceptor;
-                notificacion.idUsuarioRuta= usuarioruta.id_usuario_ruta
-                notificacion.idRuta = solicitud.idRuta;
-                notificacion.publicador = solicitante.nick;
-                notificacion.urlNickname = solicitante.foto;
-                notificacion.estado = 'Pendiente';
-                notificacion.tipo = 'Solicitud';
-                //guardar notificacion
-                db.guardarNotificacion(notificacion);
-                //mostrar notificacion si el usuario esta conectado
-                if(clients[solicitud.idReceptor]!=null)
-                    clients[solicitud.idReceptor].emit('actualizarNotificacion',notificacion);
-                });
+                if(usuarioruta!=null){
+                    //cuando se haya guardado la solicitud enviar y guardar la notificacion
+                    var solicitante=usuario.dataValues;
+                    var notificacion={};//construir la notificacion
+                    notificacion.idEmisor = solicitud.idEmisor;
+                    notificacion.idReceptor = solicitud.idReceptor;
+                    notificacion.idUsuarioRuta = usuarioruta.id_usuario_ruta
+                    notificacion.idRuta = solicitud.idRuta;
+                    notificacion.publicador = solicitante.nick;
+                    notificacion.urlNickname = solicitante.foto;
+                    notificacion.estado = 'Pendiente';
+                    notificacion.tipo = 'Solicitud';
+                    //guardar notificacion
+                    db.guardarNotificacion(notificacion).then(function(not){
+                        notificacion.idNotificacion = not.id_Notificacion;
+                        //mostrar notificacion si el usuario esta conectado
+                        if(clients[solicitud.idReceptor]!=null)
+                            clients[solicitud.idReceptor].emit('actualizarNotificacion',notificacion);
+                    });
+                }
+            });
         }
     });
 }
@@ -129,24 +135,22 @@ function rechazarSolicitudRuta(respuesta){//usuario_ruta pasa de estado Pendient
     );
 }
 
-function aceptarSolicitudRuta(respuesta){//usuario_ruta pasa de estado Pendiente a Aceptada
+function aceptarSolicitudRuta(respuesta,capacidad){//usuario_ruta pasa de estado Pendiente a Aceptada
     db.actualizarUsuarioRuta(respuesta.idUsuarioRuta,respuesta.estado).then(
         function(usuarioruta){
-            actualizarCapacidad(respuesta); //actualizar la capacidad de la ruta  
+            if(usuarioruta!=null){
+                actualizarCapacidad(respuesta,capacidad); //actualizar la capacidad de la ruta  
+            }
         }
     );
 }
 
-function actualizarCapacidad(respuesta){
+function actualizarCapacidad(respuesta,capacidad){
     //disminuye en uno la capacidad de la ruta
-    db.consultarRuta(respuesta.idRuta).then(function(ruta){
-        //consultar el estado de la capacidad en una ruta
-        var cap=ruta.dataValues.capacidad-1;//decrementa la capacidad de la ruta
-        if(cap > 0){
-            db.actualizarCapacidadRuta(respuesta.idRuta,cap).then(function(ruta){
-                contestarSolicitud(respuesta);//envia una notificacion al usuario informando que han decidido llevarlo en esta ruta
-            });
-        }
+    var cap = capacidad-1;//decrementa la capacidad de la ruta
+    console.log("actualizar capacidad");
+    db.actualizarCapacidadRuta(respuesta.idRuta,cap).then(function(ruta){
+        contestarSolicitud(respuesta);//envia una notificacion al usuario informando que han decidido llevarlo en esta ruta
     });
 }
 
@@ -156,16 +160,18 @@ function contestarSolicitud(respuesta){
     function(usuario){
         var dueñoRuta = usuario.dataValues;
         var notificacion = {};//construir la notificacion
+        notificacion.idNotificacion = respuesta.idNotificacion;
         notificacion.idEmisor = respuesta.idEmisor;
         notificacion.idReceptor = respuesta.idReceptor;
         notificacion.idUsuarioRuta = null;
         notificacion.estado = respuesta.estado;
         notificacion.tipo = respuesta.tipo;
         notificacion.publicador = dueñoRuta.nick;
-        notificacion.urlNickname = dueñoRuta.foto;                    
-        //db.guardarNotificacion(notificacion);
-        //si el usuario esta conectado enviar la notificacion
-        if(clients[respuesta.idReceptor]!=null)
-            clients[respuesta.idReceptor].emit('actualizarNotificacion',notificacion);
+        notificacion.urlNickname = dueñoRuta.foto;
+        //actualiza el estado y tipo de notificacion
+        db.actualizarNotificacion(notificacion).then(function(result){
+            if(clients[respuesta.idReceptor]!=null) //si el usuario esta conectado enviar la notificacion
+                clients[respuesta.idReceptor].emit('actualizarNotificacion',notificacion);
+        });
     }); 
 }

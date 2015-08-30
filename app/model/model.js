@@ -61,14 +61,11 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 };
 
  exports.guardarNotificacion = function(datosUsuario){
-	modelos.Notificacion.create({tipo: datosUsuario.tipo, 
+	return modelos.Notificacion.create({tipo: datosUsuario.tipo, 
 								estado: datosUsuario.estado, 
 								id_emisor: datosUsuario.idEmisor,
 								usuarioruta: datosUsuario.idUsuarioRuta, 
-								id_receptor:datosUsuario.idReceptor})
-	.then( function (notificacion){
-		console.log(notificacion);
-	});
+								id_receptor:datosUsuario.idReceptor});
 };
 
  exports.guardarAventon = function(InfoAventon){
@@ -140,13 +137,11 @@ exports.actualizarMensaje = function(idmensaje, datos_mensaje){
 };
 
 
-exports.actualizarNotificaciones = function(idnotificacion, datos_notificacion){
-	modelos.Notificacion.update({tipo: datos_notificacion.tipo, 
-								 estado: datos_notificacion.estado},
-						 		 { where: {id_Notificacion: idnotificacion}})
-	.then( function (notificacion){
-		console.log('ACTUALIZADO CORRECTAMENTE');
-	});
+exports.actualizarNotificacion = function(datos_notificacion){
+	return modelos.Notificacion.update({tipo: datos_notificacion.tipo, 
+								estado: datos_notificacion.estado
+								},
+						 		{ where: {id_Notificacion: datos_notificacion.idNotificacion}});
 };
 
 
@@ -427,10 +422,6 @@ exports.obtenerRutasUsuario = function (idUsuario, request, response ){
 	});
 }
 
-
-
-//querys notificaciones
-
 //Querys Chat
 
 exports.obtenerConversaciones = function(id,io){
@@ -551,7 +542,8 @@ exports.consultarNotificacion = function (idnotificacion){
 exports.obtenerNotificacionesPaginacion = function(idReceptor,response){
 	modelos.Notificacion.findAll({
 		where : {
-			id_receptor: idReceptor
+			id_receptor: idReceptor,
+			estado : 'Pendiente'
 		},
 		include : [
 			{ model :  modelos.Usuario , as: 'Emisor_Notifica' } ,
@@ -587,6 +579,7 @@ function crearListaNotificaciones(results){
 		var emisor = results[i].Emisor_Notifica.dataValues;
 		var ruta = results[i].Notificacion_Usuario_Ruta.dataValues
 		var notificacion = {};
+		notificacion.idNotificacion = result.id_Notificacion;
 		notificacion.idEmisor = result.id_emisor;
 		notificacion.idUsuarioRuta = result.usuarioruta;
 		notificacion.idRuta = ruta.id_ruta;

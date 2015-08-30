@@ -1,6 +1,6 @@
 var html_dir = './app/views/';
 var db = require('../model/model.js');
-
+/*
 exports.mensajes=function(request,response){
 	//pasarle a la vista datos de: mensajes entre usuarios
 	response.render('chat',{ title: 'Chat', 
@@ -9,8 +9,6 @@ exports.mensajes=function(request,response){
 		foto: request.session.user.foto
 	});
 };
-
-
 
 exports.enviarConversacion=function(request,response){
 	idReceptor=request.query.id;
@@ -26,3 +24,4 @@ exports.enviarConversaciones=function(request,response){
 	console.log("esta no es");
 };
 
+*/
