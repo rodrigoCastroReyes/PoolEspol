@@ -310,6 +310,9 @@ function crearObjetoRuta(registro){
 
 exports.obtenerRutasNoticias = function (id_usuario, request, response){
 
+	var tam = 5;
+	var inicio = request.query.page;
+
 	modelos.Ruta.findAll({
 		include: [{ model: modelos.Usuario, required: true} ],
 		where:{
@@ -334,13 +337,15 @@ exports.obtenerRutasNoticias = function (id_usuario, request, response){
 			 		continue;
 			 	}
 		 	}
-
-		 	
-
 		 	var ruta = crearObjetoRuta(registro);
 		 	listRutas.push(ruta);
 		 }
-		 var j = {rutas:listRutas.reverse()};
+		 
+		 var count = Math.ceil(listRutas.length/tam);
+		 
+		 listRutas = listRutas.slice(inicio*tam, inicio*tam + tam);
+		 listRutas = listRutas.reverse();
+		 var j = {rutas:listRutas, numPage: count};
 		 response.json(j);
 	});
 
@@ -371,6 +376,9 @@ function crearObjetoAventon(registro){
 
 exports.obtenerAventonesNoticias = function (id_usuario, request, response){
 
+	var tam = 5;
+	var inicio = request.query.page;
+
 	modelos.Aventon.findAll({
 		include: [{ model: modelos.Usuario , as: 'publicador' } ],
 		where:{
@@ -396,17 +404,17 @@ exports.obtenerAventonesNoticias = function (id_usuario, request, response){
 			 	}
 		 	}
 
-
-			
 			var aventon = crearObjetoAventon(registro);
 			listAventones.push(aventon);
 		} 
-		var j = {aventones:listAventones.reverse()};
+		var count = Math.ceil(listAventones.length/tam);
+		listAventones = listAventones.slice(inicio*tam, inicio*tam + tam);
+		listAventones = listAventones.reverse();
+		var j = {aventones:listAventones, numPage: count };
 		 response.json(j);
 	});
 
 };
-
 
 
 exports.obtenerRutasUsuario = function (idUsuario, request, response ){

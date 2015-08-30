@@ -18,6 +18,24 @@ function crearVisualizadorRuta(RutaInfo){
   contenedor.appendChild(menuInferior);
 }
 
+function crearVisualizadorRuta2(RutaInfo){
+  var contenedor=document.createElement('div');
+  contenedor.setAttribute('class','VisualizadorRuta');
+  contenedor_rutas.appendChild(contenedor,contenedor_rutas.firstChild);
+  //crear menu superior del visualizador: nickname,mensajes
+  var menuSuperior=crearMenuSuperior(RutaInfo,false);
+  contenedor.appendChild(menuSuperior);
+  //crear el mapa en donde se mostrara la ruta, ubicar los puntos de la ruta sobre el mapa
+  var contenedorMapa=document.createElement('div');
+  contenedorMapa.setAttribute('class','VisualizadorRuta-mapa');
+  contenedorMapa.setAttribute('id','mapaGoogle1');
+  contenedor.appendChild(contenedorMapa);
+  
+  crearMapa(RutaInfo,contenedorMapa);
+  //crear menu inferior del visualizador: agregar, precio, capacidad
+  var menuInferior=crearMenuInferior(RutaInfo,true,false);
+  contenedor.appendChild(menuInferior);
+}
 
 function crearMapa(RutaInfo,contenedorMapa){
   //opciones del mapa
@@ -150,11 +168,14 @@ function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
 }
 
 function procesarRutas(event){
+  $('#loader-icon').hide();
   var respond = JSON.parse(event.target.responseText);
   var rutasInfo=respond.rutas;
+  console.log(rutasInfo);
   for(var i=0;i<rutasInfo.length;i++){
-    crearVisualizadorRuta(rutasInfo[i]);
+    crearVisualizadorRuta2(rutasInfo[i]);
     usuario.agregarInfoRuta(rutasInfo[i]);
   }
+
 }
 /****/
