@@ -26,10 +26,12 @@ function crearFoto(InfoNot){
 
 function borrarNotificacion(idNotificacion){
 	var lstNotificaciones = Menu_Notificaciones.childNodes;
-	for(var i=0 ; i < lstNotificaciones.length - 1 ; i++){
+	for(var i=0 ; i < lstNotificaciones.length ; i++){
 		var notificacionInfo = lstNotificaciones[i];
-		if(idNotificacion == notificacionInfo.getAttribute('data-idNotificacion')){
-			notificacionInfo.parentNode.removeChild(notificacionInfo);
+		if( notificacionInfo.getAttribute('class') == 'Notificacion'){
+			if(idNotificacion == notificacionInfo.getAttribute('data-idNotificacion')){
+				notificacionInfo.parentNode.removeChild(notificacionInfo);
+			}
 		}
 	}
 	

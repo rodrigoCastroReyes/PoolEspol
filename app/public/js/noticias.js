@@ -4,11 +4,48 @@ var flag = false;
 var usuario;
 var puntoSolicitud;//Solicitud
 
+//Variables para la paginacion
+var PageRuta = 0;
+var limiteRutas = 1000;
+var PageAventon = 0;
+var limiteAventon = 1000;
+
+
 /*Aventon*/
 function crearVisualizadorAventon(AventonInfo){
   var contenedor=document.createElement('div');
   contenedor.setAttribute('class','VisualizadorRuta');
   contenedor_rutas.insertBefore(contenedor,contenedor_rutas.firstChild);
+
+  var menuSuperior=crearMenuSuperior(AventonInfo);
+  contenedor.appendChild(menuSuperior);
+
+  //mapa
+  var contenedorMapa=document.createElement('div');
+  contenedorMapa.setAttribute('class','VisualizadorRuta-mapa');
+  contenedorMapa.setAttribute('id','mapaGoogle2');
+  contenedor.appendChild(contenedorMapa);
+  var mapOptions = {
+    zoom: 15,
+    center:new google.maps.LatLng(AventonInfo.ubicacion.x,AventonInfo.ubicacion.y),
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };  
+  var map=new google.maps.Map(contenedorMapa,mapOptions);
+  var marker= new google.maps.Marker({
+    position: new google.maps.LatLng(AventonInfo.ubicacion.x,AventonInfo.ubicacion.y),
+    title:'#',
+    draggable:false,
+    map:map
+  });//ubica el punto del aventon dentro del mapa
+
+  var menuInferior=crearMenuInferior(AventonInfo,false);
+  contenedor.appendChild(menuInferior);
+}
+
+function crearVisualizadorAventon2(AventonInfo){
+  var contenedor=document.createElement('div');
+  contenedor.setAttribute('class','VisualizadorRuta');
+  contenedor_rutas.appendChild(contenedor,contenedor_rutas.firstChild);
 
   var menuSuperior=crearMenuSuperior(AventonInfo);
   contenedor.appendChild(menuSuperior);
@@ -105,30 +142,68 @@ function procesarAventones(event){
   var respond = JSON.parse(event.target.responseText);
   var aventonesInfo=respond.aventones;
   for(var i=0;i<aventonesInfo.length;i++){
-    crearVisualizadorAventon(aventonesInfo[i]);
+    crearVisualizadorAventon2(aventonesInfo[i]);
     usuario.agregarInfoAventon(aventonesInfo[i]);
   }
 }
 
+
+
+function auxRutas(event){
+  limiteRutas = JSON.parse(event.target.responseText).numPage;
+  procesarRutas(event);
+}
+
+function auxAventones(event){
+  limiteAventon = JSON.parse(event.target.responseText).numPage;
+  console.log("Numero de registros", limiteAventon);
+  procesarAventones(event);
+}
+
+function progreso(event){
+  $('#loader-icon').show();
+}
+
 function cargarMapas(event){
   //se crea un nuevo usuario con la informacion envia desde el server
+  $('#loader-icon').show();
   usuario=new Usuario(userid,userNick,userFoto);
   //extracion de informacion de rutas
-  var request = new XMLHttpRequest();
-  request.open("GET","/Rutas",true);
-  request.addEventListener('load',procesarRutas ,false);
-  request.send(null);
+  if(PageRuta < limiteRutas){
+    var request = new XMLHttpRequest();
+    request.open("GET","/Rutas?page="+PageRuta ,true);
+    request.addEventListener('load',auxRutas ,false);
+    request.addEventListener('progress',progreso, true );
+    request.send(null);
+    PageRuta = PageRuta+ 1; //incremento la pagina  
+  }
+  else{
+      console.log("no traigo rutas");
+  }
+
   //extraer informacion de aventones
-  var request_aventones = new XMLHttpRequest();
-  request_aventones.open("GET", "/Aventones", true);
-  request_aventones.addEventListener('load', procesarAventones, false);
-  request_aventones.send(null);
+  $('#loader-icon').show();
+
+  if(PageAventon < limiteAventon){
+    var request_aventones = new XMLHttpRequest();
+    request_aventones.open("GET", "/Aventones?page="+PageAventon, true);
+    request_aventones.addEventListener('load',auxAventones , false);
+    request.addEventListener('progress',progreso, true );
+    request_aventones.send(null);
+    PageAventon = PageAventon+ 1; //incremento la pagina  
+  }else{
+    console.log("no traigo aventones");
+  }
+  $('#loader-icon').hide();
   /*Manejadores de enventos de botones*/
   btnAceptarAgregar.addEventListener('click',guardarSolicitud,false);
   btnCancelarAgregar.addEventListener('click',cerrarSolicitarRuta,false);
   btnCloseAgregar.addEventListener('click',cerrarSolicitarRuta,false);
+}
 
-  connectSocket();
+function incializar(event){
+    cargarMapas(null);
+    connectSocket();
 }
 
 function connectSocket(){
@@ -148,7 +223,15 @@ function connectSocket(){
     quitarSinNotificaciones();
     crearNotificacion(notificacion);
   });
-
 }
 
-google.maps.event.addDomListener(window, 'load',cargarMapas);
+$(window).scroll(function(){
+if ($(window).scrollTop() == $(document).height() - $(window).height()){
+  console.log("final del scroll");
+  cargarMapas(null);
+  }
+});
+
+
+
+google.maps.event.addDomListener(window, 'load', incializar);
