@@ -6,7 +6,8 @@ exports.mensajes=function(request,response){
 	response.render('chat',{ title: 'Chat', 
 		id : request.session.user.id,
 		nickname: request.session.user.nick,
-		foto: request.session.user.foto
+		foto: request.session.user.foto,
+		idReceptor:0
 	});
 };
 
@@ -19,6 +20,27 @@ exports.enviarConversacion=function(request,response){
 	console.log("receptor: "+idReceptor);
 	db.obtenerConversacion(request.session.user.id,parseInt(idReceptor),response);	
 };
+
+exports.nuevaConversacion=function(request,response){
+	idReceptor=request.query.idReceptor;
+	//mensajes(request,response);
+	console.log("nueva conversacion");
+	response.render('chat',{ title: 'Chat', 
+		id : request.session.user.id,
+		nickname: request.session.user.nick,
+		foto: request.session.user.foto,
+		idReceptor:idReceptor
+	});
+	
+};
+
+exports.obtenerPersona=function(request,response){
+	console.log("obtenerPersona");
+	idPersona=request.query.id;
+	db.obtenerPersona(idPersona,request.session.user.id,response);
+	
+};
+
 
 /*
 exports.enviarConversaciones=function(request,response){

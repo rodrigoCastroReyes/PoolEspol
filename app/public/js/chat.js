@@ -140,36 +140,66 @@ function procesarDatosConversacionAjax(event){
 	aux[aux.length-1].addEventListener('click',mostrarChat);
 }
 
-
+/*
 function cargarConversaciones(){
   
   var request = new XMLHttpRequest();
-  var url="/chat/conversaciones";
+  var url="/chat/persona?id="+idReceptor;
   request.open("GET",url,true);
   request.addEventListener('load',procesarDatosConversacionAjax ,false);
   request.send(null);
 
 }
+*/
+function CargarPersona(id){
+	pers=$('.persona');
+	ban=0;
+	for(i=0;i<pers.length;i++){
+		p=pers[i];
+		if(p.dataset.id==idReceptor){
+			ban=1;
+			break;
+		}
+	}
+	if(ban==0){
+		var request = new XMLHttpRequest();
+		var url="/chat/persona?id="+id;
+		request.open("GET",url,true);
+		request.addEventListener('load',procesarDatosConversacionAjax ,false);
+		request.send(null);
+	}
+
+}
 
 
 function procesarDatosConversacion(persona){
+	pers=$('.persona');
+	ban=0;
+	for(i=0;i<pers.length;i++){
+		p=pers[i];
+		if(p.dataset.id==persona.id){
+			ban=1;
+			break;
+		}
+	}
+	if(ban==0){
+		div=document.createElement("div");
+		div.setAttribute("class","persona");
+		div.setAttribute("data-id",persona.id);
 
-	div=document.createElement("div");
-	div.setAttribute("class","persona");
-	div.setAttribute("data-id",persona.id);
-
-	imagen=document.createElement("img");
-	imagen.setAttribute("src",persona.foto);
-	imagen.setAttribute("class","fotoPerfil")
-	
-	h3=document.createElement("h3");
-	h3.innerHTML=persona.nick;
-	
-	div.appendChild(imagen);
-	div.appendChild(h3);
-	personas.appendChild(div);
-	aux=$('.persona')
-	aux[aux.length-1].addEventListener('click',mostrarChat);
+		imagen=document.createElement("img");
+		imagen.setAttribute("src",persona.foto);
+		imagen.setAttribute("class","fotoPerfil")
+		
+		h3=document.createElement("h3");
+		h3.innerHTML=persona.nick;
+		
+		div.appendChild(imagen);
+		div.appendChild(h3);
+		personas.appendChild(div);
+		aux=$('.persona')
+		aux[aux.length-1].addEventListener('click',mostrarChat);
+	}
 }
 
 function enviarMensaje(){
@@ -233,6 +263,27 @@ function connectSocket(){
     console.log(data);
     if(cabezeraMensaje.dataset.id==id_emisor){
     	agregarMensaje(data);
+    }else{// la ventana abierta no es del usuario dueño del mensaje
+    	chats=$(".persona");
+   		var ban=0;
+    	for(i=0;i<chats.length;i++){
+    		var c=chats[i];
+    		var auxid=c.dataset.id;
+    		if(id_emisor==auxid){
+    			ban=1;
+    			break;
+    		}
+    	}
+    	//nunca ha habado con esa persona
+    	if(ban==0){
+    		console.log("nuevo mensaje");
+    		CargarPersona(id_emisor);
+
+    	}else{
+    		console.log("si lo tengo");
+    	}
+
+
     }
   });
 
@@ -254,6 +305,14 @@ function inicializar(){
 	$('#conversacion').css("display","none");
 	$('#btnEnviar').click(enviarMensaje);
 	connectSocket();
+	if(idReceptor!=0){
+		console.log("le enviare mensajes a un man");
+		CargarPersona(idReceptor);
+		personas.classList.remove("visible");
+		personas.classList.add("invisible");
+		cargarConversacion(idReceptor);
+		$('#conversacion').css("display","flex");
+	}
 }
 
 

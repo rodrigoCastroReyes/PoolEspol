@@ -25,6 +25,8 @@ router.get('/cerrar_sesion',LogoutController.cerrar);
 router.get('/chat',MensajesController.mensajes);
 //router.get('/conversaciones',MensajesController.enviarConversaciones);
 router.get('/chat/conversacion',MensajesController.enviarConversacion);
+router.get('/nuevaConversacion',MensajesController.nuevaConversacion);
+router.get('/chat/persona',MensajesController.obtenerPersona);
 
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificaciones);

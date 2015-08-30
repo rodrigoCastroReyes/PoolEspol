@@ -78,6 +78,12 @@ function colocarMarcadores(map, puntos){
   });
 }
 
+function clickMensaje(event){
+  console.log("nuevo mensaje");
+  console.log(this.dataset.idpublicador);
+  window.location.href="/nuevaConversacion?idReceptor="+this.dataset.idpublicador;
+}
+
 //crea un div con las opciones del menu superior del visualizador de ruta
 function crearMenuSuperior(RutaInfo, miRuta ){
   var menuSuperior=document.createElement('div');
@@ -103,6 +109,8 @@ function crearMenuSuperior(RutaInfo, miRuta ){
     //icono de mensajes
     var iconoMensaje=document.createElement('span');
     iconoMensaje.setAttribute('class','icon-mail4  VisualizadorRuta-info u-cursor_pointer');
+    iconoMensaje.setAttribute('data-idpublicador',RutaInfo["idPublicador"]);
+    iconoMensaje.addEventListener('click',clickMensaje,false);
     //texto: Mensajes
     var mensaje=document.createElement('span');
     mensaje.setAttribute('class','VisualizadorRuta-info');

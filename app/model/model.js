@@ -547,6 +547,20 @@ exports.obtenerConversacion = function(id_emisor,id_receptor,response){
 	});
 }
 
+exports.obtenerPersona=function(id,idDueno,response){
+	modelos.Usuario.findOne({where:{id:id}}).then(function(user){
+		var datosUsuario={
+			id:user.dataValues.id,
+			nick:user.dataValues.nick,
+			foto:user.dataValues.foto,
+			id_dueno:idDueno
+		}
+		response.json({conversaciones:[datosUsuario]});
+
+	});
+
+}
+
 
 exports.consultarUsuario = function (idusuario){
 	return modelos.Usuario.findOne({where :{id: idusuario}});
