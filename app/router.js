@@ -10,6 +10,8 @@ var router=express.Router();
 
 router.get('/',LoginController.index);
 router.post('/login',LoginController.login);
+router.post('/autenticar',LoginController.autenticar);
+router.post('/registrar',LoginController.registrar);
 
 router.get('/noticias',NoticiasController.noticias);
 router.get('/Rutas',NoticiasController.obtenerRutasNoticias);
