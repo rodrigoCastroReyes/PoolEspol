@@ -498,9 +498,36 @@ exports.obtenerConversaciones = function(id,io){
 		 	}
 		 	
 		 }
-		 //console.log("el ajax");
-		 //console.log(usuarios);
-		 //io.json({personas:usuarios});
+	});
+}
+
+exports.obtenerConversacionesPendientes = function(id,response){
+	modelos.Mensaje.findAll({
+		where:{$or:{id_receptor:id}}
+	}).then(function(result){
+		 var lista=[];
+		 var usuarios=[];
+		 for(var i =0 ; i< result.length; i++){
+		 	//obtenego el id de la persona con la que tengo la conversacion
+		 	var auxid;
+		 	auxid=result[i].dataValues.id_emisor;
+		 	if(result[i].dataValues.leido){
+		 		continue;
+		 	}
+		 	ban=1;
+		 	for(var j=0;j<lista.length;j++){
+		 		if(lista[j]==auxid ){
+		 			ban=0;
+		 			break;
+		 		}
+		 	}
+		 	//console.log(result[i].dataValues);
+		 	if(ban==1 && auxid!=null){
+		 		lista.push(auxid);
+		 	}
+		 	
+		 }
+		 response.json({ids:lista});
 	});
 }
 
@@ -533,6 +560,7 @@ exports.obtenerConversacion = function(id_emisor,id_receptor,response){
 				var mensaje={
 					tipo:tipo,
 					contenido:dato[i].dataValues.contenido,
+					leido:dato[i].dataValues.leido
 				};
 
 				json.mensajes.push(mensaje);
@@ -558,6 +586,16 @@ exports.obtenerPersona=function(id,idDueno,response){
 		response.json({conversaciones:[datosUsuario]});
 
 	});
+
+}
+
+exports.leerMensajes=function(id_emisor,id_receptor){
+	modelos.Mensaje.update({leido: true},
+							{ where: { id_emisor: id_emisor,id_receptor:id_receptor } })
+	.then( function (mensaje){
+		
+	});
+
 
 }
 

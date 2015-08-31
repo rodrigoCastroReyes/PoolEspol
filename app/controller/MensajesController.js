@@ -41,6 +41,23 @@ exports.obtenerPersona=function(request,response){
 	
 };
 
+exports.obtenerNoLeidos=function(request,response){
+	console.log("obtenerNoLeidos");
+	id=request.session.user.id,
+	db.obtenerConversacionesPendientes(request.session.user.id,response);
+	
+};
+
+exports.leerMensajes=function(request,response){
+	console.log("leerMensajes");
+	id=request.query.id;
+	console.log('emisor'+id+' receptor '+request.session.user.id)
+	db.leerMensajes(id,request.session.user.id);
+	
+};
+
+
+
 
 /*
 exports.enviarConversaciones=function(request,response){

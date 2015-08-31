@@ -47,11 +47,6 @@ function socketChat(http,sessionMiddleware){
                 //Sconsole.log(mensaje.dataValues);
                 db.guardarMensaje(mensaje,socketDestino);
                 
-                
-                
-                //io.sockets.emit('enviarCliente',data);
-                //socketDestino.emit('enviarCliente',data);
-                
             });
         }
 
