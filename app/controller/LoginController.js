@@ -13,16 +13,35 @@ exports.index = function(request, response){
 };
 
 exports.login=function(request,response){
-	   db.encontrarUsuario(request.body.usuario).then(function (user){
-		if(!user){
-			//si no esta registrado lo redirecciona a index.html
-			response.sendfile(html_dir + 'index.html');
-		}else{			
-			request.session.user=user.dataValues;
-			response.redirect('/noticias');
-		}
-	}).catch(function(err){
-		console.log(err);
-		response.sendfile(html_dir + 'index.html');
-	});
+	   var soap = require('soap');
+	   var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
+	   var args = {authUser: request.body.usuario, authContrasenia: request.body.contraseña};
+	   var resp;
+	   soap.createClient(url, function(err, client) {
+	   	client.autenticacion(args, function(err, result){
+	   		resp = result.autenticacionResult;
+	   		console.log(resp);
+			if (resp){
+				db.encontrarUsuario(request.body.usuario).then(function (user){
+				if(!user){
+					console.log('Ud no se encuentra registrado');
+					//si no esta registrado lo redirecciona a index.html
+					response.sendfile(html_dir + 'index.html');
+				}else{			
+					request.session.user=user.dataValues;
+					response.redirect('/noticias');}
+				}).catch(function(err){
+					console.log(err);
+					response.sendfile(html_dir + 'index.html');
+				});
+			}
+			else{ 
+				//window.alert("Ud. no es usuario Espol");
+				console.log('Ud no es usuario Espol');
+				//window.alert("Ud. no es usuario Espol");
+				response.sendfile(html_dir + 'index.html');
+			}
+	   	});
+	   });
+	   
 };
