@@ -2,9 +2,8 @@ var db = require('./app/model/model.js');
 
 var clients={};
 
-function socketNoticias(http,sessionMiddleware){
+function socketNoticias(io,sessionMiddleware){
     //tabla de hash con referencia a las conecciones de los clientes
-    var io = require('socket.io')(http);
 
     io.use(function(socket,next){
         sessionMiddleware(socket.request, socket.request.res, next);
