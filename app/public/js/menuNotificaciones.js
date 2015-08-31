@@ -12,7 +12,7 @@ function verTodasNotificacion(){
 	enlace.innerHTML="Ver todas";
 	enlace.href="/notificaciones";
 	center.appendChild(enlace);
-	Menu_Notificaciones.appendChild(center);
+	//Menu_Notificaciones.appendChild(center);
 }
 
 function crearFoto(InfoNot){
@@ -26,18 +26,17 @@ function crearFoto(InfoNot){
 
 function borrarNotificacion(idNotificacion){
 	var lstNotificaciones = Menu_Notificaciones.childNodes;
+
 	for(var i=0 ; i < lstNotificaciones.length ; i++){
 		var notificacionInfo = lstNotificaciones[i];
 		if( notificacionInfo.getAttribute('class') == 'Notificacion'){
 			if(idNotificacion == notificacionInfo.getAttribute('data-idNotificacion')){
 				notificacionInfo.parentNode.removeChild(notificacionInfo);
+				break;
 			}
 		}
 	}
-	
-	console.log(Menu_Notificaciones.childNodes.length);
-
-	if(Menu_Notificaciones.childNodes.length == 1){
+	if(Menu_Notificaciones.childNodes.length == 0){
 		sinNotificaciones();
 	}
 }
@@ -76,39 +75,51 @@ function crearInfoNotificacion(InfoNot){
 	titulo.setAttribute('class','Notificacion-titulo');
 
 	if(InfoNot['tipo']=="Solicitud"){
-		titulo.innerHTML=InfoNot['publicador'] + " ha solicitado unirse a tu ruta";
-		contTitulo.appendChild(titulo);
+		if(InfoNot['estado'] == 'Pendiente'){
+			titulo.innerHTML=InfoNot['publicador'] + " ha solicitado unirse a tu ruta";
+			contTitulo.appendChild(titulo);
 
-		var contBotones=document.createElement('div');
-		contBotones.setAttribute('class','Notificacion-Botones');
+			var contBotones=document.createElement('div');
+			contBotones.setAttribute('class','Notificacion-Botones');
 
-		var inputAceptar=document.createElement('input');
-		inputAceptar.setAttribute('class','Notificacion-boton');
-		inputAceptar.setAttribute('type','submit');
-		inputAceptar.setAttribute('data-idNotificacion',InfoNot['idNotificacion']);
-		inputAceptar.setAttribute('data-idEmisor',InfoNot['idEmisor']);
-		inputAceptar.setAttribute('data-idUsuario-Ruta',InfoNot['idUsuarioRuta']);
-		inputAceptar.setAttribute('data-idRuta',InfoNot['idRuta']);
-		inputAceptar.setAttribute('id','btnAceptar');
-		inputAceptar.setAttribute('value','Aceptar');
-		inputAceptar.addEventListener('click',aceptarSolicitud,false);
+			var inputAceptar=document.createElement('input');
+			inputAceptar.setAttribute('class','Notificacion-boton');
+			inputAceptar.setAttribute('type','submit');
+			inputAceptar.setAttribute('data-idNotificacion',InfoNot['idNotificacion']);
+			inputAceptar.setAttribute('data-idEmisor',InfoNot['idEmisor']);
+			inputAceptar.setAttribute('data-idUsuario-Ruta',InfoNot['idUsuarioRuta']);
+			inputAceptar.setAttribute('data-idRuta',InfoNot['idRuta']);
+			inputAceptar.setAttribute('id','btnAceptar');
+			inputAceptar.setAttribute('value','Aceptar');
+			inputAceptar.addEventListener('click',aceptarSolicitud,false);
 
-		var inputRechazar=document.createElement('input');
-		inputRechazar.setAttribute('class','Notificacion-boton');
-		inputRechazar.setAttribute('type','submit');
-		inputRechazar.setAttribute('data-idNotificacion',InfoNot['idNotificacion']);
-		inputRechazar.setAttribute('data-idEmisor',InfoNot['idEmisor']);
-		inputRechazar.setAttribute('data-idUsuario-Ruta',InfoNot['idUsuarioRuta']);
-		inputRechazar.setAttribute('data-idRuta',InfoNot['idRuta']);
-		inputRechazar.setAttribute('id','btnCancelar');
-		inputRechazar.setAttribute('value','Rechazar');
-		inputRechazar.addEventListener('click',rechazarSolicitud,false);
+			var inputRechazar=document.createElement('input');
+			inputRechazar.setAttribute('class','Notificacion-boton');
+			inputRechazar.setAttribute('type','submit');
+			inputRechazar.setAttribute('data-idNotificacion',InfoNot['idNotificacion']);
+			inputRechazar.setAttribute('data-idEmisor',InfoNot['idEmisor']);
+			inputRechazar.setAttribute('data-idUsuario-Ruta',InfoNot['idUsuarioRuta']);
+			inputRechazar.setAttribute('data-idRuta',InfoNot['idRuta']);
+			inputRechazar.setAttribute('id','btnCancelar');
+			inputRechazar.setAttribute('value','Rechazar');
+			inputRechazar.addEventListener('click',rechazarSolicitud,false);
 
-		contBotones.appendChild(inputAceptar);
-		contBotones.appendChild(inputRechazar);
+			contBotones.appendChild(inputAceptar);
+			contBotones.appendChild(inputRechazar);
 
-		info.appendChild(contTitulo);
-		info.appendChild(contBotones);
+			info.appendChild(contTitulo);
+			info.appendChild(contBotones);
+		}
+		if(InfoNot['estado'] == 'Aceptada'){
+			titulo.innerHTML= "Has aceptado a " + InfoNot['publicador'] + " en su ruta";
+			contTitulo.appendChild(titulo);
+			info.appendChild(contTitulo);
+		}
+		if(InfoNot['estado'] == 'Rechazada'){
+			titulo.innerHTML= "Has rechazado la solicitud de " + InfoNot['publicador'];
+			contTitulo.appendChild(titulo);
+			info.appendChild(contTitulo);
+		}
 	}else{
 		if(InfoNot['estado'] == 'Aceptada'){
 			titulo.innerHTML=InfoNot['publicador'] + " ha aceptado llevarte";
@@ -124,7 +135,6 @@ function crearInfoNotificacion(InfoNot){
 }
 
 function crearNotificacion(InfoNotificacion){
-	
 	var contenedor=document.createElement('div');
 	contenedor.setAttribute('class','Notificacion');
 	contenedor.setAttribute('data-idNotificacion',InfoNotificacion['idNotificacion']);
@@ -176,8 +186,10 @@ function iniciar () {
 	$("#notificaciones").click(function () {
 		if(ban==false){
 			$("#Menu_Notificaciones").show();
+			$("#Notificaciones_Ver_todas").show();
 	    	ban=true;
 	    }else{
+	    	$("#Notificaciones_Ver_todas").hide();
 	    	$("#Menu_Notificaciones").hide();
 	    	ban=false;
 	    }

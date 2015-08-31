@@ -138,16 +138,12 @@ exports.actualizarMensaje = function(idmensaje, datos_mensaje){
 
 
 exports.actualizarNotificacion = function(datos_notificacion){
-	return modelos.Notificacion.update({tipo: datos_notificacion.tipo, 
-								estado: datos_notificacion.estado
-								},
+	return modelos.Notificacion.update({ estado: datos_notificacion.estado },
 						 		{ where: {id_Notificacion: datos_notificacion.idNotificacion}});
 };
 
-
-
 exports.actualizarAventon = function(idaventon, datos_aventon){
- 	return modelos.Aventon.update({id_usuario_da:datos_aventon.idReceptor},
+ 	return modelos.Aventon.update({id_usuario_da:datos_aventon.idEmisor},
  								  { where: {id_aventon: idaventon} });
 };
 
@@ -177,7 +173,6 @@ exports.consultarUsuario = function (idusuario){
 	return modelos.Usuario.findOne({where :{id: idusuario}});
 };
 
-//aqui hago un join
 exports.consultarUsuarioCarro = function (idcarro){
  			return modelos.Usuario.find({
 	 			include: [{ model:modelos.Carro, as: 'Usuario_Carro'}],
@@ -185,8 +180,7 @@ exports.consultarUsuarioCarro = function (idcarro){
 	 		});   	
 };
 
-/*Querys*/
-
+//Usuario
 exports.encontrarUsuario = function(nickname){
 	return modelos.Usuario.findOne({
 		where:{
@@ -199,28 +193,53 @@ exports.encontrarUsuarioPorID = function(id){
 	return modelos.Usuario.findById(id);
 }
 
-exports.encontrarRutaPorID = function (idRuta){
-	return modelos.Ruta.findById(idRuta);
-}
-
 exports.encontrarUsuarioRutaPorId = function (idUsuarioRuta){
 	return modelos.Usuario_Ruta.findById(idUsuarioRuta);
 }
 
-
 //Consultas Ruta
+
+exports.encontrarRutaPorID = function (idRuta){
+	return modelos.Ruta.findById(idRuta);
+}
+
 exports.consultarRuta = function (idruta){
 	return modelos.Ruta.findOne({ where:{id_ruta:idruta}});
 };
 
-exports.consultarNotificacion = function (idnotificacion){
-	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
-};
+exports.perteneceARuta = function(solicitud){
+	return modelos.Usuario_Ruta.findAll({
+		where : {
+			estado: 'Aceptada',
+		},
+		include : [
+			{ model :  modelos.Usuario, as : 'Usuario_Miembro',
+			  where :  { id : solicitud.idEmisor }
+			},
+			{ model : modelos.Ruta, as: 'Ruta_Miembro' ,
+			  where :  { id_ruta : solicitud.idRuta }
+			}
+		],
+	});
+}
 
-
+exports.solicituPendienteEnRuta = function(solicitud){
+	return modelos.Usuario_Ruta.findAll({
+		where : {
+			estado: 'Pendiente',
+		},
+		include : [
+			{ model :  modelos.Usuario, as : 'Usuario_Miembro',
+			  where :  { id : solicitud.idEmisor }
+			},
+			{ model : modelos.Ruta, as: 'Ruta_Miembro' ,
+			  where :  { id_ruta : solicitud.idRuta }
+			}
+		],
+	});
+}
 
 //Carga de rutas y aventones desde la base de datos
-
 function obtenerHora(){
   var d = new Date();
   var hora = d.getHours();
@@ -346,6 +365,12 @@ exports.obtenerRutasNoticias = function (id_usuario, request, response){
 
 }
 
+//Aventones
+
+exports.obtenerAventonPorID = function(idAventon){
+	return modelos.Aventon.findById(idAventon);
+}
+
 function crearObjetoAventon(registro){
 	
 	var dateObj = new Date(registro.fecha);
@@ -360,10 +385,8 @@ function crearObjetoAventon(registro){
 		urlNickname: registro.publicador.foto,
 		fecha: stringFecha,
 		hora: registro.hora,
-		id_Aventon: registro.id_aventon,
+		idAventon: registro.id_aventon,
 		ubicacion: {x: registro.latitud, y: registro.longitud}
-		
-		
 	}
 	return aventon;
 
@@ -536,36 +559,15 @@ exports.obtenerPersona=function(id,idDueno,response){
 	});
 
 }
-
-
-exports.consultarUsuario = function (idusuario){
-	return modelos.Usuario.findOne({where :{id: idusuario}});
-};
-//aqui hago un join
-exports.consultarUsuarioCarro = function (idcarro){
- 			return modelos.Usuario.find({
-	 			include: [{model:modelos.Carro, as: 'Usuario_Carro'}],
-	 			where : {id_carro:idcarro}
-	 		});
-   	
-    };
-
-
-exports.consultarRuta = function (idruta){
-	return modelos.Ruta.findOne({ where:{id_ruta:idruta}});
-};
-
+//Notificaciones
 exports.consultarNotificacion = function (idnotificacion){
 	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
 };
-
-//Notificaciones
 //obtiene las tres notificaciones mas reciente del usuario
 exports.obtenerNotificacionesPaginacion = function(idReceptor,response){
 	modelos.Notificacion.findAll({
 		where : {
 			id_receptor: idReceptor,
-			estado : 'Pendiente'
 		},
 		include : [
 			{ model :  modelos.Usuario , as: 'Emisor_Notifica' } ,
@@ -573,6 +575,7 @@ exports.obtenerNotificacionesPaginacion = function(idReceptor,response){
 		],
 		limit: 3
 	}).then(function(results){
+		//console.log(results);
 		var listNot = crearListaNotificaciones(results);
 		response.json({notificaciones: listNot});
 	});
@@ -589,6 +592,7 @@ exports.obtenerNotificacionesUsuario = function(idReceptor,response){
 			{ model : modelos.Usuario_Ruta, as: 'Notificacion_Usuario_Ruta'}
 		]
 	}).then(function(results){
+		console.log(results);
 		var listNot = crearListaNotificaciones(results);
 		response.json({notificaciones: listNot});
 	});
@@ -596,21 +600,26 @@ exports.obtenerNotificacionesUsuario = function(idReceptor,response){
 
 function crearListaNotificaciones(results){
 	var listNot = [];
-	for(var i = 0 ; i < results.length ; i++){
-		var result = results[i].dataValues;
-		var emisor = results[i].Emisor_Notifica.dataValues;
-		var ruta = results[i].Notificacion_Usuario_Ruta.dataValues
-		var notificacion = {};
-		notificacion.idNotificacion = result.id_Notificacion;
-		notificacion.idEmisor = result.id_emisor;
-		notificacion.idUsuarioRuta = result.usuarioruta;
-		notificacion.idRuta = ruta.id_ruta;
-  		notificacion.tipo = result.tipo;
-  		notificacion.estado = result.estado;
-  		notificacion.publicador = emisor.nick;
-  		notificacion.urlNickname = emisor.foto;
-  		listNot.push(notificacion);
+	if(results!=null){
+		for(var i = 0 ; i < results.length ; i++){
+			var result = results[i].dataValues;
+			var notificacion = {};
+			if(results[i].Emisor_Notifica!=null){
+				var emisor = results[i].Emisor_Notifica.dataValues;
+				notificacion.publicador = emisor.nick;
+		  		notificacion.urlNickname = emisor.foto;
+			}
+			if(results[i].Notificacion_Usuario_Ruta!=null){
+				var ruta = results[i].Notificacion_Usuario_Ruta.dataValues;
+				notificacion.idRuta = ruta.id_ruta;
+			}
+			notificacion.idNotificacion = result.id_Notificacion;
+			notificacion.idEmisor = result.id_emisor;
+			notificacion.idUsuarioRuta = result.usuarioruta;	
+		  	notificacion.tipo = result.tipo;
+		  	notificacion.estado = result.estado;	  		
+		  	listNot.push(notificacion);
+		}
 	}
 	return listNot;
-
 }

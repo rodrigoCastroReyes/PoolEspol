@@ -1,3 +1,6 @@
+var usuario;
+var socket;
+
 function mostrarNotificaciones(event){
 	var respond = JSON.parse(event.target.responseText);
 	var notificaciones=respond.notificaciones;
@@ -19,6 +22,8 @@ function agregarNotificacion(InfoNotificacion){
 }
 
 function iniciar(){
+	usuario = new Usuario(userid,userNick,userFoto);
+	socket = io.connect();
 	var request = new XMLHttpRequest();
 	request.open("GET","/obtenerNotificaciones?paginacion=-1",true);
 	request.addEventListener('load',mostrarNotificaciones ,false);

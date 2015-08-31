@@ -11,6 +11,40 @@ html,body{
 	background-color: #e2e4e6;
 }
 
+#errorRuta-Ok{
+	cursor: pointer;
+}
+
+.errorRuta-Titulo{
+	font-family: opcionUno;
+}
+
+.errorRuta-Boton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding: 5px;
+}
+
+.errorRuta{
+	display: flex;
+	flex-direction : column;
+	background-color: #0080FB;
+	border-radius: 6px;
+	color: white;
+	align-items: center;
+	justify-content:center;
+	height: 60px;
+	width: 290px;
+	position: fixed;
+	top:35%;
+	left:40%;
+	right:40%;
+    z-index: 100;
+    border: 3px solid white;
+    padding: 10px;
+}
 
 #contenedor_rutas{
 	width: 100%;
