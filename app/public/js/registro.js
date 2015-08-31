@@ -31,23 +31,16 @@ function opcionesCarroOff(){
 function autenticar(){
 	var valid=document.autenticacion.checkValidity();
 	if(valid){
+		
 		//si se ingresa de forma correcta el nombre y la contraseña se puede ingresar la info de registro
 		//se habilita los campos de nombre apellido y sexo con su valores fijos
 		var campos_registro=document.getElementById("registrar").getElementsByTagName("input");
-		var i=0;
 		var campo;
-		for(i=0 ; i < campos_registro.length; i++){
+		for(var i=0 ; i < campos_registro.length; i++){
 			campo=campos_registro[i];
-			if(campo.name=="nombre"){
-				campo.value="RODRIGO FABRICIO";
-				campo.disabled=true;
-			}else if (campo.name=="apellido"){
-				campo.value="CASTRO REYES";
-				campo.disabled=true;
-			}else if(campo.name=="sexo"){
-				campo.disabled=true;
-			}else{
-				campo.disabled=false;
+			campo.disabled=false;
+			if(campo.name=="nickname"){
+				campo.value=document.getElementById("usuario").value;
 			}
 		}
 		document.getElementById("botonRegistro").disabled=false;//se habilita el boton de registro
@@ -55,8 +48,8 @@ function autenticar(){
 		for(var i=0; i<inputs.length;i++){
 			inputs[i].style.background="white";
 		}
+		document.autenticacion.submit();
 		alert("Autenticacion correcta");
-		//document.autenticacion.submit();
 	}else{
 		var inputs=document.querySelectorAll("#autenticacion input");
 		for(var i=0; i<inputs.length;i++){
@@ -75,6 +68,7 @@ function registrar(){
 		for(var i=0; i<inputs.length;i++){
 			inputs[i].style.background="white";
 		}
+		document.registrar.submit();
 		alert("Registro correcto");
 	}else{
 		var inputs=document.querySelectorAll("#registrar input");
