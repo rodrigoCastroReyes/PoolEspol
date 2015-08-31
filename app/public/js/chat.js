@@ -23,13 +23,6 @@ function procesarConversacion(event){
 	span.setAttribute("class","texto_simple")
 	cabezeraMensaje.appendChild(span);
 	cabezeraMensaje.setAttribute("data-id",conver.id);
-	/*
-	span=document.createElement("span");
-	span.innerHTML=conver.id;
-	span.setAttribute("class","texto_oculto");
-	span.setAttribute("id","id_destino");
-	cabezeraMensaje.appendChild(span);
-	*/
 
 	for(i=0;i<mensajes.length;i++){
 		var contenedor=document.createElement("div");
@@ -81,6 +74,10 @@ function mostrarChat(evt){
 	personas.classList.remove("visible");
 	personas.classList.add("invisible");
 	cargarConversacion(this.dataset.id);
+	leerMensajes(this.dataset.id);
+	this.setAttribute('data-leido','si');
+	p=$('.persona[data-id='+this.dataset.id+'] span');
+	p.remove();
 	$('#conversacion').css("display","flex");
 
 }
@@ -132,11 +129,14 @@ function procesarDatosConversacionAjax(event){
 		h3=document.createElement("h3");
 		h3.innerHTML=conversaciones[i].nick;
 		
+		
+
 		div.appendChild(imagen);
 		div.appendChild(h3);
+		div.setAttribute('data-leido','si');
 		personas.appendChild(div);
 	}
-	aux=$('.persona')
+	aux=$('.persona');
 	aux[aux.length-1].addEventListener('click',mostrarChat);
 }
 
@@ -170,6 +170,40 @@ function CargarPersona(id){
 	}
 
 }
+function procesarNoLeidos(event){
+	var respond = event.target.responseText;
+	var j= JSON.parse(respond);
+	console.log(j);
+	ids=j.ids;
+	for(i=0;i<ids.length;i++){
+		p=$('.persona[data-id='+ids[i]+']');
+		console.log(p[0]);
+		if(p[0].dataset.leido=='si'){
+			punto=document.createElement("span");
+			punto.setAttribute('class','punto2');
+			
+			p[0].setAttribute('data-leido','no');
+			p[0].appendChild(punto);
+			//p.css("background","yellow");
+		}
+	}
+}
+
+function obtenerNoLeidos(){
+	var request = new XMLHttpRequest();
+	var url="/chat/nolidos";
+	request.open("GET",url,true);
+	request.addEventListener('load',procesarNoLeidos ,false);
+	request.send(null);
+}
+
+function leerMensajes(id){
+	console.log(id);
+	var request = new XMLHttpRequest();
+	var url="/chat/leermensajes?id="+id;
+	request.open("GET",url,true);
+	request.send(null);
+}
 
 
 function procesarDatosConversacion(persona){
@@ -193,41 +227,46 @@ function procesarDatosConversacion(persona){
 		
 		h3=document.createElement("h3");
 		h3.innerHTML=persona.nick;
+
 		
 		div.appendChild(imagen);
 		div.appendChild(h3);
+		div.setAttribute('data-leido','si');
 		personas.appendChild(div);
-		aux=$('.persona')
+		aux=$('.persona');
 		aux[aux.length-1].addEventListener('click',mostrarChat);
 	}
+	obtenerNoLeidos();
 }
 
 function enviarMensaje(){
 	texto=txtMensaje.value;
 	txtMensaje.value="";
-	var contenerPerfil=document.createElement("div");
-	var contenedorMensaje=document.createElement("div");
-	var contenedor=document.createElement("div");
-	var imagen=document.createElement("img");
-	var p1=document.createElement("p");
-	var p2=document.createElement("p");
+	if(texto!=""){
+		var contenerPerfil=document.createElement("div");
+		var contenedorMensaje=document.createElement("div");
+		var contenedor=document.createElement("div");
+		var imagen=document.createElement("img");
+		var p1=document.createElement("p");
+		var p2=document.createElement("p");
 
-	contenedor.setAttribute("class","self");
-	imagen.setAttribute("src",userFoto);
-	imagen.setAttribute("class","fotoPerfil");
-	p1.innerHTML=userNick;
-	p2.innerHTML=texto;
-	contenedorMensaje.setAttribute("class","mensaje");
-	contenerPerfil.setAttribute("class","infoPer");
-	contenedor.appendChild(contenedorMensaje);
-	contenedor.appendChild(contenerPerfil);
-	contenerPerfil.appendChild(imagen);
-	contenerPerfil.appendChild(p1);
-	contenedorMensaje.appendChild(p2);
-	areaMensajes.appendChild(contenedor);
-	$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
-	console.log(cabezeraMensaje.dataset.id);
-	socket.emit('enviarServidor',{'idEmisor':userId,'idDestino':cabezeraMensaje.dataset.id,'mensaje':texto});
+		contenedor.setAttribute("class","self");
+		imagen.setAttribute("src",userFoto);
+		imagen.setAttribute("class","fotoPerfil");
+		p1.innerHTML=userNick;
+		p2.innerHTML=texto;
+		contenedorMensaje.setAttribute("class","mensaje");
+		contenerPerfil.setAttribute("class","infoPer");
+		contenedor.appendChild(contenedorMensaje);
+		contenedor.appendChild(contenerPerfil);
+		contenerPerfil.appendChild(imagen);
+		contenerPerfil.appendChild(p1);
+		contenedorMensaje.appendChild(p2);
+		areaMensajes.appendChild(contenedor);
+		$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
+		console.log(cabezeraMensaje.dataset.id);
+		socket.emit('enviarServidor',{'idEmisor':userId,'idDestino':cabezeraMensaje.dataset.id,'mensaje':texto});
+	}
 
 }
 
@@ -293,7 +332,6 @@ function connectSocket(){
    		procesarDatosConversacion(data);
    	}
   });
-  
 
 }
 
@@ -313,6 +351,7 @@ function inicializar(){
 		cargarConversacion(idReceptor);
 		$('#conversacion').css("display","flex");
 	}
+	//obtenerNoLeidos();
 }
 
 

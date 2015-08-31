@@ -10,6 +10,8 @@ var router=express.Router();
 
 router.get('/',LoginController.index);
 router.post('/login',LoginController.login);
+router.post('/autenticar',LoginController.autenticar);
+router.post('/registrar',LoginController.registrar);
 
 router.get('/noticias',NoticiasController.noticias);
 router.get('/Rutas',NoticiasController.obtenerRutasNoticias);
@@ -27,6 +29,8 @@ router.get('/chat',MensajesController.mensajes);
 router.get('/chat/conversacion',MensajesController.enviarConversacion);
 router.get('/nuevaConversacion',MensajesController.nuevaConversacion);
 router.get('/chat/persona',MensajesController.obtenerPersona);
+router.get('/chat/nolidos',MensajesController.obtenerNoLeidos);
+router.get('/chat/leermensajes',MensajesController.leerMensajes);
 
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificaciones);

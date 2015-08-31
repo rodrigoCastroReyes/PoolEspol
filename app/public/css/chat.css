@@ -15,6 +15,33 @@ html,body{
 	background: #FFFFFF;
 }
 
+.punto1{
+	width: 20px;
+	height: 20px;
+	margin: 20px 20px 20px 20px;
+	border-radius: 100% 100% 100% 100%;
+	background: #FFFFFF;
+
+}
+
+.punto1:hover{
+	width: 20px;
+	height: 20px;
+	margin: 20px 20px 20px 20px;
+	border-radius: 100% 100% 100% 100%;
+	background: #0080FF;
+
+}
+
+.punto2{
+	width: 20px;
+	height: 20px;
+	margin: 20px 20px 20px 20px;
+	border-radius: 100% 100% 100% 100%;
+	background: red;
+
+}
+
 .fotoPerfil{
 	width: 50px;
 	height: 50px;

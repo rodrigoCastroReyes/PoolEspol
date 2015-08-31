@@ -8,6 +8,7 @@
 		<meta name="keywords" content="DAW, aventon, red social,ESPOL">
 		<script type="text/javascript" src="js/init.js"></script>
 		<script type="text/javascript" src="js/registro.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	</head>
 	<body>
@@ -73,7 +74,7 @@
 							<label for="contraseña" class="etiqueta">Contraseña:</label>
 						</div>
 						<div class="tabla_item columna_flexible_start flex_start">
-							<form id="autenticacion" name="autenticacion" method="post" action="">
+							<form id="autenticacion" name="autenticacion" method="post" action="/autenticar">
 								<input class="entrada_texto" name="usuario" id="usuario" 
 								type="text" pattern="[a-z]{6,20}"
 								autofocus="autofocus" required>
@@ -96,7 +97,7 @@
 							<label id="capacidadLabel" for="capacidad" class="etiqueta invisible">Capacidad:</label>
 						</div>
 						<div class="tabla_item columna_flexible_start flex_start">
-							<form id="registrar" name="registrar" method="post" action="">
+							<form id="registrar" name="registrar" method="post" action="/registrar">
 								<input class="entrada_texto" name="nombre" id="nombre" type="text" required
 								disabled 
 								>

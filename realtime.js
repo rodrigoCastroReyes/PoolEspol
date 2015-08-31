@@ -2,10 +2,10 @@ var db = require('./app/model/model.js');
 
 var clients={};
 
-function socketNoticias(http,sessionMiddleware){
+function socketNoticias(io,sessionMiddleware){
+    
     //tabla de hash con referencia a las conecciones de los clientes
-    var io = require('socket.io')(http);
-
+    //var io = require('socket.io')(http);
     io.use(function(socket,next){
         sessionMiddleware(socket.request, socket.request.res, next);
     });
@@ -107,7 +107,6 @@ function aceptarAventon(confirmacion){
                             notificacion.urlNickname = dueñoRuta.foto;
                             
                             db.guardarNotificacion(notificacion).then(function(result){
-                                console.log("notificacion");
                                 console.log(result);
                             });
 
@@ -135,11 +134,7 @@ function aceptarAventon(confirmacion){
         }
     });
 }
-
-
-
 //Rutas : 
-
 //Solicitud Rutas
 function aceptarSolicitudRuta(respuesta,capacidad){//usuario_ruta pasa de estado Pendiente a Aceptada
     db.actualizarUsuarioRuta(respuesta.idUsuarioRuta,respuesta.estado).then(

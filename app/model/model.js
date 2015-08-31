@@ -54,6 +54,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 
 				};
 				socket.emit("enviarCliente",datos);
+				socket.emit("nuevoMensaje");
 
 			});
 		}
@@ -320,8 +321,6 @@ function crearObjetoRuta(registro){
 	return ruta;
 }
 
-
-
 exports.obtenerRutasNoticias = function (id_usuario, request, response){
 
 	var tam = 5;
@@ -490,16 +489,39 @@ exports.obtenerConversaciones = function(id,io){
 		 			console.log(datosUsuario);
 		 			io.sockets.emit('enviarDatosConversacion',datosUsuario);
 		 			//usuarios.push(datosUsuario);
-		 			
 		 		});
-		 		
-		 		
+		 	}
+		 }
+	});
+}
+
+exports.obtenerConversacionesPendientes = function(id,response){
+	modelos.Mensaje.findAll({
+		where:{$or:{id_receptor:id}}
+	}).then(function(result){
+		 var lista=[];
+		 var usuarios=[];
+		 for(var i =0 ; i< result.length; i++){
+		 	//obtenego el id de la persona con la que tengo la conversacion
+		 	var auxid;
+		 	auxid=result[i].dataValues.id_emisor;
+		 	if(result[i].dataValues.leido){
+		 		continue;
+		 	}
+		 	ban=1;
+		 	for(var j=0;j<lista.length;j++){
+		 		if(lista[j]==auxid ){
+		 			ban=0;
+		 			break;
+		 		}
+		 	}
+		 	//console.log(result[i].dataValues);
+		 	if(ban==1 && auxid!=null){
+		 		lista.push(auxid);
 		 	}
 		 	
 		 }
-		 //console.log("el ajax");
-		 //console.log(usuarios);
-		 //io.json({personas:usuarios});
+		 response.json({ids:lista});
 	});
 }
 
@@ -517,7 +539,7 @@ exports.obtenerConversacion = function(id_emisor,id_receptor,response){
 										{id_emisor:id_receptor,id_receptor:id_emisor},
 										{id_emisor:id_emisor,id_receptor:id_receptor}
 										]
-									}
+									},order: [['fecha', 'ASC'], ['hora' ,'ASC'] ]
 		}).then(function (dato){
 			
 			for(i=0;i<dato.length;i++){
@@ -532,6 +554,7 @@ exports.obtenerConversacion = function(id_emisor,id_receptor,response){
 				var mensaje={
 					tipo:tipo,
 					contenido:dato[i].dataValues.contenido,
+					leido:dato[i].dataValues.leido
 				};
 
 				json.mensajes.push(mensaje);
@@ -555,14 +578,38 @@ exports.obtenerPersona=function(id,idDueno,response){
 			id_dueno:idDueno
 		}
 		response.json({conversaciones:[datosUsuario]});
+	});
+}
+
+exports.leerMensajes=function(id_emisor,id_receptor){
+	modelos.Mensaje.update({leido: true},
+							{ where: { id_emisor: id_emisor,id_receptor:id_receptor } })
+	.then( function (mensaje){
 
 	});
-
 }
-//Notificaciones
+
+exports.consultarUsuario = function (idusuario){
+	return modelos.Usuario.findOne({where :{id: idusuario}});
+};
+
+//aqui hago un join
+
+exports.consultarUsuarioCarro = function (idcarro){
+ 			return modelos.Usuario.find({
+	 			include: [{model:modelos.Carro, as: 'Usuario_Carro'}],
+	 			where : {id_carro:idcarro}
+	 		});   	
+};
+
+exports.consultarRuta = function (idruta){
+	return modelos.Ruta.findOne({ where:{id_ruta:idruta}});
+};
+
 exports.consultarNotificacion = function (idnotificacion){
 	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
 };
+
 //obtiene las tres notificaciones mas reciente del usuario
 exports.obtenerNotificacionesPaginacion = function(idReceptor,response){
 	modelos.Notificacion.findAll({
