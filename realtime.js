@@ -4,6 +4,7 @@ var clients={};
 
 function socketNoticias(io,sessionMiddleware){
     //tabla de hash con referencia a las conecciones de los clientes
+
     //var io = require('socket.io')(http);
 
     io.use(function(socket,next){
