@@ -242,29 +242,31 @@ function procesarDatosConversacion(persona){
 function enviarMensaje(){
 	texto=txtMensaje.value;
 	txtMensaje.value="";
-	var contenerPerfil=document.createElement("div");
-	var contenedorMensaje=document.createElement("div");
-	var contenedor=document.createElement("div");
-	var imagen=document.createElement("img");
-	var p1=document.createElement("p");
-	var p2=document.createElement("p");
+	if(texto!=""){
+		var contenerPerfil=document.createElement("div");
+		var contenedorMensaje=document.createElement("div");
+		var contenedor=document.createElement("div");
+		var imagen=document.createElement("img");
+		var p1=document.createElement("p");
+		var p2=document.createElement("p");
 
-	contenedor.setAttribute("class","self");
-	imagen.setAttribute("src",userFoto);
-	imagen.setAttribute("class","fotoPerfil");
-	p1.innerHTML=userNick;
-	p2.innerHTML=texto;
-	contenedorMensaje.setAttribute("class","mensaje");
-	contenerPerfil.setAttribute("class","infoPer");
-	contenedor.appendChild(contenedorMensaje);
-	contenedor.appendChild(contenerPerfil);
-	contenerPerfil.appendChild(imagen);
-	contenerPerfil.appendChild(p1);
-	contenedorMensaje.appendChild(p2);
-	areaMensajes.appendChild(contenedor);
-	$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
-	console.log(cabezeraMensaje.dataset.id);
-	socket.emit('enviarServidor',{'idEmisor':userId,'idDestino':cabezeraMensaje.dataset.id,'mensaje':texto});
+		contenedor.setAttribute("class","self");
+		imagen.setAttribute("src",userFoto);
+		imagen.setAttribute("class","fotoPerfil");
+		p1.innerHTML=userNick;
+		p2.innerHTML=texto;
+		contenedorMensaje.setAttribute("class","mensaje");
+		contenerPerfil.setAttribute("class","infoPer");
+		contenedor.appendChild(contenedorMensaje);
+		contenedor.appendChild(contenerPerfil);
+		contenerPerfil.appendChild(imagen);
+		contenerPerfil.appendChild(p1);
+		contenedorMensaje.appendChild(p2);
+		areaMensajes.appendChild(contenedor);
+		$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
+		console.log(cabezeraMensaje.dataset.id);
+		socket.emit('enviarServidor',{'idEmisor':userId,'idDestino':cabezeraMensaje.dataset.id,'mensaje':texto});
+	}
 
 }
 

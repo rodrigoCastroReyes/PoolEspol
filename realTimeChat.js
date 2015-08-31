@@ -15,9 +15,9 @@ function crearObjetoMensaje(data){
    return mensaje;
 }
 
-function socketChat(http,sessionMiddleware){
+function socketChat(io,sessionMiddleware){
     var clients={};//tabla de hash con referencia a las conecciones de los clientes
-    var io = require('socket.io')(http);
+    //var io = require('socket.io')(http);
     io.use(function(socket,next){
         sessionMiddleware(socket.request, socket.request.res, next);
     });
@@ -46,7 +46,6 @@ function socketChat(http,sessionMiddleware){
                 mensaje=crearObjetoMensaje(data);
                 //Sconsole.log(mensaje.dataValues);
                 db.guardarMensaje(mensaje,socketDestino);
-                
             });
         }
 

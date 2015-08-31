@@ -1,3 +1,4 @@
+var socket;
 function cargarPerfil(){
   window.location.href="/perfil"; 
 }
@@ -76,9 +77,22 @@ function botonesOff(){
 	}
 }
 
+function connectSocketBarra(){
+  socket = io.connect();
+ 
+  socket.on('nuevoMensaje',function(){
+ 		$('#menuMensaje').css("background","red");
+  });
+
+ 
+
+}
+
+
 function init(){
 	aceptar_cierre.addEventListener('click',aceptarCierre,false);
 	cancelar_cierre.addEventListener('click',cancelarCierre,false);
+	connectSocketBarra();
 }
 
 window.addEventListener('load',init,false);

@@ -54,6 +54,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 
 				};
 				socket.emit("enviarCliente",datos);
+				socket.emit("nuevoMensaje");
 
 			});
 		}
@@ -521,7 +522,7 @@ exports.obtenerConversacion = function(id_emisor,id_receptor,response){
 										{id_emisor:id_receptor,id_receptor:id_emisor},
 										{id_emisor:id_emisor,id_receptor:id_receptor}
 										]
-									}
+									},order: [['fecha', 'ASC'], ['hora' ,'ASC'] ]
 		}).then(function (dato){
 			
 			for(i=0;i<dato.length;i++){
