@@ -9,9 +9,6 @@ exports.obtenerNotificaciones = function(request,response){
 	if(request.query.paginacion == 1){
 		db.obtenerNotificacionesPaginacion(request.session.user.id,response);
 	}else{
-		
-		console.log("estoy aca rftmadre");
-
 		db.obtenerNotificacionesUsuario(request.session.user.id,response);	
 	}
 }

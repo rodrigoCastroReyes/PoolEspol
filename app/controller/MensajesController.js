@@ -11,8 +11,6 @@ exports.mensajes=function(request,response){
 	});
 };
 
-
-
 exports.enviarConversacion=function(request,response){
 	console.log("si entre");
 	idReceptor=request.query.id;
@@ -41,6 +39,7 @@ exports.obtenerPersona=function(request,response){
 	
 };
 
+
 exports.obtenerNoLeidos=function(request,response){
 	console.log("obtenerNoLeidos");
 	id=request.session.user.id,
@@ -58,7 +57,6 @@ exports.leerMensajes=function(request,response){
 
 
 
-
 /*
 exports.enviarConversaciones=function(request,response){
 	console.log("esta es");
@@ -66,5 +64,5 @@ exports.enviarConversaciones=function(request,response){
 	db.obtenerConversaciones(request.session.user.id,response);	
 	console.log("esta no es");
 };
-*/
 
+*/

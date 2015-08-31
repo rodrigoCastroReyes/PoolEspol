@@ -2,19 +2,6 @@
 //var conString = "tcp://postgres:postgres@localhost:5432/PoolEspol";
 var modelos = require('../model/PoolEspoldb.js');
 
-exports.encontrarUsuario = function(nickname){
-	return modelos.Usuario.findOne({
-		where:{
-			nick:nickname
-		}
-	});
-}
-
-/*Querys*/
-exports.encontrarUsuarioPorID=function(id){
-	return modelos.Usuario.findById(id);
-}
-
 /*
 FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 */
@@ -74,14 +61,11 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 };
 
  exports.guardarNotificacion = function(datosUsuario){
-	modelos.Notificacion.create({tipo: datosUsuario.tipo, 
+	return modelos.Notificacion.create({tipo: datosUsuario.tipo, 
 								estado: datosUsuario.estado, 
 								id_emisor: datosUsuario.idEmisor,
 								usuarioruta: datosUsuario.idUsuarioRuta, 
-								id_receptor:datosUsuario.idReceptor})
-	.then( function (notificacion){
-		console.log(notificacion);
-	});
+								id_receptor:datosUsuario.idReceptor});
 };
 
  exports.guardarAventon = function(InfoAventon){
@@ -153,13 +137,11 @@ exports.actualizarMensaje = function(idmensaje, datos_mensaje){
 };
 
 
-exports.actualizarNotificaciones = function(idnotificacion, datos_notificacion){
-	modelos.Notificacion.update({tipo: datos_notificacion.tipo, 
-								 estado: datos_notificacion.estado},
-						 		 { where: {id_Notificacion: idnotificacion}})
-	.then( function (notificacion){
-		console.log('ACTUALIZADO CORRECTAMENTE');
-	});
+exports.actualizarNotificacion = function(datos_notificacion){
+	return modelos.Notificacion.update({tipo: datos_notificacion.tipo, 
+								estado: datos_notificacion.estado
+								},
+						 		{ where: {id_Notificacion: datos_notificacion.idNotificacion}});
 };
 
 
@@ -170,26 +152,16 @@ exports.actualizarAventon = function(idaventon, datos_aventon){
 };
 
 
-exports.actualizarRuta = function(idruta, datos_ruta){
-	modelos.Ruta.update({costo: datos_ruta.costo, 
-						capacidad: datos_ruta.capacidad,
-						estado: datos_ruta.estado,
-						puntosx: datos_ruta.puntosx,
-  						puntosy: datos_ruta.puntosy},
-						{where: {id_ruta: idruta}})
-	.then(function (ruta){
-			console.log('ENTROOOOOO');			
-	});
+exports.actualizarCapacidadRuta = function(idruta,cap){
+	return modelos.Ruta.update({ capacidad: cap },
+							   { where: {id_ruta: idruta} });
 };
 
-exports.actualizarUsuarioRuta = function(idusuarioruta, datos_usuario_ruta){
-
-	modelos.Usuario_Ruta.update({ lat: datos_usuario_ruta.lat,
-								  longit: datos_usuario_ruta.longit},
-								{ where: {id_usuario_ruta: idusuarioruta}})
-	.then( function (usuarioruta){
-		 console.log('ACTUALIZADO CORRECTAMENTE');
-	});
+exports.actualizarUsuarioRuta = function(idusuarioruta,estado){
+	return modelos.Usuario_Ruta.update({ 
+								  estado: estado
+								},
+								{ where: {id_usuario_ruta: idusuarioruta}});
 };
 
 
@@ -212,6 +184,29 @@ exports.consultarUsuarioCarro = function (idcarro){
 	 			where : { id_carro:idcarro }
 	 		});   	
 };
+
+/*Querys*/
+
+exports.encontrarUsuario = function(nickname){
+	return modelos.Usuario.findOne({
+		where:{
+			nick:nickname
+		}
+	});
+}
+
+exports.encontrarUsuarioPorID = function(id){
+	return modelos.Usuario.findById(id);
+}
+
+exports.encontrarRutaPorID = function (idRuta){
+	return modelos.Ruta.findById(idRuta);
+}
+
+exports.encontrarUsuarioRutaPorId = function (idUsuarioRuta){
+	return modelos.Usuario_Ruta.findById(idUsuarioRuta);
+}
+
 
 //Consultas Ruta
 exports.consultarRuta = function (idruta){
@@ -435,25 +430,6 @@ exports.obtenerRutasUsuario = function (idUsuario, request, response ){
 	});
 }
 
-
-
-//querys notificaciones
-//obtiene las tres notificaciones mas reciente del usuario
-exports.obtenerNotificacionesPaginacion = function(idReceptor,response){
-	modelos.Notificacion.findAll({
-		where : {
-			id_receptor: idReceptor
-		},
-		include : [
-			{ model :  modelos.Usuario , as: 'Emisor_Notifica' }
-		],
-		limit: 3
-	}).then(function(results){
-		var listNot = crearListaNotificaciones(results);
-		response.json({notificaciones: listNot});
-	});
-}
-
 //Querys Chat
 
 exports.obtenerConversaciones = function(id,io){
@@ -621,6 +597,25 @@ exports.consultarNotificacion = function (idnotificacion){
 	return modelos.Notificacion.findOne({ where:{id_Notificacion: idnotificacion}});
 };
 
+//Notificaciones
+//obtiene las tres notificaciones mas reciente del usuario
+exports.obtenerNotificacionesPaginacion = function(idReceptor,response){
+	modelos.Notificacion.findAll({
+		where : {
+			id_receptor: idReceptor,
+			estado : 'Pendiente'
+		},
+		include : [
+			{ model :  modelos.Usuario , as: 'Emisor_Notifica' } ,
+			{ model : modelos.Usuario_Ruta, as: 'Notificacion_Usuario_Ruta'}
+		],
+		limit: 3
+	}).then(function(results){
+		var listNot = crearListaNotificaciones(results);
+		response.json({notificaciones: listNot});
+	});
+}
+
 //obtiene todas las notificaciones del usuario
 exports.obtenerNotificacionesUsuario = function(idReceptor,response){
 	modelos.Notificacion.findAll({
@@ -628,7 +623,8 @@ exports.obtenerNotificacionesUsuario = function(idReceptor,response){
 			id_receptor: idReceptor
 		},
 		include : [
-			{ model :  modelos.Usuario , as: 'Emisor_Notifica' }
+			{ model :  modelos.Usuario , as: 'Emisor_Notifica' } ,
+			{ model : modelos.Usuario_Ruta, as: 'Notificacion_Usuario_Ruta'}
 		]
 	}).then(function(results){
 		var listNot = crearListaNotificaciones(results);
@@ -641,9 +637,12 @@ function crearListaNotificaciones(results){
 	for(var i = 0 ; i < results.length ; i++){
 		var result = results[i].dataValues;
 		var emisor = results[i].Emisor_Notifica.dataValues;
+		var ruta = results[i].Notificacion_Usuario_Ruta.dataValues
 		var notificacion = {};
+		notificacion.idNotificacion = result.id_Notificacion;
 		notificacion.idEmisor = result.id_emisor;
 		notificacion.idUsuarioRuta = result.usuarioruta;
+		notificacion.idRuta = ruta.id_ruta;
   		notificacion.tipo = result.tipo;
   		notificacion.estado = result.estado;
   		notificacion.publicador = emisor.nick;
@@ -651,4 +650,5 @@ function crearListaNotificaciones(results){
   		listNot.push(notificacion);
 	}
 	return listNot;
+
 }

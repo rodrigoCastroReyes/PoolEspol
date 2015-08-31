@@ -1,5 +1,6 @@
 var socket;
 
+var flag = false;
 var usuario;
 var puntoSolicitud;//Solicitud
 
@@ -168,7 +169,6 @@ function cargarMapas(event){
   $('#loader-icon').show();
   usuario=new Usuario(userid,userNick,userFoto);
   //extracion de informacion de rutas
-
   if(PageRuta < limiteRutas){
     var request = new XMLHttpRequest();
     request.open("GET","/Rutas?page="+PageRuta ,true);
@@ -180,6 +180,7 @@ function cargarMapas(event){
   else{
       console.log("no traigo rutas");
   }
+
   //extraer informacion de aventones
   $('#loader-icon').show();
 
@@ -190,8 +191,7 @@ function cargarMapas(event){
     request.addEventListener('progress',progreso, true );
     request_aventones.send(null);
     PageAventon = PageAventon+ 1; //incremento la pagina  
-  }
-  else{
+  }else{
     console.log("no traigo aventones");
   }
   $('#loader-icon').hide();
@@ -199,7 +199,6 @@ function cargarMapas(event){
   btnAceptarAgregar.addEventListener('click',guardarSolicitud,false);
   btnCancelarAgregar.addEventListener('click',cerrarSolicitarRuta,false);
   btnCloseAgregar.addEventListener('click',cerrarSolicitarRuta,false);
-
 }
 
 function incializar(event){
@@ -221,9 +220,9 @@ function connectSocket(){
   });
 
   socket.on('actualizarNotificacion',function(notificacion){
+    quitarSinNotificaciones();
     crearNotificacion(notificacion);
   });
-
 }
 
 $(window).scroll(function(){
