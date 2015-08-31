@@ -28,10 +28,13 @@ function opcionesCarroOff(){
 	}
 }
 
+function procesarInformacionUsuario(response){
+
+}
+
 function autenticar(){
 	var valid=document.autenticacion.checkValidity();
 	if(valid){
-		
 		//si se ingresa de forma correcta el nombre y la contraseña se puede ingresar la info de registro
 		//se habilita los campos de nombre apellido y sexo con su valores fijos
 		var campos_registro=document.getElementById("registrar").getElementsByTagName("input");
@@ -48,7 +51,17 @@ function autenticar(){
 		for(var i=0; i<inputs.length;i++){
 			inputs[i].style.background="white";
 		}
-		document.autenticacion.submit();
+		//document.autenticacion.submit();
+		var request = new XMLHttpRequest();
+		var url="/autenticar";
+		request.open("POST",url,true);
+		request.addEventListener('load',procesarInformacionUsuario ,false);
+		request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+		var us=$('#usuario').val();
+		console.log(us);
+		var cont=$('#contraseña').val();
+		console.log(contraseña);
+		request.send(JSON.stringify({usuario:us,contraseña:cont}));
 		alert("Autenticacion correcta");
 	}else{
 		var inputs=document.querySelectorAll("#autenticacion input");

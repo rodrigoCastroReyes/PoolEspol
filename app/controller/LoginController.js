@@ -21,7 +21,7 @@ exports.login=function(request,response){
 	   	client.autenticacion(args, function(err, result){
 	   		resp = result.autenticacionResult;
 	   		console.log(resp);
-			if (resp){
+			if (resp || true ){
 				db.encontrarUsuario(request.body.usuario).then(function (user){
 				if(!user){
 					console.log('Ud no se encuentra registrado');
@@ -53,6 +53,7 @@ exports.autenticar=function(request,response){
 	   var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
 	   var args = {authUser: request.body.usuario, authContrasenia: request.body.contraseña};
 	   var resp;
+	   console.log(request.body);
 	   soap.createClient(url, function(err, client) {
 	   	client.autenticacion(args, function(err, result){
 	   		resp = result.autenticacionResult;
@@ -63,7 +64,7 @@ exports.autenticar=function(request,response){
 					console.log("Autenticacion correcta");
 				}else{			
 					console.log('Ud ya se encuentra registrado');}
-					response.sendfile(html_dir + 'index.html');
+					//response.sendfile(html_dir + 'index.html');
 				}).catch(function(err){
 					console.log(err);
 					response.sendfile(html_dir + 'index.html');
