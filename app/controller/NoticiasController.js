@@ -9,7 +9,8 @@ exports.noticias=function(request,response){
 		response.render('noticias',{ title: 'Noticias', 
 			id : request.session.user.id,
 			nickname: request.session.user.nick,
-			foto: request.session.user.foto
+			foto: request.session.user.foto,
+			flag:request.session.user.id_carro
 		});
 	}else{
 		response.sendfile(html_dir + 'index.html');

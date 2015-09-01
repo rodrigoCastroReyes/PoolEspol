@@ -59,6 +59,7 @@ function deshabilitarEntradas(inputs,color){
 }
 
 function guardarDatos(evt){
+	console.log("si me llaman");
 	var val=document.forms["datosPersona"].checkValidity();
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
 	//input: nombre,apellido,cedula,nickname
@@ -228,15 +229,15 @@ function inicio(){
 	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
 	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatos,false);
 
-	/*if(botonEditarAuto){
+	if($('#botonEditarAuto').length>0){
 		botonEditarAuto.addEventListener('click',editarInfoAuto,false);
 	}
-	if(botonCancelarAuto){
+	if( $('#botonCancelarAuto').length>0){
 		botonCancelarAuto.addEventListener('click',cancelarEdicionAuto,false);
 	}
-	if(botonGuardarAuto){
+	if($('#botonGuardarAuto').length>0){
 		botonGuardarAuto.addEventListener('click',guardarDatosAuto,false);
-	}	*/
+	}
 }
 
 window.addEventListener('load',inicio,false);
