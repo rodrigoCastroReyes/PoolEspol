@@ -12,6 +12,7 @@ function mostrarNotificaciones(event){
 function agregarNotificacion(InfoNotificacion){
 	var contenedor=document.createElement('div');
 	contenedor.setAttribute('class','Notificacion  Notificacion-grande');
+	contenedor.setAttribute('data-idNotificacion',InfoNotificacion['idNotificacion']);
 	var contFoto=crearFoto(InfoNotificacion);
 	contFoto.setAttribute('margin-right','10px');
 	var info=crearInfoNotificacion(InfoNotificacion);

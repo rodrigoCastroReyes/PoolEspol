@@ -89,7 +89,7 @@ function solicitarRuta(event){
   var idRuta=this.getAttribute('data-idRuta');
   var rutaActual=usuario.consultarRuta(idRuta);
   var solicitud=usuario.obtenerSolicitud(idRuta);//verifica si ya existe una solicitud para esta ruta
-  if(rutaActual!=null && solicitud==null ){
+  if(rutaActual!=null){
     $("#contenedor_rutas").css('opacity','0.5');
     $("#OpcionAgregar").css('visibility','visible');
     $("#OpcionAgregar").css('opacity','1');
@@ -218,11 +218,6 @@ function connectSocket(){
   socket.on('actualizarAventon',function(infoAventon){
     usuario.agregarInfoRuta(infoRuta);
     crearVisualizadorAventon(infoAventon);//se crea el visualizador de la ruta
-  });
-
-  socket.on('actualizarNotificacion',function(notificacion){
-    quitarSinNotificaciones();
-    crearNotificacion(notificacion);
   });
 
   socket.on('ErrorRuta',function(code){

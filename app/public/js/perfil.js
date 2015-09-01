@@ -7,7 +7,8 @@ var nombre, apellido,cedula,nickname;
 var placa,capacidad;
 var datosUsuario= new Object();
 var datosCarro= new Object();
-var socket;
+
+var usuario;
 
 function editarUsuario(){
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
@@ -220,12 +221,13 @@ function visualizarMiRuta(RutaInfo){
 }
 
 function inicio(){
+	usuario=new Usuario(userid,userNick,foto);
 	
 	obtenerMisRutas();
 	document.getElementById("botonEditarUsuario").addEventListener('click',editarUsuario,false);
 	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
 	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatos,false);
-	
+
 	/*if(botonEditarAuto){
 		botonEditarAuto.addEventListener('click',editarInfoAuto,false);
 	}
@@ -236,8 +238,5 @@ function inicio(){
 		botonGuardarAuto.addEventListener('click',guardarDatosAuto,false);
 	}	*/
 }
-
-
-
 
 window.addEventListener('load',inicio,false);

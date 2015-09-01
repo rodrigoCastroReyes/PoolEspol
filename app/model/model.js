@@ -70,15 +70,12 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 };
 
  exports.guardarAventon = function(InfoAventon){
-	modelos.Aventon.create({latitud: InfoAventon.ubicacion.x,
+	return modelos.Aventon.create({latitud: InfoAventon.ubicacion.x,
 							longitud: InfoAventon.ubicacion.y,  
 							fecha: InfoAventon.fecha, 
 							hora: InfoAventon.hora, 
 							id_usuario_pide: InfoAventon.idPublicador,
-						    id_usuario_da: null})
-	.then( function (aventon){
-		console.log(aventon);
-	});
+						    id_usuario_da: null});
 };
 
  exports.guardarRuta = function(_ruta){
@@ -620,6 +617,7 @@ exports.obtenerNotificacionesPaginacion = function(idReceptor,response){
 			{ model :  modelos.Usuario , as: 'Emisor_Notifica' } ,
 			{ model : modelos.Usuario_Ruta, as: 'Notificacion_Usuario_Ruta'}
 		],
+		order: [['id_notificacion', 'DESC'], ['tipo' ,'ASC'] ],
 		limit: 3
 	}).then(function(results){
 		//console.log(results);
@@ -637,7 +635,8 @@ exports.obtenerNotificacionesUsuario = function(idReceptor,response){
 		include : [
 			{ model :  modelos.Usuario , as: 'Emisor_Notifica' } ,
 			{ model : modelos.Usuario_Ruta, as: 'Notificacion_Usuario_Ruta'}
-		]
+		],
+		order: [['id_notificacion', 'DESC'], ['tipo' ,'ASC'] ]
 	}).then(function(results){
 		console.log(results);
 		var listNot = crearListaNotificaciones(results);

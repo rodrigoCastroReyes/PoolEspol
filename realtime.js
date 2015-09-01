@@ -67,11 +67,13 @@ function socketNoticias(io,sessionMiddleware){
             });
 
             client.on('nuevoAventon',function(infoAventon){
-                db.guardarAventon(infoAventon);
-                for (var key in clients){
-                    if(key!=session.user.id)
-                        clients[key].emit('actualizarAventon',infoAventon);//broadcast de la nueva ruta a los usuarios conectados
-                }
+                db.guardarAventon(infoAventon).then(function (result){
+                    infoAventon.idAventon=result.dataValues.id_aventon;
+                    for (var key in clients){
+                        if(key!=session.user.id)
+                            clients[key].emit('actualizarAventon',infoAventon);//broadcast de la nueva ruta a los usuarios conectados
+                    }
+                }); 
             });
 
             client.on('aceptarAventon',function(confirmacion){//comprobar que ese aventon no ha sido aceptado antes

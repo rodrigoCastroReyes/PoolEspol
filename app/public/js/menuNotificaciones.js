@@ -1,4 +1,5 @@
 var ban=false;
+var socket;
 
 function cargarNotificaciones(){
   window.location.href="/notificaciones"; 
@@ -111,7 +112,7 @@ function crearInfoNotificacion(InfoNot){
 			info.appendChild(contBotones);
 		}
 		if(InfoNot['estado'] == 'Aceptada'){
-			titulo.innerHTML= "Has aceptado a " + InfoNot['publicador'] + " en su ruta";
+			titulo.innerHTML= "Has aceptado a " + InfoNot['publicador'] + " en tu ruta";
 			contTitulo.appendChild(titulo);
 			info.appendChild(contTitulo);
 		}
@@ -144,7 +145,7 @@ function crearNotificacion(InfoNotificacion){
 
 	contenedor.appendChild(contFoto);
 	contenedor.appendChild(info);
-	Menu_Notificaciones.insertBefore(contenedor,Menu_Notificaciones.firstChild);
+	Menu_Notificaciones.appendChild(contenedor);
 }
 
 function procesarNotificaciones(event){
@@ -183,6 +184,13 @@ function quitarSinNotificaciones(){
 
 
 function iniciar () {
+	socket = io.connect();
+	
+	socket.on('actualizarNotificacion',function(notificacion){
+    	quitarSinNotificaciones();
+    	crearNotificacion(notificacion);
+ 	});
+	
 	$("#notificaciones").click(function () {
 		if(ban==false){
 			$("#Menu_Notificaciones").show();
