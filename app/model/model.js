@@ -326,7 +326,8 @@ exports.obtenerRutasNoticias = function (id_usuario, request, response){
 	modelos.Ruta.findAll({
 		include: [{ model: modelos.Usuario, required: true} ],
 		where:{
-			idcreador: { $ne: id_usuario }
+			idcreador: { $ne: id_usuario },
+			capacidad: { $ne: 0}
 		},
 		order: [['fecha', 'DESC'], ['hora' ,'DESC'] ]
 	
@@ -668,4 +669,38 @@ function crearListaNotificaciones(results){
 		}
 	}
 	return listNot;
+}
+
+exports.obtenerPasajerosRuta  = function(request, response){
+	idRuta = request.query.id;
+	console.log(idRuta);
+
+	modelos.Usuario_Ruta.findAll({
+		include: [{ model: modelos.Usuario , as: 'pasajeros', required: true } ],
+		where:{
+			id_ruta: idRuta,
+			estado: "Aceptada",
+		},
+		
+	}).then(function (result){
+
+		listPasajeros = [];
+		for(var i = 0; i< result.length; i++){
+			var registro = result[i].dataValues;
+			var pasajero = {
+				nickname: registro.pasajeros.nick,
+    			id_usuario: registro.pasajeros.id,
+    			urlfoto: registro.pasajeros.foto,
+    			latitud: registro.lat,
+    			longitud: registro.longit 
+			};
+			listPasajeros.push(pasajero);
+		}
+		var j = {pasajeros: listPasajeros };
+		console.log(j);
+		response.json(j);
+
+	});
+
+
 }

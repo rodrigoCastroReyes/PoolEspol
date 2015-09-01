@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize("PoolEspol","postgres","",{
+var sequelize = new Sequelize("PoolEspol","postgres","obayona",{
 	host: 'localhost',
 	dialect: 'postgres',
 	define:{
@@ -499,6 +499,11 @@ Usuario.hasMany(Usuario_Ruta,{
 Usuario_Ruta.belongsTo(Usuario, {
 	foreignKey: 'id_usuario',
 	as : 'Usuario_Miembro'
+});
+
+Usuario_Ruta.belongsTo(Usuario,{
+	foreignKey: 'id_usuario',
+	as: 'pasajeros'
 });
 
 module.exports.Mensaje = Mensaje;

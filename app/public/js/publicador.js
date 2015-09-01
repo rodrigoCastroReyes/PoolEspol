@@ -333,7 +333,14 @@ function erroresFechaHoraAventon(event){
 }
 
 function inicializar(){
-  btnRuta.addEventListener('click',crearRuta,false);
+  if(!flag){
+    btnRuta.style.display = "none";
+  }
+  else{
+    btnRuta.addEventListener('click',crearRuta,false);
+  }
+
+  
   btnCancelarRuta.addEventListener('click', cerrarRuta,false);
   btnClose.addEventListener('click', cerrarRuta,false);
 
