@@ -1,6 +1,4 @@
 var socket;
-
-var flag = false;
 var usuario;
 var puntoSolicitud;//Solicitud
 
@@ -203,6 +201,7 @@ function cargarMapas(event){
 }
 
 function incializar(event){
+    limiteAventon = (flag)?1000:0; //verifica si tiene o no tiene carro
     cargarMapas(null);
     connectSocket();
 }
