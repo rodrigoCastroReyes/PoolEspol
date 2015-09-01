@@ -30,17 +30,24 @@ function opcionesCarroOff(){
 
 function procesarInformacionUsuario(event){
 	//json = {nombre,apellido,nick,sexo}
-	var respond = event.target.responseText;
-	var json = JSON.parse(respond);
-	nombre.value=json.nombre;
-	apellido.value=json.apellido;
-	nickname.value=nick;
+	//var respond = event.target.responseText;
+	//var json = JSON.parse(respond);
+	//nombre.value=json.nombre;
+	//apellido.value=json.apellido;
+	//nickname.value=nick;
+	var response= event.target.responseXML;
+	var arch= response.getElementsByTagName("archivo");
+	for (var i=0; i< arch.length; i++){
+	nombre= ar.getElementsByTagName("NOMBRES")[0].firstChild.nodeValue;
+	apellido= ar.getElementsByTagName("APELLIDOS")[0].firstChild.nodeValue;
+	nickname= document.getElementsById("usuario")[0].value;
+	}
+	sexo= ar.getElementsByTagName("SEXO")[0].firstChild.nodeValue;
 	if(sexo=="M"){
 		masculino.checked = true;
 	}else{
 		femenino.checked = true;
 	}
-
 }
 
 function autenticar(){
@@ -62,7 +69,6 @@ function autenticar(){
 		for(var i=0; i<inputs.length;i++){
 			inputs[i].style.background="white";
 		}
-		//document.autenticacion.submit();
 		var request = new XMLHttpRequest();
 		var url="/autenticar";
 		request.open("POST",url,true);
@@ -108,10 +114,7 @@ function registrar(){
 
 function login(){
 	var valid=document.formulario_inicio_sesion.checkValidity();
-	if(valid){
-		/*autenticacion con espol, si el usuario existe en la base de espol, 
-		enviar el formulario :document.formulario_inicio_sesion.submit();
-		si no existe, vale trozo*/
+	if(valid){ // uso del servicio web se encuentra en el LoginController.js
 		document.formulario_inicio_sesion.submit();
 	}else{
 		var inputs=document.querySelectorAll("#formulario_inicio_sesion input");
