@@ -32,7 +32,8 @@ var sessionMiddleware = session({
 			client:client,
 			ttl: 260 }),
 	saveUninitialized: false,
-	resave: false
+	resave: false,
+	cookie: { maxAge: 10*60*1000 }
 });
 
 app.use(sessionMiddleware);

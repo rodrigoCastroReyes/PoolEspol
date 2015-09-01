@@ -76,8 +76,9 @@ function aceptarAventon(event){
   //se envia una notificacion al solicitante del aventon que el usuario desea llevarlo
   var idAventon=this.getAttribute('data-idaventon');
   var idReceptor=this.getAttribute('data-idpublicador');
-  var idEmisor=usuario.idUsuario;
-  var confirmacion={idAventon:idAventon,idEmisor:idEmisor,idReceptor:idReceptor}
+  var id=usuario.id;
+  var confirmacion={idAventon:idAventon,idEmisor:id,idReceptor:idReceptor}
+  console.log(confirmacion);
   socket.emit('aceptarAventon',confirmacion);
 }
 
@@ -88,7 +89,7 @@ function solicitarRuta(event){
   var idRuta=this.getAttribute('data-idRuta');
   var rutaActual=usuario.consultarRuta(idRuta);
   var solicitud=usuario.obtenerSolicitud(idRuta);//verifica si ya existe una solicitud para esta ruta
-  if(rutaActual!=null && solicitud==null ){
+  if(rutaActual!=null){
     $("#contenedor_rutas").css('opacity','0.5');
     $("#OpcionAgregar").css('visibility','visible');
     $("#OpcionAgregar").css('opacity','1');
@@ -219,11 +220,87 @@ function connectSocket(){
     crearVisualizadorAventon(infoAventon);//se crea el visualizador de la ruta
   });
 
-  socket.on('actualizarNotificacion',function(notificacion){
-    quitarSinNotificaciones();
-    crearNotificacion(notificacion);
+  socket.on('ErrorRuta',function(code){
+    switch(code){
+      case 0:
+        solicitudRepetida("Ya te has unido a esta ruta antes!");
+        break;
+      case 1:
+        solicitudRepetida("No hay capacidad en esta ruta");
+        break;
+      case 2:
+        solicitudRepetida("Este aventon ya ha sido resuelto");
+        break;
+      case 3:
+         solicitudRepetida("Ya haz intentado unirte a esta ruta!");
+         break;
+    }
+  });
+
+  socket.on('AventonAceptado',function(datosUsuario){
+    solicitudAventonAceptado(datosUsuario);
   });
 }
+
+function solicitudAventonAceptado(datosUsuario){
+  var contenedor = document.createElement('div');
+  contenedor.setAttribute('id','contenedorerrorRuta');
+  contenedor.setAttribute('class','errorRuta');
+
+  var leyenda = document.createElement('div');
+  var boton = document.createElement('div');
+  boton.setAttribute('class','errorRuta-Boton');
+  contenedor.appendChild(leyenda);
+  contenedor.appendChild(boton);
+
+  var spanLeyenda = document.createElement('span');
+  spanLeyenda.innerHTML = "Haz aceptado llevar a " + datosUsuario.nickname;
+  spanLeyenda.setAttribute('class','errorRuta-Titulo');
+  leyenda.appendChild(spanLeyenda);
+
+  var spanBoton = document.createElement('span');
+  
+  spanBoton.addEventListener('click',function(){
+    $("#contenedorerrorRuta").remove();
+  });
+
+  spanBoton.setAttribute('id','errorRuta-Ok');
+  spanBoton.setAttribute('class','icon-checkmark iconos_menu');
+  boton.appendChild(spanBoton);
+  var rutas=document.getElementById("contenedor_rutas");
+  rutas.appendChild(contenedor);
+
+}
+
+function solicitudRepetida(mensaje){
+  var contenedor = document.createElement('div');
+  contenedor.setAttribute('id','contenedorerrorRuta');
+  contenedor.setAttribute('class','errorRuta');
+
+  var leyenda = document.createElement('div');
+  var boton = document.createElement('div');
+  boton.setAttribute('class','errorRuta-Boton');
+  contenedor.appendChild(leyenda);
+  contenedor.appendChild(boton);
+
+  var spanLeyenda = document.createElement('span');
+  spanLeyenda.innerHTML = mensaje;
+  spanLeyenda.setAttribute('class','errorRuta-Titulo');
+  leyenda.appendChild(spanLeyenda);
+
+  var spanBoton = document.createElement('span');
+  
+  spanBoton.addEventListener('click',function(){
+    $("#contenedorerrorRuta").remove();
+  });
+
+  spanBoton.setAttribute('id','errorRuta-Ok');
+  spanBoton.setAttribute('class','icon-checkmark iconos_menu');
+  boton.appendChild(spanBoton);
+  var rutas=document.getElementById("contenedor_rutas");
+  rutas.appendChild(contenedor);
+}
+
 
 $(window).scroll(function(){
 if ($(window).scrollTop() == $(document).height() - $(window).height()){
@@ -231,7 +308,5 @@ if ($(window).scrollTop() == $(document).height() - $(window).height()){
   cargarMapas(null);
   }
 });
-
-
 
 google.maps.event.addDomListener(window, 'load', incializar);

@@ -6,24 +6,22 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/estiloMapa.css">
 	<link rel = "stylesheet" type="text/css" href = "css/cuadroPublicador.css"/>
+	<link rel = "stylesheet" type="text/css" href = "css/pasajeros.css"/>
 	<script src = "js/jquery-1.11.3.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<script src="../socket.io/socket.io.js"></script>
 	<script src = "js/poolEspol.js"> </script>
-	
 	<script src = "js/visualizadorNoticias.js"> </script>
 	<script src = "js/noticias.js"> </script>
-
 	<script src = "js/publicador.js"> </script>
 	<script src = "js/barra.js"> </script>
-	
 	<script src = "js/menuNotificaciones.js"> </script>
-	
 	<script>
 		//datos del usuario enviado por el server
   		var userid = "{{id}}";
   		var userNick = "{{nickname}}";
-  		var userFoto = "{{foto}}"
+  		var userFoto = "{{foto}}";
+  		var flag = "{{flag}}";	
 	</script>
 {% endblock %}
 
@@ -35,10 +33,16 @@
 	{% include './barra.html' %}
 	{% include './menu_salir.html' %}
 	
-	<div id="Menu_Notificaciones">
-    </div>
-	
+	<div id = "Contenedor_Menu_Notificaciones">
+		<div id="Menu_Notificaciones">
+    	</div>
+    	<div id="Notificaciones_Ver_todas">
+    		<a class="Notificacion-Mas" id="mas" href="/notificaciones">Ver todas</a>
+    	</div>
+	</div>
+		
 	{% include './cuadro_publicador.html' %}
+	{% include './pasajeros.html' %}
 	
 	<div id="contenedor_rutas">
 	</div>

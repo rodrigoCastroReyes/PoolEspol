@@ -8,19 +8,31 @@
 	<link rel = "stylesheet" type="text/css" href = "css/cuadroPublicador.css"/>
 	<script src = "js/jquery-1.11.3.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script src="../socket.io/socket.io.js"></script>
 	<script src = "js/barra.js"> </script>
 	<script src= "js/poolEspol.js" type="text/javascript"></script>
 	<script src = "js/visualizadorNoticias.js"> </script>
-	<script src = "js/publicador.js"> </script>
 	<script src="js/perfil.js" type="text/javascript"></script>
+	<script src = "js/publicador.js"> </script>
 	<script src = "js/menuNotificaciones.js"> </script>
+	<script>
+		//datos del usuario enviado por el server
+  		var userid = "{{id}}";
+  		var userNick = "{{nickname}}";
+  		var foto = "{{foto}}"
+	</script>
 {% endblock %}
 
 {% block content %}
 	{% include './barra.html' %}
 	{% include './menu_salir.html' %}
 	
-	<div id="Menu_Notificaciones">
+	<div id = "Contenedor_Menu_Notificaciones">
+		<div id="Menu_Notificaciones">
+    	</div>
+    	<div id="Notificaciones_Ver_todas">
+    		<a class="Notificacion-Mas" id="mas" href="/notificaciones">Ver todas</a>
+    	</div>
 	</div>
 
 	<div id="contenedor_perfil"class="flex_container">

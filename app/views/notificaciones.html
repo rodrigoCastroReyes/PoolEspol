@@ -5,17 +5,30 @@
 	<link rel="stylesheet" type="text/css" href="css/notificaciones.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src = "js/jquery-1.11.3.min.js"></script>
+	<script src="../socket.io/socket.io.js"></script>
+	<script src = "js/poolEspol.js"> </script>
 	<script src = "js/barra.js"> </script>
 	<script src = "js/notificaciones.js"> </script>
 	<script src = "js/menuNotificaciones.js"> </script>
+	<script>
+		//datos del usuario enviado por el server
+  		var userid = "{{id}}";
+  		var userNick = "{{nickname}}";
+  		var userFoto = "{{foto}}"
+	</script>
 {% endblock %}
 
 {% block content %}
 	{% include './barra.html' %}
 	{% include './menu_salir.html' %}
 
-	<div id="Menu_Notificaciones">
-    </div>
+	<div id = "Contenedor_Menu_Notificaciones">
+		<div id="Menu_Notificaciones">
+    	</div>
+    	<div id="Notificaciones_Ver_todas">
+    		<a class="Notificacion-Mas" id="mas" href="/notificaciones">Ver todas</a>
+    	</div>
+	</div>
 
 	<div id="Contenedor_Notificaciones" class="Notificaciones">
     </div>
