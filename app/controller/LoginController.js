@@ -37,7 +37,7 @@ exports.login=function(request,response){
 			}
 			else{ 
 				//window.alert("Ud. no es usuario Espol");
-				console.log('Ud no es usuario Espol');
+				console.log('Usuario o contraseña incorrecta, intente nuevamente');
 				//window.alert("Ud. no es usuario Espol");
 				response.sendfile(html_dir + 'index.html');
 			}
@@ -62,6 +62,17 @@ exports.autenticar=function(request,response){
 				db.encontrarUsuario(request.body.usuario).then(function (user){
 				if(!user){
 					console.log("Autenticacion correcta");
+					var soap = require('soap');
+					var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
+					var args = {usuario: request.body.usuario};
+					soap.createClient(url, function(err, client) {
+						client.wsInfoUsuario(args, function(err, result) {
+						console.log(result);
+						//console.log(result.wsInfoUsuarioResult);
+						//send(response);
+						//response.send(result.wsInfoUsuarioResult);
+						});
+					});
 				}else{			
 					console.log('Ud ya se encuentra registrado');}
 					//response.sendfile(html_dir + 'index.html');
@@ -71,12 +82,13 @@ exports.autenticar=function(request,response){
 				});
 			}
 			else{ 
-				console.log('Ud no es usuario Espol');
+				console.log('Usuario o contraseña incorrecta, intente nuevamente');
 				response.sendfile(html_dir + 'index.html');
 			}
 	   	});
 	   });
 };
+
 
 exports.registrar= function(request,response){
 		if(request.body.carro=='si'){
