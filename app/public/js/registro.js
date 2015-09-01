@@ -28,7 +28,18 @@ function opcionesCarroOff(){
 	}
 }
 
-function procesarInformacionUsuario(response){
+function procesarInformacionUsuario(event){
+	//json = {nombre,apellido,nick,sexo}
+	var respond = event.target.responseText;
+	var json = JSON.parse(respond);
+	nombre.value=json.nombre;
+	apellido.value=json.apellido;
+	nickname.value=nick;
+	if(sexo=="M"){
+		masculino.checked = true;
+	}else{
+		femenino.checked = true;
+	}
 
 }
 
@@ -57,11 +68,12 @@ function autenticar(){
 		request.open("POST",url,true);
 		request.addEventListener('load',procesarInformacionUsuario ,false);
 		request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-		var us=$('#usuario').val();
-		console.log(us);
-		var cont=$('#contraseña').val();
-		console.log(contraseña);
-		request.send(JSON.stringify({usuario:us,contraseña:cont}));
+		inputs=document.getElementById("formulario_registro_usuario").getElementsByTagName("input");
+		usuario=inputs[0].value;
+		password=inputs[1].value;
+		console.log(usuario);
+		console.log(password);
+		request.send(JSON.stringify({usuario:usuario,contraseña:password}));
 		alert("Autenticacion correcta");
 	}else{
 		var inputs=document.querySelectorAll("#autenticacion input");

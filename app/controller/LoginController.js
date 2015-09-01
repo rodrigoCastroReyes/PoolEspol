@@ -53,7 +53,7 @@ exports.autenticar=function(request,response){
 	   var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
 	   var args = {authUser: request.body.usuario, authContrasenia: request.body.contraseña};
 	   var resp;
-	   console.log(request.body);
+	   console.log(args);
 	   soap.createClient(url, function(err, client) {
 	   	client.autenticacion(args, function(err, result){
 	   		resp = result.autenticacionResult;
