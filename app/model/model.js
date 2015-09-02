@@ -14,7 +14,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	});
 };
 
- exports.guardarUsuario = function(datosUsuario){
+ exports.guardarUsuario = function(datosUsuario,response){
 	modelos.Usuario.create({nick: datosUsuario.nick, 
 							password: datosUsuario.password, 
 							nombre: datosUsuario.nombre,
@@ -24,7 +24,8 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 							id_carro: datosUsuario.id_carro,
 							foto: datosUsuario.foto })
 	.then(function (usuario){
-		console.log(usuario);	
+		//console.log(usuario);
+		response.json({mensaje:'Se ha Registrado con Exito'});	
 	});
 };
 
@@ -702,5 +703,26 @@ exports.obtenerPasajerosRuta  = function(request, response){
 
 	});
 
+
+}
+
+exports.guardarUsuarioConCarro=function(datosUsuario,datosCarro,response){
+	modelos.Carro.create({placa: datosCarro.placa, 
+							foto: datosCarro.foto, 
+							capacidad: datosCarro.capacidad})
+	.then(function (carro){
+		console.log(carro);
+		modelos.Usuario.create({nick: datosUsuario.nick, 
+							password: datosUsuario.password, 
+							nombre: datosUsuario.nombre,
+							apellidos: datosUsuario.apellidos,
+							sexo: datosUsuario.sexo, 
+							telefono: datosUsuario.telefono,
+							id_carro: carro.dataValues.id_carro,
+							foto: datosUsuario.foto })
+		.then(function (usuario){
+			response.json({mensaje:'Se ha Registrado con Exito'});	
+		});
+	});
 
 }

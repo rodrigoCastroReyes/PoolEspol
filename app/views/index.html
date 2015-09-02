@@ -116,16 +116,17 @@
 									<span class="single_text" >Femenino</span>
 								</div>
 								<div id="opciones_carro">
-									<input type="radio" name="carro" value="Si" disabled onchange="opcionesCarroOn(this)"> 
+									<input id='siCarro' type="radio" name="carro" value="Si" disabled onchange="opcionesCarroOn(this)"> 
 									<span class="single_text">Si</span>
-									<input type="radio" name="carro" value="No" disabled checked=""
+									<input id='noCarro' type="radio" name="carro" value="No" disabled checked=""
 									onchange="opcionesCarroOff(this)">
 									<span class="single_text" >No</span>
 								</div>
 								
 								<input class="entrada_texto invisible" name="placa" id="placa" type="text"	
 								disabled
-								type="text" pattern="[A-Z0-9]{6,7}">
+								type="text" >
+								<!--pattern="[A-Z0-9]{6,7}"-->
 								<input class="entrada_texto invisible" name="capacidad" id="capacidad"
 								type="text"
 								pattern="[0-6]{1}" 
