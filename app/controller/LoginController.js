@@ -22,7 +22,7 @@ exports.login=function(request,response){
 	   	client.autenticacion(args, function(err, result){
 	   		resp = result.autenticacionResult;
 	   		console.log(resp);
-			if (resp || true ){
+			if (resp ){
 				db.encontrarUsuario(request.body.usuario).then(function (user){
 				if(!user){
 					console.log('Ud no se encuentra registrado');
@@ -79,7 +79,7 @@ exports.autenticar=function(request,response){
 						//response.sendfile(html_dir + 'index.html');
 				}).catch(function(err){
 					console.log(err);
-					response.sendfile(html_dir + 'index.html');
+					//response.sendfile(html_dir + 'index.html');
 				});
 			}
 			else{ 
@@ -93,6 +93,7 @@ exports.autenticar=function(request,response){
 
 exports.registrar= function(request,response){
 	console.log("te vas a registar");
+	console.log(request.body);
 	if(request.body.carro){
 		console.log("tienes carro");
 		var datos = {nick: request.body.nickname, 

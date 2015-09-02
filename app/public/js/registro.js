@@ -1,3 +1,4 @@
+var carro=false;
 function iniciar(){
 	document.getElementById("botonAutenticar").addEventListener("click",autenticar,false);
 	document.getElementById("botonRegistro").addEventListener("click",registrar,false);
@@ -15,6 +16,7 @@ function opcionesCarroOn(){
 		capacidad.setAttribute("class","entrada_texto visible");
 		placa.disabled=false;
 		capacidad.disabled=false;
+		carro=true;
 	}
 }
 
@@ -29,6 +31,7 @@ function opcionesCarroOff(){
 		capacidad.setAttribute("class","invisible");
 		placa.disabled=true;
 		capacidad.disabled=true;
+		carro=false;
 	}
 }
 
@@ -112,16 +115,13 @@ function respuestaRegistro(event){
 function registrar(){
 	var valid=document.registrar.checkValidity();
 	if(valid){
-		var json={};
-		json.usuario={};
-		json.carro={};
 		var inputs=document.querySelectorAll("#registrar input");//se cambia de color los inputs
 		for(var i=0; i<inputs.length;i++){
 			inputs[i].style.background="white";
 		}
 		//document.registrar.submit();
 		var request = new XMLHttpRequest();
-		var url="/autenticar";
+		var url="/registrar";
 		request.open("POST",url,true);
 		request.addEventListener('load',respuestaRegistro ,false);
 		request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
@@ -131,20 +131,20 @@ function registrar(){
 			campo=campos_registro[i];
 			campo.disabled=false;
 		}
-		json.nombre=nombre;
-		json.apellido=apellido;
-		json.nick=nick;
-		json.telefono=telefono;
+		var json={
+			nombre:nombre.value,
+			apellido:apellido.value,
+			nickname:nickname.value,
+			telefono:telefono.value,
+			sexo:"masculino",
+			placa:placa.value,
+			capacidad:capacidad.value,
+			carro:carro
+		};
 		if(masculino.checkValidity==true){
 			json.sexo="masculino";
 		}else{
 			json.sexo="femenino";
-		}
-		json.usuario.sexo=nombre;
-		json.carro=siCarro.checkValidity;
-		if(siCarro.checkValidity==true){
-			json.placa=placa.value;
-			json.capacidad=capacidad.value;
 		}
 		var campos_registro=document.getElementById("registrar").getElementsByTagName("input");
 		var campo;
@@ -153,7 +153,7 @@ function registrar(){
 			campo.disabled=true;
 		}
 		console.log(json);
-		request.send(json);
+		request.send(JSON.stringify(json));
 
 	}else{
 		var inputs=document.querySelectorAll("#registrar input");
