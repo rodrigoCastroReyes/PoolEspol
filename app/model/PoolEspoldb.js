@@ -501,6 +501,11 @@ Usuario_Ruta.belongsTo(Usuario, {
 	as : 'Usuario_Miembro'
 });
 
+Usuario_Ruta.belongsTo(Usuario,{
+	foreignKey: 'id_usuario',
+	as: 'pasajeros'
+});
+
 module.exports.Mensaje = Mensaje;
 module.exports.Notificacion = Notificacion;
 module.exports.Ruta = Ruta;

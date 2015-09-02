@@ -124,7 +124,7 @@ function crearMenuSuperior(RutaInfo, miRuta ){
 
 //crea un div con las opciones del menu inferior del visualizador de ruta
 function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
-   //menu inferior
+  //menu inferior
   var menuInferior=document.createElement('div');
   menuInferior.setAttribute('class','VisualizadorRuta-menu u-menu_inferior');
 
@@ -160,6 +160,9 @@ function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
     //icono Ruta
     var iconoRuta=document.createElement('span');
     iconoRuta.setAttribute('class','icon-user VisualizadorRuta-info');
+    iconoRuta.setAttribute('data-idruta',RutaInfo["idRuta"]);
+    iconoRuta.addEventListener('click',mostrarPasajeros,false);
+
     //capacidad de la ruta
     var capacidad=document.createElement('span');
     capacidad.setAttribute('class','VisualizadorRuta-info');
@@ -175,6 +178,49 @@ function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
   return menuInferior;
 }
 
+function mostrarPasajeros(){
+  console.log("mostrar Pasajeros");
+  id_ruta = this.dataset.idruta;
+  
+  var request = new XMLHttpRequest();
+  request.open("GET","/pasajeros?id="+id_ruta ,true);
+  request.addEventListener('load',procesarPasajeros ,false);
+  request.send(null);
+
+}
+
+function procesarPasajeros(event){
+  var respond = JSON.parse(event.target.responseText);
+  var pasajeros = respond.pasajeros;
+  console.log(pasajeros);
+  if(pasajeros.length == 0){
+    alert("Esa ruta no tiene pasajeros");
+    return;
+  }
+  $("#contenidoPasajeros").css('opacity','1');
+  $("#pantallaPasajeros").css('visibility','visible');
+  $("#pantallaPasajeros").css('opacity','1');
+
+  for (var i =0; i< pasajeros.length; i++){
+      pasajero = pasajeros[i];
+      var div = document.createElement("div");
+      div.setAttribute('class',"pasajero");
+      var p = document.createElement("p");
+      p.innerHTML = pasajero.nickname;
+      p.setAttribute('class', "nickname_pasajero");
+      var foto = document.createElement("img");
+      foto.setAttribute('class','pasajero_foto');
+      foto.setAttribute('src', pasajero.urlfoto);
+      div.appendChild(foto);
+      div.appendChild(p);
+      var br = document.createElement("br");
+
+      $("#ListaPasajeros").append(div);
+      $("#ListaPasajeros").append(br); 
+  }
+
+}
+
 function procesarRutas(event){
   $('#loader-icon').hide();
   var respond = JSON.parse(event.target.responseText);
@@ -186,4 +232,16 @@ function procesarRutas(event){
   }
 
 }
+function cerrarPasajeros(event){
+  $("#pantallaPasajeros").css('visibility','hidden');
+  $("#pantallaPasajeros").css('opacity','0');
+  $("#contenidoPasajeros").css('opacity','1');
+  $("#ListaPasajeros").html("");
+
+}
+
+window.addEventListener('load', function(event){
+  $('#closePasajeros').on('click', cerrarPasajeros);
+
+})
 /****/

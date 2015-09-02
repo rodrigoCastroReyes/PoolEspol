@@ -9,7 +9,8 @@ exports.noticias=function(request,response){
 		response.render('noticias',{ title: 'Noticias', 
 			id : request.session.user.id,
 			nickname: request.session.user.nick,
-			foto: request.session.user.foto
+			foto: request.session.user.foto,
+			flag:request.session.user.id_carro
 		});
 	}else{
 		response.sendfile(html_dir + 'index.html');
@@ -23,4 +24,8 @@ exports.obtenerRutasNoticias = function(request, response){
 
 exports.obtenerAventonesNoticias = function(request, response){
 	db.obtenerAventonesNoticias(request.session.user.id, request, response);
+}
+
+exports.obtenerPasajeros = function(request, response){
+	db.obtenerPasajerosRuta(request, response);
 }

@@ -34,5 +34,6 @@ router.get('/chat/leermensajes',MensajesController.leerMensajes);
 
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificaciones);
+router.get('/pasajeros',NoticiasController.obtenerPasajeros);
 
 module.exports = router;

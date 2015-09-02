@@ -1,6 +1,7 @@
 var html_dir = './app/views/';
 var db = require('../model/model.js');
-
+var soap = require('soap');
+var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
 
 exports.index = function(request, response){
 	if(request.session.user){
@@ -13,8 +14,8 @@ exports.index = function(request, response){
 };
 
 exports.login=function(request,response){
-	   var soap = require('soap');
-	   var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
+	   
+	   
 	   var args = {authUser: request.body.usuario, authContrasenia: request.body.contraseña};
 	   var resp;
 	   soap.createClient(url, function(err, client) {
@@ -37,7 +38,7 @@ exports.login=function(request,response){
 			}
 			else{ 
 				//window.alert("Ud. no es usuario Espol");
-				console.log('Ud no es usuario Espol');
+				console.log('Usuario o contraseña incorrecta, intente nuevamente');
 				//window.alert("Ud. no es usuario Espol");
 				response.sendfile(html_dir + 'index.html');
 			}
@@ -49,45 +50,71 @@ exports.login=function(request,response){
 
 
 exports.autenticar=function(request,response){
-	   var soap = require('soap');
-	   var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
+	   //var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
 	   var args = {authUser: request.body.usuario, authContrasenia: request.body.contraseña};
 	   var resp;
-	   console.log(request.body);
+	   console.log("autenticacion");
 	   soap.createClient(url, function(err, client) {
 	   	client.autenticacion(args, function(err, result){
 	   		resp = result.autenticacionResult;
 	   		console.log(resp);
 			if (resp){
 				db.encontrarUsuario(request.body.usuario).then(function (user){
-				if(!user){
-					console.log("Autenticacion correcta");
-				}else{			
-					console.log('Ud ya se encuentra registrado');}
-					//response.sendfile(html_dir + 'index.html');
+					console.log('user: '+user);
+					if(user!=null){
+						console.log('Ud ya se encuentra registrado');
+						response.json({error:'Ud ya se encuentra registrado'});
+						
+					}else{	
+						console.log("Autenticacion correcta");
+						var args = {usuario: request.body.usuario};
+						soap.createClient(url, function(err, client) {
+							client.wsInfoUsuario(args, function(err, result) {
+								console.log(result.wsInfoUsuarioResult.diffgram.NewDataSet.INFORMACIONUSUARIO);
+								response.json(result.wsInfoUsuarioResult.diffgram.NewDataSet.INFORMACIONUSUARIO);
+							});
+						});
+					}	
+						
+						//response.sendfile(html_dir + 'index.html');
 				}).catch(function(err){
 					console.log(err);
 					response.sendfile(html_dir + 'index.html');
 				});
 			}
 			else{ 
-				console.log('Ud no es usuario Espol');
-				response.sendfile(html_dir + 'index.html');
+				console.log('Usuario o contraseña incorrecta, intente nuevamente');
+				response.json({error:'Usuario o contraseña incorrecta, intente nuevamente'});
 			}
 	   	});
 	   });
 };
 
+
 exports.registrar= function(request,response){
-		if(request.body.carro=='si'){
-			var datos = {nick: 'request.body', password: 'asasasasasasa', nombre: request.body.nombre, apellidos: request.body.apellido, sexo: request.body.sexo, telefono: request.body.telefono, id_carro: request.body.placa, foto: 'asasasasasasa'};
-			db.guardarUsuario(datos);
-			var datos_carro = {
-placa: request.body.placa, foto: 'asasasasasasa', capacidad: request.body.capacidad};
-			db.guardarCarro(datos_carro);
-		}else{
-			var datos = {nick: 'request.body', password: 'asasasasasasa', nombre: request.body.nombre, apellidos: request.body.apellido, sexo: request.body.sexo, telefono: request.body.telefono, id_carro: null, foto: 'asasasasasasa'};
-			db.guardarUsuario(datos);
-		}
-		console.log('Registrado Correctamente');
+	console.log("te vas a registar");
+	if(request.body.carro){
+		console.log("tienes carro");
+		var datos = {nick: request.body.nickname, 
+			password: 'asasasasasasa',
+			nombre: request.body.nombre,
+			apellidos: request.body.apellido, 
+			sexo: request.body.sexo, 
+			telefono: request.body.telefono, 
+			id_carro: request.body.placa, 
+			foto: 'asasasasasasa'
+		};
+		//db.guardarUsuario(datos);
+		var datos_carro = {placa: request.body.placa, 
+			foto: 'sin foto', 
+			capacidad: request.body.capacidad
+		};
+		//db.guardarCarro(datos_carro);
+		db.guardarUsuarioConCarro(datos,datos_carro,response);
+	}else{
+		console.log("no tienes carro");
+		var datos = {nick: request.body.nickname, password: 'asasasasasasa', nombre: request.body.nombre, apellidos: request.body.apellido, sexo: request.body.sexo, telefono: request.body.telefono, id_carro: null, foto: 'asasasasasasa'};
+		db.guardarUsuario(datos,response);
+	}
+	//console.log('Registrado Correctamente');
 }

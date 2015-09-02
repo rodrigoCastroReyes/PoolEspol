@@ -20,7 +20,8 @@ exports.perfil=function(request,response){
 		    		celular: usuario.telefono, 
 		    		nickname: usuario.nick, 
 		    		idcarro:0, 
-		    		foto:usuario.foto});
+		    		foto:usuario.foto,
+		    		flag:usuario.id_carro});
 		    	}else{
 		    		response.render('perfil',{
 		    		id : usuario.id,
@@ -31,7 +32,8 @@ exports.perfil=function(request,response){
 		    		placa:usuariocarro.Usuario_Carro.placa ,
 		    		cantidad:usuariocarro.Usuario_Carro.capacidad, 
 		    		idcarro:usuariocarro.Usuario_Carro.id_carro, 
-		    		foto:usuario.foto});
+		    		foto:usuario.foto,
+		    		flag:usuario.id_carro});
 		    	}			    	
 			});
 	}); 
