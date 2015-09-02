@@ -110,9 +110,9 @@
 								pattern="[0-9]{10}" 
 								required disabled>
 								<div id="opciones_sexo">
-									<input id="masculino" type="radio" name="sexo" value="Masculino" checked="" disabled> 
+									<input id="masculino" type="radio" name="sexo" value="Masculino" checked="" disabled onchange="opcionesMasculino(this)"> 
 									<span class="single_text">Masculino</span>
-									<input id="femenino" type="radio" name="sexo" value="Femenino" disabled>
+									<input id="femenino" type="radio" name="sexo" value="Femenino" disabled onchange="opcionesFemenino(this)">
 									<span class="single_text" >Femenino</span>
 								</div>
 								<div id="opciones_carro">
