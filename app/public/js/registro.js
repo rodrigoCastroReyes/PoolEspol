@@ -1,4 +1,5 @@
 var carro=false;
+var sexo;
 function iniciar(){
 	document.getElementById("botonAutenticar").addEventListener("click",autenticar,false);
 	document.getElementById("botonRegistro").addEventListener("click",registrar,false);
@@ -33,6 +34,24 @@ function opcionesCarroOff(){
 		capacidad.disabled=true;
 		carro=false;
 	}
+}
+
+function opcionesMasculino(){
+	input=event.target;
+	if(input.checked){
+		sexo=true;
+
+	}
+
+}
+
+function opcionesFemenino(){
+	input=event.target;
+	if(input.checked){
+		sexo=false;
+
+	}
+
 }
 
 function procesarInformacionUsuario(event){
@@ -141,7 +160,7 @@ function registrar(){
 			capacidad:capacidad.value,
 			carro:carro
 		};
-		if(masculino.checkValidity==true){
+		if(sexo=="M"){
 			json.sexo="masculino";
 		}else{
 			json.sexo="femenino";

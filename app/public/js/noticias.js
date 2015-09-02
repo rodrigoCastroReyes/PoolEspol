@@ -87,6 +87,7 @@ function solicitarRuta(event){
   var idRuta=this.getAttribute('data-idRuta');
   var rutaActual=usuario.consultarRuta(idRuta);
   var solicitud=usuario.obtenerSolicitud(idRuta);//verifica si ya existe una solicitud para esta ruta
+
     $("#contenedor_rutas").css('opacity','0.5');
     $("#OpcionAgregar").css('visibility','visible');
     $("#OpcionAgregar").css('opacity','1');
@@ -104,6 +105,7 @@ function solicitarRuta(event){
     });
     //se crea una nueva solicitud para la ruta actual
     usuario.agregarSolicitud(idRuta,this.getAttribute('data-idPublicador'));
+
 }
 
 function marcarPunto(location, map) {//marca el punto en donde un usuario espera que lo lleven en el mapa de la ruta de otro usuario
