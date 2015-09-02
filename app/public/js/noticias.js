@@ -164,8 +164,10 @@ function progreso(event){
 function cargarMapas(event){
   //se crea un nuevo usuario con la informacion envia desde el server
   $('#loader-icon').show();
+
   usuario=new Usuario(userid,userNick,userFoto);
   //extracion de informacion de rutas
+  
   if(PageRuta < limiteRutas){
     var request = new XMLHttpRequest();
     request.open("GET","/Rutas?page="+PageRuta ,true);
@@ -173,8 +175,7 @@ function cargarMapas(event){
     request.addEventListener('progress',progreso, true );
     request.send(null);
     PageRuta = PageRuta+ 1; //incremento la pagina  
-  }
-  else{
+  }else{
       console.log("no traigo rutas");
   }
 
@@ -191,6 +192,7 @@ function cargarMapas(event){
   }else{
     console.log("no traigo aventones");
   }
+  
   $('#loader-icon').hide();
   /*Manejadores de enventos de botones*/
   btnAceptarAgregar.addEventListener('click',guardarSolicitud,false);
