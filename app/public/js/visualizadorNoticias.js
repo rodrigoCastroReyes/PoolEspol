@@ -71,6 +71,26 @@ function clickMensaje(event){
   window.location.href="/nuevaConversacion?idReceptor="+this.dataset.idpublicador;
 }
 
+function clickEliminar(event){
+  var IDruta = this.dataset.idruta;
+  console.log("Eliminado", this.dataset.idruta);
+  var request = new XMLHttpRequest();
+  request.open("GET","/eliminarRuta?id="+IDruta ,true);
+  request.addEventListener('load', quitarVisualizador ,false);
+  request.send(null);
+
+}
+
+function quitarVisualizador(event){
+  console.log("eliminado");
+  var respond = JSON.parse(event.target.responseText);
+  var idContenedor=respond.idruta;
+  var element = document.getElementById(idContenedor);
+  element.outerHTML = "";
+  delete element;
+
+}
+
 //crea un div con las opciones del menu superior del visualizador de ruta
 function crearMenuSuperior(RutaInfo, miRuta ){
   var menuSuperior=document.createElement('div');
@@ -105,6 +125,21 @@ function crearMenuSuperior(RutaInfo, miRuta ){
     infoMensajes.appendChild(iconoMensaje);  infoMensajes.appendChild(mensaje);
 
     menuSuperior.appendChild(infoUsuario); menuSuperior.appendChild(infoMensajes);
+  }
+  else{
+    var infoEliminar=document.createElement('div');
+    infoEliminar.setAttribute('class','VisualizadorRuta-opcion u-flex_end');
+    var iconoEliminar=document.createElement('span');
+    iconoEliminar.setAttribute('class','icon-bin  VisualizadorRuta-info u-cursor_pointer');
+    iconoEliminar.setAttribute('data-idruta',RutaInfo["idRuta"]);
+    iconoEliminar.addEventListener('click', clickEliminar, false);
+    //texto: Mensajes
+    var eliminar=document.createElement('span');
+    eliminar.setAttribute('class','VisualizadorRuta-info');
+    eliminar.innerHTML="Eliminar";
+    infoEliminar.appendChild(iconoEliminar);  
+    infoEliminar.appendChild(eliminar);
+    menuSuperior.appendChild(infoEliminar); 
   }
   return menuSuperior;
 }

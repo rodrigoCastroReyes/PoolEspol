@@ -36,4 +36,6 @@ router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificaciones);
 router.get('/pasajeros',NoticiasController.obtenerPasajeros);
 
+router.get('/eliminarRuta', PerfilController.eliminarRuta);
+
 module.exports = router;
