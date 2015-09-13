@@ -6,45 +6,16 @@ var limiteRutas = 1000;
 var PageAventon = 0;
 var limiteAventon = 1000;
 
-/*Aventon*/
-function crearVisualizadorAventon(AventonInfo,appendLast){
-  var contenedor=document.createElement('div');
-  contenedor.setAttribute('class','VisualizadorRuta');
-  if(appendLast){
-    contenedor_rutas.appendChild(contenedor);
-  }else{
-    contenedor_rutas.insertBefore(contenedor,contenedor_rutas.firstChild);
+/*Noticias*/
+function procesarRutas(event){
+  $('#loader-icon').hide();
+  var respond = JSON.parse(event.target.responseText);
+  var rutasInfo=respond.rutas;
+  console.log(rutasInfo);
+  for(var i=0;i<rutasInfo.length;i++){
+    crearVisualizadorRuta(rutasInfo[i],true);
+    usuario.agregarInfoRuta(rutasInfo[i]);
   }
-  var menuSuperior=crearMenuSuperior(AventonInfo);
-  contenedor.appendChild(menuSuperior);
-  var contenedorMapa=document.createElement('div');//mapa
-  contenedorMapa.setAttribute('class','VisualizadorRuta-mapa');
-  contenedorMapa.setAttribute('id','mapaGoogle2');
-  contenedor.appendChild(contenedorMapa);
-  var mapOptions = {
-    zoom: 15,
-    center:new google.maps.LatLng(AventonInfo.ubicacion.x,AventonInfo.ubicacion.y),
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };  
-  var map=new google.maps.Map(contenedorMapa,mapOptions);
-  var marker= new google.maps.Marker({
-    position: new google.maps.LatLng(AventonInfo.ubicacion.x,AventonInfo.ubicacion.y),
-    title:'#',
-    draggable:false,
-    map:map
-  });//ubica el punto del aventon dentro del mapaS
-  var menuInferior=crearMenuInferior(AventonInfo,false);
-  contenedor.appendChild(menuInferior);
-}
-
-function aceptarAventon(event){ 
-  //se envia una notificacion al solicitante del aventon indicando que el usuario desea llevarlo
-  var idAventon=this.getAttribute('data-idaventon');
-  var idReceptor=this.getAttribute('data-idpublicador');
-  var id=usuario.id;
-  var confirmacion={idAventon:idAventon,idEmisor:id,idReceptor:idReceptor}
-  console.log(confirmacion);
-  socket.emit('aceptarAventon',confirmacion);
 }
 
 function procesarAventones(event){
@@ -89,8 +60,6 @@ function connectSocket(){
     solicitudAventonAceptado(datosUsuario);
   });
 }
-
-/*Noticias*/
 
 /**Mensajes de error**/
 function solicitudAventonAceptado(datosUsuario){
@@ -153,7 +122,18 @@ function solicitudRepetida(mensaje){
 }
 /**Mensajes de error**/
 
+function cerrarPasajeros(event){
+  $("#pantallaPasajeros").css('visibility','hidden');
+  $("#pantallaPasajeros").css('opacity','0');
+  $("#contenidoPasajeros").css('opacity','1');
+  $("#ListaPasajeros").html("");
+}
 
+window.addEventListener('load', function(event){
+  $('#closePasajeros').on('click', cerrarPasajeros);
+})
+
+/*Paginacion*/
 $(window).scroll(function(){
 if ($(window).scrollTop() == $(document).height() - $(window).height()){
   console.log("final del scroll");
@@ -175,10 +155,10 @@ function auxAventones(event){
 function progreso(event){
   $('#loader-icon').show();
 }
+/*Paginacion*/
 
 function cargarMapas(event){
   $('#loader-icon').show();
-  usuario=new Usuario(userid,userNick,userFoto);//se crea un nuevo usuario con la informacion envia desde el server
   //extracion de informacion de rutas
   if(PageRuta < limiteRutas){
     var request = new XMLHttpRequest();
@@ -211,6 +191,7 @@ function cargarMapas(event){
 
 function inicializar(event){
   limiteAventon = (flag)?1000:0; //verifica si tiene o no tiene carro
+  usuario=new Usuario(userid,userNick,userFoto);//se crea un nuevo usuario con la informacion envia desde el server
   cargarMapas(null);
   connectSocket();
 }

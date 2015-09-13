@@ -28,7 +28,7 @@ span,form{
 }
 
 .AgregarARuta{
-    position: absolute;
+    position: fixed;
     border-radius: 12px;
     opacity:0;
     transform: translate(-50%, -50%);
@@ -46,7 +46,7 @@ span,form{
 	display: flex;
     flex-direction:column;
     background-color: #0080FB;
-    z-index: 9999;
+    z-index: 100;
     position: relative;
     height: 100%;
     width: 100%;
