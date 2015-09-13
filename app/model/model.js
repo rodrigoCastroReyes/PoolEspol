@@ -159,6 +159,10 @@ exports.actualizarUsuarioRuta = function(idusuarioruta,estado){
 								{ where: {id_usuario_ruta: idusuarioruta}});
 };
 
+exports.actualizarEstadoRuta = function(idruta, std){
+	return modelos.Ruta.update({ estado: std },
+							   { where: {id_ruta: idruta} });
+};
 
 //Consultas chat
 exports.obtenerConversaciones = function(id){
@@ -328,7 +332,8 @@ exports.obtenerRutasNoticias = function (id_usuario, request, response){
 		include: [{ model: modelos.Usuario, required: true} ],
 		where:{
 			idcreador: { $ne: id_usuario },
-			capacidad: { $ne: 0}
+			capacidad: { $ne: 0},
+			estado: { $ne: "Eliminado"},
 		},
 		order: [['fecha', 'DESC'], ['hora' ,'DESC'] ]
 	
@@ -437,7 +442,8 @@ exports.obtenerRutasUsuario = function (idUsuario, request, response ){
 	modelos.Ruta.findAll({
 		include: [{ model: modelos.Usuario, required: true} ],
 		where:{
-			idcreador: idUsuario
+			idcreador: idUsuario,
+			estado: {$ne: "Eliminado"}
 		}
 	}).then(function (result){
 		var listRutas= [];

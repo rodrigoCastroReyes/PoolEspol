@@ -58,3 +58,10 @@ exports.obtenerMisRuta = function(request,response){
 	db.obtenerRutasUsuario(request.session.user.id, request, response);
 
 }
+
+exports.eliminarRuta = function (request, response){
+	var ruta = request.query.id;
+	db.actualizarEstadoRuta(ruta, "Eliminado");
+	response.json({"idruta": ruta });
+
+}

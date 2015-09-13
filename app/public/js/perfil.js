@@ -206,6 +206,7 @@ function procesarMisRutas(event){
 function visualizarMiRuta(RutaInfo){
 	var contenedor=document.createElement('div');
   	contenedor.setAttribute('class','VisualizadorRuta');
+  	contenedor.id = RutaInfo["idRuta"];
   	contenedor_rutas.insertBefore(contenedor,contenedor_rutas.firstChild);
   	
   	var menuSuperior=crearMenuSuperior(RutaInfo,true);
