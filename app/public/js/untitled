@@ -1,0 +1,9 @@
+function aceptarAventon(event){ 
+  //se envia una notificacion al solicitante del aventon indicando que el usuario desea llevarlo
+  var idAventon=this.getAttribute('data-idaventon');
+  var idReceptor=this.getAttribute('data-idpublicador');
+  var id=usuario.id;
+  var confirmacion={idAventon:idAventon,idEmisor:id,idReceptor:idReceptor}
+  console.log(confirmacion);
+  socket.emit('aceptarAventon',confirmacion);
+}
