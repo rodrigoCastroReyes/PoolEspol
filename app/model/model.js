@@ -26,6 +26,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	.then(function (usuario){
 		//console.log(usuario);
 		response.json({mensaje:'Se ha Registrado con Exito'});	
+		//response.redirect('/');
 	});
 };
 
@@ -770,6 +771,7 @@ exports.guardarUsuarioConCarro=function(datosUsuario,datosCarro,response){
 							foto: datosUsuario.foto })
 		.then(function (usuario){
 			response.json({mensaje:'Se ha Registrado con Exito'});	
+			//response.redirect('/');
 		});
 	});
 

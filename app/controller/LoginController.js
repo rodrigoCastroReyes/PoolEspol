@@ -2,7 +2,7 @@ var html_dir = './app/views/';
 var db = require('../model/model.js');
 var soap = require('soap');
 var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
-var fs=require('fs');
+
 
 exports.index = function(request, response){
 	if(request.session.user){
@@ -92,8 +92,6 @@ exports.autenticar=function(request,response){
 exports.registrar= function(request,response){
 	console.log("te vas a registar");
 	console.log(request.body);
-	var foto;
-	console.log(request.body.foto);
 	if(request.body.sexo=='masculino'){
 		foto='imagenes/perfilHombre.jpg';
 	}else{
@@ -101,7 +99,6 @@ exports.registrar= function(request,response){
 	}
 	if(request.body.carro){
 		console.log("tienes carro");
-		
 		var datos = {nick: request.body.nickname, 
 			password: 'asasasasasasa',
 			nombre: request.body.nombre,
@@ -113,7 +110,7 @@ exports.registrar= function(request,response){
 		};
 		//db.guardarUsuario(datos);
 		var datos_carro = {placa: request.body.placa, 
-			foto: foto, 
+			foto: 'sin foto', 
 			capacidad: request.body.capacidad
 		};
 		//db.guardarCarro(datos_carro);
