@@ -132,6 +132,13 @@ function crearInfoNotificacion(InfoNot){
 			info.appendChild(contTitulo);
 		}
 	}
+
+	if(InfoNot['estado'] == 'Eliminado'){
+		titulo.innerHTML=InfoNot['publicador'] + " Ha eliminado una ruta en la que estabas";
+		contTitulo.appendChild(titulo);
+		info.appendChild(contTitulo);
+	}
+
 	return info;
 }
 
