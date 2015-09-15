@@ -79,6 +79,30 @@ function socketNoticias(io,sessionMiddleware){
             client.on('aceptarAventon',function(confirmacion){//comprobar que ese aventon no ha sido aceptado antes
                 aceptarAventon(confirmacion);//actualizar el estado del aventon
             });
+
+
+            client.on('EliminarRuta',function(idruta, idpasajeros){//comprobar que ese aventon no ha sido aceptado antes
+                console.log("elimacion de ruta", idruta);
+                console.log("pasajeros",idpasajeros);
+                db.actualizarEstadoRuta(idruta, "Eliminado").then(function (result){
+                    for (var key in clients){
+                        if(key==session.user.id){
+                            console.log("Entre al carajo");
+                            clients[key].emit('EliminarRutaPerfil', idruta);
+                        }
+                    }
+                    
+
+                });
+                db.actualizarEstadoUsuarioRuta(idruta, idpasajeros, "Eliminada").then(function (result){
+                    db.consultarUsuarioRutaPorIDruta(idruta).then(function(resultados){
+                        console.log("consult", resultados);
+                        notificarPasajeros(session.user.id, resultados);
+                    });
+
+                });
+                
+            });
         }    
     }); 
 }
@@ -234,4 +258,87 @@ function guardarSolicitud(solicitud){
             });
         }
     });
+}
+
+
+function notificarPasajeros(idPublicador, usuarioruta ){
+    //envia una notificacion al usuario que ha hecho una solicitud
+    var listaNotificaciones = [];
+
+    for (var i =0; i< usuarioruta.length; i++){
+        var ur = usuarioruta[i].dataValues;
+        var notificacion = {
+            tipo: "Informacion",
+            estado: "Eliminado",
+            id_emisor: idPublicador,
+            id_receptor: ur.id_usuario,
+            usuarioruta: ur.id_usuario_ruta
+        };
+        listaNotificaciones.push(notificacion);
+    }
+
+    db.encontrarUsuarioPorID(idPublicador).then(
+        function(usuario){
+            var notificacionesTransmitir = [];
+            var dueñoRuta = usuario.dataValues;
+
+            for (var i =0; i< usuarioruta.length; i++){
+                var ur = usuarioruta[i].dataValues;
+                var notificacion = {
+                    idEmisor: idPublicador,
+                    idReceptor: ur.id_usuario,
+                    idUsuarioRuta: ur.id_usuario_ruta,
+                    estado: "Eliminado",
+                    tipo: "Informacion",
+                    publicador: dueñoRuta.nick,
+                    urlNickname: dueñoRuta.foto
+                };
+                notificacionesTransmitir.push(notificacion);
+            }
+            console.log("notificacionesTransmitir", notificacionesTransmitir);
+
+
+            db.guadarNotificaciones(listaNotificaciones).then(function(resultados){
+
+                for (var i = 0; i< notificacionesTransmitir.length; i++){
+                    var not = notificacionesTransmitir[i];
+                    var idreceptor = not.idReceptor;
+
+                    if(clients[idreceptor]!=null) //si el usuario esta conectado enviar la notificacion
+                        clients[idreceptor].emit('actualizarNotificacion',not);
+                }
+
+
+            });
+            
+
+        });
+
+
+    
+
+
+    /*db.encontrarUsuarioPorID(idPublicador).then(
+    function(usuario){
+        var dueñoRuta = usuario.dataValues;
+        var notificacion = {};//construir la notificacion
+
+        for (var i = 0; i< idpasajeros.length; i++ ){
+            notificacion.idEmisor = idPublicador;
+            notificacion.idReceptor = idpasajeros[i];
+            notificacion.idUsuarioRuta = respuesta.idUsuarioRuta;
+            notificacion.estado = respuesta.estado;
+            notificacion.tipo = respuesta.tipo;
+            notificacion.publicador = dueñoRuta.nick;
+            notificacion.urlNickname = dueñoRuta.foto;
+        }
+        //actualiza el estado y tipo de notificacion
+        db.actualizarNotificacion(notificacion).then(function(result){
+            db.guardarNotificacion(notificacion).then(function(result){
+                console.log(result);
+            });
+            if(clients[respuesta.idReceptor]!=null) //si el usuario esta conectado enviar la notificacion
+                clients[respuesta.idReceptor].emit('actualizarNotificacion',notificacion);
+        });
+    }); */
 }

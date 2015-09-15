@@ -746,13 +746,13 @@ exports.obtenerPasajerosRuta  = function(request, response){
 			listPasajeros.push(pasajero);
 		}
 		var j = {pasajeros: listPasajeros };
-		console.log(j);
 		response.json(j);
 
 	});
 
 
 }
+
 
 exports.guardarUsuarioConCarro=function(datosUsuario,datosCarro,response){
 	modelos.Carro.create({placa: datosCarro.placa, 
@@ -772,5 +772,42 @@ exports.guardarUsuarioConCarro=function(datosUsuario,datosCarro,response){
 			response.json({mensaje:'Se ha Registrado con Exito'});	
 		});
 	});
+
+}
+
+
+exports.actualizarEstadoUsuarioRuta = function(idRuta, idPasajeros, std){
+
+	return modelos.Usuario_Ruta.update({ 
+			 
+			  estado: std
+			},
+			{ where: {
+				id_ruta: idRuta,
+
+				id_usuario: {in: idPasajeros}
+			}
+
+			}
+
+			);
+
+
+}
+
+
+exports.consultarUsuarioRutaPorIDruta = function(idruta){
+	return modelos.Usuario_Ruta.findAll({
+		where:{
+			id_ruta: idruta,
+		}
+		
+	});
+
+}
+
+
+exports.guadarNotificaciones = function(listNotificaciones){
+	return modelos.Notificacion.bulkCreate(listNotificaciones);
 
 }

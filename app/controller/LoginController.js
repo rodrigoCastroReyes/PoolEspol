@@ -15,29 +15,27 @@ exports.index = function(request, response){
 };
 
 exports.login=function(request,response){
-	   
-	   
 	   var args = {authUser: request.body.usuario, authContrasenia: request.body.contraseña};
 	   var resp;
 	   soap.createClient(url, function(err, client) {
 	   	client.autenticacion(args, function(err, result){
 	   		resp = result.autenticacionResult;
 	   		console.log(resp);
+
 			if (true || resp ){
+
 				db.encontrarUsuario(request.body.usuario).then(function (user){
 				if(!user){
-					console.log('Ud no se encuentra registrado');
-					//si no esta registrado lo redirecciona a index.html
+					console.log('Ud no se encuentra registrado'); //si no esta registrado lo redirecciona a index.html
 					response.sendfile(html_dir + 'index.html');
 				}else{			
 					request.session.user=user.dataValues;
-					response.redirect('/noticias');}
-				}).catch(function(err){
+					response.redirect('/noticias');
+				} }).catch(function(err){
 					console.log(err);
 					response.sendfile(html_dir + 'index.html');
 				});
-			}
-			else{ 
+			}else{ 
 				//window.alert("Ud. no es usuario Espol");
 				console.log('Usuario o contraseña incorrecta, intente nuevamente');
 				//window.alert("Ud. no es usuario Espol");
@@ -45,7 +43,6 @@ exports.login=function(request,response){
 			}
 	   	});
 	   });
-	   
 };
 
 

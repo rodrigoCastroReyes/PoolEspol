@@ -58,7 +58,7 @@ function deshabilitarEntradas(inputs,color){
 	}
 }
 
-function guardarDatos(evt){
+function guardarDatos(event){
 	console.log("si me llaman");
 	var val=document.forms["datosPersona"].checkValidity();
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos

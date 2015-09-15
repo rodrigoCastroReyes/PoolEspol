@@ -9,6 +9,7 @@ var Solicitud = function(idRuta,idEmisor,idReceptor,latitud,longitud){
   this.idRuta = idRuta || '' ;
   this.idEmisor= idEmisor || '';
   this.idReceptor= idReceptor || '' ;
+  
   this.latitud = latitud || 0.0 ;
   this.longitud = longitud || 0.0 ;
 }
@@ -79,6 +80,7 @@ var Usuario=function(id,nickname,urlFoto){
     info.precio,
     info.capacidad,
     info.ruta);
+    console.log(this.infoRutas[info.idRuta]);
   }
 
   this.agregarInfoAventon=function(info){
@@ -89,11 +91,12 @@ var Usuario=function(id,nickname,urlFoto){
     info.ubicacion);
   }
 
-  this.agregarSolicitud=function(idRuta,idReceptor,latitud,longitud){
-    this.solicitudes[idRuta]=new Solicitud(idRuta,this.id,idReceptor,latitud,longitud);
+  this.agregarSolicitud=function(solicitud){
+    this.solicitudes[solicitud.idRuta] = solicitud;
+  }
+  
+  function errorFound(error){
+    alert("Error has ocurred" + error.code);/* 0: Error desconocido 1: Permiso denegado  2: Posicion no esta disponible  3: Timeout */
   }
 }
 
-function errorFound(error){
-  alert("Error has ocurred" + error.code);/* 0: Error desconocido 1: Permiso denegado  2: Posicion no esta disponible  3: Timeout */
-}
