@@ -198,11 +198,20 @@ html,body{
 	overflow-y: auto;
 }
 
+.numeroNotificacionPersona{
+	border: 5px;
+	background: red;
+	padding: 5px;
+	color: white;
+	margin-left: 10px;
+}
+
 
 
 footer{
 	text-align:center;
 }
+
 
 
 #cabezera{

@@ -52,6 +52,7 @@ exports.leerMensajes=function(request,response){
 	id=request.query.id;
 	console.log('emisor'+id+' receptor '+request.session.user.id)
 	db.leerMensajes(id,request.session.user.id);
+	response.json({id:id});
 	
 };
 

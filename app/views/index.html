@@ -92,6 +92,7 @@
 							<label for="nickname" class="etiqueta">Nickname:</label>
 							<label for="telefono" class="etiqueta">Telefono:</label>
 							<label for="sexo" class="etiqueta">Sexo:</label>
+							<label for="foto" class="etiqueta">Foto:</label>
 							<label for="carro" class="etiqueta">Carro:</label>
 							<label id="placaLabel" for="placa" class="etiqueta invisible">Placa:</label>
 							<label id="capacidadLabel" for="capacidad" class="etiqueta invisible">Capacidad:</label>
@@ -115,6 +116,8 @@
 									<input id="femenino" type="radio" name="sexo" value="Femenino" disabled onchange="opcionesFemenino(this)">
 									<span class="single_text" >Femenino</span>
 								</div>
+								<input class="entrada_texto" name="foto" id="foto" type="file" 
+								required disabled>
 								<div id="opciones_carro">
 									<input id='siCarro' type="radio" name="carro" value="Si" disabled onchange="opcionesCarroOn(this)"> 
 									<span class="single_text">Si</span>

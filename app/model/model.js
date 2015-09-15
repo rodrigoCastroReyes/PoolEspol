@@ -55,7 +55,37 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 
 				};
 				socket.emit("enviarCliente",datos);
-				socket.emit("nuevoMensaje");
+				modelos.Mensaje.findAll({
+					where:{$or:{id_receptor:datosUsuario.id_receptor}}
+				}).then(function(result){
+					 var lista=[];
+					 var usuarios=[];
+					 for(var i =0 ; i< result.length; i++){
+					 	//obtenego el id de la persona con la que tengo la conversacion
+					 	var auxid;
+					 	auxid=result[i].dataValues.id_emisor;
+					 	if(result[i].dataValues.leido){
+					 		continue;
+					 	}
+					 	ban=1;
+					 	for(var j=0;j<lista.length;j++){
+					 		if(lista[j]==auxid ){
+					 			ban=0;
+					 			break;
+					 		}
+					 	}
+					 	//console.log(result[i].dataValues);
+					 	if(ban==1 && auxid!=null){
+					 		lista.push(auxid);
+					 	}
+					 	
+					 }
+					 socket.emit("nuevoMensaje",lista.length);
+					 console.log(lista.length);
+					 obtenerNumeroMensajesNoLeidosNoExport(datosUsuario.id_receptor,datosUsuario.id_emisor,socket);
+				});
+
+				
 
 			});
 		}
@@ -527,6 +557,18 @@ exports.obtenerConversacionesPendientes = function(id,response){
 		 	
 		 }
 		 response.json({ids:lista});
+	});
+}
+
+exports.obtenerNumeroMensajesNoLeidos = function(id_receptor,id_emisor,io){
+	obtenerNumeroMensajesNoLeidosNoExport(id_receptor,id_emisor,io);
+}
+
+obtenerNumeroMensajesNoLeidosNoExport= function(id_receptor,id_emisor,io){
+	modelos.Mensaje.findAll({
+		where:{$or:{id_receptor:id_receptor,id_emisor:id_emisor},leido:false}
+	}).then(function(result){
+		io.emit('enviarNumeroNoLeido',{id:id_emisor,num:result.length});
 	});
 }
 

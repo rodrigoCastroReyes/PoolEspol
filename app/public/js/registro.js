@@ -77,6 +77,7 @@ function procesarInformacionUsuario(event){
 		}
 		siCarro.disabled=false;
 		noCarro.disabled=false;
+		foto.disabled=false;
 	}else{
 		alert(json.error);
 	}
@@ -133,6 +134,7 @@ function respuestaRegistro(event){
 
 function registrar(){
 	var valid=document.registrar.checkValidity();
+	console.log(foto.files);
 	if(valid){
 		var inputs=document.querySelectorAll("#registrar input");//se cambia de color los inputs
 		for(var i=0; i<inputs.length;i++){
@@ -143,7 +145,7 @@ function registrar(){
 		var url="/registrar";
 		request.open("POST",url,true);
 		request.addEventListener('load',respuestaRegistro ,false);
-		request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+		request.setRequestHeader("Content-Type","application/json;charset=UTF-8;image/png;image/jpg;image/jpeg");
 		var campos_registro=document.getElementById("registrar").getElementsByTagName("input");
 		var campo;
 		for(var i=0 ; i < campos_registro.length; i++){
@@ -158,7 +160,8 @@ function registrar(){
 			sexo:"masculino",
 			placa:placa.value,
 			capacidad:capacidad.value,
-			carro:carro
+			carro:carro,
+			foto:foto.files
 		};
 		if(sexo=="M"){
 			json.sexo="masculino";

@@ -46,6 +46,11 @@ function socketChat(io,sessionMiddleware){
                 mensaje=crearObjetoMensaje(data);
                 //Sconsole.log(mensaje.dataValues);
                 db.guardarMensaje(mensaje,socketDestino);
+                //db.obtenerNumeroMensajesNoLeidos(data.idDestino,session.user.id,socketDestino);
+            });
+
+            client.on('SolicitarNoLeidos',function(data){
+               db.obtenerNumeroMensajesNoLeidos(data.id_receptor,data.id_emisor,io);
             });
         }
 

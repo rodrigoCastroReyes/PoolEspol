@@ -99,6 +99,13 @@
 	font-size: 25px;
 }
 
+.numeroNotificacion{
+|	border: 5px;
+	background: red;
+	padding: 5px;
+	color: white;
+}
+
 
 
 @media screen and (max-width:400px){

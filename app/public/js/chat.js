@@ -29,7 +29,7 @@ function procesarConversacion(event){
 		var contenerPerfil=document.createElement("div");
 		var contenedorMensaje=document.createElement("div");
 		imagen=document.createElement("img");
-		var p1=document.createElement("p");
+		//var p1=document.createElement("p");
 		var p2=document.createElement("p");
 		tipo=mensajes[i].tipo;
 		mensaje=mensajes[i].contenido;
@@ -39,20 +39,20 @@ function procesarConversacion(event){
 		if(tipo=="emisor"){
 			contenedor.setAttribute("class","friend");
 			imagen.setAttribute("src",fotoEmisor);
-			p1.innerHTML=nickEmisor;
+			//p1.innerHTML=nickEmisor;
 			contenedor.appendChild(contenerPerfil);
 			contenedor.appendChild(contenedorMensaje);
 		}else{
 			contenedor.setAttribute("class","self");
 			imagen.setAttribute("src",fotoReceptor);
-			p1.innerHTML=nickReceptor;
+			//p1.innerHTML=nickReceptor;
 			contenedor.appendChild(contenedorMensaje);
 			contenedor.appendChild(contenerPerfil);
 		
 		}
 		p2.innerHTML=mensaje;
 		contenerPerfil.appendChild(imagen);
-		contenerPerfil.appendChild(p1);
+		//contenerPerfil.appendChild(p1);
 		contenedorMensaje.appendChild(p2);
 		areaMensajes.appendChild(contenedor);		
 	}
@@ -75,10 +75,9 @@ function mostrarChat(evt){
 	personas.classList.add("invisible");
 	cargarConversacion(this.dataset.id);
 	leerMensajes(this.dataset.id);
-	this.setAttribute('data-leido','si');
-	p=$('.persona[data-id='+this.dataset.id+'] span');
-	p.remove();
 	$('#conversacion').css("display","flex");
+	
+	//obtenerNoLeidosBarra();
 
 }
 
@@ -88,31 +87,7 @@ function regresar(evt){
 	$('#conversacion').css("display","none");
 
 }
-/*
-function procesarConversaciones(event){
-	var respond = event.target.responseText;
-	var conver = JSON.parse(respond);
-	var conversaciones=conver.conversaciones;
-	for(i=0;i<conversaciones.length;i++){
-		persona=conversaciones[i];
-		div=document.createElement("div");
-		div.setAttribute("class","persona");
-		div.setAttribute("data-conversacion",persona.conversacion);
 
-		imagen=document.createElement("img");
-		imagen.setAttribute("src",persona.foto);
-		imagen.setAttribute("class","fotoPerfil")
-		
-		h3=document.createElement("h3");
-		h3.innerHTML=persona.nick;
-		
-		div.appendChild(imagen);
-		div.appendChild(h3);
-		personas.appendChild(div);
-	}
-	$('.persona').click(mostrarChat);
-}
-*/
 function procesarDatosConversacionAjax(event){
 	var respond = event.target.responseText;
 	var c = JSON.parse(respond);
@@ -138,6 +113,7 @@ function procesarDatosConversacionAjax(event){
 	}
 	aux=$('.persona');
 	aux[aux.length-1].addEventListener('click',mostrarChat);
+
 }
 
 /*
@@ -178,14 +154,7 @@ function procesarNoLeidos(event){
 	for(i=0;i<ids.length;i++){
 		p=$('.persona[data-id='+ids[i]+']');
 		console.log(p[0]);
-		if(p[0].dataset.leido=='si'){
-			punto=document.createElement("span");
-			punto.setAttribute('class','punto2');
-			
-			p[0].setAttribute('data-leido','no');
-			p[0].appendChild(punto);
-			//p.css("background","yellow");
-		}
+		socket.emit('SolicitarNoLeidos',{id_receptor:idReceptor,id_emisor:ids[i]});
 	}
 }
 
@@ -196,12 +165,28 @@ function obtenerNoLeidos(){
 	request.addEventListener('load',procesarNoLeidos ,false);
 	request.send(null);
 }
+function eliminarNotificacionPersona(id){
+	console.log(id);
+	$('.persona[data-id='+id+']')[0].setAttribute('data-leido','si');
+	p=$('.persona[data-id='+id+'] span');
+	console.log(p);
+	p.remove();
+}
+
+function actualizarLeidos(event){
+	var respond = event.target.responseText;
+	var j= JSON.parse(respond);
+	eliminarNotificacionPersona(j.id);
+	obtenerNoLeidosBarra();
+
+}
 
 function leerMensajes(id){
 	console.log(id);
 	var request = new XMLHttpRequest();
 	var url="/chat/leermensajes?id="+id;
 	request.open("GET",url,true);
+	request.addEventListener('load',actualizarLeidos ,false);
 	request.send(null);
 }
 
@@ -237,6 +222,7 @@ function procesarDatosConversacion(persona){
 		aux[aux.length-1].addEventListener('click',mostrarChat);
 	}
 	obtenerNoLeidos();
+
 }
 
 function enviarMensaje(){
@@ -247,20 +233,20 @@ function enviarMensaje(){
 		var contenedorMensaje=document.createElement("div");
 		var contenedor=document.createElement("div");
 		var imagen=document.createElement("img");
-		var p1=document.createElement("p");
+		//var p1=document.createElement("p");
 		var p2=document.createElement("p");
 
 		contenedor.setAttribute("class","self");
 		imagen.setAttribute("src",userFoto);
 		imagen.setAttribute("class","fotoPerfil");
-		p1.innerHTML=userNick;
+		//p1.innerHTML=userNick;
 		p2.innerHTML=texto;
 		contenedorMensaje.setAttribute("class","mensaje");
 		contenerPerfil.setAttribute("class","infoPer");
 		contenedor.appendChild(contenedorMensaje);
 		contenedor.appendChild(contenerPerfil);
 		contenerPerfil.appendChild(imagen);
-		contenerPerfil.appendChild(p1);
+		//contenerPerfil.appendChild(p1);
 		contenedorMensaje.appendChild(p2);
 		areaMensajes.appendChild(contenedor);
 		$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
@@ -275,19 +261,19 @@ function agregarMensaje(mensaje){
 	var contenerPerfil=document.createElement("div");
 	var contenedorMensaje=document.createElement("div");
 	imagen=document.createElement("img");
-	var p1=document.createElement("p");
+	//var p1=document.createElement("p");
 	var p2=document.createElement("p");
 	imagen.setAttribute("class","fotoPerfil");
 	contenedorMensaje.setAttribute("class","mensaje");
 	contenerPerfil.setAttribute("class","infoPer");
 	contenedor.setAttribute("class","friend");
 	imagen.setAttribute("src",mensaje.foto);
-	p1.innerHTML=mensaje.nick;
+	//p1.innerHTML=mensaje.nick;
 	contenedor.appendChild(contenerPerfil);
 	contenedor.appendChild(contenedorMensaje);
 	p2.innerHTML=mensaje.contenido;
 	contenerPerfil.appendChild(imagen);
-	contenerPerfil.appendChild(p1);
+	//contenerPerfil.appendChild(p1);
 	contenedorMensaje.appendChild(p2);
 	areaMensajes.appendChild(contenedor);
 	$("#areaMensajes").animate({ scrollTop: areaMensajes.scrollHeight}, 1000);
@@ -333,6 +319,27 @@ function connectSocket(){
    	}
   });
 
+  socket.on('enviarNumeroNoLeido',function(data){
+    console.log(data);
+    p=$('.persona[data-id='+data.id+']');
+    if(p[0].dataset.leido=='no'){
+		$('.persona[data-id='+data.id+'] .numeroNotificacionPersona').remove();
+	}
+	punto=document.createElement("span");
+	punto.setAttribute('class','numeroNotificacionPersona');
+	
+	p[0].setAttribute('data-leido','no');
+	punto.innerHTML=data.num;
+	p[0].appendChild(punto);
+  });
+
+  
+
+}
+
+function focoCajaTexto(){
+	leerMensajes(cabezeraMensaje.dataset.id);
+	//obtenerNoLeidosBarra();
 }
 
 
@@ -342,6 +349,7 @@ function inicializar(){
 	//cargarConversaciones();
 	$('#conversacion').css("display","none");
 	$('#btnEnviar').click(enviarMensaje);
+	txtMensaje.addEventListener('click',focoCajaTexto,false);
 	connectSocket();
 	if(idReceptor!=0){
 		console.log("le enviare mensajes a un man");
