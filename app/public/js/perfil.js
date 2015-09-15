@@ -24,6 +24,7 @@ function editarUsuario(){
  	apellido=inputs[1].value;
  	cedula=inputs[2].value;
  	nickname=inputs[3].value;
+ 
 }
 
 function habilitarEntradas(inputs,color){
@@ -58,7 +59,7 @@ function deshabilitarEntradas(inputs,color){
 	}
 }
 
-function guardarDatos(event){
+function guardarDatosPersona(event){
 	console.log("si me llaman");
 	var val=document.forms["datosPersona"].checkValidity();
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
@@ -228,7 +229,7 @@ function inicio(){
 	obtenerMisRutas();
 	document.getElementById("botonEditarUsuario").addEventListener('click',editarUsuario,false);
 	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
-	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatos,false);
+	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatosPersona,false);
 
 	if($('#botonEditarAuto').length>0){
 		botonEditarAuto.addEventListener('click',editarInfoAuto,false);
