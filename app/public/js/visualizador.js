@@ -2,7 +2,7 @@
 
 //crea un div con las opciones del menu superior del visualizador de ruta
 
-function crearMenuSuperior(RutaInfo, miRuta ){
+function crearMenuSuperior(RutaInfo, miRuta, infoPerfil ){
   var menuSuperior=document.createElement('div');
   menuSuperior.setAttribute('class','VisualizadorRuta-menu u-menu_superior');
   
@@ -12,9 +12,13 @@ function crearMenuSuperior(RutaInfo, miRuta ){
     infoUsuario.setAttribute('class','VisualizadorRuta-opcion u-flex_start');
     //foto del usurio
     var foto=document.createElement('img');
-    foto.setAttribute('class','nickname u-cursor_pointer');
     foto.setAttribute('data-idpublicador',RutaInfo["idPublicador"]);
-    foto.addEventListener('click',obtenerInfoUsuario,false);
+    if(infoPerfil){
+      foto.setAttribute('class','nickname u-cursor_pointer');
+      foto.addEventListener('click',obtenerInfoUsuario,false);
+    }else{
+      foto.setAttribute('class','nickname');
+    }
     foto.setAttribute('src', RutaInfo['urlNickname']);
     //nick name del usuario
     var nickname=document.createElement('span');
@@ -192,7 +196,7 @@ function crearVisualizadorRuta(RutaInfo,appendLast){
   }
   
   //crear menu superior del visualizador: nickname,mensajes
-  var menuSuperior=crearMenuSuperior(RutaInfo,false);
+  var menuSuperior=crearMenuSuperior(RutaInfo,false,true);
   contenedor.appendChild(menuSuperior);
   //crear el mapa en donde se mostrara la ruta, ubicar los puntos de la ruta sobre el mapa
   var contenedorMapa=document.createElement('div');
