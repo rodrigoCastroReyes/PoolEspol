@@ -16,6 +16,7 @@ router.post('/registrar',LoginController.registrar);
 router.get('/noticias',NoticiasController.noticias);
 router.get('/Rutas',NoticiasController.obtenerRutasNoticias);
 router.get('/Aventones', NoticiasController.obtenerAventonesNoticias);
+router.get('/InfoUsuario',NoticiasController.obtenerUsuarioInfo);
 
 router.get('/perfil',PerfilController.perfil);
 router.post('/actualizarperfil',PerfilController.actualizarPerfil);

@@ -1,6 +1,7 @@
 //visualizador.js: contiene todo los necesario para dibujar el visualizador de una ruta y un aventon
 
 //crea un div con las opciones del menu superior del visualizador de ruta
+
 function crearMenuSuperior(RutaInfo, miRuta ){
   var menuSuperior=document.createElement('div');
   menuSuperior.setAttribute('class','VisualizadorRuta-menu u-menu_superior');
@@ -11,7 +12,9 @@ function crearMenuSuperior(RutaInfo, miRuta ){
     infoUsuario.setAttribute('class','VisualizadorRuta-opcion u-flex_start');
     //foto del usurio
     var foto=document.createElement('img');
-    foto.setAttribute('class','nickname u-cursor_pointer');;
+    foto.setAttribute('class','nickname u-cursor_pointer');
+    foto.setAttribute('data-idpublicador',RutaInfo["idPublicador"]);
+    foto.addEventListener('click',obtenerInfoUsuario,false);
     foto.setAttribute('src', RutaInfo['urlNickname']);
     //nick name del usuario
     var nickname=document.createElement('span');

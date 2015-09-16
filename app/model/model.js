@@ -42,7 +42,6 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 		console.log("aqui 1");
 		if(socket!=null){
 			console.log("si entro al if");
-
 			modelos.Usuario.findOne({where:{id:mensaje.id_emisor}}).then(function(user){
 				foto=user.dataValues.foto;
 				nick=user.dataValues.nick;
@@ -199,6 +198,50 @@ exports.encontrarUsuarioPorID = function(id){
 exports.encontrarUsuarioRutaPorId = function (idUsuarioRuta){
 	return modelos.Usuario_Ruta.findById(idUsuarioRuta);
 }
+
+var Sequelize = require('sequelize');
+
+exports.obtenerEstadisticaUsuario = function(idUsuario){
+	return modelos.Usuario.findAll({
+		attributes : ['id', 'nick', 'foto' , [
+			    	Sequelize.fn('count',
+					Sequelize.col('id')), 'total']
+		],
+		include: [{
+			model : modelos.Usuario_Ruta, as : 'Usuario_anade_usuariosRutas',
+			attributes : [],
+			where: {
+				estado : 'Aceptada'
+			},
+			include : [{
+				model : modelos.Ruta, as: 'Ruta_Miembro',
+				attributes : [],
+				where: {
+					idcreador : idUsuario,
+					estado : 'pendiente'
+				}
+			}]
+			}
+		],
+		group : ['id'] ,
+		order : ['total']
+	});
+}
+
+exports.obtenerNotificacionesRechazadas = function(idUsuario){
+	return modelos.Notificacion.count({
+		where : {
+			id_receptor : idUsuario,
+			estado : 'Rechazada' ,
+			tipo : 'Solicitud'
+		},
+		include : [{
+			model : modelos.Usuario, as: 'Receptor_Notificado',
+			id : idUsuario
+		}]
+	});
+}
+
 
 //Consultas Ruta
 
@@ -437,6 +480,15 @@ exports.obtenerAventonesNoticias = function (id_usuario, request, response){
 
 };
 
+exports.obtenerNumRutas = function(idUsuario){
+	return modelos.Ruta.count({
+		include: [{ model: modelos.Usuario, required: true} ],
+		where:{
+			idcreador: idUsuario,
+			estado: {$ne: "Eliminado"}
+		}
+	});
+}
 
 exports.obtenerRutasUsuario = function (idUsuario, request, response ){
 	modelos.Ruta.findAll({

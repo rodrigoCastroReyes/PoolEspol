@@ -17,6 +17,28 @@ exports.noticias=function(request,response){
 	}
 }
 
+exports.obtenerUsuarioInfo = function(request,response){
+	db.obtenerEstadisticaUsuario(request.query.publicador).then(function(result){
+		var data = [];
+		for(var i = 0 ; i<result.length; i++){
+			console.log(result[i].dataValues);
+			data.push(result[i].dataValues);
+		}
+		db.consultarUsuario(request.query.publicador).then(function(result){
+			if(result!=null){
+				var usuario = result.dataValues;
+				db.obtenerNotificacionesRechazadas(request.query.publicador).then(function(count){
+					var notRechazadas = count ;
+					db.obtenerNumRutas(request.query.publicador).then(function(num){
+						response.json({ data : data , usuario : usuario, 
+										numRechazadas : notRechazadas , numRutas : num });
+					})
+				});
+			}
+		});
+	});
+}
+
 exports.obtenerRutasNoticias = function(request, response){
 	db.obtenerRutasNoticias(request.session.user.id, request, response);
 }

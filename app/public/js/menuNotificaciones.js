@@ -1,6 +1,8 @@
 var ban=false;
 var socket;
 
+var newNot = false;
+
 function cargarNotificaciones(){
   window.location.href="/notificaciones"; 
 }
@@ -77,6 +79,9 @@ function crearInfoNotificacion(InfoNot){
 
 	if(InfoNot['tipo']=="Solicitud"){
 		if(InfoNot['estado'] == 'Pendiente'){
+			$("#notificacionesIcono").css("color","#FE1100");
+    		newNot = true;
+			
 			titulo.innerHTML=InfoNot['publicador'] + " ha solicitado unirse a tu ruta";
 			contTitulo.appendChild(titulo);
 
@@ -189,9 +194,14 @@ function iniciar () {
 	socket.on('actualizarNotificacion',function(notificacion){
     	quitarSinNotificaciones();
     	crearNotificacion(notificacion);
+    	$("#notificacionesIcono").css("color","#FE1100");
+    	newNot = true;
  	});
 	
 	$("#notificaciones").click(function () {
+		if(newNot){
+			$("#notificacionesIcono").css("color","white");
+		}
 		if(ban==false){
 			$("#Menu_Notificaciones").show();
 			$("#Notificaciones_Ver_todas").show();

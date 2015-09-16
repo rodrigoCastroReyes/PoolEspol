@@ -62,7 +62,7 @@ function guardarSolicitud(event){
     }
   }
   if(flag){
-    var solicitud = new Solicitud(idRuta, usuario.id, infoRuta.idPublicador,
+    var solicitud = new Solicitud(idRuta, usuario.id, infoRuta.idPublicador.toString(),
                                   puntoSolicitud.position.lat(), puntoSolicitud.position.lng());
     //se crea una nueva solicitud para la ruta actual
     usuario.agregarSolicitud(solicitud);//se registra la solicitud del usuario

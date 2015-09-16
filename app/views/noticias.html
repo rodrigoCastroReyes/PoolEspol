@@ -8,11 +8,15 @@
 	<link rel = "stylesheet" type="text/css" href = "css/cuadroPublicador.css"/>
 	<link rel = "stylesheet" type="text/css" href = "css/pasajeros.css"/>
 	<script src = "js/jquery-1.11.3.min.js"></script>
+	<script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+  	<script src="http://www.amcharts.com/lib/3/serial.js"></script>
+  	<script src="http://www.amcharts.com/lib/3/themes/light.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=geometry"></script>
 	<script src="../socket.io/socket.io.js"></script>
 	<script src = "js/poolEspol.js"> </script>
 	<script src = "js/visualizador.js"> </script>
 	<script src = "js/noticias.js"> </script>
+	<script src = "js/estadisticas.js"></script>
 	<script src = "js/solicitud.js"> </script>
 	<script src = "js/pasajeros.js"> </script>
 	<script src = "js/publicador.js"> </script>
@@ -47,6 +51,30 @@
 	{% include './pasajeros.html' %}
 	
 	<div id="contenedor_rutas">
+	</div>
+
+	<div id="infoUsuario" class="informacionUsuario">
+		<input id="infoUsuarioClose" class = "IngresoAventon-cerrar" value = "X" type = "button" onclick="cerrarEstadisticas();" />
+		<div class = "informacionUsuario-perfil">
+			<label id = "informacionUsuario-nickname"></label>
+			<img id= "informacionUsuario-foto">
+			<label id = "informacionUsuario-nombres"></label>
+		</div>	
+		<span id="informacionUsuario-vacio"> No tiene informaci&oacute;n adicional</span>
+		<div class="informacionUsuario-estadistica">
+			<div class="estadistica-histograma">
+				<h1 class="histograma-titulo">Pasajeros mas llevados</h1>
+				<div id = "histograma" class="infoUsuario-Histograma">
+				</div>
+			</div>
+			<div class="estadistica-rutas">
+				<h1 class="histograma-titulo">Informaci&oacute;n de Rutas</h1>
+				<span id="estadisticaTotal" class= "rutas-titulo"></span>
+				<span id="estadisticaRutas" class= "rutas-titulo"></span>
+				<span id="estadisticaProbabilidad" class= "rutas-titulo"></span>
+				<span id="estadisticaProbabilidadDos" class= "rutas-titulo"></span>
+			</div>
+		</div>
 	</div>
 	<div id="loader-icon"><img src="imagenes/loader.svg" /><div>
 {% endblock %}

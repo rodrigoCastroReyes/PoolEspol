@@ -11,6 +11,109 @@ html,body{
 	background-color: #e2e4e6;
 }
 
+.informacionUsuario{
+	border: 5px solid #0080FB;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 20px;
+	background-color: white;
+	z-index: 10;
+    border-radius: 12px;
+    height: 425px;
+    left: 50%;
+    opacity:0;
+    position: fixed;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    transition: all 400ms ease-in;
+    visibility: hidden;
+    width: 650px;
+}
+
+.informacionUsuario-perfil{
+	display: flex;
+    flex-direction:column;
+    background-color: white;
+    align-items:center;
+    z-index: 100;
+    position: relative;
+    border-bottom: #e2e4e6 solid 3px;
+    margin: 5px 0px;
+}
+
+#informacionUsuario-nombres{
+	font-size: 24px;
+	font-family: opcionUno;
+	padding-bottom: 10px;
+}
+
+#informacionUsuario-foto{
+	border-radius: 30px;
+	margin: 2px 2px;
+	width: 60px;
+	height: 60px;
+	border: #0080FB solid 3px;
+}
+
+.informacionUsuario-estadistica{
+	display: flex;
+    flex-direction: row;
+    background-color: white;
+    z-index: 100;
+    position: relative;
+    height: 65%;
+    width: 100%;
+    margin: 5px 0px;
+}
+
+.infoUsuario-Histograma{
+	width : 90%;
+    height : 250px;
+    font-size : 18px;
+}
+
+#informacionUsuario-vacio{
+	display: none;
+}
+
+.estadistica-histograma{
+	display: flex;
+	flex-direction:column;
+	align-items:center;
+	width: 100%;
+	height: 100%;
+}
+
+.estadistica-rutas{
+	display: flex;
+	flex-direction:column;
+	align-items:center;
+	width: 100%;
+	height: 100%;
+}
+
+.estadistica-resultado{
+	color: black;
+	font-family: opcionUno;
+	font-size: 19px;
+}
+
+#informacionUsuario-nickname,.histograma-titulo,.perfil-titulo,.rutas-titulo{
+	color: #0080FB;
+	font-family: opcionUno;
+	font-size: 26px;
+	padding: 5px 5px;
+}
+
+.rutas-titulo{
+	color: #0080FB;
+	font-family: opcionUno;
+	font-size: 20px;
+	padding: 5px 5px;
+}
+
+
 #errorRuta-Ok{
 	cursor: pointer;
 }
