@@ -325,4 +325,11 @@ p.text {
 		margin-left: 0%;
 	}
 
+	.numeroNotificacionPersona{
+		border: 5px;
+		background: red;
+		padding: 5px;
+		color: white;
+	}
+
 }

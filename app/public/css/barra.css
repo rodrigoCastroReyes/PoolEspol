@@ -100,7 +100,7 @@
 }
 
 .numeroNotificacion{
-|	border: 5px;
+	border: 5px;
 	background: red;
 	padding: 5px;
 	color: white;
@@ -201,5 +201,14 @@
 	}
 	#menu_salir{
 		  left: 10%	;
+	}
+	.numeroNotificacion{
+		border: 5px;
+		background: red;
+		padding: 5px;
+		color: white;
+		position: fixed;
+	  	left: 54%;
+	  	top: 3px;
 	}
 }

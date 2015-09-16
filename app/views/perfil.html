@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="css/perfil.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel = "stylesheet" type="text/css" href = "css/cuadroPublicador.css"/>
+	<link rel = "stylesheet" type="text/css" href = "css/pasajerosMapa.css"/>
 	<script src = "js/jquery-1.11.3.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<script src="../socket.io/socket.io.js"></script>
@@ -14,7 +15,6 @@
 	<script src = "js/pasajeros.js" type="text/javascript"></script>
 	<script src = "js/visualizador.js" type="text/javascript"></script>
 	<script src="js/perfil.js" type="text/javascript"></script>
-	<script src = "js/pasajeros.js"> </script>
 	<script src = "js/publicador.js"> </script>
 	<script src = "js/menuNotificaciones.js"> </script>
 	<script>
@@ -106,6 +106,15 @@
 	   	</div>
 		<div id="infoRutas">
 			{% include './cuadro_publicador.html' %}
+
+			<div id =  "pantallaPasajerosMapa" >
+				<div id = "contenedorPasajerosMapa">
+					<input id="closePasajerosMapa" value="X" type="button" class="pasajeros-cerrarMapa">
+					<div id = "tituloPasajerosMapa">Pasajeros de la ruta</div>
+					<div id = "mapaPasajeros"></div>
+				</div>
+			</div>
+
 			<h1 id="tituloRutas">Mis Rutas</h1>	
 			<div id="contenedor_rutas">
 			</div>

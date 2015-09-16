@@ -201,6 +201,7 @@ function procesarMisRutas(event){
   var rutasInfo=respond.rutas;
   for(var i=0;i<rutasInfo.length;i++){
     visualizarMiRuta(rutasInfo[i]);
+    usuario.agregarInfoRuta(rutasInfo[i]);
   }
 }
 
