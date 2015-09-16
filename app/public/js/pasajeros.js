@@ -13,7 +13,7 @@ function mostrarPasajerosEnMapa(){
   request.open("GET","/pasajeros?id="+id_ruta ,true);
   request.addEventListener('load',function(event){
     var respond = JSON.parse(event.target.responseText);
-    var ruta = usr.consultarRuta(id_ruta);
+    var ruta = usuario.consultarRuta(id_ruta);
     procesarPasajerosMapa(ruta, respond);
 
   } ,false);
