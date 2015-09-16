@@ -1,6 +1,8 @@
 //visualizador.js: contiene todo los necesario para dibujar el visualizador de una ruta y un aventon
 
 //crea un div con las opciones del menu superior del visualizador de ruta
+var IDruta = -1;
+
 
 function errorFound(error){
   alert("Error has ocurred" + error.code);/* 0: Error desconocido 1: Permiso denegado  2: Posicion no esta disponible  3: Timeout */
@@ -301,9 +303,15 @@ function clickMensaje(event){
 
 
 /*Eliminar Ruta*/
+
 function clickEliminar(event){
-  var IDruta = this.dataset.idruta;
+  IDruta = this.dataset.idruta;
   console.log("Eliminado", this.dataset.idruta);
+  abrir_eliminar();
+
+}
+
+function EliminarRuta(event){
   
   var request = new XMLHttpRequest();
   request.open("GET","/pasajeros?id="+IDruta ,true);
@@ -320,6 +328,9 @@ function clickEliminar(event){
   } ,false);
   request.send(null);
 
+  cancelar_eliminar();
+
+
 }
 
 function quitarVisualizador(idruta){
@@ -328,12 +339,46 @@ function quitarVisualizador(idruta){
   delete element;
 }
 
+function abrir_eliminar(){
+  
+  var menuE = document.getElementById("menu_eliminar");
+  if(menuE== null){
+    return;
+  }
+  menuE.style.display="flex";
+  
+  var perfil=document.getElementById("contenedor_perfil")
+  
+}
+
+function cancelar_eliminar(){
+  var menuE = document.getElementById("menu_eliminar");
+  if(menuE== null){
+    return;
+  }
+
+  menuE.style.display="none";
+
+}
+
+
 /*Eliminar Ruta*/
 
 function inicializar(event){
   socket.on('EliminarRutaPerfil',function(idruta){
     quitarVisualizador(idruta);
   });
+
+  var btnCancelarEliminar = document.getElementById("cancelar_eliminar");
+  if(btnCancelarEliminar != null){
+    btnCancelarEliminar.addEventListener('click', cancelar_eliminar);
+  }
+
+  var btnAceptarEliminar = document.getElementById("aceptar_eliminar");
+  if(btnAceptarEliminar != null){
+    btnAceptarEliminar.addEventListener('click', EliminarRuta);
+  }
+
 }
 
 window.addEventListener('load',inicializar,false);

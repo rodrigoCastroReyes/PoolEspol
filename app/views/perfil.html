@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel = "stylesheet" type="text/css" href = "css/cuadroPublicador.css"/>
 	<link rel = "stylesheet" type="text/css" href = "css/pasajerosMapa.css"/>
+	<link rel = "stylesheet" type="text/css" href = "css/menu_eliminar.css"/>
 	<script src = "js/jquery-1.11.3.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<script src="../socket.io/socket.io.js"></script>
@@ -106,7 +107,7 @@
 	   	</div>
 		<div id="infoRutas">
 			{% include './cuadro_publicador.html' %}
-
+			{% include './menu_eliminar.html' %}
 			<div id =  "pantallaPasajerosMapa" >
 				<div id = "contenedorPasajerosMapa">
 					<input id="closePasajerosMapa" value="X" type="button" class="pasajeros-cerrarMapa">
