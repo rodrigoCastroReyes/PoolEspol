@@ -265,5 +265,18 @@ html,body{
 		display: flex;
 		width: 100%; 
 	}
+	.informacionUsuario{
+		height: 65%;
+		width: 80%;
+	}
+	.informacionUsuario-estadistica {
+		height: 55%;
+	}
+	.estadistica-rutas {
+		align-items: inherit;
+	}
+	#informacionUsuario-nickname, .histograma-titulo, .perfil-titulo, .rutas-titulo {
+		font-size: 16px;
+	}
 }
 #loader-icon {position: fixed;top: 50%;width:100%;height:100%;text-align:center}
