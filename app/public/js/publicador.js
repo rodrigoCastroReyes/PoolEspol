@@ -70,7 +70,7 @@ function crearRuta(event){
   end=null;
   waypoints=[];
   //css
-  $("#contenedor_rutas").css('opacity','0.5');
+  $("#contenedorPasajerosMapa").css('opacity','0.5');
   $("#Pantalla_Ruta").css('visibility','visible');
   $("#Pantalla_Ruta").css('opacity','1');
 
@@ -228,7 +228,7 @@ function guardarAventon(){
   var valid=document.forms["formAventon"].checkValidity();
   if(valid){
 
-  	infoAventon.idPublicador=usuario.id;
+    infoAventon.idPublicador=usuario.id;
     infoAventon.publicador=usuario.nickname;
     infoAventon.urlNickname=usuario.foto;
     infoAventon.fecha=Fecha_Aventon.value;

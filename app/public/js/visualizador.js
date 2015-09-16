@@ -98,8 +98,13 @@ function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
     var iconoRuta=document.createElement('span');
     iconoRuta.setAttribute('class','icon-user VisualizadorRuta-info u-cursor_pointer');
     iconoRuta.setAttribute('data-idruta',RutaInfo["idRuta"]);
-    iconoRuta.addEventListener('click',mostrarPasajeros,false);
 
+    if(!miRuta){
+      iconoRuta.addEventListener('click',mostrarPasajeros,false);
+    }
+    else{
+      iconoRuta.addEventListener('click',mostrarPasajerosEnMapa,false);
+    }
     //capacidad de la ruta
     var capacidad=document.createElement('span');
     capacidad.setAttribute('class','VisualizadorRuta-info');
