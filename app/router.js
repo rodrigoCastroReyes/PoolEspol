@@ -4,7 +4,7 @@ var PerfilController = require('./controller/PerfilController');
 var MensajesController = require('./controller/MensajesController');
 var NotificacionesController = require('./controller/NotificacionesController');
 var LogoutController = require('./controller/LogoutController');
-
+var PaginaDesarrolladores = require('./controller/PaginaDesarrolladores');
 var express=require('express');
 var router=express.Router();
 
@@ -38,5 +38,6 @@ router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificacion
 router.get('/pasajeros',NoticiasController.obtenerPasajeros);
 
 router.get('/eliminarRuta', PerfilController.eliminarRuta);
+router.get('/desarrolladores',PaginaDesarrolladores.index);
 
 module.exports = router;

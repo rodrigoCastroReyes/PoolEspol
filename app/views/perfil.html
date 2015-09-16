@@ -11,6 +11,7 @@
 	<script src="../socket.io/socket.io.js"></script>
 	<script src = "js/barra.js"> </script>
 	<script src= "js/poolEspol.js" type="text/javascript"></script>
+	<script src = "js/pasajeros.js" type="text/javascript"></script>
 	<script src = "js/visualizador.js" type="text/javascript"></script>
 	<script src="js/perfil.js" type="text/javascript"></script>
 	<script src = "js/pasajeros.js"> </script>
@@ -55,10 +56,10 @@
 						</div>
 						<div class="tabla_item columna_flexible flex_align_items_center">
 							<form id="datosPersona" class="columna_flexible" accept-charset="utf-8" action="/editarUsuario" method="post">
-								<input class="input_text" name="nombre" type="text" value={{nombre}} disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos" />
-								<input class="input_text" name="apellidos" type="text"  value={{apellido}} disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos"/>
-								<input class="input_text" name="telefono" type="text"   value={{celular}} max="11" required disabled=true pattern="[0-9]{10}" title="Datos solamente numerico" />
-								<input class="input_text" name="nickname" type="text" value={{nickname}}  disabled=true
+								<input class="input_text" name="nombre" type="text" value="{{nombre}}" disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos" />
+								<input class="input_text" name="apellidos" type="text"  value="{{apellido}}" disabled=true required pattern="[a-zA-Z\s]{4,}" title="Datos alfabeticos"/>
+								<input class="input_text" name="telefono" type="text"   value="{{celular}}" max="11" required disabled=true pattern="[0-9]{10}" title="Datos solamente numerico" />
+								<input class="input_text" name="nickname" type="text" value="{{nickname}}"  disabled=true
 								pattern="[a-z]{6,15}" 
 								required/>
 							</form>

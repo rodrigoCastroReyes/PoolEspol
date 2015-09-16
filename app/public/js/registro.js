@@ -55,12 +55,6 @@ function opcionesFemenino(){
 }
 
 function procesarInformacionUsuario(event){
-	//json = {nombre,apellido,nick,sexo}
-	//var respond = event.target.responseText;
-	//var json = JSON.parse(respond);
-	//nombre.value=json.nombre;
-	//apellido.value=json.apellido;
-	//nickname.value=nick;
 	var respond = event.target.responseText;
 	var json = JSON.parse(respond);
 	if(json.error==null){
@@ -77,6 +71,12 @@ function procesarInformacionUsuario(event){
 		}
 		siCarro.disabled=false;
 		noCarro.disabled=false;
+		foto.disabled=false;
+		var inputs=document.querySelectorAll("#registrar input");//se cambia de color los inputs
+		for(var i=0; i<inputs.length;i++){
+			inputs[i].style.background="white";
+			inputs[i].disabled=false;
+		}
 	}else{
 		alert(json.error);
 	}
@@ -87,17 +87,6 @@ function autenticar(){
 	if(valid){
 		//si se ingresa de forma correcta el nombre y la contraseña se puede ingresar la info de registro
 		//se habilita los campos de nombre apellido y sexo con su valores fijos
-		/*
-		var campos_registro=document.getElementById("registrar").getElementsByTagName("input");
-		var campo;
-		for(var i=0 ; i < campos_registro.length; i++){
-			campo=campos_registro[i];
-			campo.disabled=false;
-			if(campo.name=="nickname"){
-				campo.value=document.getElementById("usuario").value;
-			}
-		}
-		*/
 		telefono.disabled=false;
 		document.getElementById("botonRegistro").disabled=false;//se habilita el boton de registro
 		var inputs=document.querySelectorAll("#autenticacion input");//se cambia de color los inputs

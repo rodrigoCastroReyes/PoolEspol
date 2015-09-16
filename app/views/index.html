@@ -99,11 +99,11 @@
 						<div class="tabla_item columna_flexible_start flex_start">
 							<form id="registrar" name="registrar">
 								<input class="entrada_texto" name="nombre" id="nombre" type="text" required
-								disabled 
+								disabled pattern="[a-zA-Z]{15,30}"
 								>
 								<input class="entrada_texto" name="apellido" id="apellido" type="text"required
-								disabled>
-								<input class="entrada_texto" name="nickname" id="nickname" type="text"required	
+								disabled pattern="[a-zA-Z]{15,30}">
+								<input class="entrada_texto" name="nickname" id="nickname" type="text" required	
 								disabled
 								type="text" pattern="[a-z]{6,15}">
 								<input class="entrada_texto" name="telefono" id="telefono" type="tel"
@@ -151,7 +151,7 @@
 			</div>
 		</div>
 		<footer class="Footer">
-			<a href="desarrolladores.html"> Desarrolladores </a> 
+			<a href="/desarrolladores"> Desarrolladores </a> 
 		</footer>
 	</body>
 </html>

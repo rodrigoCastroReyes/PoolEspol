@@ -3,6 +3,7 @@ var db = require('../model/model.js');
 var soap = require('soap');
 var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
 
+
 exports.index = function(request, response){
 	if(request.session.user){
 		
@@ -20,7 +21,9 @@ exports.login=function(request,response){
 	   	client.autenticacion(args, function(err, result){
 	   		resp = result.autenticacionResult;
 	   		console.log(resp);
-			if (resp  || 1 == 1 ){
+
+			if (true || resp ){
+
 				db.encontrarUsuario(request.body.usuario).then(function (user){
 				if(!user){
 					console.log('Ud no se encuentra registrado'); //si no esta registrado lo redirecciona a index.html
@@ -53,7 +56,7 @@ exports.autenticar=function(request,response){
 	   	client.autenticacion(args, function(err, result){
 	   		resp = result.autenticacionResult;
 	   		console.log(resp);
-			if (resp){
+			if (resp ){
 				db.encontrarUsuario(request.body.usuario).then(function (user){
 					console.log('user: '+user);
 					if(user!=null){
@@ -89,6 +92,11 @@ exports.autenticar=function(request,response){
 exports.registrar= function(request,response){
 	console.log("te vas a registar");
 	console.log(request.body);
+	if(request.body.sexo=='masculino'){
+		foto='imagenes/perfilHombre.jpg';
+	}else{
+		foto='imagenes/perfilMujer.jpg';
+	}
 	if(request.body.carro){
 		console.log("tienes carro");
 		var datos = {nick: request.body.nickname, 
@@ -98,7 +106,7 @@ exports.registrar= function(request,response){
 			sexo: request.body.sexo, 
 			telefono: request.body.telefono, 
 			id_carro: request.body.placa, 
-			foto: 'asasasasasasa'
+			foto: foto
 		};
 		//db.guardarUsuario(datos);
 		var datos_carro = {placa: request.body.placa, 
@@ -109,7 +117,14 @@ exports.registrar= function(request,response){
 		db.guardarUsuarioConCarro(datos,datos_carro,response);
 	}else{
 		console.log("no tienes carro");
-		var datos = {nick: request.body.nickname, password: 'asasasasasasa', nombre: request.body.nombre, apellidos: request.body.apellido, sexo: request.body.sexo, telefono: request.body.telefono, id_carro: null, foto: 'asasasasasasa'};
+		var datos = {nick: request.body.nickname, 
+			password: 'asasasasasasa', 
+			nombre: request.body.nombre, 
+			apellidos: request.body.apellido, 
+			sexo: request.body.sexo, 
+			telefono: request.body.telefono, 
+			id_carro: null, 
+			foto: foto};
 		db.guardarUsuario(datos,response);
 	}
 	//console.log('Registrado Correctamente');

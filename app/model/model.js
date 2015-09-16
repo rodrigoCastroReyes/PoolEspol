@@ -26,6 +26,7 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 	.then(function (usuario){
 		//console.log(usuario);
 		response.json({mensaje:'Se ha Registrado con Exito'});	
+		//response.redirect('/');
 	});
 };
 
@@ -54,7 +55,37 @@ FUNCIONES PARA   INSERTAR DATOS EN LA BASE DE DATOS
 
 				};
 				socket.emit("enviarCliente",datos);
-				socket.emit("nuevoMensaje");
+				modelos.Mensaje.findAll({
+					where:{$or:{id_receptor:datosUsuario.id_receptor}}
+				}).then(function(result){
+					 var lista=[];
+					 var usuarios=[];
+					 for(var i =0 ; i< result.length; i++){
+					 	//obtenego el id de la persona con la que tengo la conversacion
+					 	var auxid;
+					 	auxid=result[i].dataValues.id_emisor;
+					 	if(result[i].dataValues.leido){
+					 		continue;
+					 	}
+					 	ban=1;
+					 	for(var j=0;j<lista.length;j++){
+					 		if(lista[j]==auxid ){
+					 			ban=0;
+					 			break;
+					 		}
+					 	}
+					 	//console.log(result[i].dataValues);
+					 	if(ban==1 && auxid!=null){
+					 		lista.push(auxid);
+					 	}
+					 	
+					 }
+					 socket.emit("nuevoMensaje",lista.length);
+					 console.log(lista.length);
+					 obtenerNumeroMensajesNoLeidosNoExport(datosUsuario.id_receptor,datosUsuario.id_emisor,socket);
+				});
+
+				
 
 			});
 		}
@@ -582,6 +613,18 @@ exports.obtenerConversacionesPendientes = function(id,response){
 	});
 }
 
+exports.obtenerNumeroMensajesNoLeidos = function(id_receptor,id_emisor,io){
+	obtenerNumeroMensajesNoLeidosNoExport(id_receptor,id_emisor,io);
+}
+
+obtenerNumeroMensajesNoLeidosNoExport= function(id_receptor,id_emisor,io){
+	modelos.Mensaje.findAll({
+		where:{$or:{id_receptor:id_receptor,id_emisor:id_emisor},leido:false}
+	}).then(function(result){
+		io.emit('enviarNumeroNoLeido',{id:id_emisor,num:result.length});
+	});
+}
+
 exports.obtenerConversacion = function(id_emisor,id_receptor,response){
 	//response.json({idEmisor:id_emisor,idReceptor:id_receptor});
 	var json={
@@ -756,13 +799,13 @@ exports.obtenerPasajerosRuta  = function(request, response){
 			listPasajeros.push(pasajero);
 		}
 		var j = {pasajeros: listPasajeros };
-		console.log(j);
 		response.json(j);
 
 	});
 
 
 }
+
 
 exports.guardarUsuarioConCarro=function(datosUsuario,datosCarro,response){
 	modelos.Carro.create({placa: datosCarro.placa, 
@@ -780,7 +823,45 @@ exports.guardarUsuarioConCarro=function(datosUsuario,datosCarro,response){
 							foto: datosUsuario.foto })
 		.then(function (usuario){
 			response.json({mensaje:'Se ha Registrado con Exito'});	
+			//response.redirect('/');
 		});
 	});
+
+}
+
+
+exports.actualizarEstadoUsuarioRuta = function(idRuta, idPasajeros, std){
+
+	return modelos.Usuario_Ruta.update({ 
+			 
+			  estado: std
+			},
+			{ where: {
+				id_ruta: idRuta,
+
+				id_usuario: {in: idPasajeros}
+			}
+
+			}
+
+			);
+
+
+}
+
+
+exports.consultarUsuarioRutaPorIDruta = function(idruta){
+	return modelos.Usuario_Ruta.findAll({
+		where:{
+			id_ruta: idruta,
+		}
+		
+	});
+
+}
+
+
+exports.guadarNotificaciones = function(listNotificaciones){
+	return modelos.Notificacion.bulkCreate(listNotificaciones);
 
 }

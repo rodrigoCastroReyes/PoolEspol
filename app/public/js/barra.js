@@ -80,12 +80,42 @@ function botonesOff(){
 function connectSocketBarra(){
   socket = io.connect();
  
-  socket.on('nuevoMensaje',function(){
- 		$('#menuMensaje').css("background","red");
+  socket.on('nuevoMensaje',function(n){
+ 		var s=document.createElement("span");
+ 		s.innerHTML=n;
+ 		$('.numeroNotificacion').remove()
+ 		s.setAttribute("class","numeroNotificacion");
+ 		menuMensaje.appendChild(s);
   });
 
  
 
+}
+
+function procesarNoLeidosBarra (event){
+	var respond = event.target.responseText;
+	var j= JSON.parse(respond);
+	console.log(j);
+	n=j.ids.length;
+	if(n>0){
+		var s=document.createElement("span");
+		s.innerHTML=n;
+		$('.numeroNotificacion').remove();
+		s.setAttribute("class","numeroNotificacion");
+		menuMensaje.appendChild(s);
+	}else{
+		$('.numeroNotificacion').remove();
+	}
+
+}
+
+
+function obtenerNoLeidosBarra(){
+	var request = new XMLHttpRequest();
+	var url="/chat/nolidos";
+	request.open("GET",url,true);
+	request.addEventListener('load',procesarNoLeidosBarra ,false);
+	request.send(null);
 }
 
 
@@ -93,6 +123,7 @@ function init(){
 	aceptar_cierre.addEventListener('click',aceptarCierre,false);
 	cancelar_cierre.addEventListener('click',cancelarCierre,false);
 	connectSocketBarra();
+	obtenerNoLeidosBarra();
 }
 
 window.addEventListener('load',init,false);

@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/cerrarSesion.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/cerrarSesion.css">
 	<script type="text/javascript">
 		function volverInicio(){
 			window.location.href="/"; 
@@ -17,13 +17,14 @@
 	<div id="contenedor_inicio">
 		<div>
 			<figure class="logo" onclick="volverInicio();">
-				<img height="200" width="200" src="imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
+				<img height="200" width="200" src="../imagenes/LogoPoolEspol.png" figcaption="Logo de la Aplicacion">
 			</figure>
 		</div>
 		<div>
 			<section>
 				<article>
-					<p id="leyenda">Gracias por visitarnos</p>						
+				<p id="leyenda" align="center">Error 500</p>
+					<p id="leyenda">{{Mensaje}}</p>						
 				</article>
 			</section>
 		</div>

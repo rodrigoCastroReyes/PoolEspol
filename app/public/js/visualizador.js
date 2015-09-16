@@ -234,22 +234,41 @@ function clickMensaje(event){
 }
 /*Ir a conversacion*/
 
+
 /*Eliminar Ruta*/
 function clickEliminar(event){
   var IDruta = this.dataset.idruta;
   console.log("Eliminado", this.dataset.idruta);
+  
   var request = new XMLHttpRequest();
-  request.open("GET","/eliminarRuta?id="+IDruta ,true);
-  request.addEventListener('load', quitarVisualizador ,false);
+  request.open("GET","/pasajeros?id="+IDruta ,true);
+  request.addEventListener('load', function(event){
+          var respond = JSON.parse(event.target.responseText);
+          var psjr = respond.pasajeros;
+          var idpasajeros = [];
+          for (var i =0; i< psjr.length; i++){
+            console.log(psjr[i].id_usuario);
+            idpasajeros.push(psjr[i].id_usuario);
+          }
+          socket.emit("EliminarRuta", IDruta, idpasajeros);
+
+  } ,false);
   request.send(null);
+
 }
 
-function quitarVisualizador(event){
-  console.log("eliminado");
-  var respond = JSON.parse(event.target.responseText);
-  var idContenedor=respond.idruta;
-  var element = document.getElementById(idContenedor);
+function quitarVisualizador(idruta){
+  var element = document.getElementById(idruta);
   element.outerHTML = "";
   delete element;
 }
+
 /*Eliminar Ruta*/
+
+function inicializar(event){
+  socket.on('EliminarRutaPerfil',function(idruta){
+    quitarVisualizador(idruta);
+  });
+}
+
+window.addEventListener('load',inicializar,false);

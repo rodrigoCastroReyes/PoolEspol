@@ -44,6 +44,15 @@ app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/app/views');
 app.use('/',routes);
+app.use(function (req,res,next){
+	res.status(404);
+	res.render('Pagina404',{Mensaje:"El recurso que intenta acceder no se encuentra disponible"});
+});
+
+app.use(function (req,res,next){
+	res.status(500);
+	res.render('Pagina500',{Mensaje:"A ocurrido un error interno, se debio cerrar la pagina"});
+});
 
 http.listen(app.get('port'),function(){
     console.log("Pool Espol Aplication running in a port " + app.get('port'));
