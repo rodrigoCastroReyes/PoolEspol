@@ -619,7 +619,7 @@ exports.obtenerNumeroMensajesNoLeidos = function(id_receptor,id_emisor,io){
 
 obtenerNumeroMensajesNoLeidosNoExport= function(id_receptor,id_emisor,io){
 	modelos.Mensaje.findAll({
-		where:{$or:{id_receptor:id_receptor,id_emisor:id_emisor},leido:false}
+		where:{id_receptor:id_receptor,id_emisor:id_emisor,leido:false}
 	}).then(function(result){
 		io.emit('enviarNumeroNoLeido',{id:id_emisor,num:result.length});
 	});

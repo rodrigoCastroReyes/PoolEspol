@@ -23,7 +23,8 @@ exports.enviarConversacion=function(request,response){
 		console.log("receptor: "+idReceptor);
 		db.obtenerConversacion(request.session.user.id,parseInt(idReceptor),response);
 	}else{
-		response.sendfile(html_dir + 'index.html');
+		//response.sendfile(html_dir + 'index.html');
+		response.json({error:'sesion caducada'});
 	}
 };
 
@@ -50,7 +51,7 @@ exports.obtenerPersona=function(request,response){
 		idPersona=request.query.id;
 		db.obtenerPersona(idPersona,request.session.user.id,response);
 	}else{
-		response.sendfile(html_dir + 'index.html');
+		response.json({error:'sesion caducada'});
 	}
 	
 };
@@ -62,7 +63,7 @@ exports.obtenerNoLeidos=function(request,response){
 		id=request.session.user.id,
 		db.obtenerConversacionesPendientes(request.session.user.id,response);
 	}else{
-		response.sendfile(html_dir + 'index.html');
+		response.json({error:'sesion caducada'});
 	}
 	
 };
@@ -75,7 +76,7 @@ exports.leerMensajes=function(request,response){
 		db.leerMensajes(id,request.session.user.id);
 		response.json({id:id});
 	}else{
-		response.sendfile(html_dir + 'index.html');
+		response.json({error:'sesion caducada'});
 	}
 	
 };
