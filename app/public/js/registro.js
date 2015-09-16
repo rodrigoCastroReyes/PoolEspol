@@ -77,8 +77,11 @@ function procesarInformacionUsuario(event){
 			inputs[i].style.background="white";
 			inputs[i].disabled=false;
 		}
+
 	}else{
 		alert(json.error);
+		volverInicio();
+
 	}
 }
 
@@ -116,11 +119,13 @@ function autenticar(){
 function respuestaRegistro(event){
 	var respond = event.target.responseText;
 	var json = JSON.parse(respond);
+
 	alert(json.mensaje);
 
 }
 
 function registrar(){
+
 	var valid=document.registrar.checkValidity();
 	if(valid){
 		var inputs=document.querySelectorAll("#registrar input");//se cambia de color los inputs
@@ -128,6 +133,7 @@ function registrar(){
 			inputs[i].style.background="white";
 		}
 		//document.registrar.submit();
+		
 		var request = new XMLHttpRequest();
 		var url="/registrar";
 		request.open("POST",url,true);
@@ -161,7 +167,9 @@ function registrar(){
 			campo.disabled=true;
 		}
 		console.log(json);
+		
 		request.send(JSON.stringify(json));
+		
 
 	}else{
 		var inputs=document.querySelectorAll("#registrar input");
