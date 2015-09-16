@@ -244,6 +244,11 @@ span,form{
 }
 
 @media screen and (max-width: 400px){
+
+	.AgregarARuta{
+		height: 50%;
+   		width: 85%;	
+	}
 	
 	.IngresoAventon-Titulo, .IngresoRuta-Titulo{
 		width: 100%;
