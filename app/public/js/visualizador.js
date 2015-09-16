@@ -2,6 +2,62 @@
 
 //crea un div con las opciones del menu superior del visualizador de ruta
 
+function errorFound(error){
+  alert("Error has ocurred" + error.code);/* 0: Error desconocido 1: Permiso denegado  2: Posicion no esta disponible  3: Timeout */
+}
+
+function cerrarInfoAventon(){
+  $("#contenedor_rutas").css('opacity','1');
+  $("#infoAventon").css('visibility','hidden');
+  $("#infoAventon").css('opacity','0');
+}
+
+function obtenerInfoAventon(event){
+  var idAventon = this.getAttribute('data-idAventon');
+  var lat = this.getAttribute('data-Lat');
+  var lon = this.getAttribute('data-Long');
+  var aventon = new punto(lat,lon);
+  console.log(aventon);
+  //Geolocalizacion
+  var posicionActual={};
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(
+      function(position){
+        posicionActual=new punto(position.coords.latitude.toString(),position.coords.longitude.toString());
+        console.log(posicionActual);
+
+        $("#contenedor_rutas").css('opacity','0.5');
+        $("#infoAventon").css('visibility','visible');
+        $("#infoAventon").css('opacity','1');
+
+        var from = new google.maps.LatLng(parseFloat(aventon.x),parseFloat(aventon.y));
+        var to =  new google.maps.LatLng(parseFloat(posicionActual.x),parseFloat(posicionActual.y));
+        var dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
+        console.log(dist);
+
+        var RutaInfo = {};
+        RutaInfo.ruta = [];
+        RutaInfo.ruta.push(posicionActual);
+        RutaInfo.ruta.push(aventon);
+
+        var contDistancia = document.getElementById("infoAventon-distancia");
+        $("#contDistancia").empty();
+        contDistancia.setAttribute("class","rutas-titulo");
+        contDistancia.innerHTML = "Distancia en km : ";
+        var span = document.createElement('span');
+        span.setAttribute('class','estadistica-resultado');
+        span.innerHTML =  parseFloat(dist/100).toFixed(2);
+        contDistancia.appendChild(span);
+
+        var contenedorMapa = document.getElementById("mapaInfoAventon");
+        crearMapa(RutaInfo,contenedorMapa);
+      },
+    errorFound);//se obtiene las posiciones actuales  
+  }else{
+    alert("Actualiza el navegador");
+  }
+}
+
 function crearMenuSuperior(RutaInfo, miRuta, infoPerfil ){
   var menuSuperior=document.createElement('div');
   menuSuperior.setAttribute('class','VisualizadorRuta-menu u-menu_superior');
@@ -13,12 +69,16 @@ function crearMenuSuperior(RutaInfo, miRuta, infoPerfil ){
     //foto del usurio
     var foto=document.createElement('img');
     foto.setAttribute('data-idpublicador',RutaInfo["idPublicador"]);
+    foto.setAttribute('class','nickname u-cursor_pointer');
     if(infoPerfil){
-      foto.setAttribute('class','nickname u-cursor_pointer');
       foto.addEventListener('click',obtenerInfoUsuario,false);
     }else{
-      foto.setAttribute('class','nickname');
+      foto.setAttribute('data-idAventon',RutaInfo["idAventon"]);
+      foto.setAttribute('data-Lat',RutaInfo["ubicacion"].x);
+      foto.setAttribute('data-Long',RutaInfo["ubicacion"].y);
+      foto.addEventListener('click',obtenerInfoAventon,false);
     }
+
     foto.setAttribute('src', RutaInfo['urlNickname']);
     //nick name del usuario
     var nickname=document.createElement('span');

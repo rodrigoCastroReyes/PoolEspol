@@ -13,7 +13,6 @@ function mostrarEstadistica(event){
   $("#contenedor_rutas").css('opacity','0.5');
   $("#infoUsuario").css('visibility','visible');
   $("#infoUsuario").css('opacity','1');
-  console.log(response);
 
   /*Informacion del usuario*/
   var usuario = response.usuario;

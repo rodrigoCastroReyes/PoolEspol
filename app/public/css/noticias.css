@@ -42,6 +42,17 @@ html,body{
     margin: 5px 0px;
 }
 
+#infoAventon{
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+}
+
+#mapaInfoAventon{
+	width: 100%;
+	height: 85%;
+}
+
 #informacionUsuario-nombres{
 	font-size: 24px;
 	font-family: opcionUno;

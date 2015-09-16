@@ -44,19 +44,6 @@ var Usuario=function(id,nickname,urlFoto){
   this.infoAventones=new Array();//informacion sobre los aventones
   this.solicitudes=new Array();//solicitudes a rutas
 
-  this.consultarPosicionActual=function(){
-    //Geolocalizacion
-    var posicionActual={};
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(function(position){
-        posicionActual=new punto(position.coords.latitude,position.coords.longitude);
-        console.log("Posicion consultada");
-      },errorFound);//se obtiene las posiciones actuales
-    }else{
-      alert("Actualiza el navegador");
-    }
-  }
-
   this.consultarRuta=function(idRuta){
     var infoRuta=this.infoRutas[idRuta];
     return infoRuta;
@@ -95,8 +82,5 @@ var Usuario=function(id,nickname,urlFoto){
     this.solicitudes[solicitud.idRuta] = solicitud;
   }
   
-  function errorFound(error){
-    alert("Error has ocurred" + error.code);/* 0: Error desconocido 1: Permiso denegado  2: Posicion no esta disponible  3: Timeout */
-  }
 }
 

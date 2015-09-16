@@ -61,6 +61,7 @@ function guardarSolicitud(event){
       break;
     }
   }
+  flag = true;
   if(flag){
     var solicitud = new Solicitud(idRuta, usuario.id, infoRuta.idPublicador.toString(),
                                   puntoSolicitud.position.lat(), puntoSolicitud.position.lng());
