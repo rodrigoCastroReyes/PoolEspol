@@ -82,5 +82,6 @@ var Usuario=function(id,nickname,urlFoto){
     this.solicitudes[solicitud.idRuta] = solicitud;
   }
   
+
 }
 

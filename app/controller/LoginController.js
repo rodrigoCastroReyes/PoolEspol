@@ -6,10 +6,8 @@ var url = 'http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
 
 exports.index = function(request, response){
 	if(request.session.user){
-		
 		response.redirect('/noticias');
 	}else{
-		
 		response.sendfile(html_dir + 'index.html');
 	}
 };
