@@ -4,6 +4,10 @@ function procesarConversacion(event){
 	var respond = event.target.responseText;
 	var conver = JSON.parse(respond);
 	console.log(conver);
+	if(conver.error){
+		window.location.href="/"; 
+		return;
+	}
 	
 	var fotoEmisor=conver.foto;
 	var nickEmisor=conver.nick;
@@ -91,6 +95,10 @@ function regresar(evt){
 function procesarDatosConversacionAjax(event){
 	var respond = event.target.responseText;
 	var c = JSON.parse(respond);
+	if(c.error){
+		window.location.href="/"; 
+		return;
+	}
 	conversaciones=c.conversaciones;
 	for(i=0;i<conversaciones.length;i++){
 		div=document.createElement("div");
@@ -149,12 +157,18 @@ function CargarPersona(id){
 function procesarNoLeidos(event){
 	var respond = event.target.responseText;
 	var j= JSON.parse(respond);
+	if(j.error){
+		window.location.href="/"; 
+		return;
+	}
 	console.log(j);
 	ids=j.ids;
 	for(i=0;i<ids.length;i++){
 		p=$('.persona[data-id='+ids[i]+']');
 		console.log(p[0]);
-		socket.emit('SolicitarNoLeidos',{id_receptor:idReceptor,id_emisor:ids[i]});
+		var data={id_receptor:userId ,id_emisor:ids[i]};
+		console.log(data);
+		socket.emit('SolicitarNoLeidos',data);
 	}
 }
 
@@ -176,6 +190,10 @@ function eliminarNotificacionPersona(id){
 function actualizarLeidos(event){
 	var respond = event.target.responseText;
 	var j= JSON.parse(respond);
+	if(j.error){
+		window.location.href="/"; 
+		return;
+	}
 	eliminarNotificacionPersona(j.id);
 	obtenerNoLeidosBarra();
 

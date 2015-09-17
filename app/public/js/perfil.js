@@ -29,11 +29,13 @@ function editarUsuario(){
 
 function habilitarEntradas(inputs,color){
 	for(var i=0;i<inputs.length;i++){
-		if(i==0){//foco en la primera caja de texto 
-			inputs[i].focus();
+			if(inputs[i]!=txtnickname){
+			if(i==0){//foco en la primera caja de texto 
+				inputs[i].focus();
+			}
+			inputs[i].style.background=color;
+			inputs[i].disabled=false;//se habilita la caja de texto 
 		}
-		inputs[i].style.background=color;
-		inputs[i].disabled=false;//se habilita la caja de texto 
 	}
 }
 
