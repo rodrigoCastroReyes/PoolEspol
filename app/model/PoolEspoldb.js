@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize("PoolEspol","postgres","",{
-	host: 'localhost',
+var sequelize = new Sequelize("2015_1T_grupo4","grupo4","grupo4",{
+	host: '200.10.150.66',
 	dialect: 'postgres',
 	define:{
 		timestamps: false
