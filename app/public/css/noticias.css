@@ -223,6 +223,10 @@ html,body{
 	border-radius: 0px 0px 10px 10px;
 }
 
+.u-flex_center{
+	justify-content:center;
+}
+
 .u-flex_end{
 	justify-content:flex-end;
 }

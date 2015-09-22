@@ -76,9 +76,7 @@ function crearMenuSuperior(RutaInfo, miRuta, infoPerfil ){
       foto.addEventListener('click',obtenerInfoUsuario,false);
     }else{
       foto.setAttribute('data-idAventon',RutaInfo["idAventon"]);
-      foto.setAttribute('data-Lat',RutaInfo["ubicacion"].x);
-      foto.setAttribute('data-Long',RutaInfo["ubicacion"].y);
-      foto.addEventListener('click',obtenerInfoAventon,false);
+      //foto.addEventListener('click',obtenerInfoAventon,false);
     }
 
     foto.setAttribute('src', RutaInfo['urlNickname']);
@@ -139,11 +137,10 @@ function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
   }
 
   var infoHorario=document.createElement('div');
-  infoHorario.setAttribute('class','info-horario');
+  infoHorario.setAttribute('class','info-horario u-flex_center');
   var horario=document.createElement('span');
   horario.innerHTML= RutaInfo["fecha"]+" - "+RutaInfo["hora"]
   infoHorario.appendChild(horario);
-  
   menuInferior.appendChild(infoHorario)
 
   if(opcionesRuta){//visualizador ruta
@@ -178,6 +175,18 @@ function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
   }else{//visualizador aventon
     iconoAgregar.setAttribute('data-idAventon',RutaInfo["idAventon"]);
     iconoAgregar.addEventListener('click',aceptarAventon,false);
+
+    var masInfoAventon = document.createElement('div');
+    masInfoAventon.setAttribute('class','VisualizadorRuta-opcion u-flex_end');
+    
+    var iconoInfoAventon = document.createElement('span');
+    iconoInfoAventon.setAttribute('class','VisualizadorRuta-info icon-location u-cursor_pointer');
+    iconoInfoAventon.setAttribute('data-idAventon',RutaInfo["idAventon"]);
+    iconoInfoAventon.setAttribute('data-Lat',RutaInfo["ubicacion"].x);
+    iconoInfoAventon.setAttribute('data-Long',RutaInfo["ubicacion"].y);
+    iconoInfoAventon.addEventListener('click',obtenerInfoAventon,false);
+    masInfoAventon.appendChild(iconoInfoAventon);
+    menuInferior.appendChild(masInfoAventon);
   }
   return menuInferior;
 }
