@@ -142,12 +142,18 @@ function borrarMarcador(event){
 function guardarRuta(){
   var valid=document.forms["formRuta"].checkValidity();
   if(valid){
+    if(directionsDisplay.getDirections() == null){
+      mostrarError("Debe ingresar puntos en la ruta! ");
+      return;
+    }
     guardarPuntos();
     guardarDatos();
+    console.log(infoRuta);
     //se envia los datos al servidor
     socket.emit('nuevaRuta',infoRuta);
     cerrarRuta();//se cierra el cuadro publicador de ruta
-    infoRuta=new InfoRuta();//se reinicia infoRuta
+    infoRuta = new InfoRuta();//se reinicia infoRuta
+    mostrarOK("Ruta registrada con &eacute;xito");
   }
 }
 
@@ -228,6 +234,10 @@ function guardarAventon(){
   var valid=document.forms["formAventon"].checkValidity();
   if(valid){
 
+    if(puntoAventon==null){
+      mostrarError("Ingrese un punto!");
+      return;
+    }
     infoAventon.idPublicador=usuario.id;
     infoAventon.publicador=usuario.nickname;
     infoAventon.urlNickname=usuario.foto;
@@ -241,6 +251,7 @@ function guardarAventon(){
     cerrarAventon();
     puntoAventon=null;
     infoAventon=new InfoAventon();//se reinicia el objeto infoAventon
+    mostrarOK("Avent&oacute;n registrado con &eacute;xito");
   }
 }
 

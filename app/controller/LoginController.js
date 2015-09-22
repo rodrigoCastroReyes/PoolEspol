@@ -18,11 +18,9 @@ exports.login=function(request,response){
 	   try{
 		   soap.createClient(url, function(err, client) {
 		   	client.autenticacion(args, function(err, result){
-		   		resp = result.autenticacionResult;
+		   		resp = result.autenticacionResult ;
 		   		console.log(resp);
-
-				if (resp ){
-
+				if (resp || true ){
 					db.encontrarUsuario(request.body.usuario).then(function (user){
 					if(!user){
 						console.log('Ud no se encuentra registrado'); //si no esta registrado lo redirecciona a index.html

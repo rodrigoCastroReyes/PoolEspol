@@ -43,17 +43,17 @@ function connectSocket(){
   socket.on('ErrorRuta',function(code){
     switch(code){
       case 0:
-        solicitudRepetida("Ya te has unido a esta ruta antes!");
+        mostrarError("Ya te has unido a esta ruta antes!");
         break;
       case 1:
-        solicitudRepetida("No hay capacidad en esta ruta");
+        mostrarError("No hay capacidad en esta ruta");
         break;
       case 2:
-        solicitudRepetida("Este aventon ya ha sido resuelto");
+        mostrarError("Este aventon ya ha sido resuelto");
         break;
       case 3:
-         solicitudRepetida("Ya haz intentado unirte a esta ruta!");
-         break;
+        mostrarError("Ya haz intentado unirte a esta ruta!");
+        break;
     }
   });
   socket.on('AventonAceptado',function(datosUsuario){
@@ -92,7 +92,7 @@ function solicitudAventonAceptado(datosUsuario){
 
 }
 
-function solicitudRepetida(mensaje){
+function mostrarError(mensaje){
   var contenedor = document.createElement('div');
   contenedor.setAttribute('id','contenedorerrorRuta');
   contenedor.setAttribute('class','errorRuta');
@@ -117,9 +117,43 @@ function solicitudRepetida(mensaje){
   spanBoton.setAttribute('id','errorRuta-Ok');
   spanBoton.setAttribute('class','icon-checkmark iconos_menu');
   boton.appendChild(spanBoton);
-  var rutas=document.getElementById("contenedor_rutas");
-  rutas.appendChild(contenedor);
+  $("body").append(contenedor);
 }
+
+function mostrarOK(mensaje){
+  var contenedor = document.createElement('div');
+  contenedor.setAttribute('id','contenedorerrorRuta');
+  contenedor.setAttribute('class','errorRuta');
+
+  var leyenda = document.createElement('div');
+  leyenda.setAttribute('class','errorRuta-leyenda');
+
+  var boton = document.createElement('div');
+  boton.setAttribute('class','errorRuta-Boton');
+  contenedor.appendChild(leyenda);
+  contenedor.appendChild(boton);
+
+  var icon = document.createElement('span');
+  icon.setAttribute('class','icon-happy errorRuta-icon');
+  leyenda.appendChild(icon);
+
+  var spanLeyenda = document.createElement('span');
+  spanLeyenda.innerHTML = mensaje;
+  spanLeyenda.setAttribute('class','errorRuta-Titulo ');
+  leyenda.appendChild(spanLeyenda);
+
+  var spanBoton = document.createElement('span');
+  
+  spanBoton.addEventListener('click',function(){
+    $("#contenedorerrorRuta").remove();
+  });
+
+  spanBoton.setAttribute('id','errorRuta-Ok');
+  spanBoton.setAttribute('class','icon-checkmark iconos_menu');
+  boton.appendChild(spanBoton);
+  $("body").append(contenedor);
+}
+
 /**Mensajes de error**/
 
 function cerrarPasajeros(event){

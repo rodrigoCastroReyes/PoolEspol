@@ -131,6 +131,18 @@ html,body{
 
 .errorRuta-Titulo{
 	font-family: opcionUno;
+	font-size: 20px;
+}
+
+.errorRuta-icon{
+	font-size: 20px;
+	margin: 0px 5px;
+}
+
+.errorRuta-leyenda{
+	display: flex;
+	flex-direction: row;
+    justify-content: center;
 }
 
 .errorRuta-Boton{
