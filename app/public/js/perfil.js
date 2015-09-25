@@ -243,6 +243,39 @@ function inicio(){
 	if($('#botonGuardarAuto').length>0){
 		botonGuardarAuto.addEventListener('click',guardarDatosAuto,false);
 	}
+	
+}
+
+function ocultarTodos(){
+	var contenedores=document.getElementsByClassName('visible');
+	for (i=0;i<contenedores.length;i++){
+		console.log(i);
+		console.log(contenedores.length);
+		contenedores[i].className='invisible';
+	}
+}
+
+function mostrarMisRutas(){
+	ocultarTodos();
+	contenedor_rutas.className='visible';
+}
+
+function mostrarMisAventones(){
+	ocultarTodos();
+	contenedor_aventones.className='visible';
+
+}
+
+function mostrarMisRutasunido(){
+	ocultarTodos();
+	contenedor_rutas_unido.className='visible';
+
+}
+
+function mostrarMisAventonesDoy(){
+	ocultarTodos();
+	contenedor_aventones_doy.className='visible';
+
 }
 
 window.addEventListener('load',inicio,false);
