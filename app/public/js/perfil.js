@@ -226,6 +226,9 @@ function visualizarMiRuta(RutaInfo){
   	contenedor.appendChild(menuInferior);
 }
 
+
+
+
 function inicio(){
 	usuario=new Usuario(userid,userNick,foto);
 	
@@ -258,12 +261,34 @@ function ocultarTodos(){
 function mostrarMisRutas(){
 	ocultarTodos();
 	contenedor_rutas.className='visible';
+
 }
+
+
+/*MIS AVENTONES*/
+function obtenerMisAventones(){
+	console.log("pido mis aventones");
+	var request = new XMLHttpRequest();
+  	request.open("GET","/misAventones",true);
+  	request.addEventListener('load',procesarMisAventones,false);
+  	request.send(null);
+}
+
+
+function procesarMisAventones(event){
+  var respond = JSON.parse(event.target.responseText);
+  var aventonInfo=respond.aventones;
+  for(var i=0;i<aventonInfo.length;i++){
+    dibujarAventon(aventonInfo[i], contenedor_aventones);
+  }
+}
+
 
 function mostrarMisAventones(){
 	ocultarTodos();
 	contenedor_aventones.className='visible';
-
+	console.log("mis aventones");
+	obtenerMisAventones();
 }
 
 function mostrarMisRutasunido(){
