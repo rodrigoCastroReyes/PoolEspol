@@ -273,14 +273,6 @@ function ocultarTodos(){
 function mostrarMisRutas(){
 	ocultarTodos();
 	contenedor_rutas.className='visible';
-<<<<<<< HEAD
-=======
-	$("#contenedor_rutas").empty();
-	var h1 = document.createElement('h1');
-	h1.setAttribute('id','tituloRutas');
-	h1.innerHTML = "Mis Rutas";
-	contenedor_rutas.appendChild(h1);
->>>>>>> a1ef536e700abfdc5800ec837b1ea5df03f6fa5c
 	obtenerMisRutas();
 }
 
