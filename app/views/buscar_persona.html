@@ -1,0 +1,20 @@
+<div id="buscar_persona">
+	<div id="cabezera_buscar_personas">
+		<input id = "btnCloseBuscar" value = "X" type = "button" onclick="cerrarBuscarPersona();"/>
+		<h1 id="title_buscar">Buscar Persona</h1>
+		<span id="contenido_buscar">
+			<select id="tipo" class="combo">
+			  <option value="nick">Nick</option>
+			  <option value="nombre">Nombre</option>
+			  <option value="apellido">Apellido</option>
+			</select>
+			<input type="text" id="txtNick" placeholder="" class="entrada_texto"/>
+			<input type="button" id="btnBuscar" value="Buscar" onclick="obtenerPersona();" /> 
+
+		</span>
+	</div>
+	<div id="resultados_personas">
+		
+	</div>
+</div>
+

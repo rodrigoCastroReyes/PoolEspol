@@ -381,7 +381,14 @@ function inicializar(){
 }
 
 
+function buscarPersona(){
+	buscar_persona.style.display="flex";
+	var chat=document.getElementById("contenido");
 
+	if(chat!=null){//chat
+		chat.style.opacity=0.5;
+	}
+}
 
 
 

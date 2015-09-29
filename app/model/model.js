@@ -681,6 +681,60 @@ exports.obtenerPersona=function(id,idDueno,response){
 	});
 }
 
+exports.obtenerPersonaNick=function(nick,response){
+	modelos.Usuario.findAll({where:{nick:{$like: "%"+nick+"%"}}}).then(function(result){
+		p=[];
+		for(i=0;i<result.length;i++){
+			var persona={
+				nick:result[i].dataValues.nick,
+				nombre:result[i].dataValues.nombre,
+				apellidos:result[i].dataValues.apellidos,
+				id:result[i].dataValues.id,
+				foto:result[i].dataValues.foto,
+			}
+			p.push(persona);
+		}
+		console.log(p);
+		response.json(p);
+	});
+}
+
+exports.obtenerPersonaNombre=function(nombre,response){
+	modelos.Usuario.findAll({where:{nombre:{$like: "%"+nombre+"%"}}}).then(function(result){
+		p=[];
+		for(i=0;i<result.length;i++){
+			var persona={
+				nick:result[i].dataValues.nick,
+				nombre:result[i].dataValues.nombre,
+				apellidos:result[i].dataValues.apellidos,
+				id:result[i].dataValues.id,
+				foto:result[i].dataValues.foto,
+			}
+			p.push(persona);
+		}
+		console.log(p);
+		response.json(p);
+	});
+}
+
+exports.obtenerPersonaApellido=function(apellido,response){
+	modelos.Usuario.findAll({where:{apellidos:{$like: "%"+apellido+"%"}}}).then(function(result){
+		p=[];
+		for(i=0;i<result.length;i++){
+			var persona={
+				nick:result[i].dataValues.nick,
+				nombre:result[i].dataValues.nombre,
+				apellidos:result[i].dataValues.apellidos,
+				id:result[i].dataValues.id,
+				foto:result[i].dataValues.foto,
+			}
+			p.push(persona);
+		}
+		console.log(p);
+		response.json(p);
+	});
+}
+
 exports.leerMensajes=function(id_emisor,id_receptor){
 	modelos.Mensaje.update({leido: true},
 							{ where: { id_emisor: id_emisor,id_receptor:id_receptor } })
