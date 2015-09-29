@@ -24,7 +24,6 @@ function editarUsuario(){
  	apellido=inputs[1].value;
  	cedula=inputs[2].value;
  	nickname=inputs[3].value;
- 
 }
 
 function habilitarEntradas(inputs,color){
@@ -218,7 +217,7 @@ function visualizarMiRuta(RutaInfo){
 	var contenedor=document.createElement('div');
   	contenedor.setAttribute('class','VisualizadorRuta');
   	contenedor.id = RutaInfo["idRuta"];
-  	contenedor_rutas.insertBefore(contenedor,contenedor_rutas.firstChild);
+  	contenedor_rutas.appendChild(contenedor);
   	
   	var menuSuperior=crearMenuSuperior(RutaInfo,true);
   	contenedor.appendChild(menuSuperior);
@@ -229,15 +228,14 @@ function visualizarMiRuta(RutaInfo){
   	contenedor.appendChild(contenedorMapa);
   	crearMapa(RutaInfo,contenedorMapa);
   	
-  	var menuInferior=crearMenuInferior(RutaInfo,true,true);
+  	var menuInferior=crearMenuInferior(RutaInfo,true,true,false);
   	contenedor.appendChild(menuInferior);
 }
 
 
-
-
 function inicio(){
 	usuario=new Usuario(userid,userNick,foto);
+
 	document.getElementById("botonEditarUsuario").addEventListener('click',editarUsuario,false);
 	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
 	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatosPersona,false);
@@ -275,6 +273,14 @@ function ocultarTodos(){
 function mostrarMisRutas(){
 	ocultarTodos();
 	contenedor_rutas.className='visible';
+<<<<<<< HEAD
+=======
+	$("#contenedor_rutas").empty();
+	var h1 = document.createElement('h1');
+	h1.setAttribute('id','tituloRutas');
+	h1.innerHTML = "Mis Rutas";
+	contenedor_rutas.appendChild(h1);
+>>>>>>> a1ef536e700abfdc5800ec837b1ea5df03f6fa5c
 	obtenerMisRutas();
 }
 

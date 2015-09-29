@@ -35,6 +35,9 @@ router.get('/nuevaConversacion',MensajesController.nuevaConversacion);
 router.get('/chat/persona',MensajesController.obtenerPersona);
 router.get('/chat/nolidos',MensajesController.obtenerNoLeidos);
 router.get('/chat/leermensajes',MensajesController.leerMensajes);
+router.get('/chat/obtenerPersonaNick',MensajesController.obtenerPersonaByNick);
+router.get('/chat/obtenerPersonaNombre',MensajesController.obtenerPersonaByNombre);
+router.get('/chat/obtenerPersonaApellido',MensajesController.obtenerPersonaByApellido);
 
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificaciones);

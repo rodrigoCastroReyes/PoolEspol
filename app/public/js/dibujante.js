@@ -1,3 +1,30 @@
+/*Ruta*/
+function dibujarRuta(RutaInfo, lienzo){
+  var contenedor=document.createElement('div');
+  contenedor.setAttribute('class','VisualizadorRuta');
+  
+  
+  lienzo.appendChild(contenedor);
+  
+  
+  //crear menu superior del visualizador: nickname,mensajes
+  var menuSuperior=dibujarMenuSuperior(RutaInfo,false,true);
+  contenedor.appendChild(menuSuperior);
+  //crear el mapa en donde se mostrara la ruta, ubicar los puntos de la ruta sobre el mapa
+  var contenedorMapa=document.createElement('div');
+  contenedorMapa.setAttribute('class','VisualizadorRuta-mapa');
+  contenedorMapa.setAttribute('id','mapaGoogle1');
+  contenedor.appendChild(contenedorMapa);
+  
+  crearMapa(RutaInfo,contenedorMapa);
+  //crear menu inferior del visualizador: agregar, precio, capacidad
+  var menuInferior=dibujarMenuInferior(RutaInfo,true,false);
+  contenedor.appendChild(menuInferior);
+}
+
+
+
+
 
 /*Aventon*/
 

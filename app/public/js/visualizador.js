@@ -8,6 +8,158 @@ function errorFound(error){
   alert("Error has ocurred" + error.code);/* 0: Error desconocido 1: Permiso denegado  2: Posicion no esta disponible  3: Timeout */
 }
 
+function cerrarInfoRuta(){
+  $("#contenedor_rutas").css('opacity','1');
+  $("#infoRuta").css('visibility','hidden');
+  $("#infoRuta").css('opacity','0');
+}
+
+function cronologiaRuta(response,day){
+	var list = [];
+	var rows = response.rows;
+	var element;
+	var container = document.createElement('div');
+	var span = document.createElement('span');
+	span.innerHTML = " " + moment(day).format("DD/MMM/YYYY, h:mm:ss a");
+	container.appendChild(span);
+	list.push(container);
+    var seconds = 0;
+	for(var i in rows){
+		element = rows[i].elements[i];
+		container = document.createElement('div');
+		span = document.createElement('span');
+		seconds = element.duration.value + seconds;
+		var newday = moment(day).add(seconds,'seconds');
+		span.innerHTML = " " + moment(newday).format("DD/MMM/YYYY, h:mm:ss a");
+		container.appendChild(span);
+		list.push(container);
+	}
+	return list;
+}
+
+function calcularDistancia(response){
+	var total = 0 ;
+	for(var i in response.rows){
+		total = response.rows[i].elements[i].distance.value + total;
+	}
+	return total;
+}
+
+function calcularDuracion(response){
+	var total = 0 ;
+	for(var i in response.rows){
+		total = response.rows[i].elements[i].duration.value + total;
+	}
+	return total;
+}
+
+
+function mostrarResumen(response){
+	var contDist= document.getElementById("infoRuta-distancia");
+	$("#infoRuta-distancia").empty();
+	contDist.setAttribute('class','rutas-titulo');
+	contDist.innerHTML = "Distancia de la ruta: ";
+	var contDur= document.getElementById("infoRuta-duracion");
+	$("#infoRuta-duracion").empty();
+	contDur.setAttribute('class','rutas-titulo');
+	contDur.innerHTML = "Duracion de la ruta: ";
+
+	var span = document.createElement('span');
+	span.setAttribute('class','estadistica-resultado');
+	span.innerHTML =  calcularDistancia(response)/100 + " km";
+	contDist.appendChild(span);
+
+	span = document.createElement('span');
+	span.setAttribute('class','estadistica-resultado');
+	span.innerHTML = Math.ceil(calcularDuracion(response)/60) + " min";
+	contDur.appendChild(span);
+}
+
+
+function mostrarInfoRuta(response,status,infoRuta){
+    if(status=="OK") {
+    	var ruta = infoRuta.ruta;
+    	var day = moment(infoRuta.fecha + " " + infoRuta.hora, "DD-MM-YYYY HH:mm:ss")
+        mostrarResumen(response);
+        var infoWindowContent= cronologiaRuta(response,day);
+
+        var mapOptions = {
+          zoom: 15,
+          center:new google.maps.LatLng(ruta[0].x,ruta[0].y),
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+
+       	var contenedorMapa = document.getElementById("mapaInfoRuta");
+        var newMap = new google.maps.Map(contenedorMapa,mapOptions);//se crea el mapa
+        var path = []
+        for(var i=0; i< ruta.length - 1 ; i++){
+        	path.push( { location: { lat: ruta[i].x , lng : ruta[i].y } , stopover: true  } );
+        }
+        var directionsDisplay=new google.maps.DirectionsRenderer({
+            map: newMap,
+            markerOptions: {
+            	visible : false
+            },
+            polylineOptions:{
+              strokeColor: "#0080FB"
+            }
+        });
+	    var directionsService = new google.maps.DirectionsService();
+	    var request = {
+	        origin: { lat: ruta[0].x , lng : ruta[0].y },
+	        waypoints: path,
+	        destination: { lat: ruta[ruta.length -1].x , lng : ruta[ruta.length -1].y },
+	        optimizeWaypoints: true,
+	        travelMode:google.maps.TravelMode.DRIVING
+	    }
+	    directionsService.route(request,function(response,status){
+            if(status==google.maps.DirectionsStatus.OK){
+              	directionsDisplay.setDirections(response);
+              	for(var i in ruta){
+              		var marker= new google.maps.Marker({
+					    position: { lat: ruta[i].x , lng : ruta[i].y },
+					    draggable:false,
+					    map:newMap
+					});
+					marker.indice = i;
+					marker.addListener('click', function() {
+						var contentString = "";
+						var infowindow = new google.maps.InfoWindow({
+						    content: infoWindowContent[this.indice]
+						});
+						infowindow.open(newMap,this);
+					});
+              	}
+            }
+        });
+   } else {
+    	alert("Error: " + status);
+    }
+}
+
+function obtenerInfoRuta(event){
+  var idRuta = this.getAttribute('data-idruta');
+  var infoRuta = usuario.consultarRuta(idRuta);
+  $("#contenedor_rutas").css('opacity','0.5');
+  $("#infoRuta").css('visibility','visible');
+  $("#infoRuta").css('opacity','1');
+  var service = new google.maps.DistanceMatrixService();
+  var origins = [];
+  var destinations = [];
+  for (var i = 0 ; i < infoRuta.ruta.length - 1 ; i++){
+    origins.push({ lat: infoRuta.ruta[i].x , lng: infoRuta.ruta[i].y });
+  }
+  for (var i = 1 ; i < infoRuta.ruta.length ; i++){
+    destinations.push({ lat: infoRuta.ruta[i].x , lng: infoRuta.ruta[i].y });
+  }
+  service.getDistanceMatrix({ origins: origins, destinations: destinations,
+    travelMode: google.maps.TravelMode.DRIVING
+	},
+    function(response,status){
+    	mostrarInfoRuta(response,status,infoRuta);
+    });
+}
+
 function cerrarInfoAventon(){
   $("#contenedor_rutas").css('opacity','1');
   $("#infoAventon").css('visibility','hidden');
@@ -19,15 +171,12 @@ function obtenerInfoAventon(event){
   var lat = this.getAttribute('data-Lat');
   var lon = this.getAttribute('data-Long');
   var aventon = new punto(lat,lon);
-  console.log(aventon);
   //Geolocalizacion
   var posicionActual={};
   if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(
       function(position){
         posicionActual=new punto(position.coords.latitude.toString(),position.coords.longitude.toString());
-        console.log(posicionActual);
-
         $("#contenedor_rutas").css('opacity','0.5');
         $("#infoAventon").css('visibility','visible');
         $("#infoAventon").css('opacity','1');
@@ -35,7 +184,6 @@ function obtenerInfoAventon(event){
         var from = new google.maps.LatLng(parseFloat(aventon.x),parseFloat(aventon.y));
         var to =  new google.maps.LatLng(parseFloat(posicionActual.x),parseFloat(posicionActual.y));
         var dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
-        console.log(dist);
 
         var RutaInfo = {};
         RutaInfo.ruta = [];
@@ -120,12 +268,12 @@ function crearMenuSuperior(RutaInfo, miRuta, infoPerfil ){
 }
 
 //crea un div con las opciones del menu inferior del visualizador de ruta
-function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
+function crearMenuInferior(RutaInfo,opcionesRuta,miRuta,mostrarInfoRuta){
   //menu inferior
   var menuInferior=document.createElement('div');
   menuInferior.setAttribute('class','VisualizadorRuta-menu u-menu_inferior');
 
-  if(!miRuta){//mostrar opcion + cuando la ruta no pertenezca al usuario
+  if(!miRuta){//mostrar opcion +  cuando la ruta no pertenezca al usuario
     var infoAgregar=document.createElement('div');
     infoAgregar.setAttribute('class','VisualizadorRuta-opcion u-flex_start');
     var iconoAgregar=document.createElement('span');
@@ -165,12 +313,20 @@ function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
       iconoRuta.addEventListener('click',mostrarPasajerosEnMapa,false);
     }
     //capacidad de la ruta
-    var capacidad=document.createElement('span');
+    var capacidad = document.createElement('span');
     capacidad.setAttribute('class','VisualizadorRuta-info');
-    capacidad.innerHTML=RutaInfo["capacidad"];
+    capacidad.innerHTML = RutaInfo["capacidad"];
     contRuta.appendChild(precio);
     contRuta.appendChild(iconoRuta);
     contRuta.appendChild(capacidad);
+    if(mostrarInfoRuta ){
+	    //mostrar la opcion : informacion de ruta
+	    var iconoInfoRuta = document.createElement('span');
+	    iconoInfoRuta.setAttribute('class','VisualizadorRuta-info icon-location u-cursor_pointer');
+	    iconoInfoRuta.setAttribute('data-idruta',RutaInfo["idRuta"]);
+	    iconoInfoRuta.addEventListener('click',obtenerInfoRuta,false);
+	    contRuta.appendChild(iconoInfoRuta);
+    }
     menuInferior.appendChild(contRuta);
   }else{//visualizador aventon
     iconoAgregar.setAttribute('data-idAventon',RutaInfo["idAventon"]);
@@ -206,14 +362,14 @@ function crearMapa(RutaInfo,contenedorMapa){//en ruta Info viene la informacion 
 
 function colocarMarcadores(map, puntos){
   var waypoints = [];
-  for (var i =1; i < puntos.length-2; i++){
+  for (var i = 1; i < puntos.length-1; i++){
     var coordenada = puntos[i];
     var position = new google.maps.LatLng(coordenada.x, coordenada.y);
     waypoints.push({location : position, stopover:false });
   }
   var request={
     origin: new google.maps.LatLng(puntos[0].x, puntos[0].y),
-    destination: new google.maps.LatLng(puntos[puntos.length -1].x, puntos[puntos.length -1].y),
+    destination: new google.maps.LatLng(puntos[puntos.length-1].x, puntos[puntos.length-1].y),
     waypoints,
     optimizeWaypoints:true,
     travelMode:google.maps.TravelMode.DRIVING
@@ -224,7 +380,7 @@ function colocarMarcadores(map, puntos){
   var directionsService=new google.maps.DirectionsService();
   directionsService.route(request,function(response,status){
     if(status==google.maps.DirectionsStatus.OK){
-      directionsDisplay.setDirections(response);
+      	directionsDisplay.setDirections(response);
     }
   });
 }
@@ -282,7 +438,7 @@ function crearVisualizadorRuta(RutaInfo,appendLast){
   
   crearMapa(RutaInfo,contenedorMapa);
   //crear menu inferior del visualizador: agregar, precio, capacidad
-  var menuInferior=crearMenuInferior(RutaInfo,true,false);
+  var menuInferior=crearMenuInferior(RutaInfo,true,false,true);
   contenedor.appendChild(menuInferior);
 }
 

@@ -278,7 +278,19 @@ p.text {
 	flex-direction: column;
 }
 
+#nuevaConversacion{
+	justify-content: flex-start;
+	align-items: center;
+	font-family: opcionUno;
+	cursor: pointer;
+	margin: 10px;
+  	margin-left: 30%;
+}
 
+#nuevaConversacion:hover{
+	color: #0080FF;
+
+}
 
 @media (max-width: 800px){
 	.regresar{

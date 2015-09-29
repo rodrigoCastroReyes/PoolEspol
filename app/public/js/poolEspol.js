@@ -67,7 +67,6 @@ var Usuario=function(id,nickname,urlFoto){
     info.precio,
     info.capacidad,
     info.ruta);
-    console.log(this.infoRutas[info.idRuta]);
   }
 
   this.agregarInfoAventon=function(info){

@@ -20,31 +20,6 @@ function mostrarPasajerosEnMapa(){
   request.send(null);
 }
 
-function colocarMarcadores(map, puntos){
-  var waypoints = [];
-  for (var i =1; i < puntos.length-2; i++){
-    var coordenada = puntos[i];
-    var position = new google.maps.LatLng(coordenada.x, coordenada.y);
-    waypoints.push({location : position, stopover:false });
-  }
-  var request={
-    origin: new google.maps.LatLng(puntos[0].x, puntos[0].y),
-    destination: new google.maps.LatLng(puntos[puntos.length -1].x, puntos[puntos.length -1].y),
-    waypoints,
-    optimizeWaypoints:true,
-    travelMode:google.maps.TravelMode.DRIVING
-  }
-  var directionsDisplay=new google.maps.DirectionsRenderer();
-  directionsDisplay.setMap(map);
-
-  var directionsService=new google.maps.DirectionsService();
-  directionsService.route(request,function(response,status){
-    if(status==google.maps.DirectionsStatus.OK){
-      directionsDisplay.setDirections(response);
-    }
-  });
-}
-
 function colocarPasajeros(pasajeros, map){
   console.log(pasajeros);
   var lista = pasajeros.pasajeros;
