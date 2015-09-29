@@ -23,6 +23,8 @@ router.post('/actualizarperfil',PerfilController.actualizarPerfil);
 router.post('/actualizarcarro',PerfilController.actualizarCarro);
 router.get('/misRutas',PerfilController.obtenerMisRuta);
 router.get('/misAventones',PerfilController.obtenerMisAventones);
+router.get('/rutasunidas', PerfilController.obtenerRutasUnidas);
+router.get("/aventonesdados", PerfilController.obtenerAventonesDados);
 
 router.get('/cerrar_sesion',LogoutController.cerrar);
 
