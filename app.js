@@ -29,10 +29,9 @@ var sessionMiddleware = session({
 			host:'localhost',
 			port: 6379,
 			client:client,
-			ttl: 260 }),
+			ttl: 10*60* }),
 	saveUninitialized: false,
-	resave: false,
-	cookie: { maxAge: 10*60*1000 }
+	resave: false
 });
 
 app.use(sessionMiddleware);
