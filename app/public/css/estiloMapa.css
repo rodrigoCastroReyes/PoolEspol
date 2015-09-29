@@ -145,7 +145,7 @@ span,form{
 }
 
 
-.IngresoRuta-cerrar,.IngresoAventon-cerrar{
+.IngresoRuta-cerrar,.IngresoAventon-cerrar,.IngresoRutas-cerrar{
 	background: #606061;
 	border-radius: 12px;
 	box-shadow: 1px 1px 3px #000;
@@ -162,7 +162,7 @@ span,form{
 	z-index: 9999;
 }
 
-.IngresoRuta-cerrar:hover, .IngresoAventon-cerrar:hover{ 
+.IngresoRuta-cerrar:hover, .IngresoAventon-cerrar:hover, .IngresoRutas-cerrar:hover{ 
 	background: #00d9ff; 
 }
 
