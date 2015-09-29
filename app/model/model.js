@@ -540,6 +540,34 @@ exports.obtenerRutasUsuario = function (idUsuario, request, response ){
 	});
 }
 
+
+exports.obtenerAventonesUsuario = function (id_usuario, request, response){
+
+	var inicio = request.query.page;
+
+	modelos.Aventon.findAll({
+		include: [{ model: modelos.Usuario , as: 'publicador' } ],
+		where:{
+			id_usuario_pide: id_usuario
+		},
+		order: [['id_aventon', 'DESC' ]]
+		
+	}).then(function (result){
+		var listAventones = [];
+
+		for (var i =0; i< result.length; i++){
+			var registro =  result[i].dataValues;
+			var aventon = crearObjetoAventon(registro);
+			listAventones.push(aventon);
+		} 
+		listAventones = listAventones.reverse();
+		var j = {aventones:listAventones };
+		 response.json(j);
+	});
+
+
+} 
+
 //Querys Chat
 
 exports.obtenerConversaciones = function(id,io){

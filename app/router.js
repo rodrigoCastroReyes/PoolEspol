@@ -22,6 +22,7 @@ router.get('/perfil',PerfilController.perfil);
 router.post('/actualizarperfil',PerfilController.actualizarPerfil);
 router.post('/actualizarcarro',PerfilController.actualizarCarro);
 router.get('/misRutas',PerfilController.obtenerMisRuta);
+router.get('/misAventones',PerfilController.obtenerMisAventones);
 
 router.get('/cerrar_sesion',LogoutController.cerrar);
 

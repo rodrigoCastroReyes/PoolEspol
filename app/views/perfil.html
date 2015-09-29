@@ -18,6 +18,7 @@
 	<script src="js/perfil.js" type="text/javascript"></script>
 	<script src = "js/publicador.js"> </script>
 	<script src = "js/menuNotificaciones.js"> </script>
+	<script src = "js/dibujante.js"> </script>
 	<script>
 		//datos del usuario enviado por el server
   		var userid = "{{id}}";
@@ -115,10 +116,40 @@
 					<div id = "mapaPasajeros"></div>
 				</div>
 			</div>
-
-			<h1 id="tituloRutas">Mis Rutas</h1>	
-			<div id="contenedor_rutas">
+			<div id="menu_perfil">
+				<ul>
+					<li id="op_rutas" onclick="mostrarMisRutas();">
+						<span>Mis Rutas</span>
+					</li>
+					<li id="op_aventones" onclick="mostrarMisAventones();">
+						<span>Aventones Solicitados</span>
+					</li>
+					<li id="op_rutas_unido" onclick="mostrarMisRutasunido();">
+						<span>Rutas Unidas</span>
+					</li>
+					<li id="op_aventones_doy" onclick="mostrarMisAventonesDoy();">
+						<span>Aventones Dados</span>
+					</li>
+				</ul>
 			</div>
+
+			
+			<div id="contenedor_rutas" class="invisible">
+				<h1 id="tituloRutas">Mis Rutas</h1>	
+			</div>
+
+			<div id="contenedor_aventones" class="invisible">
+				<h1 id="tituloRutas">Aventones Solicitaos</h1>	
+			</div>
+
+			<div id="contenedor_rutas_unido" class="invisible">
+				<h1 id="tituloRutas">Rutas Unidas</h1>	
+			</div>
+
+			<div id="contenedor_aventones_doy" class="invisible">
+				<h1 id="tituloRutas">Aventones Dados</h1>	
+			</div>
+
 		</div>
 	</div>
 
