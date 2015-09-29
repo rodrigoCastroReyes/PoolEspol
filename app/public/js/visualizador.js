@@ -268,7 +268,7 @@ function crearMenuSuperior(RutaInfo, miRuta, infoPerfil ){
 }
 
 //crea un div con las opciones del menu inferior del visualizador de ruta
-function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
+function crearMenuInferior(RutaInfo,opcionesRuta,miRuta,mostrarInfoRuta){
   //menu inferior
   var menuInferior=document.createElement('div');
   menuInferior.setAttribute('class','VisualizadorRuta-menu u-menu_inferior');
@@ -319,12 +319,14 @@ function crearMenuInferior(RutaInfo,opcionesRuta,miRuta){
     contRuta.appendChild(precio);
     contRuta.appendChild(iconoRuta);
     contRuta.appendChild(capacidad);
-    //mostrar la opcion : informacion de ruta
-    var iconoInfoRuta = document.createElement('span');
-    iconoInfoRuta.setAttribute('class','VisualizadorRuta-info icon-location u-cursor_pointer');
-    iconoInfoRuta.setAttribute('data-idruta',RutaInfo["idRuta"]);
-    iconoInfoRuta.addEventListener('click',obtenerInfoRuta,false);
-    contRuta.appendChild(iconoInfoRuta);
+    if(mostrarInfoRuta ){
+	    //mostrar la opcion : informacion de ruta
+	    var iconoInfoRuta = document.createElement('span');
+	    iconoInfoRuta.setAttribute('class','VisualizadorRuta-info icon-location u-cursor_pointer');
+	    iconoInfoRuta.setAttribute('data-idruta',RutaInfo["idRuta"]);
+	    iconoInfoRuta.addEventListener('click',obtenerInfoRuta,false);
+	    contRuta.appendChild(iconoInfoRuta);
+    }
     menuInferior.appendChild(contRuta);
   }else{//visualizador aventon
     iconoAgregar.setAttribute('data-idAventon',RutaInfo["idAventon"]);
@@ -378,7 +380,7 @@ function colocarMarcadores(map, puntos){
   var directionsService=new google.maps.DirectionsService();
   directionsService.route(request,function(response,status){
     if(status==google.maps.DirectionsStatus.OK){
-      directionsDisplay.setDirections(response);
+      	directionsDisplay.setDirections(response);
     }
   });
 }
@@ -436,7 +438,7 @@ function crearVisualizadorRuta(RutaInfo,appendLast){
   
   crearMapa(RutaInfo,contenedorMapa);
   //crear menu inferior del visualizador: agregar, precio, capacidad
-  var menuInferior=crearMenuInferior(RutaInfo,true,false);
+  var menuInferior=crearMenuInferior(RutaInfo,true,false,true);
   contenedor.appendChild(menuInferior);
 }
 
