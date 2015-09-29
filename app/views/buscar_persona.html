@@ -8,8 +8,7 @@
 			  <option value="nombre">Nombre</option>
 			  <option value="apellido">Apellido</option>
 			</select>
-			<input type="text" id="txtNick" placeholder="" class="entrada_texto"/>
-			<input type="button" id="btnBuscar" value="Buscar" onclick="obtenerPersona();" /> 
+			<input type="text" id="txtNick" placeholder="" class="entrada_texto" onchange="buscar();" onkeyup="buscar();"/>
 
 		</span>
 	</div>

@@ -386,6 +386,7 @@ function buscarPersona(){
 	var chat=document.getElementById("contenido");
 
 	if(chat!=null){//chat
+		$('#conversacion').css("display","none");
 		chat.style.opacity=0.5;
 	}
 }

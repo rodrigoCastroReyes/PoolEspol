@@ -78,16 +78,23 @@ function procesarPersonaBusqueda(response){
 
 		informacion=document.createElement("div");
 		
-		h3=document.createElement("h3");
-		h3.innerHTML='Nick Name: '+p[i].nick;
-		informacion.appendChild(h3);
-		h3=document.createElement("h3");
-		h3.innerHTML='Nombres: '+p[i].nombre;
-		informacion.appendChild(h3);
-		h3=document.createElement("h3");
-		h3.innerHTML='Apellidos: '+p[i].apellidos;
-		informacion.appendChild(h3);
-		
+		if(tipo.value=="nick"){
+			h3=document.createElement("h3");
+			h3.innerHTML='Nick Name: '+p[i].nick;
+			informacion.appendChild(h3);
+		}
+		if(tipo.value=="nombre"){
+			h3=document.createElement("h3");
+			h3.innerHTML='Nombres: '+p[i].nombre;
+			informacion.appendChild(h3);
+		}
+
+		if(tipo.value=="apellido"){
+			h3=document.createElement("h3");
+			h3.innerHTML='Apellidos: '+p[i].apellidos;
+			informacion.appendChild(h3);
+		}
+			
 		
 
 		div.appendChild(imagen);
@@ -101,39 +108,51 @@ function procesarPersonaBusqueda(response){
 
 function obtenerPersonaNick(){
 	console.log(txtNick.value);
-	var request = new XMLHttpRequest();
-  	var url="/chat/obtenerPersonaNick?nick="+txtNick.value;
-  	request.open("GET",url,true);
-  	request.addEventListener('load',procesarPersonaBusqueda ,false);
-  	request.send(null);
+	nick=txtNick.value;
+	if(nick!=""){
+		var request = new XMLHttpRequest();
+	  	var url="/chat/obtenerPersonaNick?nick="+nick;
+	  	request.open("GET",url,true);
+	  	request.addEventListener('load',procesarPersonaBusqueda ,false);
+	  	request.send(null);
+	}else
+		resultados_personas.innerHTML="";
 
 }
 
 function obtenerPersonaNombre(){
 	console.log(txtNick.value);
-	var request = new XMLHttpRequest();
-  	var url="/chat/obtenerPersonaNombre?nombre="+txtNick.value.toUpperCase();
-  	request.open("GET",url,true);
-  	request.addEventListener('load',procesarPersonaBusqueda ,false);
-  	request.send(null);
+	nombre=txtNick.value;
+	if(nombre!=""){
+		var request = new XMLHttpRequest();
+	  	var url="/chat/obtenerPersonaNombre?nombre="+nombre.toUpperCase();
+	  	request.open("GET",url,true);
+	  	request.addEventListener('load',procesarPersonaBusqueda ,false);
+	  	request.send(null);
+	}else
+		resultados_personas.innerHTML="";
 
 }
 
 function obtenerPersonaApellido(){
 	console.log(txtNick.value);
-	var request = new XMLHttpRequest();
-  	var url="/chat/obtenerPersonaApellido?apellido="+txtNick.value.toUpperCase();
-  	request.open("GET",url,true);
-  	request.addEventListener('load',procesarPersonaBusqueda ,false);
-  	request.send(null);
+	apellido=txtNick.value;
+	if(apellido!=""){
+		var request = new XMLHttpRequest();
+	  	var url="/chat/obtenerPersonaApellido?apellido="+apellido.toUpperCase();
+	  	request.open("GET",url,true);
+	  	request.addEventListener('load',procesarPersonaBusqueda ,false);
+	  	request.send(null);
+	}else
+		resultados_personas.innerHTML="";
 
 }
 
-function obtenerPersona(){
+function buscar(){
 	if(tipo.value=="nick")
 		obtenerPersonaNick();
-	else if(tipo.value=="nombre")
+	if(tipo.value=="nombre")
 		obtenerPersonaNombre();
-	else
+	if(tipo.value=="apellido")
 		obtenerPersonaApellido();
 }
