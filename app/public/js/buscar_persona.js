@@ -149,6 +149,8 @@ function obtenerPersonaApellido(){
 }
 
 function buscar(){
+	console.log("buscar");
+	console.log(tipo.value);
 	if(tipo.value=="nick")
 		obtenerPersonaNick();
 	if(tipo.value=="nombre")
