@@ -36,7 +36,6 @@ function editarUsuario(){
  	apellido=inputs[1].value;
  	cedula=inputs[2].value;
  	nickname=inputs[3].value;
- 
 }
 
 function habilitarEntradas(inputs,color){
@@ -211,19 +210,26 @@ function obtenerMisRutas(){
 }
 
 function procesarMisRutas(event){
+  
   var respond = JSON.parse(event.target.responseText);
   var rutasInfo=respond.rutas;
+  
+  if(rutasInfo.length > 0){
+  	contenedor_rutas.innerHTML = "";
+  }
+
   for(var i=0;i<rutasInfo.length;i++){
     visualizarMiRuta(rutasInfo[i]);
     usuario.agregarInfoRuta(rutasInfo[i]);
   }
+
 }
 
 function visualizarMiRuta(RutaInfo){
 	var contenedor=document.createElement('div');
   	contenedor.setAttribute('class','VisualizadorRuta');
   	contenedor.id = RutaInfo["idRuta"];
-  	contenedor_rutas.insertBefore(contenedor,contenedor_rutas.firstChild);
+  	contenedor_rutas.appendChild(contenedor);
   	
   	var menuSuperior=crearMenuSuperior(RutaInfo,true);
   	contenedor.appendChild(menuSuperior);
@@ -234,17 +240,14 @@ function visualizarMiRuta(RutaInfo){
   	contenedor.appendChild(contenedorMapa);
   	crearMapa(RutaInfo,contenedorMapa);
   	
-  	var menuInferior=crearMenuInferior(RutaInfo,true,true);
+  	var menuInferior=crearMenuInferior(RutaInfo,true,true,false);
   	contenedor.appendChild(menuInferior);
 }
 
 
-
-
 function inicio(){
 	usuario=new Usuario(userid,userNick,foto);
-	
-	obtenerMisRutas();
+
 	document.getElementById("botonEditarUsuario").addEventListener('click',editarUsuario,false);
 	document.getElementById("botonCancelarUsuario").addEventListener('click',cancelarEdicion,false);
 	document.getElementById("botonGuardarUsuario").addEventListener('click',guardarDatosPersona,false);
@@ -258,6 +261,15 @@ function inicio(){
 	if($('#botonGuardarAuto').length>0){
 		botonGuardarAuto.addEventListener('click',guardarDatosAuto,false);
 	}
+
+	if(!flag){
+		op_rutas.className= "invisible";
+		op_aventones_doy.className = "invisible";
+		mostrarMisAventones();
+	}else{
+		mostrarMisRutas();
+	}
+
 	
 }
 
@@ -273,13 +285,13 @@ function ocultarTodos(){
 function mostrarMisRutas(){
 	ocultarTodos();
 	contenedor_rutas.className='visible';
-
+	obtenerMisRutas();
 }
 
 
 /*MIS AVENTONES*/
 function obtenerMisAventones(){
-	console.log("pido mis aventones");
+
 	var request = new XMLHttpRequest();
   	request.open("GET","/misAventones",true);
   	request.addEventListener('load',procesarMisAventones,false);
@@ -290,6 +302,11 @@ function obtenerMisAventones(){
 function procesarMisAventones(event){
   var respond = JSON.parse(event.target.responseText);
   var aventonInfo=respond.aventones;
+
+  if (aventonInfo.length> 0){
+		contenedor_aventones.innerHTML = "";
+	}
+
   for(var i=0;i<aventonInfo.length;i++){
     dibujarAventon(aventonInfo[i], contenedor_aventones);
   }
@@ -303,15 +320,63 @@ function mostrarMisAventones(){
 	obtenerMisAventones();
 }
 
+
+/*RUTAS UNIDAS*/
+function obtenerRutasUnidas(){
+	var request = new XMLHttpRequest();
+  	request.open("GET","/rutasunidas",true);
+  	request.addEventListener('load',procesarRutasUnidas,false);
+  	request.send(null);
+}
+
+function procesarRutasUnidas(event){
+	var respond = JSON.parse(event.target.responseText);
+	var rutaInfo=respond.rutas;
+	
+	if (rutaInfo.length> 0){
+		contenedor_rutas_unido.innerHTML = "";
+	}
+
+	for(var i=0;i<rutaInfo.length;i++){
+		console.log(rutaInfo[i]);
+	    dibujarRuta(rutaInfo[i], contenedor_rutas_unido);
+	}
+}
+
 function mostrarMisRutasunido(){
 	ocultarTodos();
 	contenedor_rutas_unido.className='visible';
+	obtenerRutasUnidas();
+}
 
+
+/*Aventones dados*/
+
+function procesarAventonesDados(event){
+	var respond = JSON.parse(event.target.responseText);
+	var aventonInfo=respond.aventones;
+	
+	if (aventonInfo.length> 0){
+		contenedor_aventones_doy.innerHTML = "";
+	}
+
+	for(var i=0;i<aventonInfo.length;i++){
+    	dibujarAventon(aventonInfo[i], contenedor_aventones_doy);
+  	}
+}
+
+function obtenerAventonesDados(){
+	
+	var request = new XMLHttpRequest();
+  	request.open("GET","/aventonesdados",true);
+  	request.addEventListener('load',procesarAventonesDados,false);
+  	request.send(null);
 }
 
 function mostrarMisAventonesDoy(){
 	ocultarTodos();
 	contenedor_aventones_doy.className='visible';
+	obtenerAventonesDados();
 
 }
 

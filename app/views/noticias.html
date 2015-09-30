@@ -8,6 +8,7 @@
 	<link rel = "stylesheet" type="text/css" href = "css/cuadroPublicador.css"/>
 	<link rel = "stylesheet" type="text/css" href = "css/pasajeros.css"/>
 	<script src = "js/jquery-1.11.3.min.js"></script>
+	<script src="js/moment.min.js"></script>
 	<script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
   	<script src="http://www.amcharts.com/lib/3/serial.js"></script>
   	<script src="http://www.amcharts.com/lib/3/themes/light.js"></script>
@@ -55,11 +56,24 @@
 
 	<div id="infoAventon" class="informacionUsuario">
 		<input id="infoAventonClose" class = "IngresoAventon-cerrar" value = "X" type = "button" onclick="cerrarInfoAventon();" />
-		<h1 class="histograma-titulo">Informaci&oacute;n del Aventon</h1>
+		<h1 class="infoAventon-titulo">Informaci&oacute;n del Aventon</h1>
 		<div id="mapaInfoAventon">
 			
 		</div>
 		<span id="infoAventon-distancia" class= "rutas-titulo"></span>
+	</div>
+
+	<div id="infoRuta" class="informacionRuta">
+		<input id="infoRutaClose" class = "IngresoRuta-cerrar" value = "X" type = "button" onclick="cerrarInfoRuta();" />
+		<h1 class="infoRuta-titulo">Informaci&oacute;n de la Ruta</h1>
+		<div class="infoRuta-Contenido">
+			<div id="mapaInfoRuta">
+			</div>
+			<div class="infoRuta-datos" >
+				<span id="infoRuta-distancia"></span>
+				<span id="infoRuta-duracion"></span>
+			</div>
+		</div>
 	</div>
 
 	<div id="infoUsuario" class="informacionUsuario">

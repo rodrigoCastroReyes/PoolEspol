@@ -73,9 +73,25 @@ exports.obtenerMisRuta = function(request,response){
 exports.obtenerMisAventones = function(request,response){
 	if(request.session.user){
 		db.obtenerAventonesUsuario(request.session.user.id, request, response);
+	}else{
+		response.sendfile(html_dir + 'index.html');
 	}
 }
 
+exports.obtenerRutasUnidas = function(request, response){
+	if(request.session.user){
+		db.obtenerRutasUnidas(request.session.user.id, request, response);
+	}else{
+		response.sendfile(html_dir + 'index.html');
+	}
+}
+
+exports.obtenerAventonesDados = function(request, response){
+	
+	if(request.session.user){
+		db.obtenerAventonesDados(request.session.user.id, request, response);
+	}
+}
 
 exports.eliminarRuta = function (request, response){
 	var ruta = request.query.id;

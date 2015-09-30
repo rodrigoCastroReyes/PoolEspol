@@ -405,6 +405,37 @@ function crearObjetoRuta(registro){
 	return ruta;
 }
 
+function crearObjetoRuta2(registro){
+	
+	var puntos = [];
+	var limit = registro.puntosx.length;
+
+	for (var i =0; i< limit; i++ ){
+		var punto = {x: registro.puntosx[i], y: registro.puntosy[i]};
+		puntos.push(punto);
+	}
+
+	var dateObj = new Date(registro.fecha);
+	var month = dateObj.getUTCMonth() + 1; 
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+
+	var stringFecha = day + "/" + month + "/" + year;
+
+	var ruta = {idPublicador: registro.id,
+		 		publicador: registro.nick, 
+		 		urlNickname: registro.foto,
+		 		fecha: stringFecha,
+		 		hora: registro.hora,
+		 		precio: registro.costo,
+		 		capacidad: registro.capacidad,
+		 		idRuta: registro.id_ruta,
+		 		ruta: puntos
+		 		}
+	return ruta;
+}
+
+
 exports.obtenerRutasNoticias = function (id_usuario, request, response){
 
 	var tam = 5;
@@ -477,6 +508,28 @@ function crearObjetoAventon(registro){
 
 }
 
+function crearObjetoAventon2(registro){
+	
+	var dateObj = new Date(registro.fecha);
+	var month = dateObj.getUTCMonth() + 1; 
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+
+	var stringFecha = day + "/" + month + "/" + year;
+	var aventon = {
+		idPublicador: registro.id_usuario_pide,
+		publicador: registro.dador.nick,
+		urlNickname: registro.dador.foto,
+		fecha: stringFecha,
+		hora: registro.hora,
+		idAventon: registro.id_aventon,
+		ubicacion: {x: registro.latitud, y: registro.longitud}
+	}
+	return aventon;
+
+}
+
+
 exports.obtenerAventonesNoticias = function (id_usuario, request, response){
 
 	var tam = 5;
@@ -547,6 +600,56 @@ exports.obtenerRutasUsuario = function (idUsuario, request, response ){
 		response.json(j);
 	});
 }
+
+exports.obtenerRutasUnidas = function (idUsuario, request, response){
+
+	var query = "select * from ruta, usuario" +  
+	" where ruta.idcreador = usuario.id and ruta.id_ruta IN (select id_ruta from usuario_ruta " +
+	"where usuario_ruta.id_usuario = " + idUsuario+ " and usuario_ruta.estado = 'Aceptada')";
+
+
+	modelos.S.query(query).then(function(result){
+		console.log(result[0]);
+		var listResult = result[0];
+		var listRutasUnidas = [];
+
+		for( var i = 0; i< listResult.length; i++){
+			var temp = crearObjetoRuta2(listResult[i]);
+			listRutasUnidas.push(temp);
+		}
+		var j = {rutas:listRutasUnidas};
+		response.json(j);
+
+	});
+	
+
+}
+
+exports.obtenerAventonesDados = function(idUsuario, request, response){
+	var inicio = request.query.page;
+
+	modelos.Aventon.findAll({
+		include: [{ model: modelos.Usuario , as: 'dador' } ],
+		where:{
+			id_usuario_da: idUsuario
+		},
+		order: [['id_aventon', 'DESC' ]]
+		
+	}).then(function (result){
+		console.log(result);
+		var listAventones = [];
+
+		for (var i =0; i< result.length; i++){
+			var registro =  result[i].dataValues;
+			var aventon = crearObjetoAventon2(registro);
+			listAventones.push(aventon);
+		} 
+		listAventones.reverse();
+		var j = {aventones:listAventones };
+		 response.json(j);
+	});
+}
+
 
 
 exports.obtenerAventonesUsuario = function (id_usuario, request, response){
@@ -714,6 +817,60 @@ exports.obtenerPersona=function(id,idDueno,response){
 			id_dueno:idDueno
 		}
 		response.json({conversaciones:[datosUsuario]});
+	});
+}
+
+exports.obtenerPersonaNick=function(nick,response){
+	modelos.Usuario.findAll({where:{nick:{$like: "%"+nick+"%"}}}).then(function(result){
+		p=[];
+		for(i=0;i<result.length;i++){
+			var persona={
+				nick:result[i].dataValues.nick,
+				nombre:result[i].dataValues.nombre,
+				apellidos:result[i].dataValues.apellidos,
+				id:result[i].dataValues.id,
+				foto:result[i].dataValues.foto,
+			}
+			p.push(persona);
+		}
+		console.log(p);
+		response.json(p);
+	});
+}
+
+exports.obtenerPersonaNombre=function(nombre,response){
+	modelos.Usuario.findAll({where:{nombre:{$like: "%"+nombre+"%"}}}).then(function(result){
+		p=[];
+		for(i=0;i<result.length;i++){
+			var persona={
+				nick:result[i].dataValues.nick,
+				nombre:result[i].dataValues.nombre,
+				apellidos:result[i].dataValues.apellidos,
+				id:result[i].dataValues.id,
+				foto:result[i].dataValues.foto,
+			}
+			p.push(persona);
+		}
+		console.log(p);
+		response.json(p);
+	});
+}
+
+exports.obtenerPersonaApellido=function(apellido,response){
+	modelos.Usuario.findAll({where:{apellidos:{$like: "%"+apellido+"%"}}}).then(function(result){
+		p=[];
+		for(i=0;i<result.length;i++){
+			var persona={
+				nick:result[i].dataValues.nick,
+				nombre:result[i].dataValues.nombre,
+				apellidos:result[i].dataValues.apellidos,
+				id:result[i].dataValues.id,
+				foto:result[i].dataValues.foto,
+			}
+			p.push(persona);
+		}
+		console.log(p);
+		response.json(p);
 	});
 }
 
