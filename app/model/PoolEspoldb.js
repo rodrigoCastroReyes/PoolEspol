@@ -13,7 +13,7 @@ var sequelize = new Sequelize("2015_1T_grupo4","grupo4","grupo4",{
 		idle: 10000
 	}
 });*/
-var sequelize = new Sequelize("PoolEspol","postgres","",{
+var sequelize = new Sequelize("PoolEspol","postgres","root",{
 	host: 'localhost',
 	dialect: 'postgres',
 	define:{

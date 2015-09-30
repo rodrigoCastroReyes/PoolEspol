@@ -22,7 +22,6 @@ app.set('port', 5000);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
 var sessionMiddleware = session({
 	secret: 'bobneuman',
 	store: new redisStore({
