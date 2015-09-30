@@ -530,6 +530,7 @@ function cancelar_eliminar(){
 /*Eliminar Ruta*/
 
 function inicializar(event){
+  
   socket.on('EliminarRutaPerfil',function(idruta){
     quitarVisualizador(idruta);
   });
