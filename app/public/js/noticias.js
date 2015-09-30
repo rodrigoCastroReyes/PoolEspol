@@ -198,7 +198,6 @@ function cargarMapas(event){
     var request = new XMLHttpRequest();
     request.open("GET","/Rutas?page="+PageRuta ,true);
     request.addEventListener('load',auxRutas ,false);
-    request.addEventListener('progress',progreso, true );
     request.send(null);
     PageRuta = PageRuta + 1; //incremento la pagina  
   }else{
@@ -210,7 +209,6 @@ function cargarMapas(event){
     var request_aventones = new XMLHttpRequest();
     request_aventones.open("GET", "/Aventones?page="+PageAventon, true);
     request_aventones.addEventListener('load',auxAventones , false);
-    request.addEventListener('progress',progreso, true );
     request_aventones.send(null);
     PageAventon = PageAventon + 1; //incremento la pagina  
   }else{

@@ -1,6 +1,5 @@
 var Sequelize = require('sequelize');
 
-
 var sequelize = new Sequelize("2015_1T_grupo4","grupo4","grupo4",{
 	host: '200.10.150.66',
 	dialect: 'postgres',
@@ -13,7 +12,8 @@ var sequelize = new Sequelize("2015_1T_grupo4","grupo4","grupo4",{
 		idle: 10000
 	}
 });
-/*var sequelize = new Sequelize("PoolEspol","postgres","obayona",{
+
+/*var sequelize = new Sequelize("PoolEspol","postgres","",{
 	host: 'localhost',
 	dialect: 'postgres',
 	define:{
@@ -486,7 +486,7 @@ Aventon.belongsTo(Usuario, {
 });
 
 Aventon.belongsTo(Usuario, {
-	foreignKey: 'id_usuario_da',
+	foreignKey: 'id_usuario_pide',
 	as: 'dador'
 });
 
