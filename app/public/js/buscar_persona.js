@@ -66,6 +66,11 @@ function procesarPersonaBusqueda(response){
 		resultados_personas.innerHTML='No Hay Resultados';
 
 	for(i=0;i<p.length;i++){
+		if(p[i].id==userId){
+			if(p.length==1)
+				resultados_personas.innerHTML='No Hay Resultados';
+			continue;
+		}	
 		div=document.createElement("div");
 		div.setAttribute("class","persona");
 		div.setAttribute("data-id",p[i].id);
