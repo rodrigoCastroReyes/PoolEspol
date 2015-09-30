@@ -26,6 +26,7 @@
     "express": "^4.13.3",
     "express-session": "^1.7.6",
     "pg": "^4.4.1",
+    "formidable": "*",
     "pg-hstore": "^2.3.2",
     "redis": "^0.12.1",
     "sequelize": "^3.5.1",
