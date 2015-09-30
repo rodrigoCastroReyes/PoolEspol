@@ -37,7 +37,12 @@ html,body{
      overflow: hidden;
 
 }
-
+.cuadroimage{
+   
+    position: relative;
+    top: -99px;
+    right: -99px;
+}
 
 .upfile [type="file"] {
         background-color: #0080FF;
