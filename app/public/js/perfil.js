@@ -380,4 +380,22 @@ function mostrarMisAventonesDoy(){
 
 }
 
+function abrirSubirFoto(){
+	subirFoto.style.display="flex";
+	var chat=document.getElementById("contenido");
+
+	if(chat!=null){//chat
+		chat.style.opacity=0.5;
+	}
+}
+
+function cerrarSubirFoto(){
+	subirFoto.style.display="none";
+	var chat=document.getElementById("contenido");
+
+	if(chat!=null){//chat
+		chat.style.opacity=1;
+	}
+}
+
 window.addEventListener('load',inicio,false);

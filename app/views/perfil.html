@@ -8,6 +8,7 @@
 	<link rel = "stylesheet" type="text/css" href = "css/cuadroPublicador.css"/>
 	<link rel = "stylesheet" type="text/css" href = "css/pasajerosMapa.css"/>
 	<link rel = "stylesheet" type="text/css" href = "css/menu_eliminar.css"/>
+	<link rel = "stylesheet" type="text/css" href = "css/subir_foto.css"/>
 	<script src = "js/jquery-1.11.3.min.js"></script>
 	<script src="js/moment.min.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
@@ -47,26 +48,8 @@
 				<div id="nickName" class="columna_flexible flex_center">
 					<img width="100" height="100" src={{foto}} >
 					<h1 >{{nickname}}</h1>
-					<a href="#openModal" class="icon-pencil lapiz cuadroimage" ></a>
-						<div id="openModal" class="modalDialog">
-							<div>
-							
-								<a href="#close" title="Close" class="close" >X</a>
-								<h2 id="CargarUnaImagen">Imagen de Perfil </h2>
-								<form action="/photo" method="post" enctype="multipart/form-data" id="subirfoto">
-								<div class="upfile">
-									<input type="file" multiple="multiple"  name="userPhoto" accept="image/*" onchange="loadFile(event)">
-								</div>
-								
-								<input type="submit" value="Upload Image" name="submit" class="botonsubir">
-								</form>
-								<div id="colocarimagen">
-									<img id="output" />
-								</div>
-					    		
-							
-							</div>		
-						</div>
+					<a class="icon-pencil lapiz cuadroimage" onclick="abrirSubirFoto();" ></a>
+						
 				</div>
 				<div id="datosPersonales" class="columna_flexible ">
 					<h2>Informacion Personal</h2>
@@ -130,6 +113,7 @@
 		<div id="infoRutas">
 			{% include './cuadro_publicador.html' %}
 			{% include './menu_eliminar.html' %}
+			{% include './subir_foto.html' %}
 			<div id =  "pantallaPasajerosMapa" >
 				<div id = "contenedorPasajerosMapa">
 					<input id="closePasajerosMapa" value="X" type="button" class="pasajeros-cerrarMapa">

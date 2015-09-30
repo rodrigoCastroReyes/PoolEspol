@@ -1,0 +1,16 @@
+<div id="subirFoto" >
+	<div id="contenedor_subir_foto">
+		<input id = "btnCloseSubir" value = "X" type = "button" onclick="cerrarSubirFoto();"/>
+		<h2 id="CargarUnaImagen">Imagen de Perfil </h2>
+		<form action="/photo" method="post" enctype="multipart/form-data" id="subirfoto">
+		<div class="upfile">
+			<input type="file" multiple="multiple"  name="userPhoto" accept="image/*" onchange="loadFile(event)">
+		</div>
+		
+		</form>
+		<div id="colocarimagen">
+			<img id="output" />
+		</div>
+		<input type="submit" value="Upload Image" name="submit" class="botonsubir">
+	</div>	
+</div>
