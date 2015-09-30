@@ -47,6 +47,26 @@
 				<div id="nickName" class="columna_flexible flex_center">
 					<img width="100" height="100" src={{foto}} >
 					<h1 >{{nickname}}</h1>
+					<a href="#openModal" class="icon-pencil lapiz cuadroimage" ></a>
+						<div id="openModal" class="modalDialog">
+							<div>
+							
+								<a href="#close" title="Close" class="close" >X</a>
+								<h2 id="CargarUnaImagen">Imagen de Perfil </h2>
+								<form action="/photo" method="post" enctype="multipart/form-data" id="subirfoto">
+								<div class="upfile">
+									<input type="file" multiple="multiple"  name="userPhoto" accept="image/*" onchange="loadFile(event)">
+								</div>
+								
+								<input type="submit" value="Upload Image" name="submit" class="botonsubir">
+								</form>
+								<div id="colocarimagen">
+									<img id="output" />
+								</div>
+					    		
+							
+							</div>		
+						</div>
 				</div>
 				<div id="datosPersonales" class="columna_flexible ">
 					<h2>Informacion Personal</h2>
@@ -136,19 +156,20 @@
 
 			
 			<div id="contenedor_rutas" class="invisible">
+				<h1 id="tituloRutas">No tiene rutas</h1>	
 
 			</div>
 
 			<div id="contenedor_aventones" class="invisible">
-				<h1 id="tituloRutas">Aventones Solicitaos</h1>	
+				<h1 id="tituloRutas">No ha solicitado aventones</h1>	
 			</div>
 
 			<div id="contenedor_rutas_unido" class="invisible">
-				<h1 id="tituloRutas">Rutas Unidas</h1>	
+				<h1 id="tituloRutas">No se ha unido a ninguna ruta</h1>	
 			</div>
 
 			<div id="contenedor_aventones_doy" class="invisible">
-				<h1 id="tituloRutas">Aventones Dados</h1>	
+				<h1 id="tituloRutas">No ha Dado aventones</h1>	
 			</div>
 
 		</div>

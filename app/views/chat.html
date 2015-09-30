@@ -4,9 +4,11 @@
 	<link rel="stylesheet"  href="css/chat.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/noticias.css">
+	<link rel="stylesheet" type="text/css" href="css/buscar_persona.css">
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
 	<script type="text/javascript" src="js/chat.js"></script>
 	<script src = "js/barra.js"> </script>
+	<script src = "js/buscar_persona.js"> </script>
 	<script src = "js/menuNotificaciones.js"> </script>
 	<script src="../socket.io/socket.io.js"></script>
 	<script>
@@ -21,6 +23,7 @@
 {% block content %}
 	{% include './barra.html' %}
 	{% include './menu_salir.html' %}
+	{% include './buscar_persona.html' %}
 
 	<div id = "Contenedor_Menu_Notificaciones">
 		<div id="Menu_Notificaciones">
@@ -32,6 +35,7 @@
 
 	<section id="contenido">
 			<div id="personas" class=" visible" >
+				<div id="nuevaConversacion" onclick="buscarPersona();"> Buscar Persona</div>
 				
 			</div>
 

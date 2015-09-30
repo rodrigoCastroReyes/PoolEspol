@@ -1,0 +1,102 @@
+#buscar_persona {
+  background-color: #0080FB;
+  border-radius: 6px;
+  color: white;
+  display: none;
+  flex-direction: column;
+  justify-content: start;
+  height: 60%;
+  width: 500px;
+  position: fixed;
+  top: 20%;
+  left: 40%;
+  right: 40%;
+  z-index: 100;
+  border: 3px solid white;
+}
+
+#btnBuscar {
+  background: #0080FF;
+  border-radius: 10px;
+  border: 2px solid #c3c3c3;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: opcionUno;
+  font-size: 100%;
+  height: 35px;
+  transition: background-color 0.5s ease;
+  width: 20%;
+}
+
+#btnBuscar :hover{
+  background: #23b7e5;
+}
+
+#contenido_buscar{
+  margin-left: 20px;
+  font-family: opcionUno;
+}
+
+#title_buscar{
+  font-family: opcionUno;
+  margin-left: 22%;
+  margin-bottom: 20px;
+  color: white;
+}
+
+
+#btnCloseBuscar{
+  background: #606061;
+  border-radius: 12px;
+  box-shadow: 1px 1px 3px #000;
+  color: #FFFFFF;
+  font-weight: bold;
+  height: 30px;
+  line-height: 25px;
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  text-decoration: none;
+  top: 0px;
+  width: 30px;
+  z-index: 9999;
+}
+#resultados_personas{
+  background: #e2e4e6;
+  width: 95%;
+  height: 70%;
+  margin: 2.5%;
+  color: black;
+  font-family: opcionUno;
+  overflow-y: auto;
+}
+
+#cabezera_buscar_personas{
+  height: 30%;
+}
+
+.entrada_texto {
+  background-color: white;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  font-family: opcionUno;
+  font-size: 20px;
+  height: auto;
+  margin: 5px 5px;
+  text-align: center;
+  width: 60%;
+  transition: box-shadow 0.5s ease;
+}
+
+.combo {
+  background-color: white;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  font-family: opcionUno;
+  font-size: 20px;
+  height: auto;
+  margin: 5px 5px;
+  text-align: center;
+  width: 20%;
+  transition: box-shadow 0.5s ease;
+}

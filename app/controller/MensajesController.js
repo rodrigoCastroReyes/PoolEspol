@@ -81,7 +81,38 @@ exports.leerMensajes=function(request,response){
 	
 };
 
+exports.obtenerPersonaByNick=function(request,response){
+	console.log("obtenerPersonaByNick");
+	if(request.session.user){
+		nick=request.query.nick;
+		db.obtenerPersonaNick(nick,response);
+	}else{
+		response.json({error:'sesion caducada'});
+	}
+	
+};
 
+exports.obtenerPersonaByNombre=function(request,response){
+	console.log("obtenerPersonaByNombre");
+	if(request.session.user){
+		nombre=request.query.nombre;
+		db.obtenerPersonaNombre(nombre,response);
+	}else{
+		response.json({error:'sesion caducada'});
+	}
+	
+};
+
+exports.obtenerPersonaByApellido=function(request,response){
+	console.log("obtenerPersonaByApellido");
+	if(request.session.user){
+		apellido=request.query.apellido;
+		db.obtenerPersonaApellido(apellido,response);
+	}else{
+		response.json({error:'sesion caducada'});
+	}
+	
+};
 
 /*
 exports.enviarConversaciones=function(request,response){
@@ -92,3 +123,7 @@ exports.enviarConversaciones=function(request,response){
 };
 
 */
+
+
+
+

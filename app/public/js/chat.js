@@ -35,12 +35,12 @@ function procesarConversacion(event){
 		imagen=document.createElement("img");
 		//var p1=document.createElement("p");
 		var p2=document.createElement("p");
-		tipo=mensajes[i].tipo;
+		type=mensajes[i].tipo;
 		mensaje=mensajes[i].contenido;
 		imagen.setAttribute("class","fotoPerfil");
 		contenedorMensaje.setAttribute("class","mensaje");
 		contenerPerfil.setAttribute("class","infoPer");
-		if(tipo=="emisor"){
+		if(type=="emisor"){
 			contenedor.setAttribute("class","friend");
 			imagen.setAttribute("src",fotoEmisor);
 			//p1.innerHTML=nickEmisor;
@@ -381,7 +381,15 @@ function inicializar(){
 }
 
 
+function buscarPersona(){
+	buscar_persona.style.display="flex";
+	var chat=document.getElementById("contenido");
 
+	if(chat!=null){//chat
+		//$('#conversacion').css("display","none");
+		chat.style.opacity=0.5;
+	}
+}
 
 
 

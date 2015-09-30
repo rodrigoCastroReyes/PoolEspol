@@ -13,7 +13,7 @@ var sequelize = new Sequelize("2015_1T_grupo4","grupo4","grupo4",{
 		idle: 10000
 	}
 });*/
-var sequelize = new Sequelize("PoolEspol","postgres","",{
+var sequelize = new Sequelize("PoolEspol","postgres","root",{
 	host: 'localhost',
 	dialect: 'postgres',
 	define:{
@@ -485,6 +485,11 @@ Aventon.belongsTo(Usuario, {
 	as: 'publicador'
 });
 
+Aventon.belongsTo(Usuario, {
+	foreignKey: 'id_usuario_da',
+	as: 'dador'
+});
+
 Usuario.hasMany(Ruta,{
 	foreignKey: 'idcreador',
 	as: 'Usuario_tiene_Rutas'
@@ -526,3 +531,4 @@ module.exports.Usuario_Ruta = Usuario_Ruta;
 module.exports.Carro = Carro;
 module.exports.Usuario = Usuario;
 module.exports.Aventon = Aventon;
+module.exports.S = sequelize;
