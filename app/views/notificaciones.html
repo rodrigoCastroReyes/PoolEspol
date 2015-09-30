@@ -4,10 +4,13 @@
 	<link rel="shortcut icon" type="image/png" href="imagenes/LogoPoolEspol.png">
 	<link rel="stylesheet" type="text/css" href="css/notificaciones.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/estiloMapa.css">
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=geometry"></script>
 	<script src = "js/jquery-1.11.3.min.js"></script>
-	<script src="../socket.io/socket.io.js"></script>
+	<script src ="../socket.io/socket.io.js"></script>
 	<script src = "js/poolEspol.js"> </script>
 	<script src = "js/barra.js"> </script>
+	<script src = "js/visualizador.js"> </script>
 	<script src = "js/notificaciones.js"> </script>
 	<script src = "js/menuNotificaciones.js"> </script>
 	<script>
@@ -33,4 +36,17 @@
 	<div id="Contenedor_Notificaciones" class="Notificaciones">
     </div>
 
+    <div id="RutaNotificaciones" class="AgregarARuta">
+		<div class="AgregarARuta-contenedor">
+			<input id = "btnCloseAgregar" value = "X" type = "button" class = "IngresoRuta-cerrar" onclick="cerrarRutaNotificaciones();" />
+			<div class="AgregarARuta-Titulo">
+				<span >Ruta</span>
+			</div>
+			<div id="MapaNotificacion" class="AgregarARuta-Mapa">
+			</div>
+			<div class="AgregarARuta-botones">
+				<input class="AgregarARuta-Boton" id ="btnAceptarAgregar" type="button" value="Aceptar" onclick="cerrarRutaNotificaciones();" />
+			</div>
+		</div>
+	</div>
 {% endblock %}

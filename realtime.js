@@ -91,17 +91,13 @@ function socketNoticias(io,sessionMiddleware){
                             clients[key].emit('EliminarRutaPerfil', idruta);
                         }
                     }
-                    
-
                 });
                 db.actualizarEstadoUsuarioRuta(idruta, idpasajeros, "Eliminada").then(function (result){
                     db.consultarUsuarioRutaPorIDruta(idruta).then(function(resultados){
                         console.log("consult", resultados);
                         notificarPasajeros(session.user.id, resultados);
                     });
-
                 });
-                
             });
         }    
     }); 
@@ -207,7 +203,6 @@ function contestarSolicitud(respuesta){
     function(usuario){
         var dueñoRuta = usuario.dataValues;
         var notificacion = {};//construir la notificacion
-
         notificacion.idNotificacion = respuesta.idNotificacion;
         notificacion.idEmisor = respuesta.idEmisor;
         notificacion.idReceptor = respuesta.idReceptor;
@@ -307,38 +302,6 @@ function notificarPasajeros(idPublicador, usuarioruta ){
                     if(clients[idreceptor]!=null) //si el usuario esta conectado enviar la notificacion
                         clients[idreceptor].emit('actualizarNotificacion',not);
                 }
-
-
             });
-            
-
         });
-
-
-    
-
-
-    /*db.encontrarUsuarioPorID(idPublicador).then(
-    function(usuario){
-        var dueñoRuta = usuario.dataValues;
-        var notificacion = {};//construir la notificacion
-
-        for (var i = 0; i< idpasajeros.length; i++ ){
-            notificacion.idEmisor = idPublicador;
-            notificacion.idReceptor = idpasajeros[i];
-            notificacion.idUsuarioRuta = respuesta.idUsuarioRuta;
-            notificacion.estado = respuesta.estado;
-            notificacion.tipo = respuesta.tipo;
-            notificacion.publicador = dueñoRuta.nick;
-            notificacion.urlNickname = dueñoRuta.foto;
-        }
-        //actualiza el estado y tipo de notificacion
-        db.actualizarNotificacion(notificacion).then(function(result){
-            db.guardarNotificacion(notificacion).then(function(result){
-                console.log(result);
-            });
-            if(clients[respuesta.idReceptor]!=null) //si el usuario esta conectado enviar la notificacion
-                clients[respuesta.idReceptor].emit('actualizarNotificacion',notificacion);
-        });
-    }); */
 }

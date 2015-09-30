@@ -21,3 +21,31 @@ exports.obtenerNotificaciones = function(request,response){
 		db.obtenerNotificacionesUsuario(request.session.user.id,response);	
 	}
 }
+
+exports.masInformacion = function(request,response){
+	var idNotificacion = request.query.id;
+	db.unirNotificacionesUsuarioRuta(idNotificacion).then(function(result){
+		if(result){
+			console.log("resultado");
+			if( result.dataValues.Notificacion_Usuario_Ruta != null ){
+				var usuario_ruta = result.dataValues.Notificacion_Usuario_Ruta.dataValues;
+				if(usuario_ruta.Ruta_Miembro!=null){
+					var ruta = usuario_ruta.Ruta_Miembro.dataValues;
+					var rutaJSON = {}
+					var puntos = [];
+					var limit = ruta.puntosx.length;
+					for (var i =0; i< limit; i++ ){
+						var punto = {x: ruta.puntosx[i], y: ruta.puntosy[i]};
+						puntos.push(punto);
+					}
+					rutaJSON.ruta = puntos;
+					response.json(rutaJSON);
+				}else{
+					response.json({});
+				}
+			}else{
+				response.json({});
+			}
+		}
+	});
+}

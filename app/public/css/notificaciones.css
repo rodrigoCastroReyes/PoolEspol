@@ -10,6 +10,21 @@ body{
 	background-color: #e2e4e6;
 }
 
+.RutaNotificaciones{
+    position: fixed;
+    border-radius: 12px;
+    opacity:0;
+    transform: translate(-50%, -50%);
+    transition: all 400ms ease-in;
+    top: 55%;
+    left: 50%;
+    visibility: hidden;
+    height: 50%;
+    width: 50%;
+	border: 5px solid #0080FB;
+	z-index: 10;
+}
+
 .Notificaciones{
 	display: flex;
 	flex-direction:column;

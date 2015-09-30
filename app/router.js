@@ -36,6 +36,7 @@ router.get('/chat/leermensajes',MensajesController.leerMensajes);
 
 router.get('/notificaciones',NotificacionesController.notificaciones);
 router.get('/obtenerNotificaciones',NotificacionesController.obtenerNotificaciones);
+router.get('/masInformacion',NotificacionesController.masInformacion);
 router.get('/pasajeros',NoticiasController.obtenerPasajeros);
 
 router.get('/eliminarRuta', PerfilController.eliminarRuta);

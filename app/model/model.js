@@ -273,6 +273,17 @@ exports.obtenerNotificacionesRechazadas = function(idUsuario){
 	});
 }
 
+exports.unirNotificacionesUsuarioRuta = function (idNotificacion){
+	return modelos.Notificacion.findOne({
+		where: { id_Notificacion: idNotificacion },
+		include : [{
+			model: modelos.Usuario_Ruta, as: 'Notificacion_Usuario_Ruta',
+			include : [{
+				model: modelos.Ruta, as: 'Ruta_Miembro'
+			}]	
+		}]
+	});
+}
 
 //Consultas Ruta
 
