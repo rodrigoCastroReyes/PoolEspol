@@ -156,6 +156,14 @@ exports.actualizarUsuario = function (idusuario,datos_usuario){
 	});
 };
 
+exports.actualizarFotoUsuario = function (idusuario,foto){
+	return modelos.Usuario.update({foto:foto.ruta},
+										{ where: { id: idusuario}})
+	.then( function (usuario){
+		console.log('ACTUALIZADO CORRECTAMENTE tu foto');
+	});
+};
+
 
 exports.actualizarMensaje = function(idmensaje, datos_mensaje){
 	modelos.Mensaje.update({contenido: datos_mensaje.contenido},

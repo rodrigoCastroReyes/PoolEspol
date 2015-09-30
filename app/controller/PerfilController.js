@@ -3,7 +3,9 @@ var db = require('../model/model.js');
 var html_dir = './app/views/';
 var ac_usuario = new Object();
 var ac_carro = new Object();
-
+var formidable = require('formidable');
+var imagePath = new Object();
+var ubicacion = new Object();
 exports.perfil=function(request,response){
 	//pasarle a la vista los datos de : rutas y aventones, datos del usuario
 	if(request.session.user){
@@ -80,3 +82,49 @@ exports.eliminarRuta = function (request, response){
 	db.actualizarEstadoRuta(ruta, "Eliminado");
 	response.json({"idruta": ruta });
 }
+
+exports.transmisionPerfil = function (request,response){
+	   var incoming = new formidable.IncomingForm();
+      //Carpeta donde se guardarán los archivos.
+      console.log(request);
+      var rutasimagen = 'app/public/imagenes/';
+      incoming.uploadDir = rutasimagen;
+      incoming.parse(request);
+      incoming.on('file', function(field, file){
+         console.log('Archivo recibido');
+      });
+      incoming.on('fileBegin', function(field, file){
+         if(file.name){
+            file.path =file.path+file.name;
+
+            
+            imagePath.ruta = file.path;
+           	ubicacion.ruta = imagePath.ruta.slice(11);
+            db.actualizarFotoUsuario(request.session.user.id,ubicacion).then(function (datos){
+            	console.log('entraste muy bien');
+            	request.session.user.foto = ubicacion.ruta;
+            	 response.render('noticias',{ title: 'Noticias', 
+					id : request.session.user.id,
+					nickname: request.session.user.nick,
+					foto: request.session.user.foto,
+					flag:request.session.user.id_carro});
+            });
+
+
+         }
+      });
+      incoming.on('end', function(){
+         console.log("se tuvo que haber guardado");
+
+      
+
+      });
+     
+    
+
+	
+
+     
+};
+
+ 

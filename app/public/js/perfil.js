@@ -10,6 +10,18 @@ var datosCarro= new Object();
 
 var usuario;
 
+
+var loadFile = function (event) {
+		// body...
+		var reader = new FileReader();
+		reader.onload = function () {
+			// body...
+			 var output = document.getElementById('output');
+			 output.src = reader.result;
+		};
+		reader.readAsDataURL(event.target.files[0]);
+};
+
 function editarUsuario(){
 	var inputs = document.querySelectorAll("#datosPersona input");//cajas de texto para editar datos
 	//estilo de cajas de texto deben cambiar para el ingreso de informacion

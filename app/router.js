@@ -40,5 +40,6 @@ router.get('/pasajeros',NoticiasController.obtenerPasajeros);
 
 router.get('/eliminarRuta', PerfilController.eliminarRuta);
 router.get('/desarrolladores',PaginaDesarrolladores.index);
+router.post('/photo',PerfilController.transmisionPerfil);
 
 module.exports = router;
